@@ -5,6 +5,8 @@ export type AnimeSourceRef = {
   name?: string;
   trustLevel?: number;
   sourceUrl?: string;
+  description?: string;
+  genres?: string[];
 };
 
 export type Anime = {
@@ -28,4 +30,6 @@ export type Anime = {
   lastUpdated?: string;
   confidence?: number;
   manualLockedFields?: string[];
+  externalSummary?: string;
+  sourceGenres?: string[];
 };

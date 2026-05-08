@@ -60,6 +60,24 @@ type ManualLockEntry = {
   reason: string;
 };
 
+type AcceptedExternalMetadataEntry = {
+  title: string;
+  year: number;
+  field: ImportField;
+  existingValue: unknown;
+  incomingValue: unknown;
+  reason: string;
+};
+
+type PreservedLocalDisplayFieldEntry = {
+  title: string;
+  year: number;
+  field: "originalTitle" | "summary" | "genres";
+  keptValue: unknown;
+  incomingValue: unknown;
+  reason: string;
+};
+
 type DuplicateEntry = {
   incomingTitle: string;
   incomingYear: number;
@@ -90,11 +108,15 @@ type ImportReport = {
     skipped: number;
     conflicts: number;
     manualLocksPreserved: number;
+    acceptedExternalMetadata: number;
+    preservedLocalDisplayFields: number;
     possibleDuplicates: number;
   };
   added: Array<{ title: string; year: number; sourceName: string }>;
   updated: Array<{ title: string; year: number; sourceName: string; fields: ImportField[] }>;
   skipped: SkippedEntry[];
+  acceptedExternalMetadata: AcceptedExternalMetadataEntry[];
+  preservedLocalDisplayFields: PreservedLocalDisplayFieldEntry[];
   conflicts: ConflictEntry[];
   manualLocksPreserved: ManualLockEntry[];
   possibleDuplicates: DuplicateEntry[];
@@ -104,7 +126,7 @@ type ImportReport = {
 
 const OBJECTIVE_FIELDS = ["title", "originalTitle", "year", "episodes", "status", "genres", "summary", "sourceRating", "sourceName", "sourceUrl"] as const;
 const MANUAL_FIELDS = ["personalFitScore", "whyForMe", "risk", "tags"] as const;
-const SYSTEM_FIELDS = ["id", "aliases", "sources", "lastUpdated", "confidence", "manualLockedFields"] as const;
+const SYSTEM_FIELDS = ["id", "aliases", "sources", "lastUpdated", "confidence", "manualLockedFields", "externalSummary", "sourceGenres"] as const;
 const DEFAULT_MANUAL_LOCKED_FIELDS: ManualField[] = ["personalFitScore", "whyForMe", "risk", "tags"];
 const DEFAULT_STAGING_PATH = "data/import/staging-anime.json";
 const DEFAULT_QUERY_PATH = "data/import/search-queries.json";
@@ -150,6 +172,8 @@ async function main() {
   console.log(`- Would update: ${report.counts.updated}`);
   console.log(`- Skipped: ${report.counts.skipped}`);
   console.log(`- Conflicts: ${report.counts.conflicts}`);
+  console.log(`- Accepted external metadata: ${report.counts.acceptedExternalMetadata}`);
+  console.log(`- Preserved local display fields: ${report.counts.preservedLocalDisplayFields}`);
   console.log(`- Manual locks preserved: ${report.counts.manualLocksPreserved}`);
   console.log(`- Possible duplicates needing review: ${report.counts.possibleDuplicates}`);
   console.log(`- Source matches needing review: ${report.needsReview.length}`);
@@ -246,6 +270,8 @@ function normalizeAnime(row: ExternalAnime, source: AnimeSource, index: number, 
   const normalizedSourceName = cleanText(row.sourceName ?? row.source_name) || source.name;
   const sourceRating = explicitRating === undefined ? null : toNullableFiniteNumber(explicitRating);
   const sourceUrl = sanitizeSourceUrl(cleanText(row.sourceUrl ?? row.source_url), source, index, report);
+  const externalSummary = cleanText(row.externalSummary ?? row.summary);
+  const sourceGenres = normalizeStringArray(row.sourceGenres ?? row.genres);
 
   return {
     id: cleanText(row.id) || makeId(title, year),
@@ -264,10 +290,12 @@ function normalizeAnime(row: ExternalAnime, source: AnimeSource, index: number, 
     sourceName: normalizedSourceName,
     sourceUrl,
     aliases: normalizeStringArray(row.aliases),
-    sources: normalizeSources(row.sources, source, sourceUrl),
+    sources: normalizeSources(row.sources, source, sourceUrl, externalSummary, sourceGenres),
     lastUpdated: cleanText(row.lastUpdated),
     confidence: clampConfidence(toNullableFiniteNumber(row.confidence)),
     manualLockedFields: normalizeManualLockedFields(row.manualLockedFields),
+    externalSummary,
+    sourceGenres,
     importSourceId: source.id,
     importSourceName: source.name,
     importTrustLevel: source.trustLevel,
@@ -396,6 +424,19 @@ function mergeOne(existing: Anime, incoming: ImportCandidate, existingTrustLevel
   if (!valuesEqual(existing.sources ?? [], nextSources)) {
     merged.sources = nextSources;
     changedFields.push("sources");
+    reportAcceptedExternalMetadata(report, existing, "sources", existing.sources ?? [], nextSources, "External source reference metadata was merged without replacing local display fields.");
+  }
+
+  if (isEmptyValue(existing.externalSummary) && !isEmptyValue(incoming.externalSummary)) {
+    merged.externalSummary = incoming.externalSummary;
+    changedFields.push("externalSummary");
+    reportAcceptedExternalMetadata(report, existing, "externalSummary", existing.externalSummary, incoming.externalSummary, "External description stored separately from local summary.");
+  }
+
+  if (isEmptyValue(existing.sourceGenres) && !isEmptyValue(incoming.sourceGenres)) {
+    merged.sourceGenres = incoming.sourceGenres;
+    changedFields.push("sourceGenres");
+    reportAcceptedExternalMetadata(report, existing, "sourceGenres", existing.sourceGenres, incoming.sourceGenres, "External genres stored separately from local display genres.");
   }
 
   if (!existing.id) {
@@ -420,21 +461,59 @@ function mergeOne(existing: Anime, incoming: ImportCandidate, existingTrustLevel
 
 function resolveObjectiveField(field: ObjectiveField, existingValue: unknown, incomingValue: unknown, existingTrustLevel: number, incomingTrustLevel: number, existing: Anime, incoming: ImportCandidate, report: ImportReport) {
   if (isEmptyValue(incomingValue)) return { value: existingValue, changed: false };
-  if (isEmptyValue(existingValue)) return { value: incomingValue, changed: !valuesEqual(existingValue, incomingValue) };
+  if (isEmptyValue(existingValue)) {
+    reportAcceptedExternalMetadata(report, existing, field, existingValue, incomingValue, `Existing ${field} is empty, so incoming ${incoming.importSourceName} metadata was accepted.`);
+    return { value: incomingValue, changed: !valuesEqual(existingValue, incomingValue) };
+  }
   if (valuesEqual(existingValue, incomingValue)) return { value: existingValue, changed: false };
+
+  if (field === "summary") {
+    report.preservedLocalDisplayFields.push({ title: existing.title, year: existing.year, field, keptValue: existingValue, incomingValue, reason: "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata." });
+    return { value: existingValue, changed: false };
+  }
+
+  if (field === "genres") {
+    report.preservedLocalDisplayFields.push({ title: existing.title, year: existing.year, field, keptValue: existingValue, incomingValue, reason: "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata." });
+    return { value: existingValue, changed: false };
+  }
+
+  if (field === "originalTitle" && shouldPreserveExistingOriginalTitle(existingValue, incomingValue)) {
+    report.preservedLocalDisplayFields.push({ title: existing.title, year: existing.year, field, keptValue: existingValue, incomingValue, reason: "Existing originalTitle appears to be an original CJK/kana title; romaji/English incoming title was kept as an alias instead of replacing it." });
+    return { value: existingValue, changed: false };
+  }
 
   if (field === "sourceUrl" && typeof existingValue === "string" && typeof incomingValue === "string" && isExampleUrl(incomingValue)) {
     report.conflicts.push({ title: existing.title, year: existing.year, field, existingValue, incomingValue, existingTrustLevel, incomingTrustLevel, resolution: "Existing real sourceUrl kept; mock/example links are not allowed to replace it." });
     return { value: existingValue, changed: false };
   }
 
+  if (["sourceName", "sourceUrl", "sourceRating"].includes(field)) {
+    reportAcceptedExternalMetadata(report, existing, field, existingValue, incomingValue, `${incoming.importSourceName} source metadata is allowed to refresh ${field}.`);
+    return { value: incomingValue, changed: true };
+  }
+
   if (incomingTrustLevel > existingTrustLevel) {
     report.conflicts.push({ title: existing.title, year: existing.year, field, existingValue, incomingValue, existingTrustLevel, incomingTrustLevel, resolution: "Incoming value kept because its source trustLevel is higher." });
+    reportAcceptedExternalMetadata(report, existing, field, existingValue, incomingValue, "Incoming value accepted because its source trustLevel is higher.");
     return { value: incomingValue, changed: true };
   }
 
   report.conflicts.push({ title: existing.title, year: existing.year, field, existingValue, incomingValue, existingTrustLevel, incomingTrustLevel, resolution: incomingTrustLevel === existingTrustLevel ? "Existing anime.json value kept because trustLevel is equal." : "Existing anime.json value kept because its source trustLevel is higher." });
   return { value: existingValue, changed: false };
+}
+
+function reportAcceptedExternalMetadata(report: ImportReport, existing: Anime, field: ImportField, existingValue: unknown, incomingValue: unknown, reason: string) {
+  report.acceptedExternalMetadata.push({ title: existing.title, year: existing.year, field, existingValue, incomingValue, reason });
+}
+
+function shouldPreserveExistingOriginalTitle(existingValue: unknown, incomingValue: unknown) {
+  const existingTitle = cleanText(existingValue);
+  const incomingTitle = cleanText(incomingValue);
+  return hasCjkOrKana(existingTitle) && !hasCjkOrKana(incomingTitle);
+}
+
+function hasCjkOrKana(value: string) {
+  return /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u.test(value);
 }
 
 function isConfirmedDuplicate(left: Pick<Anime, "title" | "originalTitle" | "year" | "aliases">, right: Pick<Anime, "title" | "originalTitle" | "year" | "aliases">) {
@@ -483,9 +562,9 @@ function normalizeManualLockedFields(value: unknown): ManualField[] {
   return normalizeStringArray(value).filter((field): field is ManualField => (MANUAL_FIELDS as readonly string[]).includes(field));
 }
 
-function normalizeSources(value: unknown, source: AnimeSource, sourceUrl: string) {
+function normalizeSources(value: unknown, source: AnimeSource, sourceUrl: string, description = "", genres: string[] = []) {
   const sources = Array.isArray(value) ? value.filter((item) => typeof item === "object" && item !== null) : [];
-  const current = { id: source.id, name: source.name, trustLevel: source.trustLevel, sourceUrl };
+  const current = { id: source.id, name: source.name, trustLevel: source.trustLevel, sourceUrl, ...(description ? { description } : {}), ...(genres.length > 0 ? { genres } : {}) };
   return uniqueBy(JSON.parse(JSON.stringify([...sources, current])), (item: { id?: string; name?: string; sourceUrl?: string }) => `${item.id ?? item.name ?? "unknown"}::${item.sourceUrl ?? ""}`);
 }
 
@@ -533,10 +612,12 @@ function createReport(mode: ImportReport["mode"], stagingPath: string, animePath
     stagingPath,
     animePath,
     reportPath,
-    counts: { stagingRows: 0, normalizedCandidates: 0, added: 0, updated: 0, skipped: 0, conflicts: 0, manualLocksPreserved: 0, possibleDuplicates: 0 },
+    counts: { stagingRows: 0, normalizedCandidates: 0, added: 0, updated: 0, skipped: 0, conflicts: 0, manualLocksPreserved: 0, acceptedExternalMetadata: 0, preservedLocalDisplayFields: 0, possibleDuplicates: 0 },
     added: [],
     updated: [],
     skipped: [],
+    acceptedExternalMetadata: [],
+    preservedLocalDisplayFields: [],
     conflicts: [],
     manualLocksPreserved: [],
     possibleDuplicates: [],
@@ -551,6 +632,8 @@ function updateCounts(report: ImportReport) {
   report.counts.skipped = report.skipped.length;
   report.counts.conflicts = report.conflicts.length;
   report.counts.manualLocksPreserved = report.manualLocksPreserved.length;
+  report.counts.acceptedExternalMetadata = report.acceptedExternalMetadata.length;
+  report.counts.preservedLocalDisplayFields = report.preservedLocalDisplayFields.length;
   report.counts.possibleDuplicates = report.possibleDuplicates.filter((item) => item.action === "needs-review").length;
 }
 
