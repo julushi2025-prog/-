@@ -1,177 +1,29 @@
 {
-  "generatedAt": "2026-05-08T10:33:13.369Z",
-  "mode": "dry-run",
+  "generatedAt": "2026-05-08T11:01:50.022Z",
+  "mode": "write",
   "stagingPath": "data/import/staging-anime.json",
   "animePath": "data/anime.json",
   "reportPath": "reports/import-report.json",
   "counts": {
-    "stagingRows": 1,
-    "normalizedCandidates": 1,
+    "stagingRows": 0,
+    "normalizedCandidates": 0,
     "added": 0,
-    "updated": 1,
+    "updated": 0,
     "skipped": 0,
     "conflicts": 0,
-    "manualLocksPreserved": 2,
-    "acceptedExternalMetadata": 6,
-    "preservedLocalDisplayFields": 3,
-    "possibleDuplicates": 0
+    "manualLocksPreserved": 0,
+    "acceptedExternalMetadata": 0,
+    "preservedLocalDisplayFields": 0,
+    "possibleDuplicates": 0,
+    "needsReview": 0
   },
   "added": [],
-  "updated": [
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "sourceName": "AniList",
-      "fields": [
-        "sourceRating",
-        "sourceName",
-        "sourceUrl",
-        "aliases",
-        "sources",
-        "externalSummary",
-        "sourceGenres",
-        "id",
-        "lastUpdated"
-      ]
-    }
-  ],
+  "updated": [],
   "skipped": [],
-  "acceptedExternalMetadata": [
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sourceRating",
-      "existingValue": null,
-      "incomingValue": 80,
-      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sourceName",
-      "existingValue": "Wikipedia",
-      "incomingValue": "AniList",
-      "reason": "AniList source metadata is allowed to refresh sourceName."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sourceUrl",
-      "existingValue": "https://en.wikipedia.org/wiki/Serial_Experiments_Lain",
-      "incomingValue": "https://anilist.co/anime/339/Serial-Experiments-Lain/",
-      "reason": "AniList source metadata is allowed to refresh sourceUrl."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sources",
-      "existingValue": [],
-      "incomingValue": [
-        {
-          "id": "anilist",
-          "name": "AniList",
-          "trustLevel": 80,
-          "sourceUrl": "https://anilist.co/anime/339/Serial-Experiments-Lain/",
-          "description": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
-          "genres": [
-            "Drama",
-            "Mystery",
-            "Psychological",
-            "Sci-Fi",
-            "Supernatural"
-          ]
-        }
-      ],
-      "reason": "External source reference metadata was merged without replacing local display fields."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "externalSummary",
-      "incomingValue": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
-      "reason": "External description stored separately from local summary."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sourceGenres",
-      "incomingValue": [
-        "Drama",
-        "Mystery",
-        "Psychological",
-        "Sci-Fi",
-        "Supernatural"
-      ],
-      "reason": "External genres stored separately from local display genres."
-    }
-  ],
-  "preservedLocalDisplayFields": [
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "originalTitle",
-      "keptValue": "シリアルエクスペリメンツレイン",
-      "incomingValue": "serial experiments lain",
-      "reason": "Existing originalTitle appears to be an original CJK/kana title; romaji/English incoming title was kept as an alias instead of replacing it."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "genres",
-      "keptValue": [
-        "科幻",
-        "心理",
-        "悬疑"
-      ],
-      "incomingValue": [
-        "Drama",
-        "Mystery",
-        "Psychological",
-        "Sci-Fi",
-        "Supernatural"
-      ],
-      "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "summary",
-      "keptValue": "内向少女岩仓玲音在收到已故同学的邮件后，被卷入现实与 Wired 网络边界逐渐崩塌的事件。",
-      "incomingValue": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
-      "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
-    }
-  ],
+  "acceptedExternalMetadata": [],
+  "preservedLocalDisplayFields": [],
   "conflicts": [],
-  "manualLocksPreserved": [
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "personalFitScore",
-      "keptValue": 98,
-      "incomingValue": 0,
-      "reason": "Default manual field lock preserved non-empty personal judgment."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "tags",
-      "keptValue": [
-        "网络本体论",
-        "声音设计",
-        "碎片化叙事",
-        "存在危机",
-        "实验影像"
-      ],
-      "incomingValue": [
-        "Philosophy",
-        "Cyberpunk",
-        "Urban Fantasy",
-        "Denpa",
-        "Conspiracy"
-      ],
-      "reason": "Default manual field lock preserved non-empty personal judgment."
-    }
-  ],
+  "manualLocksPreserved": [],
   "possibleDuplicates": [],
   "needsReview": [],
   "warnings": []
