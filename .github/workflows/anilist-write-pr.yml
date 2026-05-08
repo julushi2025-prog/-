@@ -6,11 +6,10 @@ on:
       queries:
         description: |
           AniList anime title search queries for the write import.
-          Enter one anime title per line. Blank lines are ignored.
+          Separate titles with |, English commas, semicolons, or new lines. Blank entries are ignored.
         required: true
         default: |
-          Serial Experiments Lain
-          Mushishi
+          Serial Experiments Lain | Neon Genesis Evangelion | Puella Magi Madoka Magica
 
 permissions:
   contents: write
@@ -45,23 +44,37 @@ jobs:
         run: |
           set -euo pipefail
 
-          query_args=()
-          while IFS= read -r query || [ -n "$query" ]; do
-            query="${query#"${query%%[![:space:]]*}"}"
-            query="${query%"${query##*[![:space:]]}"}"
-            if [ -n "$query" ]; then
-              query_args+=(--query "$query")
-            fi
-          done <<< "$QUERIES"
+          query_values=()
+          while IFS= read -r -d '' query; do
+            query_values+=("$query")
+          done < <(node <<'NODE'
+          const rawQueries = process.env.QUERIES ?? "";
+          const queries = [...new Set(
+            rawQueries
+              .split(/[|,;\r\n]+/)
+              .map((query) => query.trim())
+              .filter(Boolean),
+          )];
 
-          if [ ${#query_args[@]} -eq 0 ]; then
-            echo "No AniList queries were provided. Enter one anime title per line." >&2
+          for (const query of queries) {
+            process.stdout.write(`${query}\0`);
+          }
+          NODE
+          )
+
+          if [ ${#query_values[@]} -eq 0 ]; then
+            echo "No AniList queries were parsed. Separate titles with |, English commas, semicolons, or new lines." >&2
             exit 1
           fi
 
-          printf 'Running AniList write import for %s query/queries:\n' "$(( ${#query_args[@]} / 2 ))"
-          for ((i = 1; i < ${#query_args[@]}; i += 2)); do
-            printf -- '- %s\n' "${query_args[$i]}"
+          query_args=()
+          for query in "${query_values[@]}"; do
+            query_args+=(--query "$query")
+          done
+
+          printf 'Running AniList write import for %s query/queries:\n' "${#query_values[@]}"
+          for query in "${query_values[@]}"; do
+            printf -- '- %s\n' "$query"
           done
 
           npm run update:anime -- --source anilist "${query_args[@]}" --write --yes

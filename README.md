@@ -250,21 +250,22 @@ npm run update:anime -- --dry-run
 1. 打开 GitHub 仓库页面，进入 **Actions**。
 2. 在左侧工作流列表选择 **AniList Dry-run Import**。
 3. 点击 **Run workflow**。
-4. 在 `queries` 输入框按“每行一个动漫标题”填写要测试的 AniList 搜索标题；可以一次输入多行，空行会被忽略。默认批量测试列表是：
+4. 在 `queries` 输入框填写要测试的 AniList 搜索标题；支持用 `|`、英文逗号 `,`、分号 `;` 或换行分隔，空白项会被忽略。推荐单行格式是：
 
    ```text
-   Serial Experiments Lain
-   Neon Genesis Evangelion
-   Puella Magi Madoka Magica
-   Made in Abyss
-   FLCL
-   Ghost in the Shell: Stand Alone Complex
-   Revolutionary Girl Utena
-   Monogatari Series
+   Serial Experiments Lain | Neon Genesis Evangelion | Puella Magi Madoka Magica
+   ```
+
+   也可以继续使用每行一个标题。默认批量测试列表是：
+
+   ```text
+   Serial Experiments Lain | Neon Genesis Evangelion | Puella Magi Madoka Magica
+   Made in Abyss | FLCL | Ghost in the Shell: Stand Alone Complex
+   Revolutionary Girl Utena | Monogatari Series
    ```
 
 5. 再次点击 **Run workflow** 启动任务。
-6. 任务会运行 `npm install`，把多行 `queries` 拆成多个 `--query` 参数，然后执行只读 dry-run，例如：
+6. 任务会运行 `npm install`，把 `queries` 按 `|`、英文逗号、分号和换行拆成多个 `--query` 参数，然后执行只读 dry-run，例如：
 
    ```bash
    npm run update:anime -- --source anilist --query "Serial Experiments Lain" --query "Neon Genesis Evangelion" --dry-run
@@ -373,6 +374,14 @@ npm run update:anime -- --source anilist --query "Serial Experiments Lain" --dry
 npm run update:anime -- --source anilist --query "Serial Experiments Lain" --query "Mushishi" --dry-run
 ```
 
+单个 `--query` 值以及 `data/import/search-queries.json` 中的字符串也支持用 `|`、英文逗号 `,`、分号 `;` 或换行分隔。推荐单行格式：
+
+```text
+Serial Experiments Lain | Neon Genesis Evangelion | Puella Magi Madoka Magica
+```
+
+脚本会在内部拆成多个查询；如果没有解析到任何标题，AniList 导入会失败而不是生成空结果。
+
 如果没有传入 `--query`，脚本会读取 `data/import/search-queries.json`。该文件可以是字符串数组，也可以是包含 `queries` 数组的对象。
 
 #### dry-run
@@ -403,14 +412,19 @@ npm run update:anime -- --source anilist --query "Serial Experiments Lain" --wri
 1. 打开 GitHub 仓库的 **Actions** 页面。
 2. 选择 **AniList Write Import PR** workflow。
 3. 点击 **Run workflow**。
-4. 在 `queries` 输入框中填写要导入的 AniList 查询标题，每行一个动漫标题，空行会被忽略。
+4. 在 `queries` 输入框中填写要导入的 AniList 查询标题；支持用 `|`、英文逗号 `,`、分号 `;` 或换行分隔，空白项会被忽略。推荐格式：
+
+   ```text
+   Serial Experiments Lain | Neon Genesis Evangelion | Puella Magi Madoka Magica
+   ```
+
 5. 启动后，workflow 会运行：
 
 ```bash
 npm run update:anime -- --source anilist --query "标题" --write --yes
 ```
 
-workflow 会把每一行输入转换为一个 `--query` 参数，并在 write 模式下生成 / 更新：
+workflow 会先把输入按 `|`、英文逗号、分号和换行拆分；如果没有解析到任何 query，会直接失败并且不会创建空 PR。解析成功后，每个标题都会转换为独立的 `--query` 参数，并在 write 模式下生成 / 更新：
 
 - `data/anime.json`
 - `data/import/staging-anime.json`
