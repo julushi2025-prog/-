@@ -51,7 +51,7 @@ app/
 data/
   anime.json                  # 本地 mock 动漫数据
   sources.json                # 合规数据源配置
-  import/manual-anime.json    # manual-import 示例输入文件
+  import/staging-anime.json   # 外部导入暂存区，先清洗/去重/冲突检查
 scripts/
   update-anime.ts             # 数据导入/更新脚本框架，默认 dry-run
   import-anime.ts             # 兼容旧命令的入口，转到 update-anime.ts
@@ -128,7 +128,7 @@ scripts/
 
 ## 数据导入 / 更新框架
 
-第一版只提供稳定、可审查的导入框架，默认不进行任何真实网络请求。请继续遵守：
+第一版只提供稳定、可审查的导入框架，默认不进行任何真实网络请求。外部数据必须先进入 staging，再由脚本统一清洗、去重、冲突检测和生成报告，最后才允许在 write 模式写回 `data/anime.json`。请继续遵守：
 
 - 不抓盗版资源
 - 不抓播放链接
@@ -136,33 +136,18 @@ scripts/
 - 尊重 `robots.txt`、API 服务条款和网站规则
 - 只导入公开、合法、非盗版的作品元数据
 
-### `data/sources.json` 配置
+### staging-anime.json 的用途
 
-`data/sources.json` 是数据源清单。每个来源建议包含：
+`data/import/staging-anime.json` 是导入暂存文件。无论未来数据来自人工整理、公开 API，还是合规爬虫 adapter，都应该先写入这个文件或同等 staging 流程，不要直接改写 `data/anime.json`。
 
-```json
-{
-  "id": "manual-import",
-  "name": "Manual JSON Import",
-  "enabled": true,
-  "type": "manual-json",
-  "description": "从 data/import/manual-anime.json 导入人工整理的合法元数据；不抓取网页、不包含播放链接。",
-  "path": "data/import/manual-anime.json"
-}
-```
+staging 的好处是：
 
-字段说明：
+1. 先把外部字段标准化为项目字段，避免每个来源各自覆盖主数据。
+2. 先按标题、原名、别名和年份去重，避免重复作品进入页面数据。
+3. 先生成 `reports/import-report.json`，把新增、更新、跳过、冲突、manual lock 保留和疑似重复全部列出来。
+4. dry-run 不会修改主数据，只有显式 write 才会写入 `data/anime.json`。
 
-1. `id`：稳定唯一标识，用来定位 adapter。
-2. `name`：导入报告中展示的人类可读名称。
-3. `enabled`：是否启用该来源。关闭后脚本会忽略。
-4. `type`：当前支持 `manual-json`；`api-placeholder` 仅占位，不会联网。
-5. `path`：`manual-json` 的输入文件路径，相对项目根目录。
-6. `baseUrl`：后续 API adapter 可使用的入口地址；当前不会请求。
-
-### manual-import 示例
-
-`manual-import` 默认读取 `data/import/manual-anime.json`。这个文件可以是外部合规元数据的暂存区，例如：
+示例：
 
 ```json
 [
@@ -175,25 +160,76 @@ scripts/
     "genres": ["科幻", "青春"],
     "tags": ["天文意象", "成长"],
     "summary": "简介",
-    "sourceRating": 0,
+    "sourceRating": null,
     "sourceName": "Manual Import Example",
     "sourceUrl": "https://example.com/legal-metadata/paper-moon-observatory"
   }
 ]
 ```
 
-脚本会把外部字段标准化为 `data/anime.json` 当前使用的结构，并按 `title + year` 去重。对于已存在的作品，脚本会保留人工维护字段：
+如果来源没有评分，`sourceRating` 使用 `null`，不要用 `0` 伪造评分。Wikipedia 可以作为标题、年份、集数、简介等元数据来源，但不要从 Wikipedia 编造 `sourceRating`。
 
-- `personalFitScore`
-- `whyForMe`
-- `risk`
-- `tags`
+### 字段类型与覆盖规则
 
-只有导入内容明显更完整时，`whyForMe` / `risk` 才会被替换；`tags` 会合并去重，避免覆盖已有人工标签。
+脚本明确区分三类字段：
+
+1. 客观来源字段：`title`、`originalTitle`、`year`、`episodes`、`status`、`genres`、`summary`、`sourceRating`、`sourceName`、`sourceUrl`。这些字段允许外部来源更新，但发生冲突时按来源可信度处理。
+2. 个人判断字段：`personalFitScore`、`whyForMe`、`risk`、`tags`。这些字段默认被保护，不允许外部来源覆盖已有非空值。
+3. 系统辅助字段：`id`、`aliases`、`sources`、`lastUpdated`、`confidence`、`manualLockedFields`。这些字段可由脚本新增，用于追踪别名、来源、更新时间、置信度和人工锁定。
+
+### `data/sources.json` 配置与 trustLevel
+
+`data/sources.json` 是数据源清单。每个来源建议包含 `trustLevel`（或后续等价的 `priority`）：
+
+```json
+{
+  "id": "staging-import",
+  "name": "Staging JSON Import",
+  "enabled": true,
+  "type": "manual-json",
+  "description": "从 data/import/staging-anime.json 导入暂存的合法元数据；不抓取网页、不包含播放链接。",
+  "path": "data/import/staging-anime.json",
+  "trustLevel": 60
+}
+```
+
+字段说明：
+
+1. `id`：稳定唯一标识，用来定位 adapter。
+2. `name`：导入报告中展示的人类可读名称。
+3. `enabled`：是否启用该来源。当前脚本固定读取 staging；后续多 adapter 可用它控制来源。
+4. `type`：当前支持 `manual-json`；`api-placeholder` 仅占位，不会联网。
+5. `path`：`manual-json` 的输入文件路径，相对项目根目录。
+6. `trustLevel`：来源可信度。客观字段冲突时，较高 `trustLevel` 优先；相同可信度时保留 `data/anime.json` 既有值，并在报告里记录冲突。
+7. `baseUrl`：后续 API adapter 可使用的入口地址；当前不会请求。
+
+### 去重与疑似重复
+
+导入时优先按“标准化标题 + 年份”去重。标准化会忽略大小写、空格、标点和符号差异，并同时检查：
+
+- `title`
+- `originalTitle`
+- `aliases`
+
+如果标题、原名或别名与年份能明确匹配，脚本会自动合并。如果只是相似但无法确认，脚本不会自动合并，而是跳过导入项并写入 `reports/import-report.json` 的 `possibleDuplicates`，等待人工检查。
+
+### manualLockedFields 如何使用
+
+`manualLockedFields` 可以放在 `data/anime.json` 的单条作品对象中，用来声明绝不能被导入覆盖的字段，例如：
+
+```json
+{
+  "title": "某作品",
+  "year": 2026,
+  "manualLockedFields": ["personalFitScore", "whyForMe", "risk", "tags"]
+}
+```
+
+默认情况下，脚本已经保护 `personalFitScore`、`whyForMe`、`risk`、`tags` 这四个个人判断字段：已有非空值会被保留；只有主数据里对应字段为空时，才允许从 staging 补齐。若某字段显式写入 `manualLockedFields`，导入时会在报告中记录该字段被保留，避免人工判断被外部元数据覆盖。
 
 ### Dry-run 预览
 
-默认就是 dry-run，只展示将要新增、更新或跳过的记录，不写入 `data/anime.json`：
+默认就是 dry-run，只读取 `data/import/staging-anime.json`、生成预览和 `reports/import-report.json`，不会写入 `data/anime.json`：
 
 ```bash
 npm run update:anime
@@ -211,6 +247,23 @@ npm run update:anime -- --dry-run
 npm run import:anime
 ```
 
+### 查看 import-report.json
+
+每次 dry-run 或 write 都会生成 `reports/import-report.json`。重点查看：
+
+- `added`：将新增哪些作品
+- `updated`：将更新哪些作品，以及字段列表
+- `skipped`：跳过哪些作品和原因
+- `conflicts`：哪些客观字段冲突、双方值、双方 `trustLevel` 和处理结果
+- `manualLocksPreserved`：哪些个人判断字段因为默认锁或 `manualLockedFields` 被保留
+- `possibleDuplicates`：哪些疑似重复需要人工检查
+
+命令行查看示例：
+
+```bash
+cat reports/import-report.json
+```
+
 ### 正式写入
 
 写入模式必须显式确认。交互式终端中运行：
@@ -225,16 +278,17 @@ npm run update:anime -- --write
 npm run update:anime -- --write --yes
 ```
 
-脚本只会在确认后把合并结果写回 `data/anime.json`。建议写入前先执行 dry-run 并检查预览结果。
+脚本只会在确认后把合并结果写回 `data/anime.json`。建议写入前先执行 dry-run 并检查 `reports/import-report.json`。
 
 ### 后续如何添加真实 API 或爬虫 adapter
 
 1. 优先选择官方或公开授权的元数据 API，不接入盗版站。
-2. 在 `data/sources.json` 新增来源，使用新的 `type`，例如 `public-api`。
-3. 在 `scripts/update-anime.ts` 的 `loadSource` 中为该 `type` 增加 adapter。
-4. adapter 必须限速、缓存、设置合理 User-Agent，并尊重 `robots.txt`、API rate limit 和服务条款。
-5. 只读取标题、年份、集数、状态、类型、简介、评分、合法元数据页面等信息；不要读取播放地址、下载地址或绕过访问限制。
-6. adapter 返回外部记录后，继续复用脚本里的字段标准化、去重和人工字段保留逻辑，最终仍输出到 `data/anime.json`，前端无需接数据库。
+2. 真实 API / 爬虫 adapter 先把外部记录写入 staging 或返回 staging 等价结构，不直接写 `data/anime.json`。
+3. 在 `data/sources.json` 新增来源，设置 `trustLevel`，并使用新的 `type`，例如 `public-api`。
+4. 在 `scripts/update-anime.ts` 中为该 `type` 增加 adapter，但仍复用标准化、去重、manual lock、trustLevel 冲突处理和报告生成逻辑。
+5. adapter 必须限速、缓存、设置合理 User-Agent，并尊重 `robots.txt`、API rate limit 和服务条款。
+6. 只读取标题、年份、集数、状态、类型、简介、评分、合法元数据页面等信息；不要读取播放地址、下载地址或绕过访问限制。
+7. 先经过 staging 和 conflict report，可以让不同来源的数据在进入主数据前被统一审查，避免 A 来源刚写入的个人判断、合法来源链接或高可信元数据被 B 来源静默覆盖。
 
 ## 部署到 Vercel
 

@@ -1,0 +1,15 @@
+[
+  {
+    "title": "纸月观测站",
+    "originalTitle": "Paper Moon Observatory",
+    "year": 2026,
+    "episodes": 12,
+    "status": "未开播",
+    "genres": ["科幻", "青春"],
+    "tags": ["天文意象", "成长", "美术叙事"],
+    "summary": "月面旧观测站被改造成远程学校后，学生们在延迟通信和纸质星图中寻找失联教师留下的观测记录。",
+    "sourceRating": null,
+    "sourceName": "Manual Import Example",
+    "sourceUrl": "https://example.com/legal-metadata/paper-moon-observatory"
+  }
+]
