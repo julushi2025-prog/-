@@ -1,20 +1,21 @@
 {
-  "generatedAt": "2026-05-08T10:33:13.369Z",
-  "mode": "dry-run",
+  "generatedAt": "2026-05-08T11:44:56.710Z",
+  "mode": "write",
   "stagingPath": "data/import/staging-anime.json",
   "animePath": "data/anime.json",
   "reportPath": "reports/import-report.json",
   "counts": {
-    "stagingRows": 1,
-    "normalizedCandidates": 1,
+    "stagingRows": 3,
+    "normalizedCandidates": 3,
     "added": 0,
-    "updated": 1,
+    "updated": 3,
     "skipped": 0,
-    "conflicts": 0,
-    "manualLocksPreserved": 2,
-    "acceptedExternalMetadata": 6,
-    "preservedLocalDisplayFields": 3,
-    "possibleDuplicates": 0
+    "conflicts": 2,
+    "manualLocksPreserved": 6,
+    "acceptedExternalMetadata": 20,
+    "preservedLocalDisplayFields": 7,
+    "possibleDuplicates": 0,
+    "needsReview": 0
   },
   "added": [],
   "updated": [
@@ -23,6 +24,40 @@
       "year": 1998,
       "sourceName": "AniList",
       "fields": [
+        "sourceRating",
+        "sourceName",
+        "sourceUrl",
+        "aliases",
+        "sources",
+        "externalSummary",
+        "sourceGenres",
+        "id",
+        "lastUpdated"
+      ]
+    },
+    {
+      "title": "Neon Genesis Evangelion",
+      "year": 1995,
+      "sourceName": "AniList",
+      "fields": [
+        "title",
+        "sourceRating",
+        "sourceName",
+        "sourceUrl",
+        "aliases",
+        "sources",
+        "externalSummary",
+        "sourceGenres",
+        "id",
+        "lastUpdated"
+      ]
+    },
+    {
+      "title": "Puella Magi Madoka Magica",
+      "year": 2011,
+      "sourceName": "AniList",
+      "fields": [
+        "title",
         "sourceRating",
         "sourceName",
         "sourceUrl",
@@ -58,7 +93,7 @@
       "year": 1998,
       "field": "sourceUrl",
       "existingValue": "https://en.wikipedia.org/wiki/Serial_Experiments_Lain",
-      "incomingValue": "https://anilist.co/anime/339/Serial-Experiments-Lain/",
+      "incomingValue": "https://anilist.co/anime/339",
       "reason": "AniList source metadata is allowed to refresh sourceUrl."
     },
     {
@@ -71,8 +106,8 @@
           "id": "anilist",
           "name": "AniList",
           "trustLevel": 80,
-          "sourceUrl": "https://anilist.co/anime/339/Serial-Experiments-Lain/",
-          "description": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
+          "sourceUrl": "https://anilist.co/anime/339",
+          "description": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
           "genres": [
             "Drama",
             "Mystery",
@@ -88,7 +123,7 @@
       "title": "Serial Experiments Lain",
       "year": 1998,
       "field": "externalSummary",
-      "incomingValue": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
+      "incomingValue": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
       "reason": "External description stored separately from local summary."
     },
     {
@@ -103,6 +138,160 @@
         "Supernatural"
       ],
       "reason": "External genres stored separately from local display genres."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "title",
+      "existingValue": "新世纪福音战士",
+      "incomingValue": "Neon Genesis Evangelion",
+      "reason": "Incoming value accepted because its source trustLevel is higher."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "sourceRating",
+      "existingValue": null,
+      "incomingValue": 83,
+      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "sourceName",
+      "existingValue": "Wikipedia",
+      "incomingValue": "AniList",
+      "reason": "AniList source metadata is allowed to refresh sourceName."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "sourceUrl",
+      "existingValue": "https://en.wikipedia.org/wiki/Neon_Genesis_Evangelion",
+      "incomingValue": "https://anilist.co/anime/30",
+      "reason": "AniList source metadata is allowed to refresh sourceUrl."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "sources",
+      "existingValue": [],
+      "incomingValue": [
+        {
+          "id": "anilist",
+          "name": "AniList",
+          "trustLevel": 80,
+          "sourceUrl": "https://anilist.co/anime/30",
+          "description": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
+          "genres": [
+            "Action",
+            "Drama",
+            "Mecha",
+            "Mystery",
+            "Psychological",
+            "Sci-Fi"
+          ]
+        }
+      ],
+      "reason": "External source reference metadata was merged without replacing local display fields."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "externalSummary",
+      "incomingValue": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
+      "reason": "External description stored separately from local summary."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "sourceGenres",
+      "incomingValue": [
+        "Action",
+        "Drama",
+        "Mecha",
+        "Mystery",
+        "Psychological",
+        "Sci-Fi"
+      ],
+      "reason": "External genres stored separately from local display genres."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "title",
+      "existingValue": "魔法少女小圆",
+      "incomingValue": "Puella Magi Madoka Magica",
+      "reason": "Incoming value accepted because its source trustLevel is higher."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sourceRating",
+      "existingValue": null,
+      "incomingValue": 83,
+      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sourceName",
+      "existingValue": "Wikipedia",
+      "incomingValue": "AniList",
+      "reason": "AniList source metadata is allowed to refresh sourceName."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sourceUrl",
+      "existingValue": "https://en.wikipedia.org/wiki/Puella_Magi_Madoka_Magica",
+      "incomingValue": "https://anilist.co/anime/9756",
+      "reason": "AniList source metadata is allowed to refresh sourceUrl."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sources",
+      "existingValue": [],
+      "incomingValue": [
+        {
+          "id": "anilist",
+          "name": "AniList",
+          "trustLevel": 80,
+          "sourceUrl": "https://anilist.co/anime/9756",
+          "description": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
+          "genres": [
+            "Action",
+            "Drama",
+            "Fantasy",
+            "Mahou Shoujo",
+            "Psychological",
+            "Thriller"
+          ]
+        }
+      ],
+      "reason": "External source reference metadata was merged without replacing local display fields."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "externalSummary",
+      "incomingValue": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
+      "reason": "External description stored separately from local summary."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sourceGenres",
+      "incomingValue": [
+        "Action",
+        "Drama",
+        "Fantasy",
+        "Mahou Shoujo",
+        "Psychological",
+        "Thriller"
+      ],
+      "reason": "External genres stored separately from local display genres."
     }
   ],
   "preservedLocalDisplayFields": [
@@ -112,7 +301,7 @@
       "field": "originalTitle",
       "keptValue": "シリアルエクスペリメンツレイン",
       "incomingValue": "serial experiments lain",
-      "reason": "Existing originalTitle appears to be an original CJK/kana title; romaji/English incoming title was kept as an alias instead of replacing it."
+      "reason": "originalTitle is a local display field; non-empty anime.json originalTitle is preserved and incoming titles stay available through aliases/source metadata."
     },
     {
       "title": "Serial Experiments Lain",
@@ -137,11 +326,86 @@
       "year": 1998,
       "field": "summary",
       "keptValue": "内向少女岩仓玲音在收到已故同学的邮件后，被卷入现实与 Wired 网络边界逐渐崩塌的事件。",
-      "incomingValue": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
+      "incomingValue": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
+      "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "genres",
+      "keptValue": [
+        "科幻",
+        "机甲",
+        "心理"
+      ],
+      "incomingValue": [
+        "Action",
+        "Drama",
+        "Mecha",
+        "Mystery",
+        "Psychological",
+        "Sci-Fi"
+      ],
+      "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "summary",
+      "keptValue": "少年碇真嗣驾驶 EVA 对抗使徒，同时被家庭创伤、组织秘密和自我厌恶拖入崩坏。",
+      "incomingValue": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
+      "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "genres",
+      "keptValue": [
+        "奇幻",
+        "心理",
+        "悬疑"
+      ],
+      "incomingValue": [
+        "Action",
+        "Drama",
+        "Fantasy",
+        "Mahou Shoujo",
+        "Psychological",
+        "Thriller"
+      ],
+      "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "summary",
+      "keptValue": "鹿目圆等少女面对成为魔法少女的诱惑，逐渐理解愿望、代价与绝望循环的真实机制。",
+      "incomingValue": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
       "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "title",
+      "existingValue": "新世纪福音战士",
+      "incomingValue": "Neon Genesis Evangelion",
+      "existingTrustLevel": 55,
+      "incomingTrustLevel": 80,
+      "resolution": "Incoming value kept because its source trustLevel is higher."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "title",
+      "existingValue": "魔法少女小圆",
+      "incomingValue": "Puella Magi Madoka Magica",
+      "existingTrustLevel": 55,
+      "incomingTrustLevel": 80,
+      "resolution": "Incoming value kept because its source trustLevel is higher."
+    }
+  ],
   "manualLocksPreserved": [
     {
       "title": "Serial Experiments Lain",
@@ -163,11 +427,76 @@
         "实验影像"
       ],
       "incomingValue": [
-        "Philosophy",
-        "Cyberpunk",
-        "Urban Fantasy",
         "Denpa",
-        "Conspiracy"
+        "Philosophy",
+        "Augmented Reality",
+        "Female Protagonist",
+        "Artificial Intelligence",
+        "Cyberpunk",
+        "Conspiracy",
+        "Meta"
+      ],
+      "reason": "Default manual field lock preserved non-empty personal judgment."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "personalFitScore",
+      "keptValue": 96,
+      "incomingValue": 0,
+      "reason": "Default manual field lock preserved non-empty personal judgment."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "tags",
+      "keptValue": [
+        "末世压迫感",
+        "精神分析",
+        "宗教符号",
+        "机甲身体性",
+        "声画断裂"
+      ],
+      "incomingValue": [
+        "Philosophy",
+        "Coming of Age",
+        "Super Robot",
+        "Dystopian",
+        "Post-Apocalyptic",
+        "Angels",
+        "Psychosexual",
+        "Primarily Teen Cast"
+      ],
+      "reason": "Default manual field lock preserved non-empty personal judgment."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "personalFitScore",
+      "keptValue": 90,
+      "incomingValue": 0,
+      "reason": "Default manual field lock preserved non-empty personal judgment."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "tags",
+      "keptValue": [
+        "类型解构",
+        "异空间美术",
+        "命运闭环",
+        "音乐转折",
+        "契约伦理"
+      ],
+      "incomingValue": [
+        "Magic",
+        "Female Protagonist",
+        "Witch",
+        "Primarily Female Cast",
+        "Urban Fantasy",
+        "Philosophy",
+        "Primarily Teen Cast",
+        "Henshin"
       ],
       "reason": "Default manual field lock preserved non-empty personal judgment."
     }
