@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Manual CSV Import",
+    "enabled": false,
+    "type": "file",
+    "description": "未来可从个人维护的 CSV/JSON 清单导入，避免直接爬取网页。",
+    "path": "./imports/anime.csv"
+  },
+  {
+    "name": "Public Metadata API Placeholder",
+    "enabled": false,
+    "type": "api",
+    "description": "预留给合规公开元数据 API；第一版不启用网络请求。",
+    "baseUrl": "https://api.example.com/anime"
+  }
+]
