@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "import:anime": "tsx scripts/import-anime.ts"
+    "import:anime": "tsx scripts/update-anime.ts",
+    "update:anime": "tsx scripts/update-anime.ts",
+    "update:anime:write": "tsx scripts/update-anime.ts --write"
   },
   "dependencies": {
     "next": "latest",
