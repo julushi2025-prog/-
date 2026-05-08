@@ -209,9 +209,9 @@ function getArgValue(args: string[], name: string) {
 function getArgValues(args: string[], name: string) {
   const values: string[] = [];
   for (let index = 0; index < args.length; index += 1) {
-    if (args[index] === name && args[index + 1]) values.push(args[index + 1]);
+    if (args[index] === name && args[index + 1]) values.push(...splitQueryText(args[index + 1]));
   }
-  return values;
+  return uniqueStrings(values);
 }
 
 function getImportSource(sources: AnimeSource[], requestedSource: string): AnimeSource {
@@ -251,11 +251,22 @@ async function loadStagingRows(root: string, args: ReturnType<typeof parseArgs>,
 
 async function readSearchQueries(filePath: string) {
   const queries = await readJson<unknown>(filePath);
-  if (Array.isArray(queries)) return uniqueStrings(queries.map(cleanText).filter(Boolean));
+  if (Array.isArray(queries)) return normalizeQueryList(queries);
   if (queries && typeof queries === "object" && Array.isArray((queries as { queries?: unknown[] }).queries)) {
-    return uniqueStrings(((queries as { queries: unknown[] }).queries).map(cleanText).filter(Boolean));
+    return normalizeQueryList((queries as { queries: unknown[] }).queries);
   }
   throw new Error(`${DEFAULT_QUERY_PATH} must be a JSON array of strings or an object with a queries array.`);
+}
+
+function normalizeQueryList(values: unknown[]) {
+  return uniqueStrings(values.flatMap(splitQueryText));
+}
+
+function splitQueryText(value: unknown) {
+  return cleanText(value)
+    .split(/[|,;\r\n]+/)
+    .map(cleanText)
+    .filter(Boolean);
 }
 
 function normalizeAnime(row: ExternalAnime, source: AnimeSource, index: number, report: ImportReport): ImportCandidate | null {
