@@ -1,0 +1,155 @@
+name: AniList Discovery Candidate PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Discovery mode. genre/tag/year also honor the matching filter inputs below."
+        required: true
+        type: choice
+        default: trending
+        options:
+          - trending
+          - popular
+          - genre
+          - tag
+          - year
+      genres:
+        description: "AniList genres, separated by |, English commas, semicolons, or new lines."
+        required: false
+        default: ""
+      tags:
+        description: "AniList tags, separated by |, English commas, semicolons, or new lines."
+        required: false
+        default: ""
+      yearFrom:
+        description: "Earliest start year, for example 2024."
+        required: false
+        default: ""
+      yearTo:
+        description: "Latest start year, for example 2026."
+        required: false
+        default: ""
+      maxEpisodes:
+        description: "Maximum episode count to keep. Blank means no maximum."
+        required: false
+        default: ""
+      limit:
+        description: "Maximum candidates to stage: 25, 50, or 100."
+        required: true
+        type: choice
+        default: "25"
+        options:
+          - "25"
+          - "50"
+          - "100"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: anilist-discover-pr-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  anilist-discover-pr:
+    name: Discover AniList candidates and open PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run AniList discovery
+        env:
+          MODE: ${{ inputs.mode }}
+          GENRES: ${{ inputs.genres }}
+          TAGS: ${{ inputs.tags }}
+          YEAR_FROM: ${{ inputs.yearFrom }}
+          YEAR_TO: ${{ inputs.yearTo }}
+          MAX_EPISODES: ${{ inputs.maxEpisodes }}
+          LIMIT: ${{ inputs.limit }}
+        run: |
+          set -euo pipefail
+
+          args=(--source anilist --discover --mode "$MODE" --limit "$LIMIT" --dry-run)
+          [ -n "$GENRES" ] && args+=(--genres "$GENRES")
+          [ -n "$TAGS" ] && args+=(--tags "$TAGS")
+          [ -n "$YEAR_FROM" ] && args+=(--yearFrom "$YEAR_FROM")
+          [ -n "$YEAR_TO" ] && args+=(--yearTo "$YEAR_TO")
+          [ -n "$MAX_EPISODES" ] && args+=(--maxEpisodes "$MAX_EPISODES")
+
+          printf 'Running AniList discovery with mode=%s limit=%s\n' "$MODE" "$LIMIT"
+          npm run update:anime -- "${args[@]}"
+
+      - name: Verify discovery outputs
+        run: |
+          set -euo pipefail
+          test -f data/import/staging-anime.json
+          test -f reports/import-report.json
+          git diff -- data/anime.json --exit-code
+
+      - name: Prepare pull request body
+        run: |
+          set -euo pipefail
+          body_path="$RUNNER_TEMP/anilist-discover-pr-body.md"
+          node <<'NODE' > "$body_path"
+          const { readFileSync } = require("node:fs");
+          const report = JSON.parse(readFileSync("reports/import-report.json", "utf8"));
+          const counts = report.counts ?? {};
+
+          console.log("## AniList discovery summary");
+          console.log("");
+          console.log(`- discovered：${counts.discovered ?? 0} 条`);
+          console.log(`- addedCandidates：${counts.addedCandidates ?? 0} 条`);
+          console.log(`- updatedCandidates：${counts.updatedCandidates ?? 0} 条`);
+          console.log(`- skipped：${counts.skipped ?? 0} 条`);
+          console.log(`- needsReview：${counts.needsReview ?? 0} 条`);
+          console.log(`- possibleDuplicates：${counts.possibleDuplicates ?? 0} 条`);
+          console.log(`- excludedByFormat：${counts.excludedByFormat ?? 0} 条`);
+          console.log(`- excludedByEpisodeCount：${counts.excludedByEpisodeCount ?? 0} 条`);
+          console.log("");
+          console.log("Generated candidate files:");
+          console.log("- `data/import/staging-anime.json`");
+          console.log("- `reports/import-report.json`");
+          console.log("");
+          console.log("> This discovery PR intentionally does not modify `data/anime.json`. Review staged candidates before running a separate import/write flow.");
+          NODE
+          echo "PR_BODY_PATH=$body_path" >> "$GITHUB_ENV"
+
+      - name: Commit changes and create pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+
+          branch="anilist-discovery-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/import/staging-anime.json reports/import-report.json
+          if git diff --cached --quiet; then
+            echo "AniList discovery produced no candidate changes to commit; skipping PR creation."
+            exit 0
+          fi
+
+          git commit -m "Discover AniList anime candidates"
+          git push --set-upstream origin "$branch"
+          gh pr create \
+            --base "$BASE_BRANCH" \
+            --head "$branch" \
+            --title "Discover AniList anime candidates" \
+            --body-file "$PR_BODY_PATH"

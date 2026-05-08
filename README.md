@@ -403,6 +403,89 @@ npm run update:anime -- --source anilist --query "Serial Experiments Lain" --wri
 如果 AniList 返回多个相近结果，或者最佳匹配置信度不足，脚本会把候选标记为 `needsReview` 并写入 `reports/import-report.json`，不会自动合并进主数据。
 
 
+### AniList 批量 discovery 候选发现
+
+除按已知标题逐条 `--query` 导入外，项目现在支持 AniList 官方 GraphQL API 的批量 discovery 模式，用来发现候选作品并写入暂存区。该模式仍然遵守现有安全边界：
+
+- 不改 UI。
+- 不抓盗版资源，不抓播放链接。
+- 只请求 AniList 官方 GraphQL API 的公开作品元数据。
+- 只写入 `data/import/staging-anime.json` 与 `reports/import-report.json`。
+- 不直接写入或合并 `data/anime.json`。
+- 后续人工确认或单独 write 导入时，继续复用现有去重、疑似重复、冲突检测、local display fields 保护与 manual lock 规则。
+
+本地 dry-run 示例：
+
+```bash
+npm run discover:anilist -- --mode trending --limit 25 --maxEpisodes 26
+```
+
+也可以直接使用底层脚本：
+
+```bash
+npm run update:anime -- --source anilist --discover --mode popular --limit 50 --yearFrom 2024 --yearTo 2026 --maxEpisodes 26 --dry-run
+```
+
+支持的 discovery 条件：
+
+| 参数 | 说明 |
+| --- | --- |
+| `--mode` | `trending`、`popular`、`genre`、`tag`、`year`。 |
+| `--genres` | AniList genre 列表，支持用 `|`、英文逗号、分号或换行分隔。 |
+| `--tags` | AniList tag 列表，支持用 `|`、英文逗号、分号或换行分隔。 |
+| `--yearFrom` / `--yearTo` | 开播年份范围。 |
+| `--format` | 可选 AniList format 过滤，例如 `TV`、`MOVIE`、`ONA`、`OVA`。即使设置该项，默认仍排除 `MUSIC`、`SPECIAL`。 |
+| `--status` | 可选 AniList status 过滤，例如 `FINISHED`、`RELEASING`、`NOT_YET_RELEASED`。 |
+| `--minEpisodes` / `--maxEpisodes` | 集数范围过滤；超出范围会计入 `excludedByEpisodeCount`。 |
+| `--limit` | 每次最多暂存候选数，限制在 1-100；GitHub workflow 提供 25 / 50 / 100。 |
+
+默认排除规则：
+
+- 排除 AniList `format` 为 `MUSIC` 或 `SPECIAL` 的条目。
+- 排除标题、format 或标签中明显属于 `trailer`、`OP`、`ED`、`PV`、`CM`、commercial / preview 等短宣传素材的条目。
+- 如果设置了集数范围，超出范围的条目会跳过。
+
+Discovery 生成的 staging 候选会包含初步客观字段：`title`、`originalTitle`、`year`、`episodes`、`status`、`genres`、`sourceRating`、`sourceName`、`sourceUrl`、`sourceId`、`aliases`、`externalSummary`。`personalFitScore`、`whyForMe`、`risk` 和 `tags` 不会伪造确定推荐理由；候选会在报告的 `needsReview` 中提示人工补充这些个人判断字段。
+
+`reports/import-report.json` 会额外展示 discovery 相关计数：
+
+- `discovered`
+- `addedCandidates`
+- `updatedCandidates`
+- `skipped`
+- `needsReview`
+- `possibleDuplicates`
+- `excludedByFormat`
+- `excludedByEpisodeCount`
+
+### GitHub Actions 手动 AniList discovery PR
+
+项目新增手动 workflow：`.github/workflows/anilist-discover-pr.yml`。它会运行 AniList discovery、提交 staging/report 变更并创建 PR，但不会提交 `data/anime.json`。
+
+运行方式：
+
+1. 打开 GitHub 仓库的 **Actions** 页面。
+2. 选择 **AniList Discovery Candidate PR**。
+3. 点击 **Run workflow**。
+4. 设置输入：
+   - `mode`：`trending` / `popular` / `genre` / `tag` / `year`。
+   - `genres`：可选，genre 列表。
+   - `tags`：可选，tag 列表。
+   - `yearFrom` / `yearTo`：可选年份范围。
+   - `maxEpisodes`：可选最大集数。
+   - `limit`：25、50 或 100。
+5. workflow 会执行类似下面的命令：
+
+   ```bash
+   npm run update:anime -- --source anilist --discover --mode trending --limit 25 --maxEpisodes 26 --dry-run
+   ```
+
+6. PR 只包含：
+   - `data/import/staging-anime.json`
+   - `reports/import-report.json`
+
+请先人工检查 staging 与 report，再决定是否通过现有 write import 流程把候选合并进主数据。
+
 ### GitHub Actions 手动 AniList write PR
 
 项目提供手动工作流 `.github/workflows/anilist-write-pr.yml`，用于在 GitHub Actions 中执行 AniList write 导入，并把结果提交到一个新的 Pull Request。这个 workflow 不会自动合并，也不会直接写入 `main`。
