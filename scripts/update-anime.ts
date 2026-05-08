@@ -478,8 +478,8 @@ function resolveObjectiveField(field: ObjectiveField, existingValue: unknown, in
     return { value: existingValue, changed: false };
   }
 
-  if (field === "originalTitle" && shouldPreserveExistingOriginalTitle(existingValue, incomingValue)) {
-    report.preservedLocalDisplayFields.push({ title: existing.title, year: existing.year, field, keptValue: existingValue, incomingValue, reason: "Existing originalTitle appears to be an original CJK/kana title; romaji/English incoming title was kept as an alias instead of replacing it." });
+  if (field === "originalTitle") {
+    report.preservedLocalDisplayFields.push({ title: existing.title, year: existing.year, field, keptValue: existingValue, incomingValue, reason: "originalTitle is a local display field; non-empty anime.json originalTitle is preserved and incoming titles stay available through aliases/source metadata." });
     return { value: existingValue, changed: false };
   }
 
@@ -507,15 +507,6 @@ function reportAcceptedExternalMetadata(report: ImportReport, existing: Anime, f
   report.acceptedExternalMetadata.push({ title: existing.title, year: existing.year, field, existingValue, incomingValue, reason });
 }
 
-function shouldPreserveExistingOriginalTitle(existingValue: unknown, incomingValue: unknown) {
-  const existingTitle = cleanText(existingValue);
-  const incomingTitle = cleanText(incomingValue);
-  return hasCjkOrKana(existingTitle) && !hasCjkOrKana(incomingTitle);
-}
-
-function hasCjkOrKana(value: string) {
-  return /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u.test(value);
-}
 
 function isConfirmedDuplicate(left: Pick<Anime, "title" | "originalTitle" | "year" | "aliases">, right: Pick<Anime, "title" | "originalTitle" | "year" | "aliases">) {
   if (left.year !== right.year) return false;
