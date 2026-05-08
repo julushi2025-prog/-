@@ -1,11 +1,12 @@
 [
   {
-    "id": "manual-import",
-    "name": "Manual JSON Import",
+    "id": "staging-import",
+    "name": "Staging JSON Import",
     "enabled": true,
     "type": "manual-json",
-    "description": "从 data/import/manual-anime.json 导入人工整理的合法元数据；不抓取网页、不包含播放链接。",
-    "path": "data/import/manual-anime.json"
+    "description": "从 data/import/staging-anime.json 导入暂存的合法元数据；不抓取网页、不包含播放链接。",
+    "path": "data/import/staging-anime.json",
+    "trustLevel": 60
   },
   {
     "id": "public-api-placeholder",
@@ -13,6 +14,7 @@
     "enabled": false,
     "type": "api-placeholder",
     "description": "预留给合规公开元数据 API；第一版不启用网络请求，后续 adapter 必须尊重 robots.txt、限速与服务条款。",
-    "baseUrl": "https://api.example.com/anime"
+    "baseUrl": "https://api.example.com/anime",
+    "trustLevel": 70
   }
 ]

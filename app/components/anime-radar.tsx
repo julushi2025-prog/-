@@ -59,7 +59,7 @@ export function AnimeRadar({ initialAnime }: { initialAnime: Anime[] }) {
       .filter((item) => filters.tag === "all" || item.tags.includes(filters.tag))
       .filter((item) => item.personalFitScore >= filters.minScore)
       .filter((item) => matchesEpisodeRange(item.episodes, filters.episodeRange))
-      .sort((a, b) => b.personalFitScore - a.personalFitScore || b.sourceRating - a.sourceRating);
+      .sort((a, b) => b.personalFitScore - a.personalFitScore || (b.sourceRating ?? 0) - (a.sourceRating ?? 0));
   }, [dismissed, filters, initialAnime]);
 
   const averageFit = Math.round(filteredAnime.reduce((sum, item) => sum + item.personalFitScore, 0) / Math.max(filteredAnime.length, 1));
@@ -333,6 +333,6 @@ function toCsv(items: Anime[]) {
   return [headers.join(","), ...rows].join("\n");
 }
 
-function csvCell(value: string | number) {
+function csvCell(value: string | number | null | undefined) {
   return `"${String(value).replaceAll('"', '""')}"`;
 }

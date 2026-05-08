@@ -1,10 +1,14 @@
-import { access, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import type { Anime, AnimeStatus } from "../app/types";
 
 type SourceType = "manual-json" | "api-placeholder";
+type ObjectiveField = (typeof OBJECTIVE_FIELDS)[number];
+type ManualField = (typeof MANUAL_FIELDS)[number];
+type SystemField = (typeof SYSTEM_FIELDS)[number];
+type ImportField = ObjectiveField | ManualField | SystemField;
 
 type AnimeSource = {
   id: string;
@@ -12,13 +16,15 @@ type AnimeSource = {
   enabled: boolean;
   type: SourceType;
   description: string;
+  trustLevel: number;
+  priority?: number;
   path?: string;
   baseUrl?: string;
 };
 
 type ExternalAnime = Partial<Anime> & {
   original_title?: string;
-  source_rating?: number | string;
+  source_rating?: number | string | null;
   source_name?: string;
   source_url?: string;
 };
@@ -26,17 +32,76 @@ type ExternalAnime = Partial<Anime> & {
 type ImportCandidate = Anime & {
   importSourceId: string;
   importSourceName: string;
+  importTrustLevel: number;
 };
 
-type MergeStats = {
-  added: number;
-  updated: number;
-  skipped: number;
+type ConflictEntry = {
+  title: string;
+  year: number;
+  field: ImportField;
+  existingValue: unknown;
+  incomingValue: unknown;
+  existingTrustLevel: number;
+  incomingTrustLevel: number;
+  resolution: string;
+};
+
+type ManualLockEntry = {
+  title: string;
+  year: number;
+  field: ManualField;
+  keptValue: unknown;
+  incomingValue: unknown;
+  reason: string;
+};
+
+type DuplicateEntry = {
+  incomingTitle: string;
+  incomingYear: number;
+  existingTitle: string;
+  existingYear: number;
+  reason: string;
+  action: "merged" | "needs-review";
+};
+
+type SkippedEntry = {
+  title?: string;
+  year?: number;
+  sourceName?: string;
+  reason: string;
+};
+
+type ImportReport = {
+  generatedAt: string;
+  mode: "dry-run" | "write";
+  stagingPath: string;
+  animePath: string;
+  reportPath: string;
+  counts: {
+    stagingRows: number;
+    normalizedCandidates: number;
+    added: number;
+    updated: number;
+    skipped: number;
+    conflicts: number;
+    manualLocksPreserved: number;
+    possibleDuplicates: number;
+  };
+  added: Array<{ title: string; year: number; sourceName: string }>;
+  updated: Array<{ title: string; year: number; sourceName: string; fields: ImportField[] }>;
+  skipped: SkippedEntry[];
+  conflicts: ConflictEntry[];
+  manualLocksPreserved: ManualLockEntry[];
+  possibleDuplicates: DuplicateEntry[];
   warnings: string[];
-  changes: string[];
 };
 
+const OBJECTIVE_FIELDS = ["title", "originalTitle", "year", "episodes", "status", "genres", "summary", "sourceRating", "sourceName", "sourceUrl"] as const;
 const MANUAL_FIELDS = ["personalFitScore", "whyForMe", "risk", "tags"] as const;
+const SYSTEM_FIELDS = ["id", "aliases", "sources", "lastUpdated", "confidence", "manualLockedFields"] as const;
+const DEFAULT_MANUAL_LOCKED_FIELDS: ManualField[] = ["personalFitScore", "whyForMe", "risk", "tags"];
+const DEFAULT_STAGING_PATH = "data/import/staging-anime.json";
+const REPORT_PATH = "reports/import-report.json";
 const PLAYBACK_URL_PATTERN = /\b(play|watch|stream|episode|video|m3u8|magnet|torrent|download)\b/i;
 
 async function main() {
@@ -44,50 +109,49 @@ async function main() {
   const root = process.cwd();
   const sourcesPath = path.join(root, "data", "sources.json");
   const animePath = path.join(root, "data", "anime.json");
+  const reportPath = path.join(root, REPORT_PATH);
 
   const sources = await readJson<AnimeSource[]>(sourcesPath);
   const currentAnime = await readJson<Anime[]>(animePath);
-  const enabledSources = sources.filter((source) => source.enabled);
-  const stats: MergeStats = { added: 0, updated: 0, skipped: 0, warnings: [], changes: [] };
+  const stagingSource = getStagingSource(sources);
+  const report = createReport(args.write ? "write" : "dry-run", DEFAULT_STAGING_PATH, "data/anime.json", REPORT_PATH);
 
   console.log("Anime Radar data update");
   console.log(`Mode: ${args.write ? "write" : "dry-run"}`);
-  console.log(`Configured sources: ${sources.length}; enabled: ${enabledSources.length}`);
+  console.log(`Staging input: ${DEFAULT_STAGING_PATH}`);
   console.log(`Current local records: ${currentAnime.length}`);
   console.log("Safety: no piracy resources, no playback links, no high-frequency crawling, and no network requests in v1.\n");
 
-  const candidates: ImportCandidate[] = [];
-  for (const source of enabledSources) {
-    const imported = await loadSource(source, root, stats);
-    candidates.push(...imported);
-  }
+  const stagingRows = await readJson<ExternalAnime[]>(path.join(root, DEFAULT_STAGING_PATH));
+  report.counts.stagingRows = stagingRows.length;
+  const candidates = stagingRows
+    .map((row, index) => normalizeAnime(row, stagingSource, index, report))
+    .filter((item): item is ImportCandidate => item !== null);
+  report.counts.normalizedCandidates = candidates.length;
 
-  const dedupedCandidates = dedupeCandidates(candidates, stats);
-  const nextAnime = mergeAnime(currentAnime, dedupedCandidates, stats);
+  const dedupedCandidates = dedupeCandidates(candidates, report);
+  const nextAnime = mergeAnime(currentAnime, dedupedCandidates, sources, report);
+  updateCounts(report);
+  await writeReport(reportPath, report);
 
   console.log("Import preview:");
-  console.log(`- Candidates read: ${candidates.length}`);
+  console.log(`- Staging rows read: ${report.counts.stagingRows}`);
+  console.log(`- Candidates after normalization: ${report.counts.normalizedCandidates}`);
   console.log(`- Candidates after de-dupe: ${dedupedCandidates.length}`);
-  console.log(`- Would add: ${stats.added}`);
-  console.log(`- Would update: ${stats.updated}`);
-  console.log(`- Skipped: ${stats.skipped}`);
-
-  if (stats.changes.length > 0) {
-    console.log("\nPlanned changes:");
-    for (const change of stats.changes) console.log(`- ${change}`);
-  }
-
-  if (stats.warnings.length > 0) {
-    console.log("\nWarnings:");
-    for (const warning of stats.warnings) console.log(`- ${warning}`);
-  }
+  console.log(`- Would add: ${report.counts.added}`);
+  console.log(`- Would update: ${report.counts.updated}`);
+  console.log(`- Skipped: ${report.counts.skipped}`);
+  console.log(`- Conflicts: ${report.counts.conflicts}`);
+  console.log(`- Manual locks preserved: ${report.counts.manualLocksPreserved}`);
+  console.log(`- Possible duplicates needing review: ${report.counts.possibleDuplicates}`);
+  console.log(`- Report written: ${REPORT_PATH}`);
 
   if (!args.write) {
     console.log("\nDry-run complete. No changes were written to data/anime.json.");
     return;
   }
 
-  await confirmWrite(args.yes, stats.added + stats.updated, animePath);
+  await confirmWrite(args.yes, report.counts.added + report.counts.updated, animePath);
   await writeFile(animePath, `${JSON.stringify(nextAnime, null, 2)}\n`);
   console.log(`\nWrote ${nextAnime.length} records to data/anime.json.`);
 }
@@ -97,49 +161,39 @@ function parseArgs(args: string[]) {
   const dryRun = args.includes("--dry-run");
   const yes = args.includes("--yes") || args.includes("-y");
 
-  if (write && dryRun) {
-    throw new Error("Use either --dry-run or --write, not both.");
-  }
-
+  if (write && dryRun) throw new Error("Use either --dry-run or --write, not both.");
   return { write, yes };
 }
 
-async function loadSource(source: AnimeSource, root: string, stats: MergeStats): Promise<ImportCandidate[]> {
-  if (source.type === "manual-json") {
-    if (!source.path) {
-      stats.warnings.push(`${source.id}: missing path; skipped.`);
-      return [];
-    }
-
-    const filePath = path.resolve(root, source.path);
-    try {
-      await access(filePath);
-    } catch {
-      stats.warnings.push(`${source.id}: ${source.path} does not exist yet; skipped.`);
-      return [];
-    }
-
-    const rows = await readJson<ExternalAnime[]>(filePath);
-    return rows.map((row, index) => normalizeAnime(row, source, index, stats)).filter((item): item is ImportCandidate => item !== null);
-  }
-
-  stats.warnings.push(`${source.id}: API/crawler adapter is intentionally not implemented in v1; skipped without network requests.`);
-  return [];
+function getStagingSource(sources: AnimeSource[]): AnimeSource {
+  const configured = sources.find((source) => source.type === "manual-json" && source.path === DEFAULT_STAGING_PATH);
+  return configured ?? {
+    id: "staging-import",
+    name: "Staging Import",
+    enabled: true,
+    type: "manual-json",
+    description: "Local staging import file.",
+    trustLevel: 50,
+    path: DEFAULT_STAGING_PATH,
+  };
 }
 
-function normalizeAnime(row: ExternalAnime, source: AnimeSource, index: number, stats: MergeStats): ImportCandidate | null {
+function normalizeAnime(row: ExternalAnime, source: AnimeSource, index: number, report: ImportReport): ImportCandidate | null {
   const title = cleanText(row.title);
   const year = toNumber(row.year);
 
   if (!title || !year) {
-    stats.skipped += 1;
-    stats.warnings.push(`${source.id}[${index}]: missing required title or year; skipped.`);
+    report.skipped.push({ title: title || undefined, year, sourceName: source.name, reason: `${source.id}[${index}]: missing required title or year.` });
     return null;
   }
 
-  const sourceUrl = sanitizeSourceUrl(cleanText(row.sourceUrl ?? row.source_url), source, index, stats);
+  const explicitRating = row.sourceRating ?? row.source_rating;
+  const normalizedSourceName = cleanText(row.sourceName ?? row.source_name) || source.name;
+  const sourceRating = explicitRating === undefined ? null : toNullableFiniteNumber(explicitRating);
+  const sourceUrl = sanitizeSourceUrl(cleanText(row.sourceUrl ?? row.source_url), source, index, report);
 
   return {
+    id: cleanText(row.id) || makeId(title, year),
     title,
     originalTitle: cleanText(row.originalTitle ?? row.original_title) || title,
     year,
@@ -148,113 +202,208 @@ function normalizeAnime(row: ExternalAnime, source: AnimeSource, index: number, 
     genres: normalizeStringArray(row.genres),
     tags: normalizeStringArray(row.tags),
     summary: cleanText(row.summary),
-    sourceRating: toFiniteNumber(row.sourceRating ?? row.source_rating) ?? 0,
+    sourceRating,
     personalFitScore: clampScore(toNumber(row.personalFitScore) ?? 0),
     whyForMe: cleanText(row.whyForMe),
     risk: cleanText(row.risk),
-    sourceName: cleanText(row.sourceName ?? row.source_name) || source.name,
+    sourceName: normalizedSourceName,
     sourceUrl,
+    aliases: normalizeStringArray(row.aliases),
+    sources: normalizeSources(row.sources, source, sourceUrl),
+    lastUpdated: cleanText(row.lastUpdated),
+    confidence: clampConfidence(toNullableFiniteNumber(row.confidence)),
+    manualLockedFields: normalizeManualLockedFields(row.manualLockedFields),
     importSourceId: source.id,
     importSourceName: source.name,
+    importTrustLevel: source.trustLevel,
   };
 }
 
-function dedupeCandidates(candidates: ImportCandidate[], stats: MergeStats) {
-  const byKey = new Map<string, ImportCandidate>();
+function dedupeCandidates(candidates: ImportCandidate[], report: ImportReport) {
+  const deduped: ImportCandidate[] = [];
 
   for (const candidate of candidates) {
-    const key = animeKey(candidate);
-    const existing = byKey.get(key);
-    if (!existing) {
-      byKey.set(key, candidate);
+    const existingIndex = deduped.findIndex((item) => isConfirmedDuplicate(item, candidate));
+    if (existingIndex >= 0) {
+      const existing = deduped[existingIndex];
+      deduped[existingIndex] = mergeImportedCandidates(existing, candidate, report);
+      report.possibleDuplicates.push({ incomingTitle: candidate.title, incomingYear: candidate.year, existingTitle: existing.title, existingYear: existing.year, reason: "Confirmed duplicate in staging by normalized title/originalTitle/aliases + year.", action: "merged" });
       continue;
     }
 
-    byKey.set(key, mergeCandidates(existing, candidate, stats));
-    stats.skipped += 1;
-    stats.warnings.push(`Duplicate import candidate merged by title + year: ${candidate.title} (${candidate.year}).`);
+    const possibleDuplicate = deduped.find((item) => isPossibleDuplicate(item, candidate));
+    if (possibleDuplicate) {
+      report.possibleDuplicates.push({ incomingTitle: candidate.title, incomingYear: candidate.year, existingTitle: possibleDuplicate.title, existingYear: possibleDuplicate.year, reason: "Similar normalized title/alias but not enough evidence to merge automatically.", action: "needs-review" });
+      report.skipped.push({ title: candidate.title, year: candidate.year, sourceName: candidate.importSourceName, reason: "Possible duplicate in staging requires manual review." });
+      continue;
+    }
+
+    deduped.push(candidate);
   }
 
-  return [...byKey.values()];
+  return deduped;
 }
 
-function mergeAnime(currentAnime: Anime[], candidates: ImportCandidate[], stats: MergeStats) {
+function mergeAnime(currentAnime: Anime[], candidates: ImportCandidate[], sources: AnimeSource[], report: ImportReport) {
   const next = currentAnime.map((item) => ({ ...item }));
-  const indexByKey = new Map(next.map((item, index) => [animeKey(item), index]));
 
   for (const candidate of candidates) {
-    const key = animeKey(candidate);
-    const existingIndex = indexByKey.get(key);
+    const existingIndex = next.findIndex((item) => isConfirmedDuplicate(item, candidate));
 
-    if (existingIndex === undefined) {
-      const { importSourceId: _importSourceId, importSourceName: _importSourceName, ...anime } = candidate;
-      next.push(anime);
-      indexByKey.set(key, next.length - 1);
-      stats.added += 1;
-      stats.changes.push(`ADD ${anime.title} (${anime.year}) from ${candidate.importSourceName}.`);
+    if (existingIndex === -1) {
+      const possibleDuplicate = next.find((item) => isPossibleDuplicate(item, candidate));
+      if (possibleDuplicate) {
+        report.possibleDuplicates.push({ incomingTitle: candidate.title, incomingYear: candidate.year, existingTitle: possibleDuplicate.title, existingYear: possibleDuplicate.year, reason: "Similar normalized title/alias in anime.json but not enough evidence to merge automatically.", action: "needs-review" });
+        report.skipped.push({ title: candidate.title, year: candidate.year, sourceName: candidate.importSourceName, reason: "Possible duplicate in anime.json requires manual review." });
+        continue;
+      }
+
+      const { importSourceId: _importSourceId, importSourceName, importTrustLevel: _importTrustLevel, ...anime } = candidate;
+      next.push({ ...anime, lastUpdated: new Date().toISOString() });
+      report.added.push({ title: anime.title, year: anime.year, sourceName: importSourceName });
       continue;
     }
 
-    const merged = mergeOne(next[existingIndex], candidate, stats, true);
-    if (JSON.stringify(merged) !== JSON.stringify(next[existingIndex])) {
-      next[existingIndex] = merged;
-      stats.updated += 1;
-      stats.changes.push(`UPDATE ${merged.title} (${merged.year}) from ${candidate.importSourceName}; manual fields preserved unless imported content was higher quality.`);
+    const existing = next[existingIndex];
+    const merged = mergeOne(existing, candidate, getExistingTrustLevel(existing, sources), report);
+    if (JSON.stringify(merged.anime) !== JSON.stringify(existing)) {
+      next[existingIndex] = merged.anime;
+      report.updated.push({ title: merged.anime.title, year: merged.anime.year, sourceName: candidate.importSourceName, fields: merged.changedFields });
     } else {
-      stats.skipped += 1;
+      report.skipped.push({ title: candidate.title, year: candidate.year, sourceName: candidate.importSourceName, reason: "No field changes after normalization, trust comparison, and manual locks." });
     }
   }
 
   return next;
 }
 
-function mergeCandidates(existing: ImportCandidate, incoming: ImportCandidate, stats: MergeStats): ImportCandidate {
+function mergeImportedCandidates(existing: ImportCandidate, incoming: ImportCandidate, report: ImportReport): ImportCandidate {
+  const merged = mergeOne(existing, incoming, existing.importTrustLevel, report);
   return {
-    ...mergeOne(existing, incoming, stats, false),
-    importSourceId: existing.importSourceId,
-    importSourceName: existing.importSourceName,
+    ...merged.anime,
+    importSourceId: existing.importTrustLevel >= incoming.importTrustLevel ? existing.importSourceId : incoming.importSourceId,
+    importSourceName: existing.importTrustLevel >= incoming.importTrustLevel ? existing.importSourceName : incoming.importSourceName,
+    importTrustLevel: Math.max(existing.importTrustLevel, incoming.importTrustLevel),
   };
 }
 
-function mergeOne(existing: Anime, incoming: Anime, _stats: MergeStats, preserveManualFields: boolean): Anime {
-  const merged: Anime = {
-    ...existing,
-    originalTitle: preferText(existing.originalTitle, incoming.originalTitle),
-    episodes: incoming.episodes || existing.episodes,
-    status: incoming.status || existing.status,
-    genres: uniqueStrings([...existing.genres, ...incoming.genres]),
-    summary: preferText(existing.summary, incoming.summary),
-    sourceRating: Math.max(existing.sourceRating || 0, incoming.sourceRating || 0),
-    sourceName: preferText(existing.sourceName, incoming.sourceName),
-    sourceUrl: preferText(existing.sourceUrl, incoming.sourceUrl),
-  };
+function mergeOne(existing: Anime, incoming: ImportCandidate, existingTrustLevel: number, report: ImportReport): { anime: Anime; changedFields: ImportField[] } {
+  const merged: Anime = { ...existing };
+  const changedFields: ImportField[] = [];
+  const explicitLockedFields = normalizeManualLockedFields(existing.manualLockedFields);
+  const defaultLockedFields = DEFAULT_MANUAL_LOCKED_FIELDS.filter((field) => !isEmptyValue(existing[field]));
+  const lockedFields = uniqueStrings([...explicitLockedFields, ...defaultLockedFields]) as ManualField[];
 
-  if (preserveManualFields) {
-    merged.personalFitScore = existing.personalFitScore || incoming.personalFitScore;
-    merged.whyForMe = preferHigherQualityManualText(existing.whyForMe, incoming.whyForMe);
-    merged.risk = preferHigherQualityManualText(existing.risk, incoming.risk);
-    merged.tags = uniqueStrings([...existing.tags, ...incoming.tags]);
-  } else {
-    for (const field of MANUAL_FIELDS) {
-      if (field === "tags") merged.tags = uniqueStrings([...existing.tags, ...incoming.tags]);
+  for (const field of OBJECTIVE_FIELDS) {
+    const result = resolveObjectiveField(field, existing[field], incoming[field], existingTrustLevel, incoming.importTrustLevel, existing, incoming, report);
+    if (result.changed) {
+      (merged[field] as Anime[ObjectiveField]) = result.value as never;
+      changedFields.push(field);
     }
-    merged.personalFitScore = Math.max(existing.personalFitScore || 0, incoming.personalFitScore || 0);
-    merged.whyForMe = preferText(existing.whyForMe, incoming.whyForMe);
-    merged.risk = preferText(existing.risk, incoming.risk);
   }
 
-  return merged;
+  for (const field of MANUAL_FIELDS) {
+    const incomingValue = incoming[field];
+    const existingValue = existing[field];
+    if (isEmptyValue(incomingValue)) continue;
+
+    if (lockedFields.includes(field) && !isEmptyValue(existingValue)) {
+      if (!valuesEqual(existingValue, incomingValue)) {
+        report.manualLocksPreserved.push({ title: existing.title, year: existing.year, field, keptValue: existingValue, incomingValue, reason: explicitLockedFields.includes(field) ? "manualLockedFields explicitly locks this field." : "Default manual field lock preserved non-empty personal judgment." });
+      }
+      continue;
+    }
+
+    if (isEmptyValue(existingValue)) {
+      (merged[field] as Anime[ManualField]) = incomingValue as never;
+      changedFields.push(field);
+    }
+  }
+
+  const nextAliases = uniqueStrings([...(existing.aliases ?? []), incoming.title, incoming.originalTitle, ...(incoming.aliases ?? [])].filter(Boolean));
+  if (!valuesEqual(existing.aliases ?? [], nextAliases)) {
+    merged.aliases = nextAliases;
+    changedFields.push("aliases");
+  }
+
+  const nextSources = mergeSources(existing.sources, incoming.sources, incoming);
+  if (!valuesEqual(existing.sources ?? [], nextSources)) {
+    merged.sources = nextSources;
+    changedFields.push("sources");
+  }
+
+  if (!existing.id) {
+    merged.id = incoming.id || makeId(merged.title, merged.year);
+    changedFields.push("id");
+  }
+
+  const incomingLockedFields = normalizeManualLockedFields(incoming.manualLockedFields);
+  const nextLockedFields = uniqueStrings([...(existing.manualLockedFields ?? []), ...incomingLockedFields]);
+  if (nextLockedFields.length > 0 && !valuesEqual(existing.manualLockedFields ?? [], nextLockedFields)) {
+    merged.manualLockedFields = nextLockedFields;
+    changedFields.push("manualLockedFields");
+  }
+
+  if (changedFields.length > 0) {
+    merged.lastUpdated = new Date().toISOString();
+    if (!changedFields.includes("lastUpdated")) changedFields.push("lastUpdated");
+  }
+
+  return { anime: merged, changedFields };
 }
 
-function animeKey(item: Pick<Anime, "title" | "year">) {
-  return `${item.title.trim().toLocaleLowerCase()}::${item.year}`;
+function resolveObjectiveField(field: ObjectiveField, existingValue: unknown, incomingValue: unknown, existingTrustLevel: number, incomingTrustLevel: number, existing: Anime, incoming: ImportCandidate, report: ImportReport) {
+  if (isEmptyValue(incomingValue)) return { value: existingValue, changed: false };
+  if (isEmptyValue(existingValue)) return { value: incomingValue, changed: !valuesEqual(existingValue, incomingValue) };
+  if (valuesEqual(existingValue, incomingValue)) return { value: existingValue, changed: false };
+
+  if (field === "sourceUrl" && typeof existingValue === "string" && typeof incomingValue === "string" && isExampleUrl(incomingValue)) {
+    report.conflicts.push({ title: existing.title, year: existing.year, field, existingValue, incomingValue, existingTrustLevel, incomingTrustLevel, resolution: "Existing real sourceUrl kept; mock/example links are not allowed to replace it." });
+    return { value: existingValue, changed: false };
+  }
+
+  if (incomingTrustLevel > existingTrustLevel) {
+    report.conflicts.push({ title: existing.title, year: existing.year, field, existingValue, incomingValue, existingTrustLevel, incomingTrustLevel, resolution: "Incoming value kept because its source trustLevel is higher." });
+    return { value: incomingValue, changed: true };
+  }
+
+  report.conflicts.push({ title: existing.title, year: existing.year, field, existingValue, incomingValue, existingTrustLevel, incomingTrustLevel, resolution: incomingTrustLevel === existingTrustLevel ? "Existing anime.json value kept because trustLevel is equal." : "Existing anime.json value kept because its source trustLevel is higher." });
+  return { value: existingValue, changed: false };
+}
+
+function isConfirmedDuplicate(left: Pick<Anime, "title" | "originalTitle" | "year" | "aliases">, right: Pick<Anime, "title" | "originalTitle" | "year" | "aliases">) {
+  if (left.year !== right.year) return false;
+  const leftTitles = normalizedTitles(left);
+  const rightTitles = normalizedTitles(right);
+  return leftTitles.some((title) => rightTitles.includes(title));
+}
+
+function isPossibleDuplicate(left: Pick<Anime, "title" | "originalTitle" | "year" | "aliases">, right: Pick<Anime, "title" | "originalTitle" | "year" | "aliases">) {
+  const leftTitles = normalizedTitles(left);
+  const rightTitles = normalizedTitles(right);
+  if (leftTitles.some((title) => rightTitles.includes(title))) return true;
+  if (left.year !== right.year) return false;
+  return leftTitles.some((leftTitle) => rightTitles.some((rightTitle) => areSimilarTitles(leftTitle, rightTitle)));
+}
+
+function normalizedTitles(item: Pick<Anime, "title" | "originalTitle" | "aliases">) {
+  return uniqueStrings([item.title, item.originalTitle, ...(item.aliases ?? [])].map(normalizeTitle).filter(Boolean));
+}
+
+function normalizeTitle(value: string) {
+  return value.toLocaleLowerCase().normalize("NFKD").replace(/[\p{P}\p{S}\s_]+/gu, "");
+}
+
+function areSimilarTitles(left: string, right: string) {
+  if (left.length < 4 || right.length < 4) return false;
+  return left.includes(right) || right.includes(left) || levenshtein(left, right) <= 2;
 }
 
 function normalizeStatus(status: unknown): AnimeStatus {
-  const value = cleanText(status);
-  if (["完结", "finished", "completed", "complete"].includes(value.toLocaleLowerCase())) return "完结";
-  if (["连载中", "airing", "ongoing", "current"].includes(value.toLocaleLowerCase())) return "连载中";
-  if (["未开播", "upcoming", "announced", "not yet aired"].includes(value.toLocaleLowerCase())) return "未开播";
+  const value = cleanText(status).toLocaleLowerCase();
+  if (["完结", "finished", "completed", "complete"].includes(value)) return "完结";
+  if (["连载中", "airing", "ongoing", "current"].includes(value)) return "连载中";
+  if (["未开播", "upcoming", "announced", "not yet aired"].includes(value)) return "未开播";
   return "未开播";
 }
 
@@ -264,21 +413,87 @@ function normalizeStringArray(value: unknown): string[] {
   return [];
 }
 
-function sanitizeSourceUrl(value: string, source: AnimeSource, index: number, stats: MergeStats) {
+function normalizeManualLockedFields(value: unknown): ManualField[] {
+  return normalizeStringArray(value).filter((field): field is ManualField => (MANUAL_FIELDS as readonly string[]).includes(field));
+}
+
+function normalizeSources(value: unknown, source: AnimeSource, sourceUrl: string) {
+  const sources = Array.isArray(value) ? value.filter((item) => typeof item === "object" && item !== null) : [];
+  const current = { id: source.id, name: source.name, trustLevel: source.trustLevel, sourceUrl };
+  return uniqueBy(JSON.parse(JSON.stringify([...sources, current])), (item: { id?: string; name?: string; sourceUrl?: string }) => `${item.id ?? item.name ?? "unknown"}::${item.sourceUrl ?? ""}`);
+}
+
+function mergeSources(existingSources: unknown, incomingSources: unknown, incoming: ImportCandidate) {
+  const existing = Array.isArray(existingSources) ? existingSources : [];
+  const incomingList = Array.isArray(incomingSources) ? incomingSources : [];
+  return uniqueBy([...existing, ...incomingList, { id: incoming.importSourceId, name: incoming.importSourceName, trustLevel: incoming.importTrustLevel, sourceUrl: incoming.sourceUrl }], (item: { id?: string; name?: string; sourceUrl?: string }) => `${item.id ?? item.name ?? "unknown"}::${item.sourceUrl ?? ""}`);
+}
+
+function sanitizeSourceUrl(value: string, source: AnimeSource, index: number, report: ImportReport) {
   if (!value) return "";
 
   try {
     const url = new URL(value);
     if (!["http:", "https:"].includes(url.protocol)) throw new Error("unsupported protocol");
     if (PLAYBACK_URL_PATTERN.test(url.pathname) || PLAYBACK_URL_PATTERN.test(url.search)) {
-      stats.warnings.push(`${source.id}[${index}]: sourceUrl looks like a playback/download URL and was removed.`);
+      report.warnings.push(`${source.id}[${index}]: sourceUrl looks like a playback/download URL and was removed.`);
       return "";
     }
     return url.toString();
   } catch {
-    stats.warnings.push(`${source.id}[${index}]: invalid sourceUrl removed.`);
+    report.warnings.push(`${source.id}[${index}]: invalid sourceUrl removed.`);
     return "";
   }
+}
+
+function isExampleUrl(value: string) {
+  try {
+    const hostname = new URL(value).hostname.toLocaleLowerCase();
+    return hostname === "example.com" || hostname.endsWith(".example.com");
+  } catch {
+    return false;
+  }
+}
+
+function getExistingTrustLevel(existing: Anime, sources: AnimeSource[]) {
+  const source = sources.find((item) => item.name === existing.sourceName || item.id === existing.sourceName || existing.sources?.some((animeSource) => animeSource.id === item.id || animeSource.name === item.name));
+  return source?.trustLevel ?? 50;
+}
+
+function createReport(mode: ImportReport["mode"], stagingPath: string, animePath: string, reportPath: string): ImportReport {
+  return {
+    generatedAt: new Date().toISOString(),
+    mode,
+    stagingPath,
+    animePath,
+    reportPath,
+    counts: { stagingRows: 0, normalizedCandidates: 0, added: 0, updated: 0, skipped: 0, conflicts: 0, manualLocksPreserved: 0, possibleDuplicates: 0 },
+    added: [],
+    updated: [],
+    skipped: [],
+    conflicts: [],
+    manualLocksPreserved: [],
+    possibleDuplicates: [],
+    warnings: [],
+  };
+}
+
+function updateCounts(report: ImportReport) {
+  report.counts.added = report.added.length;
+  report.counts.updated = report.updated.length;
+  report.counts.skipped = report.skipped.length;
+  report.counts.conflicts = report.conflicts.length;
+  report.counts.manualLocksPreserved = report.manualLocksPreserved.length;
+  report.counts.possibleDuplicates = report.possibleDuplicates.filter((item) => item.action === "needs-review").length;
+}
+
+async function writeReport(reportPath: string, report: ImportReport) {
+  await mkdir(path.dirname(reportPath), { recursive: true });
+  await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+}
+
+function makeId(title: string, year: number) {
+  return `${normalizeTitle(title) || "anime"}-${year}`;
 }
 
 function cleanText(value: unknown) {
@@ -286,35 +501,64 @@ function cleanText(value: unknown) {
 }
 
 function toNumber(value: unknown): number | undefined {
-  const parsed = toFiniteNumber(value);
-  return parsed === undefined ? undefined : Math.round(parsed);
+  const parsed = toNullableFiniteNumber(value);
+  return parsed === null ? undefined : Math.round(parsed);
 }
 
-function toFiniteNumber(value: unknown): number | undefined {
+function toNullableFiniteNumber(value: unknown): number | null {
+  if (value === null) return null;
   if (typeof value === "number" && Number.isFinite(value)) return value;
   if (typeof value === "string" && value.trim()) {
     const parsed = Number(value);
     if (Number.isFinite(parsed)) return parsed;
   }
-  return undefined;
+  return null;
 }
 
 function clampScore(value: number) {
   return Math.max(0, Math.min(100, value));
 }
 
+function clampConfidence(value: number | null) {
+  return value === null ? undefined : Math.max(0, Math.min(1, value));
+}
+
 function uniqueStrings(values: string[]) {
   return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
 }
 
-function preferText(existing: string, incoming: string) {
-  return incoming && incoming.length > existing.length ? incoming : existing;
+function uniqueBy<T>(values: T[], getKey: (value: T) => string) {
+  const seen = new Set<string>();
+  return values.filter((value) => {
+    const key = getKey(value);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
-function preferHigherQualityManualText(existing: string, incoming: string) {
-  if (!incoming) return existing;
-  if (!existing) return incoming;
-  return incoming.length >= existing.length + 20 ? incoming : existing;
+function isEmptyValue(value: unknown) {
+  return value === undefined || value === null || value === "" || (Array.isArray(value) && value.length === 0);
+}
+
+function valuesEqual(left: unknown, right: unknown) {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function levenshtein(left: string, right: string) {
+  const previous = Array.from({ length: right.length + 1 }, (_, index) => index);
+  for (let i = 0; i < left.length; i += 1) {
+    let current = i + 1;
+    for (let j = 0; j < right.length; j += 1) {
+      const insert = current + 1;
+      const deleteCost = previous[j + 1] + 1;
+      const replace = previous[j] + (left[i] === right[j] ? 0 : 1);
+      previous[j] = current;
+      current = Math.min(insert, deleteCost, replace);
+    }
+    previous[right.length] = current;
+  }
+  return previous[right.length];
 }
 
 async function confirmWrite(yes: boolean, changeCount: number, animePath: string) {
@@ -325,17 +569,13 @@ async function confirmWrite(yes: boolean, changeCount: number, animePath: string
 
   if (yes) return;
 
-  if (!process.stdin.isTTY) {
-    throw new Error("Write mode requires confirmation. Re-run with --write --yes in non-interactive environments.");
-  }
+  if (!process.stdin.isTTY) throw new Error("Write mode requires confirmation. Re-run with --write --yes in non-interactive environments.");
 
   const rl = createInterface({ input, output });
   const answer = await rl.question(`Write ${changeCount} changes to ${animePath}? Type YES to confirm: `);
   rl.close();
 
-  if (answer !== "YES") {
-    throw new Error("Write cancelled; data/anime.json was not modified.");
-  }
+  if (answer !== "YES") throw new Error("Write cancelled; data/anime.json was not modified.");
 }
 
 async function readJson<T>(filePath: string): Promise<T> {
