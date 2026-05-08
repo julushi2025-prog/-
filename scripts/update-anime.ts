@@ -72,7 +72,7 @@ type AcceptedExternalMetadataEntry = {
 type PreservedLocalDisplayFieldEntry = {
   title: string;
   year: number;
-  field: "originalTitle" | "summary" | "genres";
+  field: "title" | "originalTitle" | "summary" | "genres";
   keptValue: unknown;
   incomingValue: unknown;
   reason: string;
@@ -478,6 +478,11 @@ function resolveObjectiveField(field: ObjectiveField, existingValue: unknown, in
     return { value: incomingValue, changed: !valuesEqual(existingValue, incomingValue) };
   }
   if (valuesEqual(existingValue, incomingValue)) return { value: existingValue, changed: false };
+
+  if (field === "title") {
+    report.preservedLocalDisplayFields.push({ title: existing.title, year: existing.year, field, keptValue: existingValue, incomingValue, reason: "title is the local display field; non-empty anime.json title is preserved and incoming AniList English/romaji/native titles stay available through aliases/source metadata." });
+    return { value: existingValue, changed: false };
+  }
 
   if (field === "summary") {
     report.preservedLocalDisplayFields.push({ title: existing.title, year: existing.year, field, keptValue: existingValue, incomingValue, reason: "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata." });
