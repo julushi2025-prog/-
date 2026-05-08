@@ -3,8 +3,9 @@ import path from "node:path";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import type { Anime, AnimeStatus } from "../app/types";
+import { fetchAniListAnime } from "./adapters/anilist";
 
-type SourceType = "manual-json" | "api-placeholder";
+type SourceType = "manual-json" | "api-placeholder" | "anilist-api";
 type ObjectiveField = (typeof OBJECTIVE_FIELDS)[number];
 type ManualField = (typeof MANUAL_FIELDS)[number];
 type SystemField = (typeof SYSTEM_FIELDS)[number];
@@ -27,12 +28,16 @@ type ExternalAnime = Partial<Anime> & {
   source_rating?: number | string | null;
   source_name?: string;
   source_url?: string;
+  needsReview?: boolean;
+  reviewReason?: string;
 };
 
 type ImportCandidate = Anime & {
   importSourceId: string;
   importSourceName: string;
   importTrustLevel: number;
+  importNeedsReview?: boolean;
+  importReviewReason?: string;
 };
 
 type ConflictEntry = {
@@ -93,6 +98,7 @@ type ImportReport = {
   conflicts: ConflictEntry[];
   manualLocksPreserved: ManualLockEntry[];
   possibleDuplicates: DuplicateEntry[];
+  needsReview: Array<{ title?: string; year?: number; sourceName?: string; reason: string }>;
   warnings: string[];
 };
 
@@ -101,6 +107,7 @@ const MANUAL_FIELDS = ["personalFitScore", "whyForMe", "risk", "tags"] as const;
 const SYSTEM_FIELDS = ["id", "aliases", "sources", "lastUpdated", "confidence", "manualLockedFields"] as const;
 const DEFAULT_MANUAL_LOCKED_FIELDS: ManualField[] = ["personalFitScore", "whyForMe", "risk", "tags"];
 const DEFAULT_STAGING_PATH = "data/import/staging-anime.json";
+const DEFAULT_QUERY_PATH = "data/import/search-queries.json";
 const REPORT_PATH = "reports/import-report.json";
 const PLAYBACK_URL_PATTERN = /\b(play|watch|stream|episode|video|m3u8|magnet|torrent|download)\b/i;
 
@@ -113,19 +120,20 @@ async function main() {
 
   const sources = await readJson<AnimeSource[]>(sourcesPath);
   const currentAnime = await readJson<Anime[]>(animePath);
-  const stagingSource = getStagingSource(sources);
+  const importSource = getImportSource(sources, args.source);
   const report = createReport(args.write ? "write" : "dry-run", DEFAULT_STAGING_PATH, "data/anime.json", REPORT_PATH);
 
   console.log("Anime Radar data update");
   console.log(`Mode: ${args.write ? "write" : "dry-run"}`);
+  console.log(`Source: ${importSource.name} (${importSource.id})`);
   console.log(`Staging input: ${DEFAULT_STAGING_PATH}`);
   console.log(`Current local records: ${currentAnime.length}`);
-  console.log("Safety: no piracy resources, no playback links, no high-frequency crawling, and no network requests in v1.\n");
+  console.log("Safety: no piracy resources, no playback links, no high-frequency crawling, and AniList requests are rate limited.\n");
 
-  const stagingRows = await readJson<ExternalAnime[]>(path.join(root, DEFAULT_STAGING_PATH));
+  const stagingRows = await loadStagingRows(root, args, importSource);
   report.counts.stagingRows = stagingRows.length;
   const candidates = stagingRows
-    .map((row, index) => normalizeAnime(row, stagingSource, index, report))
+    .map((row, index) => normalizeAnime(row, importSource, index, report))
     .filter((item): item is ImportCandidate => item !== null);
   report.counts.normalizedCandidates = candidates.length;
 
@@ -144,6 +152,7 @@ async function main() {
   console.log(`- Conflicts: ${report.counts.conflicts}`);
   console.log(`- Manual locks preserved: ${report.counts.manualLocksPreserved}`);
   console.log(`- Possible duplicates needing review: ${report.counts.possibleDuplicates}`);
+  console.log(`- Source matches needing review: ${report.needsReview.length}`);
   console.log(`- Report written: ${REPORT_PATH}`);
 
   if (!args.write) {
@@ -160,22 +169,68 @@ function parseArgs(args: string[]) {
   const write = args.includes("--write");
   const dryRun = args.includes("--dry-run");
   const yes = args.includes("--yes") || args.includes("-y");
+  const source = getArgValue(args, "--source") ?? "staging-import";
+  const queries = getArgValues(args, "--query");
 
   if (write && dryRun) throw new Error("Use either --dry-run or --write, not both.");
-  return { write, yes };
+  return { write, yes, source, queries };
 }
 
-function getStagingSource(sources: AnimeSource[]): AnimeSource {
-  const configured = sources.find((source) => source.type === "manual-json" && source.path === DEFAULT_STAGING_PATH);
-  return configured ?? {
-    id: "staging-import",
-    name: "Staging Import",
-    enabled: true,
-    type: "manual-json",
-    description: "Local staging import file.",
-    trustLevel: 50,
-    path: DEFAULT_STAGING_PATH,
-  };
+function getArgValue(args: string[], name: string) {
+  const index = args.indexOf(name);
+  return index >= 0 ? args[index + 1] : undefined;
+}
+
+function getArgValues(args: string[], name: string) {
+  const values: string[] = [];
+  for (let index = 0; index < args.length; index += 1) {
+    if (args[index] === name && args[index + 1]) values.push(args[index + 1]);
+  }
+  return values;
+}
+
+function getImportSource(sources: AnimeSource[], requestedSource: string): AnimeSource {
+  const configured = sources.find((source) => source.id === requestedSource || source.name.toLocaleLowerCase() === requestedSource.toLocaleLowerCase());
+  if (configured) {
+    if (!configured.enabled) throw new Error(`Source "${requestedSource}" is disabled in data/sources.json.`);
+    return configured;
+  }
+
+  if (requestedSource === "staging" || requestedSource === "staging-import") {
+    return {
+      id: "staging-import",
+      name: "Staging Import",
+      enabled: true,
+      type: "manual-json",
+      description: "Local staging import file.",
+      trustLevel: 50,
+      path: DEFAULT_STAGING_PATH,
+    };
+  }
+
+  throw new Error(`Unknown source "${requestedSource}". Add it to data/sources.json first.`);
+}
+
+async function loadStagingRows(root: string, args: ReturnType<typeof parseArgs>, source: AnimeSource): Promise<ExternalAnime[]> {
+  if (source.id !== "anilist") return readJson<ExternalAnime[]>(path.join(root, source.path ?? DEFAULT_STAGING_PATH));
+
+  const queries = args.queries.length > 0 ? args.queries : await readSearchQueries(path.join(root, DEFAULT_QUERY_PATH));
+  if (queries.length === 0) throw new Error(`AniList source requires at least one --query or a non-empty ${DEFAULT_QUERY_PATH}.`);
+
+  const rows = await fetchAniListAnime({ queries });
+  const stagingPath = path.join(root, DEFAULT_STAGING_PATH);
+  await writeFile(stagingPath, `${JSON.stringify(rows, null, 2)}\n`);
+  console.log(`AniList adapter wrote ${rows.length} normalized row(s) to ${DEFAULT_STAGING_PATH}.`);
+  return rows;
+}
+
+async function readSearchQueries(filePath: string) {
+  const queries = await readJson<unknown>(filePath);
+  if (Array.isArray(queries)) return uniqueStrings(queries.map(cleanText).filter(Boolean));
+  if (queries && typeof queries === "object" && Array.isArray((queries as { queries?: unknown[] }).queries)) {
+    return uniqueStrings(((queries as { queries: unknown[] }).queries).map(cleanText).filter(Boolean));
+  }
+  throw new Error(`${DEFAULT_QUERY_PATH} must be a JSON array of strings or an object with a queries array.`);
 }
 
 function normalizeAnime(row: ExternalAnime, source: AnimeSource, index: number, report: ImportReport): ImportCandidate | null {
@@ -216,6 +271,8 @@ function normalizeAnime(row: ExternalAnime, source: AnimeSource, index: number, 
     importSourceId: source.id,
     importSourceName: source.name,
     importTrustLevel: source.trustLevel,
+    importNeedsReview: row.needsReview === true,
+    importReviewReason: cleanText(row.reviewReason),
   };
 }
 
@@ -248,6 +305,13 @@ function mergeAnime(currentAnime: Anime[], candidates: ImportCandidate[], source
   const next = currentAnime.map((item) => ({ ...item }));
 
   for (const candidate of candidates) {
+    if (candidate.importNeedsReview) {
+      const reason = candidate.importReviewReason || "Incoming source match needs manual review before merge.";
+      report.needsReview.push({ title: candidate.title, year: candidate.year, sourceName: candidate.importSourceName, reason });
+      report.skipped.push({ title: candidate.title, year: candidate.year, sourceName: candidate.importSourceName, reason });
+      continue;
+    }
+
     const existingIndex = next.findIndex((item) => isConfirmedDuplicate(item, candidate));
 
     if (existingIndex === -1) {
@@ -258,7 +322,7 @@ function mergeAnime(currentAnime: Anime[], candidates: ImportCandidate[], source
         continue;
       }
 
-      const { importSourceId: _importSourceId, importSourceName, importTrustLevel: _importTrustLevel, ...anime } = candidate;
+      const { importSourceId: _importSourceId, importSourceName, importTrustLevel: _importTrustLevel, importNeedsReview: _importNeedsReview, importReviewReason: _importReviewReason, ...anime } = candidate;
       next.push({ ...anime, lastUpdated: new Date().toISOString() });
       report.added.push({ title: anime.title, year: anime.year, sourceName: importSourceName });
       continue;
@@ -284,6 +348,8 @@ function mergeImportedCandidates(existing: ImportCandidate, incoming: ImportCand
     importSourceId: existing.importTrustLevel >= incoming.importTrustLevel ? existing.importSourceId : incoming.importSourceId,
     importSourceName: existing.importTrustLevel >= incoming.importTrustLevel ? existing.importSourceName : incoming.importSourceName,
     importTrustLevel: Math.max(existing.importTrustLevel, incoming.importTrustLevel),
+    importNeedsReview: existing.importNeedsReview || incoming.importNeedsReview,
+    importReviewReason: existing.importReviewReason || incoming.importReviewReason,
   };
 }
 
@@ -474,6 +540,7 @@ function createReport(mode: ImportReport["mode"], stagingPath: string, animePath
     conflicts: [],
     manualLocksPreserved: [],
     possibleDuplicates: [],
+    needsReview: [],
     warnings: [],
   };
 }
