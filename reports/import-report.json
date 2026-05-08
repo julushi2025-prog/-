@@ -1,484 +1,312 @@
 {
-  "generatedAt": "2026-05-08T12:09:11.119Z",
-  "mode": "write",
+  "generatedAt": "2026-05-08T12:39:56.067Z",
+  "mode": "dry-run",
   "stagingPath": "data/import/staging-anime.json",
   "animePath": "data/anime.json",
   "reportPath": "reports/import-report.json",
   "counts": {
-    "stagingRows": 3,
-    "normalizedCandidates": 3,
-    "added": 0,
-    "updated": 3,
+    "stagingRows": 25,
+    "normalizedCandidates": 25,
+    "added": 25,
+    "updated": 0,
     "skipped": 0,
     "conflicts": 0,
-    "manualLocksPreserved": 6,
-    "acceptedExternalMetadata": 18,
-    "preservedLocalDisplayFields": 9,
+    "manualLocksPreserved": 0,
+    "acceptedExternalMetadata": 0,
+    "preservedLocalDisplayFields": 0,
     "possibleDuplicates": 0,
-    "needsReview": 0
+    "needsReview": 25,
+    "discovered": 25,
+    "addedCandidates": 25,
+    "updatedCandidates": 0,
+    "excludedByFormat": 0,
+    "excludedByEpisodeCount": 0
   },
-  "added": [],
-  "updated": [
+  "added": [
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "sourceName": "AniList",
-      "fields": [
-        "sourceRating",
-        "sourceName",
-        "sourceUrl",
-        "aliases",
-        "sources",
-        "externalSummary",
-        "sourceGenres",
-        "id",
-        "lastUpdated"
-      ]
+      "title": "Dr. STONE SCIENCE FUTURE Cour 3",
+      "year": 2026,
+      "sourceName": "AniList"
     },
     {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "sourceName": "AniList",
-      "fields": [
-        "sourceRating",
-        "sourceName",
-        "sourceUrl",
-        "aliases",
-        "sources",
-        "externalSummary",
-        "sourceGenres",
-        "id",
-        "lastUpdated"
-      ]
+      "title": "Witch Hat Atelier",
+      "year": 2026,
+      "sourceName": "AniList"
     },
     {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "sourceName": "AniList",
-      "fields": [
-        "sourceRating",
-        "sourceName",
-        "sourceUrl",
-        "aliases",
-        "sources",
-        "externalSummary",
-        "sourceGenres",
-        "id",
-        "lastUpdated"
-      ]
+      "title": "Re:ZERO -Starting Life in Another World- Season 4",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "The Warrior Princess and the Barbaric King",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "I Made Friends with the Second Prettiest Girl in My Class",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Haibara's Teenage New Game+",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Daemons of the Shadow Realm",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Petals of Reincarnation",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Frieren: Beyond Journey’s End Season 2",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Dorohedoro Season 2",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "The Beginning After the End Season 2",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "JUJUTSU KAISEN",
+      "year": 2020,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Wistoria: Wand and Sword",
+      "year": 2024,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Attack on Titan",
+      "year": 2013,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Hell’s Paradise Season 2",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Go For It, Nakamura-kun!!",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "You and I Are Polar Opposites",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Agents of the Four Seasons: Dance of Spring",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Re:ZERO -Starting Life in Another World-",
+      "year": 2016,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Sentenced to Be a Hero",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "JUJUTSU KAISEN Season 2",
+      "year": 2023,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Farming Life in Another World 2",
+      "year": 2026,
+      "sourceName": "AniList"
     }
   ],
+  "updated": [],
   "skipped": [],
-  "acceptedExternalMetadata": [
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sourceRating",
-      "existingValue": null,
-      "incomingValue": 80,
-      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sourceName",
-      "existingValue": "Wikipedia",
-      "incomingValue": "AniList",
-      "reason": "AniList source metadata is allowed to refresh sourceName."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sourceUrl",
-      "existingValue": "https://en.wikipedia.org/wiki/Serial_Experiments_Lain",
-      "incomingValue": "https://anilist.co/anime/339",
-      "reason": "AniList source metadata is allowed to refresh sourceUrl."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sources",
-      "existingValue": [],
-      "incomingValue": [
-        {
-          "id": "anilist",
-          "name": "AniList",
-          "trustLevel": 80,
-          "sourceUrl": "https://anilist.co/anime/339",
-          "description": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
-          "genres": [
-            "Drama",
-            "Mystery",
-            "Psychological",
-            "Sci-Fi",
-            "Supernatural"
-          ]
-        }
-      ],
-      "reason": "External source reference metadata was merged without replacing local display fields."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "externalSummary",
-      "incomingValue": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
-      "reason": "External description stored separately from local summary."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "sourceGenres",
-      "incomingValue": [
-        "Drama",
-        "Mystery",
-        "Psychological",
-        "Sci-Fi",
-        "Supernatural"
-      ],
-      "reason": "External genres stored separately from local display genres."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "sourceRating",
-      "existingValue": null,
-      "incomingValue": 83,
-      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "sourceName",
-      "existingValue": "Wikipedia",
-      "incomingValue": "AniList",
-      "reason": "AniList source metadata is allowed to refresh sourceName."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "sourceUrl",
-      "existingValue": "https://en.wikipedia.org/wiki/Neon_Genesis_Evangelion",
-      "incomingValue": "https://anilist.co/anime/30",
-      "reason": "AniList source metadata is allowed to refresh sourceUrl."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "sources",
-      "existingValue": [],
-      "incomingValue": [
-        {
-          "id": "anilist",
-          "name": "AniList",
-          "trustLevel": 80,
-          "sourceUrl": "https://anilist.co/anime/30",
-          "description": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
-          "genres": [
-            "Action",
-            "Drama",
-            "Mecha",
-            "Mystery",
-            "Psychological",
-            "Sci-Fi"
-          ]
-        }
-      ],
-      "reason": "External source reference metadata was merged without replacing local display fields."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "externalSummary",
-      "incomingValue": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
-      "reason": "External description stored separately from local summary."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "sourceGenres",
-      "incomingValue": [
-        "Action",
-        "Drama",
-        "Mecha",
-        "Mystery",
-        "Psychological",
-        "Sci-Fi"
-      ],
-      "reason": "External genres stored separately from local display genres."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "sourceRating",
-      "existingValue": null,
-      "incomingValue": 83,
-      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "sourceName",
-      "existingValue": "Wikipedia",
-      "incomingValue": "AniList",
-      "reason": "AniList source metadata is allowed to refresh sourceName."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "sourceUrl",
-      "existingValue": "https://en.wikipedia.org/wiki/Puella_Magi_Madoka_Magica",
-      "incomingValue": "https://anilist.co/anime/9756",
-      "reason": "AniList source metadata is allowed to refresh sourceUrl."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "sources",
-      "existingValue": [],
-      "incomingValue": [
-        {
-          "id": "anilist",
-          "name": "AniList",
-          "trustLevel": 80,
-          "sourceUrl": "https://anilist.co/anime/9756",
-          "description": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
-          "genres": [
-            "Action",
-            "Drama",
-            "Fantasy",
-            "Mahou Shoujo",
-            "Psychological",
-            "Thriller"
-          ]
-        }
-      ],
-      "reason": "External source reference metadata was merged without replacing local display fields."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "externalSummary",
-      "incomingValue": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
-      "reason": "External description stored separately from local summary."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "sourceGenres",
-      "incomingValue": [
-        "Action",
-        "Drama",
-        "Fantasy",
-        "Mahou Shoujo",
-        "Psychological",
-        "Thriller"
-      ],
-      "reason": "External genres stored separately from local display genres."
-    }
-  ],
-  "preservedLocalDisplayFields": [
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "originalTitle",
-      "keptValue": "シリアルエクスペリメンツレイン",
-      "incomingValue": "serial experiments lain",
-      "reason": "originalTitle is a local display field; non-empty anime.json originalTitle is preserved and incoming titles stay available through aliases/source metadata."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "genres",
-      "keptValue": [
-        "科幻",
-        "心理",
-        "悬疑"
-      ],
-      "incomingValue": [
-        "Drama",
-        "Mystery",
-        "Psychological",
-        "Sci-Fi",
-        "Supernatural"
-      ],
-      "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
-    },
-    {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "summary",
-      "keptValue": "内向少女岩仓玲音在收到已故同学的邮件后，被卷入现实与 Wired 网络边界逐渐崩塌的事件。",
-      "incomingValue": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
-      "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "title",
-      "keptValue": "新世纪福音战士",
-      "incomingValue": "Neon Genesis Evangelion",
-      "reason": "title is the local display field; non-empty anime.json title is preserved and incoming AniList English/romaji/native titles stay available through aliases/source metadata."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "genres",
-      "keptValue": [
-        "科幻",
-        "机甲",
-        "心理"
-      ],
-      "incomingValue": [
-        "Action",
-        "Drama",
-        "Mecha",
-        "Mystery",
-        "Psychological",
-        "Sci-Fi"
-      ],
-      "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
-    },
-    {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "summary",
-      "keptValue": "少年碇真嗣驾驶 EVA 对抗使徒，同时被家庭创伤、组织秘密和自我厌恶拖入崩坏。",
-      "incomingValue": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
-      "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "title",
-      "keptValue": "魔法少女小圆",
-      "incomingValue": "Puella Magi Madoka Magica",
-      "reason": "title is the local display field; non-empty anime.json title is preserved and incoming AniList English/romaji/native titles stay available through aliases/source metadata."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "genres",
-      "keptValue": [
-        "奇幻",
-        "心理",
-        "悬疑"
-      ],
-      "incomingValue": [
-        "Action",
-        "Drama",
-        "Fantasy",
-        "Mahou Shoujo",
-        "Psychological",
-        "Thriller"
-      ],
-      "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
-    },
-    {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "summary",
-      "keptValue": "鹿目圆等少女面对成为魔法少女的诱惑，逐渐理解愿望、代价与绝望循环的真实机制。",
-      "incomingValue": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
-      "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
-    }
-  ],
+  "acceptedExternalMetadata": [],
+  "preservedLocalDisplayFields": [],
   "conflicts": [],
-  "manualLocksPreserved": [
+  "manualLocksPreserved": [],
+  "possibleDuplicates": [],
+  "needsReview": [
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "personalFitScore",
-      "keptValue": 98,
-      "incomingValue": 0,
-      "reason": "Default manual field lock preserved non-empty personal judgment."
+      "title": "Dr. STONE SCIENCE FUTURE Cour 3",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "tags",
-      "keptValue": [
-        "网络本体论",
-        "声音设计",
-        "碎片化叙事",
-        "存在危机",
-        "实验影像"
-      ],
-      "incomingValue": [
-        "Denpa",
-        "Philosophy",
-        "Augmented Reality",
-        "Female Protagonist",
-        "Artificial Intelligence",
-        "Cyberpunk",
-        "Conspiracy",
-        "Meta"
-      ],
-      "reason": "Default manual field lock preserved non-empty personal judgment."
+      "title": "Witch Hat Atelier",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "personalFitScore",
-      "keptValue": 96,
-      "incomingValue": 0,
-      "reason": "Default manual field lock preserved non-empty personal judgment."
+      "title": "Re:ZERO -Starting Life in Another World- Season 4",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "新世纪福音战士",
-      "year": 1995,
-      "field": "tags",
-      "keptValue": [
-        "末世压迫感",
-        "精神分析",
-        "宗教符号",
-        "机甲身体性",
-        "声画断裂"
-      ],
-      "incomingValue": [
-        "Philosophy",
-        "Coming of Age",
-        "Super Robot",
-        "Dystopian",
-        "Post-Apocalyptic",
-        "Angels",
-        "Psychosexual",
-        "Primarily Teen Cast"
-      ],
-      "reason": "Default manual field lock preserved non-empty personal judgment."
+      "title": "The Warrior Princess and the Barbaric King",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "personalFitScore",
-      "keptValue": 90,
-      "incomingValue": 0,
-      "reason": "Default manual field lock preserved non-empty personal judgment."
+      "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "魔法少女小圆",
-      "year": 2011,
-      "field": "tags",
-      "keptValue": [
-        "类型解构",
-        "异空间美术",
-        "命运闭环",
-        "音乐转折",
-        "契约伦理"
-      ],
-      "incomingValue": [
-        "Magic",
-        "Female Protagonist",
-        "Witch",
-        "Primarily Female Cast",
-        "Urban Fantasy",
-        "Philosophy",
-        "Primarily Teen Cast",
-        "Henshin"
-      ],
-      "reason": "Default manual field lock preserved non-empty personal judgment."
+      "title": "I Made Friends with the Second Prettiest Girl in My Class",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Haibara's Teenage New Game+",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Daemons of the Shadow Realm",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Petals of Reincarnation",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Frieren: Beyond Journey’s End Season 2",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Dorohedoro Season 2",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "The Beginning After the End Season 2",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "JUJUTSU KAISEN",
+      "year": 2020,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Wistoria: Wand and Sword",
+      "year": 2024,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Attack on Titan",
+      "year": 2013,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Hell’s Paradise Season 2",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Go For It, Nakamura-kun!!",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "You and I Are Polar Opposites",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Agents of the Four Seasons: Dance of Spring",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Re:ZERO -Starting Life in Another World-",
+      "year": 2016,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Sentenced to Be a Hero",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "JUJUTSU KAISEN Season 2",
+      "year": 2023,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Farming Life in Another World 2",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     }
   ],
-  "possibleDuplicates": [],
-  "needsReview": [],
   "warnings": []
 }
