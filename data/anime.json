@@ -5,15 +5,55 @@
     "year": 1998,
     "episodes": 13,
     "status": "完结",
-    "genres": ["科幻", "心理", "悬疑"],
-    "tags": ["网络本体论", "声音设计", "碎片化叙事", "存在危机", "实验影像"],
+    "genres": [
+      "科幻",
+      "心理",
+      "悬疑"
+    ],
+    "tags": [
+      "网络本体论",
+      "声音设计",
+      "碎片化叙事",
+      "存在危机",
+      "实验影像"
+    ],
     "summary": "内向少女岩仓玲音在收到已故同学的邮件后，被卷入现实与 Wired 网络边界逐渐崩塌的事件。",
-    "sourceRating": null,
+    "sourceRating": 80,
     "personalFitScore": 98,
     "whyForMe": "它把网络、身份和宗教式超越感压进低频噪声、空镜和断裂剪辑里，视听本身就是世界观。叙事留白足够多，适合反复拆解镜头、声音和主题结构。",
     "risk": "表达偏意识流，信息经常不按因果顺序给出。",
-    "sourceName": "Wikipedia",
-    "sourceUrl": "https://en.wikipedia.org/wiki/Serial_Experiments_Lain"
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/339",
+    "aliases": [
+      "Serial Experiments Lain",
+      "serial experiments lain"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/339",
+        "description": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
+        "genres": [
+          "Drama",
+          "Mystery",
+          "Psychological",
+          "Sci-Fi",
+          "Supernatural"
+        ]
+      }
+    ],
+    "externalSummary": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
+    "sourceGenres": [
+      "Drama",
+      "Mystery",
+      "Psychological",
+      "Sci-Fi",
+      "Supernatural"
+    ],
+    "id": "anilist-339",
+    "lastUpdated": "2026-05-08T12:09:14.502Z"
   },
   {
     "title": "少女革命 Utena",
@@ -21,8 +61,18 @@
     "year": 1997,
     "episodes": 39,
     "status": "完结",
-    "genres": ["奇幻", "心理", "校园"],
-    "tags": ["舞台化调度", "象征系统", "性别寓言", "循环结构", "作者性强"],
+    "genres": [
+      "奇幻",
+      "心理",
+      "校园"
+    ],
+    "tags": [
+      "舞台化调度",
+      "象征系统",
+      "性别寓言",
+      "循环结构",
+      "作者性强"
+    ],
     "summary": "天上欧蒂娜在凤学园卷入蔷薇新娘与决斗体系，逐步触碰童话、权力和自我叙述的裂缝。",
     "sourceRating": null,
     "personalFitScore": 97,
@@ -37,15 +87,58 @@
     "year": 1995,
     "episodes": 26,
     "status": "完结",
-    "genres": ["科幻", "机甲", "心理"],
-    "tags": ["末世压迫感", "精神分析", "宗教符号", "机甲身体性", "声画断裂"],
+    "genres": [
+      "科幻",
+      "机甲",
+      "心理"
+    ],
+    "tags": [
+      "末世压迫感",
+      "精神分析",
+      "宗教符号",
+      "机甲身体性",
+      "声画断裂"
+    ],
     "summary": "少年碇真嗣驾驶 EVA 对抗使徒，同时被家庭创伤、组织秘密和自我厌恶拖入崩坏。",
-    "sourceRating": null,
+    "sourceRating": 83,
     "personalFitScore": 96,
     "whyForMe": "它把机甲战斗转化为身体恐惧和亲密关系失败的外化，分镜、沉默和音乐都在参与心理叙事。世界观信息与角色创伤互相咬合，适合从主题、声画和空间压迫感多层拆解。",
     "risk": "后段形式激烈变化，若只期待完整外部设定解答会有落差。",
-    "sourceName": "Wikipedia",
-    "sourceUrl": "https://en.wikipedia.org/wiki/Neon_Genesis_Evangelion"
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/30",
+    "aliases": [
+      "Neon Genesis Evangelion",
+      "新世紀エヴァンゲリオン",
+      "Shin Seiki Evangelion"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/30",
+        "description": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
+        "genres": [
+          "Action",
+          "Drama",
+          "Mecha",
+          "Mystery",
+          "Psychological",
+          "Sci-Fi"
+        ]
+      }
+    ],
+    "externalSummary": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
+    "sourceGenres": [
+      "Action",
+      "Drama",
+      "Mecha",
+      "Mystery",
+      "Psychological",
+      "Sci-Fi"
+    ],
+    "id": "anilist-30",
+    "lastUpdated": "2026-05-08T12:09:14.502Z"
   },
   {
     "title": "回转企鹅罐",
@@ -53,8 +146,18 @@
     "year": 2011,
     "episodes": 24,
     "status": "完结",
-    "genres": ["悬疑", "奇幻", "家庭"],
-    "tags": ["命运机制", "家庭寓言", "舞台化演出", "视觉符号", "结构回收"],
+    "genres": [
+      "悬疑",
+      "奇幻",
+      "家庭"
+    ],
+    "tags": [
+      "命运机制",
+      "家庭寓言",
+      "舞台化演出",
+      "视觉符号",
+      "结构回收"
+    ],
     "summary": "高仓三兄妹围绕“企鹅罐”和命运交换展开行动，逐步揭开家庭、社会事件与自我牺牲的联系。",
     "sourceRating": null,
     "personalFitScore": 95,
@@ -69,8 +172,18 @@
     "year": 2021,
     "episodes": 12,
     "status": "完结",
-    "genres": ["科幻", "奇幻", "青春"],
-    "tags": ["漂流世界", "极简美术", "青春异化", "规则寓言", "音乐留白"],
+    "genres": [
+      "科幻",
+      "奇幻",
+      "青春"
+    ],
+    "tags": [
+      "漂流世界",
+      "极简美术",
+      "青春异化",
+      "规则寓言",
+      "音乐留白"
+    ],
     "summary": "一群学生连同校舍漂流到异空间，不断遭遇由规则、欲望和群体关系生成的世界。",
     "sourceRating": null,
     "personalFitScore": 94,
@@ -85,8 +198,18 @@
     "year": 2010,
     "episodes": 11,
     "status": "完结",
-    "genres": ["青春", "喜剧", "奇幻"],
-    "tags": ["循环叙事", "高速独白", "图形化构图", "选择主题", "导演风格"],
+    "genres": [
+      "青春",
+      "喜剧",
+      "奇幻"
+    ],
+    "tags": [
+      "循环叙事",
+      "高速独白",
+      "图形化构图",
+      "选择主题",
+      "导演风格"
+    ],
     "summary": "大学生“我”在不同社团选择中反复重启校园生活，寻找理想青春却不断撞见相似困局。",
     "sourceRating": null,
     "personalFitScore": 93,
@@ -101,8 +224,18 @@
     "year": 2014,
     "episodes": 11,
     "status": "完结",
-    "genres": ["运动", "青春", "剧情"],
-    "tags": ["线条表现", "运动心理", "角色对位", "分镜节奏", "作者性改编"],
+    "genres": [
+      "运动",
+      "青春",
+      "剧情"
+    ],
+    "tags": [
+      "线条表现",
+      "运动心理",
+      "角色对位",
+      "分镜节奏",
+      "作者性改编"
+    ],
     "summary": "星野裕与月本诚等乒乓选手在胜负、天赋和自我认同之间重新理解彼此。",
     "sourceRating": null,
     "personalFitScore": 92,
@@ -117,8 +250,18 @@
     "year": 2007,
     "episodes": 12,
     "status": "完结",
-    "genres": ["恐怖", "悬疑", "奇幻"],
-    "tags": ["浮世绘美术", "怪谈结构", "色彩叙事", "仪式化推理", "心理创伤"],
+    "genres": [
+      "恐怖",
+      "悬疑",
+      "奇幻"
+    ],
+    "tags": [
+      "浮世绘美术",
+      "怪谈结构",
+      "色彩叙事",
+      "仪式化推理",
+      "心理创伤"
+    ],
     "summary": "卖药郎在各地追查物怪，必须辨明其形、真和理才能拔出退魔之剑。",
     "sourceRating": null,
     "personalFitScore": 92,
@@ -133,8 +276,18 @@
     "year": 2002,
     "episodes": 13,
     "status": "完结",
-    "genres": ["奇幻", "心理", "剧情"],
-    "tags": ["封闭城镇", "赎罪主题", "低饱和美术", "存在寓言", "慢热情绪"],
+    "genres": [
+      "奇幻",
+      "心理",
+      "剧情"
+    ],
+    "tags": [
+      "封闭城镇",
+      "赎罪主题",
+      "低饱和美术",
+      "存在寓言",
+      "慢热情绪"
+    ],
     "summary": "失去记忆的少女落下在围墙城镇中成为灰羽，逐步理解自身罪感与离开的含义。",
     "sourceRating": null,
     "personalFitScore": 90,
@@ -149,8 +302,18 @@
     "year": 2006,
     "episodes": 23,
     "status": "完结",
-    "genres": ["科幻", "悬疑", "心理"],
-    "tags": ["反乌托邦", "身份追索", "废土旅程", "哲学引用", "世界观压迫感"],
+    "genres": [
+      "科幻",
+      "悬疑",
+      "心理"
+    ],
+    "tags": [
+      "反乌托邦",
+      "身份追索",
+      "废土旅程",
+      "哲学引用",
+      "世界观压迫感"
+    ],
     "summary": "监察官莉露在穹顶城市中追查 Proxy 与自我意识机器人事件，旅程逐步指向人类文明的真相。",
     "sourceRating": null,
     "personalFitScore": 89,
@@ -165,8 +328,18 @@
     "year": 2003,
     "episodes": 22,
     "status": "完结",
-    "genres": ["科幻", "犯罪", "心理"],
-    "tags": ["地下都市", "极端慢热", "身体改造", "虚无主义", "环境叙事"],
+    "genres": [
+      "科幻",
+      "犯罪",
+      "心理"
+    ],
+    "tags": [
+      "地下都市",
+      "极端慢热",
+      "身体改造",
+      "虚无主义",
+      "环境叙事"
+    ],
     "summary": "地下都市流9洲中，失去肢体的拳手一濑被卷入帮派、改造技术和城市衰亡的漩涡。",
     "sourceRating": null,
     "personalFitScore": 88,
@@ -181,8 +354,18 @@
     "year": 2004,
     "episodes": 13,
     "status": "完结",
-    "genres": ["悬疑", "心理", "惊悚"],
-    "tags": ["社会心理", "群像单元", "现实崩坏", "今敏风格", "媒介批评"],
+    "genres": [
+      "悬疑",
+      "心理",
+      "惊悚"
+    ],
+    "tags": [
+      "社会心理",
+      "群像单元",
+      "现实崩坏",
+      "今敏风格",
+      "媒介批评"
+    ],
     "summary": "东京接连发生“少年球棒”袭击事件，受害者与社会压力共同把都市传闻推向失控。",
     "sourceRating": null,
     "personalFitScore": 92,
@@ -197,8 +380,18 @@
     "year": 2008,
     "episodes": 12,
     "status": "完结",
-    "genres": ["科幻", "冒险", "爱情"],
-    "tags": ["记忆商品化", "复古卡通美术", "身体与身份", "悲剧寓言", "导演风格"],
+    "genres": [
+      "科幻",
+      "冒险",
+      "爱情"
+    ],
+    "tags": [
+      "记忆商品化",
+      "复古卡通美术",
+      "身体与身份",
+      "悲剧寓言",
+      "导演风格"
+    ],
     "summary": "记忆可被储存和买卖的宇宙中，失忆少年Kaiba穿越不同星球寻找自身与爱情的真相。",
     "sourceRating": null,
     "personalFitScore": 91,
@@ -213,8 +406,18 @@
     "year": 2000,
     "episodes": 6,
     "status": "完结",
-    "genres": ["科幻", "喜剧", "青春"],
-    "tags": ["音乐驱动", "青春躁动", "高速剪辑", "荒诞动作", "短篇爆发力"],
+    "genres": [
+      "科幻",
+      "喜剧",
+      "青春"
+    ],
+    "tags": [
+      "音乐驱动",
+      "青春躁动",
+      "高速剪辑",
+      "荒诞动作",
+      "短篇爆发力"
+    ],
     "summary": "少年直太被神秘女子春原晴子闯入生活后，额头、机器人与青春困惑一起失控。",
     "sourceRating": null,
     "personalFitScore": 89,
@@ -229,8 +432,18 @@
     "year": 2020,
     "episodes": 12,
     "status": "完结",
-    "genres": ["校园", "喜剧", "创作"],
-    "tags": ["创作过程", "想象空间", "机械设定草图", "动画媒介自反", "团队关系"],
+    "genres": [
+      "校园",
+      "喜剧",
+      "创作"
+    ],
+    "tags": [
+      "创作过程",
+      "想象空间",
+      "机械设定草图",
+      "动画媒介自反",
+      "团队关系"
+    ],
     "summary": "浅草、金森和水崎成立映像研，在预算、制作和想象力之间把脑内世界变成动画。",
     "sourceRating": null,
     "personalFitScore": 87,
@@ -245,8 +458,18 @@
     "year": 2017,
     "episodes": 12,
     "status": "完结",
-    "genres": ["科幻", "公路", "日常"],
-    "tags": ["废墟美学", "末世日常", "极简对白", "空间孤独", "存在主题"],
+    "genres": [
+      "科幻",
+      "公路",
+      "日常"
+    ],
+    "tags": [
+      "废墟美学",
+      "末世日常",
+      "极简对白",
+      "空间孤独",
+      "存在主题"
+    ],
     "summary": "千户和尤莉驾驶半履带车穿行在文明废墟中，以日常对话面对世界终结后的空旷。",
     "sourceRating": null,
     "personalFitScore": 88,
@@ -261,8 +484,18 @@
     "year": 2017,
     "episodes": 12,
     "status": "完结",
-    "genres": ["奇幻", "动作", "心理"],
-    "tags": ["CG调度", "身体碎裂", "身份变形", "矿物世界观", "光影叙事"],
+    "genres": [
+      "奇幻",
+      "动作",
+      "心理"
+    ],
+    "tags": [
+      "CG调度",
+      "身体碎裂",
+      "身份变形",
+      "矿物世界观",
+      "光影叙事"
+    ],
     "summary": "拥有宝石身体的生命体与月人战斗，脆弱的磷叶石在失去与改变中寻找自身用途。",
     "sourceRating": null,
     "personalFitScore": 90,
@@ -277,8 +510,18 @@
     "year": 2017,
     "episodes": 13,
     "status": "完结",
-    "genres": ["奇幻", "冒险", "黑暗奇幻"],
-    "tags": ["垂直世界观", "美术压迫感", "音乐叙事", "残酷成长", "探索结构"],
+    "genres": [
+      "奇幻",
+      "冒险",
+      "黑暗奇幻"
+    ],
+    "tags": [
+      "垂直世界观",
+      "美术压迫感",
+      "音乐叙事",
+      "残酷成长",
+      "探索结构"
+    ],
     "summary": "少女莉可与机器人雷格下潜巨大深渊，追寻母亲消息的同时面对层层上升负荷与未知生态。",
     "sourceRating": null,
     "personalFitScore": 89,
@@ -293,8 +536,18 @@
     "year": 2012,
     "episodes": 25,
     "status": "完结",
-    "genres": ["科幻", "悬疑", "反乌托邦"],
-    "tags": ["社会工程", "世界观密度", "成长跨度", "伦理反转", "文明寓言"],
+    "genres": [
+      "科幻",
+      "悬疑",
+      "反乌托邦"
+    ],
+    "tags": [
+      "社会工程",
+      "世界观密度",
+      "成长跨度",
+      "伦理反转",
+      "文明寓言"
+    ],
     "summary": "拥有咒力的人类在千年后的封闭社会中成长，逐步发现秩序背后的历史与伦理代价。",
     "sourceRating": null,
     "personalFitScore": 91,
@@ -309,15 +562,58 @@
     "year": 2011,
     "episodes": 12,
     "status": "完结",
-    "genres": ["奇幻", "心理", "悬疑"],
-    "tags": ["类型解构", "异空间美术", "命运闭环", "音乐转折", "契约伦理"],
+    "genres": [
+      "奇幻",
+      "心理",
+      "悬疑"
+    ],
+    "tags": [
+      "类型解构",
+      "异空间美术",
+      "命运闭环",
+      "音乐转折",
+      "契约伦理"
+    ],
     "summary": "鹿目圆等少女面对成为魔法少女的诱惑，逐渐理解愿望、代价与绝望循环的真实机制。",
-    "sourceRating": null,
+    "sourceRating": 83,
     "personalFitScore": 90,
     "whyForMe": "魔女结界的拼贴美术、梶浦由记的音乐和叙事反转共同改写类型预期。它的情绪不是单纯煽情，而是由契约机制和命运结构一步步推出来。",
     "risk": "前几集有意保留类型表层，真正结构要到中段后显形。",
-    "sourceName": "Wikipedia",
-    "sourceUrl": "https://en.wikipedia.org/wiki/Puella_Magi_Madoka_Magica"
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/9756",
+    "aliases": [
+      "Puella Magi Madoka Magica",
+      "魔法少女まどか☆マギカ",
+      "Mahou Shoujo Madoka☆Magica"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/9756",
+        "description": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
+        "genres": [
+          "Action",
+          "Drama",
+          "Fantasy",
+          "Mahou Shoujo",
+          "Psychological",
+          "Thriller"
+        ]
+      }
+    ],
+    "externalSummary": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
+    "sourceGenres": [
+      "Action",
+      "Drama",
+      "Fantasy",
+      "Mahou Shoujo",
+      "Psychological",
+      "Thriller"
+    ],
+    "id": "anilist-9756",
+    "lastUpdated": "2026-05-08T12:09:14.502Z"
   },
   {
     "title": "Odd Taxi",
@@ -325,8 +621,18 @@
     "year": 2021,
     "episodes": 13,
     "status": "完结",
-    "genres": ["悬疑", "犯罪", "群像"],
-    "tags": ["对话谜题", "都市群像", "伏线回收", "不可靠感知", "结构精密"],
+    "genres": [
+      "悬疑",
+      "犯罪",
+      "群像"
+    ],
+    "tags": [
+      "对话谜题",
+      "都市群像",
+      "伏线回收",
+      "不可靠感知",
+      "结构精密"
+    ],
     "summary": "出租车司机小户川与多个乘客、失踪案和黑帮事件产生交集，都市群像逐渐拼成完整谜面。",
     "sourceRating": null,
     "personalFitScore": 86,
@@ -341,8 +647,18 @@
     "year": 2005,
     "episodes": 26,
     "status": "完结",
-    "genres": ["奇幻", "单元剧", "治愈"],
-    "tags": ["自然声音", "民俗感", "留白叙事", "生态寓言", "静态构图"],
+    "genres": [
+      "奇幻",
+      "单元剧",
+      "治愈"
+    ],
+    "tags": [
+      "自然声音",
+      "民俗感",
+      "留白叙事",
+      "生态寓言",
+      "静态构图"
+    ],
     "summary": "虫师银古行走各地，处理介于生命本源与自然现象之间的“虫”引发的人间事件。",
     "sourceRating": null,
     "personalFitScore": 88,
@@ -357,8 +673,18 @@
     "year": 1998,
     "episodes": 26,
     "status": "完结",
-    "genres": ["科幻", "犯罪", "公路"],
-    "tags": ["爵士叙事", "类型混合", "孤独群像", "动作分镜", "单元回声"],
+    "genres": [
+      "科幻",
+      "犯罪",
+      "公路"
+    ],
+    "tags": [
+      "爵士叙事",
+      "类型混合",
+      "孤独群像",
+      "动作分镜",
+      "单元回声"
+    ],
     "summary": "赏金猎人斯派克、杰特、菲和艾德在太阳系各处追逐目标，也被各自过去追上。",
     "sourceRating": null,
     "personalFitScore": 87,
@@ -373,8 +699,18 @@
     "year": 2004,
     "episodes": 26,
     "status": "完结",
-    "genres": ["动作", "公路", "时代剧"],
-    "tags": ["嘻哈节奏", "时代混搭", "动作调度", "公路结构", "风格化剪辑"],
+    "genres": [
+      "动作",
+      "公路",
+      "时代剧"
+    ],
+    "tags": [
+      "嘻哈节奏",
+      "时代混搭",
+      "动作调度",
+      "公路结构",
+      "风格化剪辑"
+    ],
     "summary": "风、无幻和仁结伴寻找“向日葵气味的武士”，一路穿越被现代音乐重混的江户图景。",
     "sourceRating": null,
     "personalFitScore": 84,
@@ -389,8 +725,18 @@
     "year": 2002,
     "episodes": 26,
     "status": "完结",
-    "genres": ["科幻", "犯罪", "赛博朋克"],
-    "tags": ["网络政治", "公安群像", "赛博身体", "案件结构", "社会系统"],
+    "genres": [
+      "科幻",
+      "犯罪",
+      "赛博朋克"
+    ],
+    "tags": [
+      "网络政治",
+      "公安群像",
+      "赛博身体",
+      "案件结构",
+      "社会系统"
+    ],
     "summary": "公安九课处理网络犯罪、义体技术和“笑面男”事件，调查逐渐触及社会系统漏洞。",
     "sourceRating": null,
     "personalFitScore": 89,
@@ -405,8 +751,18 @@
     "year": 2012,
     "episodes": 22,
     "status": "完结",
-    "genres": ["科幻", "犯罪", "惊悚"],
-    "tags": ["监控社会", "制度伦理", "刑侦结构", "反乌托邦", "角色对照"],
+    "genres": [
+      "科幻",
+      "犯罪",
+      "惊悚"
+    ],
+    "tags": [
+      "监控社会",
+      "制度伦理",
+      "刑侦结构",
+      "反乌托邦",
+      "角色对照"
+    ],
     "summary": "西比拉系统以数值管理犯罪倾向，常守朱与公安团队在案件中面对秩序和自由的冲突。",
     "sourceRating": null,
     "personalFitScore": 85,
@@ -421,8 +777,18 @@
     "year": 2007,
     "episodes": 26,
     "status": "完结",
-    "genres": ["科幻", "悬疑", "青春"],
-    "tags": ["增强现实", "儿童视角", "都市传说", "空间规则", "技术民俗"],
+    "genres": [
+      "科幻",
+      "悬疑",
+      "青春"
+    ],
+    "tags": [
+      "增强现实",
+      "儿童视角",
+      "都市传说",
+      "空间规则",
+      "技术民俗"
+    ],
     "summary": "孩子们在普及增强现实眼镜的城市中探索虚拟空间、非法程序和隐藏在都市传说后的事故。",
     "sourceRating": null,
     "personalFitScore": 87,
@@ -437,8 +803,18 @@
     "year": 2013,
     "episodes": 10,
     "status": "完结",
-    "genres": ["奇幻", "动作", "家庭"],
-    "tags": ["异界京都", "家庭神话", "高速色彩", "神佛混搭", "情绪结构"],
+    "genres": [
+      "奇幻",
+      "动作",
+      "家庭"
+    ],
+    "tags": [
+      "异界京都",
+      "家庭神话",
+      "高速色彩",
+      "神佛混搭",
+      "情绪结构"
+    ],
     "summary": "少女琴来到镜都寻找黑兔，卷入由神佛、家庭和异界京都构成的重逢故事。",
     "sourceRating": null,
     "personalFitScore": 86,
@@ -453,8 +829,18 @@
     "year": 2021,
     "episodes": 13,
     "status": "完结",
-    "genres": ["科幻", "音乐", "动作"],
-    "tags": ["AI使命", "时间跨度", "音乐主题", "动作分镜", "身份觉醒"],
+    "genres": [
+      "科幻",
+      "音乐",
+      "动作"
+    ],
+    "tags": [
+      "AI使命",
+      "时间跨度",
+      "音乐主题",
+      "动作分镜",
+      "身份觉醒"
+    ],
     "summary": "AI歌姬Vivy在未来AI战争前一百年开始修正历史，同时追问歌唱与使命的意义。",
     "sourceRating": null,
     "personalFitScore": 84,
@@ -469,8 +855,18 @@
     "year": 2021,
     "episodes": 11,
     "status": "完结",
-    "genres": ["历史", "剧情", "悲剧"],
-    "tags": ["历史宿命", "琵琶叙事", "色彩留白", "群像衰亡", "导演风格"],
+    "genres": [
+      "历史",
+      "剧情",
+      "悲剧"
+    ],
+    "tags": [
+      "历史宿命",
+      "琵琶叙事",
+      "色彩留白",
+      "群像衰亡",
+      "导演风格"
+    ],
     "summary": "能看见未来的少女琵琶进入平家一门，见证权势、亲情与时代洪流走向衰亡。",
     "sourceRating": null,
     "personalFitScore": 88,

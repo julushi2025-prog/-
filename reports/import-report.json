@@ -1,28 +1,44 @@
 {
-  "generatedAt": "2026-05-08T12:01:14.807Z",
-  "mode": "dry-run",
+  "generatedAt": "2026-05-08T12:09:11.119Z",
+  "mode": "write",
   "stagingPath": "data/import/staging-anime.json",
   "animePath": "data/anime.json",
   "reportPath": "reports/import-report.json",
   "counts": {
-    "stagingRows": 2,
-    "normalizedCandidates": 2,
+    "stagingRows": 3,
+    "normalizedCandidates": 3,
     "added": 0,
-    "updated": 2,
+    "updated": 3,
     "skipped": 0,
     "conflicts": 0,
-    "manualLocksPreserved": 4,
-    "acceptedExternalMetadata": 12,
-    "preservedLocalDisplayFields": 6,
+    "manualLocksPreserved": 6,
+    "acceptedExternalMetadata": 18,
+    "preservedLocalDisplayFields": 9,
     "possibleDuplicates": 0,
     "needsReview": 0
   },
   "added": [],
   "updated": [
     {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "sourceName": "AniList",
+      "fields": [
+        "sourceRating",
+        "sourceName",
+        "sourceUrl",
+        "aliases",
+        "sources",
+        "externalSummary",
+        "sourceGenres",
+        "id",
+        "lastUpdated"
+      ]
+    },
+    {
       "title": "新世纪福音战士",
       "year": 1995,
-      "sourceName": "Staging JSON Import",
+      "sourceName": "AniList",
       "fields": [
         "sourceRating",
         "sourceName",
@@ -38,7 +54,7 @@
     {
       "title": "魔法少女小圆",
       "year": 2011,
-      "sourceName": "Staging JSON Import",
+      "sourceName": "AniList",
       "fields": [
         "sourceRating",
         "sourceName",
@@ -55,12 +71,79 @@
   "skipped": [],
   "acceptedExternalMetadata": [
     {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "sourceRating",
+      "existingValue": null,
+      "incomingValue": 80,
+      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "sourceName",
+      "existingValue": "Wikipedia",
+      "incomingValue": "AniList",
+      "reason": "AniList source metadata is allowed to refresh sourceName."
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "sourceUrl",
+      "existingValue": "https://en.wikipedia.org/wiki/Serial_Experiments_Lain",
+      "incomingValue": "https://anilist.co/anime/339",
+      "reason": "AniList source metadata is allowed to refresh sourceUrl."
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "sources",
+      "existingValue": [],
+      "incomingValue": [
+        {
+          "id": "anilist",
+          "name": "AniList",
+          "trustLevel": 80,
+          "sourceUrl": "https://anilist.co/anime/339",
+          "description": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Psychological",
+            "Sci-Fi",
+            "Supernatural"
+          ]
+        }
+      ],
+      "reason": "External source reference metadata was merged without replacing local display fields."
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "externalSummary",
+      "incomingValue": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
+      "reason": "External description stored separately from local summary."
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "sourceGenres",
+      "incomingValue": [
+        "Drama",
+        "Mystery",
+        "Psychological",
+        "Sci-Fi",
+        "Supernatural"
+      ],
+      "reason": "External genres stored separately from local display genres."
+    },
+    {
       "title": "新世纪福音战士",
       "year": 1995,
       "field": "sourceRating",
       "existingValue": null,
-      "incomingValue": 84,
-      "reason": "Existing sourceRating is empty, so incoming Staging JSON Import metadata was accepted."
+      "incomingValue": 83,
+      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
     },
     {
       "title": "新世纪福音战士",
@@ -68,15 +151,15 @@
       "field": "sourceName",
       "existingValue": "Wikipedia",
       "incomingValue": "AniList",
-      "reason": "Staging JSON Import source metadata is allowed to refresh sourceName."
+      "reason": "AniList source metadata is allowed to refresh sourceName."
     },
     {
       "title": "新世纪福音战士",
       "year": 1995,
       "field": "sourceUrl",
       "existingValue": "https://en.wikipedia.org/wiki/Neon_Genesis_Evangelion",
-      "incomingValue": "https://anilist.co/anime/30/Neon-Genesis-Evangelion/",
-      "reason": "Staging JSON Import source metadata is allowed to refresh sourceUrl."
+      "incomingValue": "https://anilist.co/anime/30",
+      "reason": "AniList source metadata is allowed to refresh sourceUrl."
     },
     {
       "title": "新世纪福音战士",
@@ -88,18 +171,13 @@
           "id": "anilist",
           "name": "AniList",
           "trustLevel": 80,
-          "sourceUrl": "https://anilist.co/anime/30/Neon-Genesis-Evangelion/"
-        },
-        {
-          "id": "staging-import",
-          "name": "Staging JSON Import",
-          "trustLevel": 60,
-          "sourceUrl": "https://anilist.co/anime/30/Neon-Genesis-Evangelion/",
-          "description": "Mock AniList English summary for Evangelion.",
+          "sourceUrl": "https://anilist.co/anime/30",
+          "description": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
           "genres": [
             "Action",
             "Drama",
             "Mecha",
+            "Mystery",
             "Psychological",
             "Sci-Fi"
           ]
@@ -111,7 +189,7 @@
       "title": "新世纪福音战士",
       "year": 1995,
       "field": "externalSummary",
-      "incomingValue": "Mock AniList English summary for Evangelion.",
+      "incomingValue": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
       "reason": "External description stored separately from local summary."
     },
     {
@@ -122,6 +200,7 @@
         "Action",
         "Drama",
         "Mecha",
+        "Mystery",
         "Psychological",
         "Sci-Fi"
       ],
@@ -133,7 +212,7 @@
       "field": "sourceRating",
       "existingValue": null,
       "incomingValue": 83,
-      "reason": "Existing sourceRating is empty, so incoming Staging JSON Import metadata was accepted."
+      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
     },
     {
       "title": "魔法少女小圆",
@@ -141,15 +220,15 @@
       "field": "sourceName",
       "existingValue": "Wikipedia",
       "incomingValue": "AniList",
-      "reason": "Staging JSON Import source metadata is allowed to refresh sourceName."
+      "reason": "AniList source metadata is allowed to refresh sourceName."
     },
     {
       "title": "魔法少女小圆",
       "year": 2011,
       "field": "sourceUrl",
       "existingValue": "https://en.wikipedia.org/wiki/Puella_Magi_Madoka_Magica",
-      "incomingValue": "https://anilist.co/anime/9756/Mahou-Shoujo-MadokaMagica/",
-      "reason": "Staging JSON Import source metadata is allowed to refresh sourceUrl."
+      "incomingValue": "https://anilist.co/anime/9756",
+      "reason": "AniList source metadata is allowed to refresh sourceUrl."
     },
     {
       "title": "魔法少女小圆",
@@ -161,15 +240,10 @@
           "id": "anilist",
           "name": "AniList",
           "trustLevel": 80,
-          "sourceUrl": "https://anilist.co/anime/9756/Mahou-Shoujo-MadokaMagica/"
-        },
-        {
-          "id": "staging-import",
-          "name": "Staging JSON Import",
-          "trustLevel": 60,
-          "sourceUrl": "https://anilist.co/anime/9756/Mahou-Shoujo-MadokaMagica/",
-          "description": "Mock AniList English summary for Madoka.",
+          "sourceUrl": "https://anilist.co/anime/9756",
+          "description": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
           "genres": [
+            "Action",
             "Drama",
             "Fantasy",
             "Mahou Shoujo",
@@ -184,7 +258,7 @@
       "title": "魔法少女小圆",
       "year": 2011,
       "field": "externalSummary",
-      "incomingValue": "Mock AniList English summary for Madoka.",
+      "incomingValue": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
       "reason": "External description stored separately from local summary."
     },
     {
@@ -192,6 +266,7 @@
       "year": 2011,
       "field": "sourceGenres",
       "incomingValue": [
+        "Action",
         "Drama",
         "Fantasy",
         "Mahou Shoujo",
@@ -202,6 +277,40 @@
     }
   ],
   "preservedLocalDisplayFields": [
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "originalTitle",
+      "keptValue": "シリアルエクスペリメンツレイン",
+      "incomingValue": "serial experiments lain",
+      "reason": "originalTitle is a local display field; non-empty anime.json originalTitle is preserved and incoming titles stay available through aliases/source metadata."
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "genres",
+      "keptValue": [
+        "科幻",
+        "心理",
+        "悬疑"
+      ],
+      "incomingValue": [
+        "Drama",
+        "Mystery",
+        "Psychological",
+        "Sci-Fi",
+        "Supernatural"
+      ],
+      "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "summary",
+      "keptValue": "内向少女岩仓玲音在收到已故同学的邮件后，被卷入现实与 Wired 网络边界逐渐崩塌的事件。",
+      "incomingValue": "We're all connected... There is the world around us, a world of people, tactile sensation, and culture. There is the wired world, inside the computer, of images, personalities, virtual experiences, and a culture all of its own. The day after a classmate commits suicide, Lain, a 14-year-old girl, discovers how closely the two worlds are linked when she rec...",
+      "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
+    },
     {
       "title": "新世纪福音战士",
       "year": 1995,
@@ -223,6 +332,7 @@
         "Action",
         "Drama",
         "Mecha",
+        "Mystery",
         "Psychological",
         "Sci-Fi"
       ],
@@ -233,7 +343,7 @@
       "year": 1995,
       "field": "summary",
       "keptValue": "少年碇真嗣驾驶 EVA 对抗使徒，同时被家庭创伤、组织秘密和自我厌恶拖入崩坏。",
-      "incomingValue": "Mock AniList English summary for Evangelion.",
+      "incomingValue": "In the year 2015, the Angels, huge, tremendously powerful, alien war machines, appear in Tokyo for the second time. The only hope for Mankind's survival lies in the Evangelion, a humanoid fighting machine developed by NERV, a special United Nations agency. Capable of withstanding anything the Angels can dish out, the Evangelion's one drawback lies in the...",
       "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
     },
     {
@@ -254,6 +364,7 @@
         "悬疑"
       ],
       "incomingValue": [
+        "Action",
         "Drama",
         "Fantasy",
         "Mahou Shoujo",
@@ -267,12 +378,43 @@
       "year": 2011,
       "field": "summary",
       "keptValue": "鹿目圆等少女面对成为魔法少女的诱惑，逐渐理解愿望、代价与绝望循环的真实机制。",
-      "incomingValue": "Mock AniList English summary for Madoka.",
+      "incomingValue": "One night, 14-year-old Madoka Kaname has a terrible nightmare - against the backdrop of a devastated city, she witnesses a girl fight a losing battle against a dreadful being lingering above, while a cat-like magical creature tells Madoka the only way to change such tragic outcome is for her to make a contract with him and become a magical girl. The next...",
       "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
     }
   ],
   "conflicts": [],
   "manualLocksPreserved": [
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "personalFitScore",
+      "keptValue": 98,
+      "incomingValue": 0,
+      "reason": "Default manual field lock preserved non-empty personal judgment."
+    },
+    {
+      "title": "Serial Experiments Lain",
+      "year": 1998,
+      "field": "tags",
+      "keptValue": [
+        "网络本体论",
+        "声音设计",
+        "碎片化叙事",
+        "存在危机",
+        "实验影像"
+      ],
+      "incomingValue": [
+        "Denpa",
+        "Philosophy",
+        "Augmented Reality",
+        "Female Protagonist",
+        "Artificial Intelligence",
+        "Cyberpunk",
+        "Conspiracy",
+        "Meta"
+      ],
+      "reason": "Default manual field lock preserved non-empty personal judgment."
+    },
     {
       "title": "新世纪福音战士",
       "year": 1995,
@@ -293,9 +435,14 @@
         "声画断裂"
       ],
       "incomingValue": [
+        "Philosophy",
         "Coming of Age",
-        "Dissociative Identities",
-        "Kaiju"
+        "Super Robot",
+        "Dystopian",
+        "Post-Apocalyptic",
+        "Angels",
+        "Psychosexual",
+        "Primarily Teen Cast"
       ],
       "reason": "Default manual field lock preserved non-empty personal judgment."
     },
@@ -319,9 +466,14 @@
         "契约伦理"
       ],
       "incomingValue": [
-        "Tragedy",
-        "Time Manipulation",
-        "Witch"
+        "Magic",
+        "Female Protagonist",
+        "Witch",
+        "Primarily Female Cast",
+        "Urban Fantasy",
+        "Philosophy",
+        "Primarily Teen Cast",
+        "Henshin"
       ],
       "reason": "Default manual field lock preserved non-empty personal judgment."
     }
