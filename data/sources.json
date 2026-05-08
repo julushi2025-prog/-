@@ -1,16 +1,18 @@
 [
   {
-    "name": "Manual CSV Import",
-    "enabled": false,
-    "type": "file",
-    "description": "未来可从个人维护的 CSV/JSON 清单导入，避免直接爬取网页。",
-    "path": "./imports/anime.csv"
+    "id": "manual-import",
+    "name": "Manual JSON Import",
+    "enabled": true,
+    "type": "manual-json",
+    "description": "从 data/import/manual-anime.json 导入人工整理的合法元数据；不抓取网页、不包含播放链接。",
+    "path": "data/import/manual-anime.json"
   },
   {
+    "id": "public-api-placeholder",
     "name": "Public Metadata API Placeholder",
     "enabled": false,
-    "type": "api",
-    "description": "预留给合规公开元数据 API；第一版不启用网络请求。",
+    "type": "api-placeholder",
+    "description": "预留给合规公开元数据 API；第一版不启用网络请求，后续 adapter 必须尊重 robots.txt、限速与服务条款。",
     "baseUrl": "https://api.example.com/anime"
   }
 ]
