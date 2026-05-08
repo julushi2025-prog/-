@@ -1,0 +1,131 @@
+name: AniList Write Import PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      queries:
+        description: |
+          AniList anime title search queries for the write import.
+          Enter one anime title per line. Blank lines are ignored.
+        required: true
+        default: |
+          Serial Experiments Lain
+          Mushishi
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: anilist-write-pr-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  anilist-write-pr:
+    name: Run AniList write import and open PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run AniList write import
+        env:
+          QUERIES: ${{ inputs.queries }}
+        run: |
+          set -euo pipefail
+
+          query_args=()
+          while IFS= read -r query || [ -n "$query" ]; do
+            query="${query#"${query%%[![:space:]]*}"}"
+            query="${query%"${query##*[![:space:]]}"}"
+            if [ -n "$query" ]; then
+              query_args+=(--query "$query")
+            fi
+          done <<< "$QUERIES"
+
+          if [ ${#query_args[@]} -eq 0 ]; then
+            echo "No AniList queries were provided. Enter one anime title per line." >&2
+            exit 1
+          fi
+
+          printf 'Running AniList write import for %s query/queries:\n' "$(( ${#query_args[@]} / 2 ))"
+          for ((i = 1; i < ${#query_args[@]}; i += 2)); do
+            printf -- '- %s\n' "${query_args[$i]}"
+          done
+
+          npm run update:anime -- --source anilist "${query_args[@]}" --write --yes
+
+      - name: Verify import outputs
+        run: |
+          set -euo pipefail
+          test -f data/anime.json
+          test -f data/import/staging-anime.json
+          test -f reports/import-report.json
+
+      - name: Prepare pull request body
+        run: |
+          set -euo pipefail
+          body_path="$RUNNER_TEMP/anilist-write-pr-body.md"
+          node <<'NODE' > "$body_path"
+          const { readFileSync } = require("node:fs");
+
+          const report = JSON.parse(readFileSync("reports/import-report.json", "utf8"));
+          const counts = report.counts ?? {};
+          const needsReview = counts.needsReview ?? report.needsReview?.length ?? 0;
+
+          console.log("## AniList write import summary");
+          console.log("");
+          console.log(`- 新增：${counts.added ?? 0} 条`);
+          console.log(`- 更新：${counts.updated ?? 0} 条`);
+          console.log(`- 跳过：${counts.skipped ?? 0} 条`);
+          console.log(`- needsReview：${needsReview} 条`);
+          console.log(`- conflicts：${counts.conflicts ?? 0} 条`);
+          console.log(`- manual locks preserved：${counts.manualLocksPreserved ?? 0} 条`);
+          console.log("");
+          console.log("Generated files:");
+          console.log("- `data/anime.json`");
+          console.log("- `data/import/staging-anime.json`");
+          console.log("- `reports/import-report.json`");
+          if (needsReview > 0) {
+            console.log("");
+            console.log("> ⚠️ `reports/import-report.json` contains `needsReview` entries. Please inspect them manually before merging this PR.");
+          }
+          NODE
+          echo "PR_BODY_PATH=$body_path" >> "$GITHUB_ENV"
+
+      - name: Commit changes and create pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+
+          branch="anilist-write-import-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/anime.json data/import/staging-anime.json reports/import-report.json
+          if git diff --cached --quiet; then
+            echo "AniList write import produced no changes to commit; skipping PR creation."
+            exit 0
+          fi
+
+          git commit -m "Update anime data from AniList"
+          git push --set-upstream origin "$branch"
+          gh pr create \
+            --base "$BASE_BRANCH" \
+            --head "$branch" \
+            --title "Update anime data from AniList" \
+            --body-file "$PR_BODY_PATH"

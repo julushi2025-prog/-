@@ -393,6 +393,33 @@ npm run update:anime -- --source anilist --query "Serial Experiments Lain" --wri
 
 如果 AniList 返回多个相近结果，或者最佳匹配置信度不足，脚本会把候选标记为 `needsReview` 并写入 `reports/import-report.json`，不会自动合并进主数据。
 
+
+### GitHub Actions 手动 AniList write PR
+
+项目提供手动工作流 `.github/workflows/anilist-write-pr.yml`，用于在 GitHub Actions 中执行 AniList write 导入，并把结果提交到一个新的 Pull Request。这个 workflow 不会自动合并，也不会直接写入 `main`。
+
+运行方式：
+
+1. 打开 GitHub 仓库的 **Actions** 页面。
+2. 选择 **AniList Write Import PR** workflow。
+3. 点击 **Run workflow**。
+4. 在 `queries` 输入框中填写要导入的 AniList 查询标题，每行一个动漫标题，空行会被忽略。
+5. 启动后，workflow 会运行：
+
+```bash
+npm run update:anime -- --source anilist --query "标题" --write --yes
+```
+
+workflow 会把每一行输入转换为一个 `--query` 参数，并在 write 模式下生成 / 更新：
+
+- `data/anime.json`
+- `data/import/staging-anime.json`
+- `reports/import-report.json`
+
+随后 workflow 只会把上述三个文件的改动提交到新分支，并自动创建标题为 **Update anime data from AniList** 的 Pull Request。PR 描述会汇总新增、更新、跳过、`needsReview`、`conflicts` 和 `manual locks preserved` 数量；如果报告中存在 `needsReview`，PR 描述会提醒先人工检查 `reports/import-report.json`，但不会自动合并。
+
+导入合并仍复用现有保护规则：`personalFitScore`、`whyForMe`、`risk` 和非空 `tags` 不会被 AniList 覆盖；本地非空 `summary`、`genres`、`originalTitle` 也会被保留，只有这些字段为空时才接受外部值。
+
 #### AniList 字段映射
 
 AniList adapter 会把 GraphQL 返回的公开元数据标准化为当前 `anime.json` 字段：
