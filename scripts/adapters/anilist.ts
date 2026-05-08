@@ -153,6 +153,9 @@ function normalizeAniListMedia(media: AniListMedia, query: string, confidence: n
   const title = cleanText(media.title?.english) || cleanText(media.title?.romaji) || cleanText(media.title?.native) || query;
   const originalTitle = cleanText(media.title?.native) || title;
   const sourceRating = media.averageScore ?? media.meanScore ?? null;
+  const summary = summarizeDescription(media.description);
+  const genres = uniqueStrings(media.genres ?? []);
+  const sourceUrl = cleanText(media.siteUrl);
 
   return {
     id: `anilist-${media.id}`,
@@ -161,17 +164,19 @@ function normalizeAniListMedia(media: AniListMedia, query: string, confidence: n
     year: media.startDate?.year ?? 0,
     episodes: media.episodes ?? 0,
     status: normalizeAniListStatus(media.status),
-    genres: uniqueStrings(media.genres ?? []),
+    genres,
     tags: normalizeAniListTags(media.tags ?? []),
-    summary: summarizeDescription(media.description),
+    summary,
+    externalSummary: summary,
+    sourceGenres: genres,
     sourceRating,
     personalFitScore: 0,
     whyForMe: "",
     risk: "",
     sourceName: "AniList",
-    sourceUrl: cleanText(media.siteUrl),
+    sourceUrl,
     aliases: uniqueStrings([media.title?.english, media.title?.romaji, media.title?.native].map((value) => cleanText(value))),
-    sources: [{ id: "anilist", name: "AniList", trustLevel: 80, sourceUrl: cleanText(media.siteUrl) }],
+    sources: [{ id: "anilist", name: "AniList", trustLevel: 80, sourceUrl, description: summary, genres }],
     confidence,
     sourceQuery: query,
     sourceId: media.id,
