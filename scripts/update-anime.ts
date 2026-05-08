@@ -3,7 +3,7 @@ import path from "node:path";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import type { Anime, AnimeStatus } from "../app/types";
-import { fetchAniListAnime } from "./adapters/anilist";
+import { discoverAniListAnime, fetchAniListAnime, type AniListDiscoveryMode } from "./adapters/anilist";
 
 type SourceType = "manual-json" | "api-placeholder" | "anilist-api";
 type ObjectiveField = (typeof OBJECTIVE_FIELDS)[number];
@@ -112,6 +112,11 @@ type ImportReport = {
     preservedLocalDisplayFields: number;
     possibleDuplicates: number;
     needsReview: number;
+    discovered: number;
+    addedCandidates: number;
+    updatedCandidates: number;
+    excludedByFormat: number;
+    excludedByEpisodeCount: number;
   };
   added: Array<{ title: string; year: number; sourceName: string }>;
   updated: Array<{ title: string; year: number; sourceName: string; fields: ImportField[] }>;
@@ -153,7 +158,7 @@ async function main() {
   console.log(`Current local records: ${currentAnime.length}`);
   console.log("Safety: no piracy resources, no playback links, no high-frequency crawling, and AniList requests are rate limited.\n");
 
-  const stagingRows = await loadStagingRows(root, args, importSource);
+  const stagingRows = await loadStagingRows(root, args, importSource, report);
   report.counts.stagingRows = stagingRows.length;
   const candidates = stagingRows
     .map((row, index) => normalizeAnime(row, importSource, index, report))
@@ -197,8 +202,22 @@ function parseArgs(args: string[]) {
   const source = getArgValue(args, "--source") ?? "staging-import";
   const queries = getArgValues(args, "--query");
 
+  const discover = args.includes("--discover") || args.includes("--discovery");
+  const discoveryMode = (getArgValue(args, "--mode") ?? "trending") as AniListDiscoveryMode;
+  const genres = getArgValues(args, "--genres");
+  const tags = getArgValues(args, "--tags");
+  const formats = getArgValues(args, "--format").map((value) => value.toUpperCase());
+  const status = getArgValues(args, "--status").map((value) => value.toUpperCase());
+  const yearFrom = toNumber(getArgValue(args, "--yearFrom"));
+  const yearTo = toNumber(getArgValue(args, "--yearTo"));
+  const minEpisodes = toNumber(getArgValue(args, "--minEpisodes"));
+  const maxEpisodes = toNumber(getArgValue(args, "--maxEpisodes"));
+  const limit = toNumber(getArgValue(args, "--limit"));
+
   if (write && dryRun) throw new Error("Use either --dry-run or --write, not both.");
-  return { write, yes, source, queries };
+  if (discover && write) throw new Error("AniList discovery only writes staging/report candidates; do not combine --discover with --write.");
+  if (discover && !["trending", "popular", "genre", "tag", "year"].includes(discoveryMode)) throw new Error('Discovery --mode must be one of: trending, popular, genre, tag, year.');
+  return { write, yes, source, queries, discover, discoveryMode, genres, tags, formats, status, yearFrom, yearTo, minEpisodes, maxEpisodes, limit };
 }
 
 function getArgValue(args: string[], name: string) {
@@ -236,8 +255,33 @@ function getImportSource(sources: AnimeSource[], requestedSource: string): Anime
   throw new Error(`Unknown source "${requestedSource}". Add it to data/sources.json first.`);
 }
 
-async function loadStagingRows(root: string, args: ReturnType<typeof parseArgs>, source: AnimeSource): Promise<ExternalAnime[]> {
+async function loadStagingRows(root: string, args: ReturnType<typeof parseArgs>, source: AnimeSource, report: ImportReport): Promise<ExternalAnime[]> {
   if (source.id !== "anilist") return readJson<ExternalAnime[]>(path.join(root, source.path ?? DEFAULT_STAGING_PATH));
+
+  if (args.discover) {
+    const result = await discoverAniListAnime({
+      mode: args.discoveryMode,
+      genres: args.genres,
+      tags: args.tags,
+      yearFrom: args.yearFrom,
+      yearTo: args.yearTo,
+      formats: args.formats,
+      status: args.status,
+      minEpisodes: args.minEpisodes,
+      maxEpisodes: args.maxEpisodes,
+      limit: args.limit,
+    });
+    const stagingPath = path.join(root, DEFAULT_STAGING_PATH);
+    await writeFile(stagingPath, `${JSON.stringify(result.rows, null, 2)}\n`);
+    report.counts.discovered = result.stats.discovered;
+    report.counts.excludedByFormat = result.stats.excludedByFormat;
+    report.counts.excludedByEpisodeCount = result.stats.excludedByEpisodeCount;
+    for (const row of result.rows) {
+      report.needsReview.push({ title: row.title, year: row.year, sourceName: row.sourceName, reason: "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging." });
+    }
+    console.log(`AniList discovery wrote ${result.rows.length} candidate row(s) to ${DEFAULT_STAGING_PATH}.`);
+    return result.rows;
+  }
 
   const queries = args.queries.length > 0 ? args.queries : await readSearchQueries(path.join(root, DEFAULT_QUERY_PATH));
   if (queries.length === 0) throw new Error(`AniList source requires at least one --query or a non-empty ${DEFAULT_QUERY_PATH}.`);
@@ -620,7 +664,7 @@ function createReport(mode: ImportReport["mode"], stagingPath: string, animePath
     stagingPath,
     animePath,
     reportPath,
-    counts: { stagingRows: 0, normalizedCandidates: 0, added: 0, updated: 0, skipped: 0, conflicts: 0, manualLocksPreserved: 0, acceptedExternalMetadata: 0, preservedLocalDisplayFields: 0, possibleDuplicates: 0, needsReview: 0 },
+    counts: { stagingRows: 0, normalizedCandidates: 0, added: 0, updated: 0, skipped: 0, conflicts: 0, manualLocksPreserved: 0, acceptedExternalMetadata: 0, preservedLocalDisplayFields: 0, possibleDuplicates: 0, needsReview: 0, discovered: 0, addedCandidates: 0, updatedCandidates: 0, excludedByFormat: 0, excludedByEpisodeCount: 0 },
     added: [],
     updated: [],
     skipped: [],
@@ -637,6 +681,9 @@ function createReport(mode: ImportReport["mode"], stagingPath: string, animePath
 function updateCounts(report: ImportReport) {
   report.counts.added = report.added.length;
   report.counts.updated = report.updated.length;
+  report.counts.addedCandidates = report.added.length;
+  report.counts.updatedCandidates = report.updated.length;
+  if (report.counts.discovered === 0) report.counts.discovered = report.counts.stagingRows;
   report.counts.skipped = report.skipped.length;
   report.counts.conflicts = report.conflicts.length;
   report.counts.manualLocksPreserved = report.manualLocksPreserved.length;
