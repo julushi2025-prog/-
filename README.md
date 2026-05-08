@@ -300,3 +300,61 @@ npm run update:anime -- --write --yes
 6. 部署完成后即可访问。
 
 因为数据来自本地 JSON 文件，所以不需要额外数据库或环境变量。
+
+### AniList adapter
+
+项目现在提供第一个真实公开动漫元数据来源 adapter：AniList GraphQL API。它只请求公开作品元数据，不抓网页、不抓播放地址、不写入盗版资源链接。AniList 返回的数据仍然必须先进入 `data/import/staging-anime.json`，再复用现有 staging、dry-run、write、冲突报告、`manualLockedFields` 和 `trustLevel` 机制处理。
+
+#### 查询方式
+
+可以直接传入一个或多个 `--query`：
+
+```bash
+npm run update:anime -- --source anilist --query "Serial Experiments Lain" --dry-run
+```
+
+多个标题请重复 `--query`：
+
+```bash
+npm run update:anime -- --source anilist --query "Serial Experiments Lain" --query "Mushishi" --dry-run
+```
+
+如果没有传入 `--query`，脚本会读取 `data/import/search-queries.json`。该文件可以是字符串数组，也可以是包含 `queries` 数组的对象。
+
+#### dry-run
+
+AniList dry-run 会请求 AniList、限速处理查询、标准化字段、写入 `data/import/staging-anime.json`、生成 `reports/import-report.json`，但不会修改 `data/anime.json`：
+
+```bash
+npm run update:anime -- --source anilist --query "Serial Experiments Lain" --dry-run
+```
+
+#### write
+
+只有显式传入 `--write` 才允许把 staging 候选合并进 `data/anime.json`。在非交互环境中还需要 `--yes` 跳过确认提示。合并仍会经过现有去重、疑似重复、冲突检测、`trustLevel` 比较和人工字段保护规则：
+
+```bash
+npm run update:anime -- --source anilist --query "Serial Experiments Lain" --write --yes
+```
+
+如果 AniList 返回多个相近结果，或者最佳匹配置信度不足，脚本会把候选标记为 `needsReview` 并写入 `reports/import-report.json`，不会自动合并进主数据。
+
+#### AniList 字段映射
+
+AniList adapter 会把 GraphQL 返回的公开元数据标准化为当前 `anime.json` 字段：
+
+| 当前字段 | AniList 字段 | 规则 |
+| --- | --- | --- |
+| `title` | `title.english` / `title.romaji` | 优先英文标题，没有则用罗马音标题。 |
+| `originalTitle` | `title.native` | 使用原生标题；缺失时回退到 `title`。 |
+| `year` | `startDate.year` | 使用开播年份。 |
+| `episodes` | `episodes` | 缺失时暂存为 `0`，避免伪造集数。 |
+| `status` | `status` | `FINISHED` / `CANCELLED` 映射为 `完结`，`RELEASING` 映射为 `连载中`，其他映射为 `未开播`。 |
+| `genres` | `genres` | 原样去重导入。 |
+| `tags` | `tags` | 去除剧透标签，按 rank 取最多 8 个；已有主数据 `tags` 非空时不会被覆盖。 |
+| `summary` | `description(asHtml: false)` | 去 HTML/实体并压缩为简短简介。 |
+| `sourceRating` | `averageScore` / `meanScore` | 优先 `averageScore`，其次 `meanScore`；缺失时使用 `null`，不写 `0`。 |
+| `sourceName` | 固定值 | 写入 `AniList`。 |
+| `sourceUrl` | `siteUrl` | 只保留合法 HTTP(S) 元数据页面链接；不会导入播放或下载链接。 |
+
+`personalFitScore`、`whyForMe`、`risk` 和已有非空 `tags` 继续作为人工字段被保护；外部来源只能在这些字段为空时补齐，不能覆盖现有人工判断。

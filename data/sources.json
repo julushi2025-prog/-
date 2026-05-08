@@ -9,11 +9,29 @@
     "trustLevel": 60
   },
   {
+    "id": "wikipedia",
+    "name": "Wikipedia",
+    "enabled": true,
+    "type": "api-placeholder",
+    "description": "公开百科元数据来源；只用于标题、年份、集数、简介等元数据，不编造 sourceRating。",
+    "baseUrl": "https://en.wikipedia.org/wiki/",
+    "trustLevel": 55
+  },
+  {
+    "id": "anilist",
+    "name": "AniList",
+    "enabled": true,
+    "type": "anilist-api",
+    "description": "AniList GraphQL API 公开动漫元数据来源；只导入作品元数据，不导入播放链接或盗版资源链接。",
+    "baseUrl": "https://graphql.anilist.co",
+    "trustLevel": 80
+  },
+  {
     "id": "public-api-placeholder",
     "name": "Public Metadata API Placeholder",
     "enabled": false,
     "type": "api-placeholder",
-    "description": "预留给合规公开元数据 API；第一版不启用网络请求，后续 adapter 必须尊重 robots.txt、限速与服务条款。",
+    "description": "预留给其他合规公开元数据 API；adapter 必须尊重 robots.txt、限速与服务条款。",
     "baseUrl": "https://api.example.com/anime",
     "trustLevel": 70
   }
