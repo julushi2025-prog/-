@@ -1,27 +1,44 @@
 {
-  "generatedAt": "2026-05-08T10:33:13.369Z",
+  "generatedAt": "2026-05-08T12:01:14.807Z",
   "mode": "dry-run",
   "stagingPath": "data/import/staging-anime.json",
   "animePath": "data/anime.json",
   "reportPath": "reports/import-report.json",
   "counts": {
-    "stagingRows": 1,
-    "normalizedCandidates": 1,
+    "stagingRows": 2,
+    "normalizedCandidates": 2,
     "added": 0,
-    "updated": 1,
+    "updated": 2,
     "skipped": 0,
     "conflicts": 0,
-    "manualLocksPreserved": 2,
-    "acceptedExternalMetadata": 6,
-    "preservedLocalDisplayFields": 3,
-    "possibleDuplicates": 0
+    "manualLocksPreserved": 4,
+    "acceptedExternalMetadata": 12,
+    "preservedLocalDisplayFields": 6,
+    "possibleDuplicates": 0,
+    "needsReview": 0
   },
   "added": [],
   "updated": [
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "sourceName": "AniList",
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "sourceName": "Staging JSON Import",
+      "fields": [
+        "sourceRating",
+        "sourceName",
+        "sourceUrl",
+        "aliases",
+        "sources",
+        "externalSummary",
+        "sourceGenres",
+        "id",
+        "lastUpdated"
+      ]
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "sourceName": "Staging JSON Import",
       "fields": [
         "sourceRating",
         "sourceName",
@@ -38,32 +55,32 @@
   "skipped": [],
   "acceptedExternalMetadata": [
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
       "field": "sourceRating",
       "existingValue": null,
-      "incomingValue": 80,
-      "reason": "Existing sourceRating is empty, so incoming AniList metadata was accepted."
+      "incomingValue": 84,
+      "reason": "Existing sourceRating is empty, so incoming Staging JSON Import metadata was accepted."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
       "field": "sourceName",
       "existingValue": "Wikipedia",
       "incomingValue": "AniList",
-      "reason": "AniList source metadata is allowed to refresh sourceName."
+      "reason": "Staging JSON Import source metadata is allowed to refresh sourceName."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
       "field": "sourceUrl",
-      "existingValue": "https://en.wikipedia.org/wiki/Serial_Experiments_Lain",
-      "incomingValue": "https://anilist.co/anime/339/Serial-Experiments-Lain/",
-      "reason": "AniList source metadata is allowed to refresh sourceUrl."
+      "existingValue": "https://en.wikipedia.org/wiki/Neon_Genesis_Evangelion",
+      "incomingValue": "https://anilist.co/anime/30/Neon-Genesis-Evangelion/",
+      "reason": "Staging JSON Import source metadata is allowed to refresh sourceUrl."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
       "field": "sources",
       "existingValue": [],
       "incomingValue": [
@@ -71,103 +88,240 @@
           "id": "anilist",
           "name": "AniList",
           "trustLevel": 80,
-          "sourceUrl": "https://anilist.co/anime/339/Serial-Experiments-Lain/",
-          "description": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
+          "sourceUrl": "https://anilist.co/anime/30/Neon-Genesis-Evangelion/"
+        },
+        {
+          "id": "staging-import",
+          "name": "Staging JSON Import",
+          "trustLevel": 60,
+          "sourceUrl": "https://anilist.co/anime/30/Neon-Genesis-Evangelion/",
+          "description": "Mock AniList English summary for Evangelion.",
           "genres": [
+            "Action",
             "Drama",
-            "Mystery",
+            "Mecha",
             "Psychological",
-            "Sci-Fi",
-            "Supernatural"
+            "Sci-Fi"
           ]
         }
       ],
       "reason": "External source reference metadata was merged without replacing local display fields."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
       "field": "externalSummary",
-      "incomingValue": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
+      "incomingValue": "Mock AniList English summary for Evangelion.",
       "reason": "External description stored separately from local summary."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "sourceGenres",
+      "incomingValue": [
+        "Action",
+        "Drama",
+        "Mecha",
+        "Psychological",
+        "Sci-Fi"
+      ],
+      "reason": "External genres stored separately from local display genres."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sourceRating",
+      "existingValue": null,
+      "incomingValue": 83,
+      "reason": "Existing sourceRating is empty, so incoming Staging JSON Import metadata was accepted."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sourceName",
+      "existingValue": "Wikipedia",
+      "incomingValue": "AniList",
+      "reason": "Staging JSON Import source metadata is allowed to refresh sourceName."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sourceUrl",
+      "existingValue": "https://en.wikipedia.org/wiki/Puella_Magi_Madoka_Magica",
+      "incomingValue": "https://anilist.co/anime/9756/Mahou-Shoujo-MadokaMagica/",
+      "reason": "Staging JSON Import source metadata is allowed to refresh sourceUrl."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "sources",
+      "existingValue": [],
+      "incomingValue": [
+        {
+          "id": "anilist",
+          "name": "AniList",
+          "trustLevel": 80,
+          "sourceUrl": "https://anilist.co/anime/9756/Mahou-Shoujo-MadokaMagica/"
+        },
+        {
+          "id": "staging-import",
+          "name": "Staging JSON Import",
+          "trustLevel": 60,
+          "sourceUrl": "https://anilist.co/anime/9756/Mahou-Shoujo-MadokaMagica/",
+          "description": "Mock AniList English summary for Madoka.",
+          "genres": [
+            "Drama",
+            "Fantasy",
+            "Mahou Shoujo",
+            "Psychological",
+            "Thriller"
+          ]
+        }
+      ],
+      "reason": "External source reference metadata was merged without replacing local display fields."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "externalSummary",
+      "incomingValue": "Mock AniList English summary for Madoka.",
+      "reason": "External description stored separately from local summary."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
       "field": "sourceGenres",
       "incomingValue": [
         "Drama",
-        "Mystery",
+        "Fantasy",
+        "Mahou Shoujo",
         "Psychological",
-        "Sci-Fi",
-        "Supernatural"
+        "Thriller"
       ],
       "reason": "External genres stored separately from local display genres."
     }
   ],
   "preservedLocalDisplayFields": [
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
-      "field": "originalTitle",
-      "keptValue": "シリアルエクスペリメンツレイン",
-      "incomingValue": "serial experiments lain",
-      "reason": "Existing originalTitle appears to be an original CJK/kana title; romaji/English incoming title was kept as an alias instead of replacing it."
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "title",
+      "keptValue": "新世纪福音战士",
+      "incomingValue": "Neon Genesis Evangelion",
+      "reason": "title is the local display field; non-empty anime.json title is preserved and incoming AniList English/romaji/native titles stay available through aliases/source metadata."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
       "field": "genres",
       "keptValue": [
         "科幻",
+        "机甲",
+        "心理"
+      ],
+      "incomingValue": [
+        "Action",
+        "Drama",
+        "Mecha",
+        "Psychological",
+        "Sci-Fi"
+      ],
+      "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
+    },
+    {
+      "title": "新世纪福音战士",
+      "year": 1995,
+      "field": "summary",
+      "keptValue": "少年碇真嗣驾驶 EVA 对抗使徒，同时被家庭创伤、组织秘密和自我厌恶拖入崩坏。",
+      "incomingValue": "Mock AniList English summary for Evangelion.",
+      "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "title",
+      "keptValue": "魔法少女小圆",
+      "incomingValue": "Puella Magi Madoka Magica",
+      "reason": "title is the local display field; non-empty anime.json title is preserved and incoming AniList English/romaji/native titles stay available through aliases/source metadata."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "genres",
+      "keptValue": [
+        "奇幻",
         "心理",
         "悬疑"
       ],
       "incomingValue": [
         "Drama",
-        "Mystery",
+        "Fantasy",
+        "Mahou Shoujo",
         "Psychological",
-        "Sci-Fi",
-        "Supernatural"
+        "Thriller"
       ],
       "reason": "genres are local display taxonomy; non-empty anime.json genres are preserved and external genres stay in source metadata."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "魔法少女小圆",
+      "year": 2011,
       "field": "summary",
-      "keptValue": "内向少女岩仓玲音在收到已故同学的邮件后，被卷入现实与 Wired 网络边界逐渐崩塌的事件。",
-      "incomingValue": "Lain Iwakura, an awkward and introverted fourteen-year-old, is one of the many girls from her school to receive a disturbing email from her classmate Chisa Yomoda—the very same Chisa who recently committed suicide. Lain has neither the desire nor the experience to handle even basic technology; yet, when the technophobe opens the email, it leads her straig...",
+      "keptValue": "鹿目圆等少女面对成为魔法少女的诱惑，逐渐理解愿望、代价与绝望循环的真实机制。",
+      "incomingValue": "Mock AniList English summary for Madoka.",
       "reason": "summary is a local display field; non-empty anime.json summary is preserved and external descriptions stay in source metadata."
     }
   ],
   "conflicts": [],
   "manualLocksPreserved": [
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
       "field": "personalFitScore",
-      "keptValue": 98,
+      "keptValue": 96,
       "incomingValue": 0,
       "reason": "Default manual field lock preserved non-empty personal judgment."
     },
     {
-      "title": "Serial Experiments Lain",
-      "year": 1998,
+      "title": "新世纪福音战士",
+      "year": 1995,
       "field": "tags",
       "keptValue": [
-        "网络本体论",
-        "声音设计",
-        "碎片化叙事",
-        "存在危机",
-        "实验影像"
+        "末世压迫感",
+        "精神分析",
+        "宗教符号",
+        "机甲身体性",
+        "声画断裂"
       ],
       "incomingValue": [
-        "Philosophy",
-        "Cyberpunk",
-        "Urban Fantasy",
-        "Denpa",
-        "Conspiracy"
+        "Coming of Age",
+        "Dissociative Identities",
+        "Kaiju"
+      ],
+      "reason": "Default manual field lock preserved non-empty personal judgment."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "personalFitScore",
+      "keptValue": 90,
+      "incomingValue": 0,
+      "reason": "Default manual field lock preserved non-empty personal judgment."
+    },
+    {
+      "title": "魔法少女小圆",
+      "year": 2011,
+      "field": "tags",
+      "keptValue": [
+        "类型解构",
+        "异空间美术",
+        "命运闭环",
+        "音乐转折",
+        "契约伦理"
+      ],
+      "incomingValue": [
+        "Tragedy",
+        "Time Manipulation",
+        "Witch"
       ],
       "reason": "Default manual field lock preserved non-empty personal judgment."
     }
