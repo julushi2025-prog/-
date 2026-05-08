@@ -241,6 +241,30 @@ npm run update:anime
 npm run update:anime -- --dry-run
 ```
 
+### GitHub Actions 手动运行 AniList dry-run
+
+由于 Codex Cloud 环境可能无法直连 AniList，请不要依赖 Codex Cloud 做 AniList live API 测试。项目新增了一个只需手动触发的 GitHub Actions 工作流：`.github/workflows/anilist-dry-run.yml`。
+
+使用方式：
+
+1. 打开 GitHub 仓库页面，进入 **Actions**。
+2. 在左侧工作流列表选择 **AniList Dry-run Import**。
+3. 点击 **Run workflow**。
+4. 在 `query` 输入框填写要测试的 AniList 搜索标题；默认值是 `Serial Experiments Lain`。
+5. 再次点击 **Run workflow** 启动任务。
+6. 任务会运行 `npm install`，然后执行：
+
+   ```bash
+   npm run update:anime -- --source anilist --query "$QUERY" --dry-run
+   ```
+
+7. dry-run 不会自动 commit、不会自动合并，也不会写入 `data/anime.json`。它只会生成或更新：
+   - `data/import/staging-anime.json`
+   - `reports/import-report.json`
+8. 工作流结束后，在该次运行页面的 **Artifacts** 区域下载 `anilist-dry-run-results`，查看上述两个 dry-run 文件。
+
+这个流程只请求 AniList 的合法公开元数据 API；不要抓盗版资源，不要抓播放链接，不要高频请求，也不要覆盖 `personalFitScore`、`whyForMe`、`risk`、`tags` 等个人判断字段。
+
 兼容旧命令：
 
 ```bash

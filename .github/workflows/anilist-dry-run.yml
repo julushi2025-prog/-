@@ -1,0 +1,42 @@
+name: AniList Dry-run Import
+
+on:
+  workflow_dispatch:
+    inputs:
+      query:
+        description: AniList anime title search query for the dry-run import.
+        required: true
+        default: Serial Experiments Lain
+
+jobs:
+  anilist-dry-run:
+    name: Run AniList dry-run import
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run AniList dry-run import
+        env:
+          QUERY: ${{ inputs.query }}
+        run: npm run update:anime -- --source anilist --query "$QUERY" --dry-run
+
+      - name: Upload dry-run artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: anilist-dry-run-results
+          path: |
+            data/import/staging-anime.json
+            reports/import-report.json
+          if-no-files-found: error
