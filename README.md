@@ -301,6 +301,23 @@ npm run update:anime -- --write --yes
 
 因为数据来自本地 JSON 文件，所以不需要额外数据库或环境变量。
 
+### 临时 AniList Vercel 连通性测试接口
+
+项目提供一个临时开发测试接口，用于验证 Vercel 部署环境是否可以访问 AniList live GraphQL API：
+
+```text
+/api/test-anilist?query=Serial%20Experiments%20Lain
+```
+
+注意：
+
+1. 这是临时测试接口，不是正式爬虫，也不是正式导入功能。
+2. 只接受 `query` 查询参数；`query` 为空时返回 `400`。
+3. 每次请求只向 AniList GraphQL API 发起一次请求，最多返回 3 条标准化结果。
+4. 返回字段只包含 `title`、`originalTitle`、`year`、`episodes`、`status`、`genres`、`sourceRating`、`sourceUrl`。
+5. 不抓取播放链接，不抓取盗版资源，不保存任何外部数据。
+6. 该接口不会修改 `data/anime.json`、不会写入 `data/import/staging-anime.json`，也不会生成 `reports/import-report.json`。
+
 ### AniList adapter
 
 项目现在提供第一个真实公开动漫元数据来源 adapter：AniList GraphQL API。它只请求公开作品元数据，不抓网页、不抓播放地址、不写入盗版资源链接。AniList 返回的数据仍然必须先进入 `data/import/staging-anime.json`，再复用现有 staging、dry-run、write、冲突报告、`manualLockedFields` 和 `trustLevel` 机制处理。
