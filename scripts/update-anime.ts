@@ -111,6 +111,7 @@ type ImportReport = {
     acceptedExternalMetadata: number;
     preservedLocalDisplayFields: number;
     possibleDuplicates: number;
+    needsReview: number;
   };
   added: Array<{ title: string; year: number; sourceName: string }>;
   updated: Array<{ title: string; year: number; sourceName: string; fields: ImportField[] }>;
@@ -176,7 +177,7 @@ async function main() {
   console.log(`- Preserved local display fields: ${report.counts.preservedLocalDisplayFields}`);
   console.log(`- Manual locks preserved: ${report.counts.manualLocksPreserved}`);
   console.log(`- Possible duplicates needing review: ${report.counts.possibleDuplicates}`);
-  console.log(`- Source matches needing review: ${report.needsReview.length}`);
+  console.log(`- Source matches needing review: ${report.counts.needsReview}`);
   console.log(`- Report written: ${REPORT_PATH}`);
 
   if (!args.write) {
@@ -612,7 +613,7 @@ function createReport(mode: ImportReport["mode"], stagingPath: string, animePath
     stagingPath,
     animePath,
     reportPath,
-    counts: { stagingRows: 0, normalizedCandidates: 0, added: 0, updated: 0, skipped: 0, conflicts: 0, manualLocksPreserved: 0, acceptedExternalMetadata: 0, preservedLocalDisplayFields: 0, possibleDuplicates: 0 },
+    counts: { stagingRows: 0, normalizedCandidates: 0, added: 0, updated: 0, skipped: 0, conflicts: 0, manualLocksPreserved: 0, acceptedExternalMetadata: 0, preservedLocalDisplayFields: 0, possibleDuplicates: 0, needsReview: 0 },
     added: [],
     updated: [],
     skipped: [],
@@ -635,6 +636,7 @@ function updateCounts(report: ImportReport) {
   report.counts.acceptedExternalMetadata = report.acceptedExternalMetadata.length;
   report.counts.preservedLocalDisplayFields = report.preservedLocalDisplayFields.length;
   report.counts.possibleDuplicates = report.possibleDuplicates.filter((item) => item.action === "needs-review").length;
+  report.counts.needsReview = report.needsReview.length;
 }
 
 async function writeReport(reportPath: string, report: ImportReport) {

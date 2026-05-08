@@ -3,10 +3,20 @@ name: AniList Dry-run Import
 on:
   workflow_dispatch:
     inputs:
-      query:
-        description: AniList anime title search query for the dry-run import.
+      queries:
+        description: |
+          AniList anime title search queries for the dry-run import.
+          Enter one anime title per line. Blank lines are ignored.
         required: true
-        default: Serial Experiments Lain
+        default: |
+          Serial Experiments Lain
+          Neon Genesis Evangelion
+          Puella Magi Madoka Magica
+          Made in Abyss
+          FLCL
+          Ghost in the Shell: Stand Alone Complex
+          Revolutionary Girl Utena
+          Monogatari Series
 
 jobs:
   anilist-dry-run:
@@ -29,8 +39,30 @@ jobs:
 
       - name: Run AniList dry-run import
         env:
-          QUERY: ${{ inputs.query }}
-        run: npm run update:anime -- --source anilist --query "$QUERY" --dry-run
+          QUERIES: ${{ inputs.queries }}
+        run: |
+          set -euo pipefail
+
+          query_args=()
+          while IFS= read -r query || [ -n "$query" ]; do
+            query="${query#"${query%%[![:space:]]*}"}"
+            query="${query%"${query##*[![:space:]]}"}"
+            if [ -n "$query" ]; then
+              query_args+=(--query "$query")
+            fi
+          done <<< "$QUERIES"
+
+          if [ ${#query_args[@]} -eq 0 ]; then
+            echo "No AniList queries were provided. Enter one anime title per line." >&2
+            exit 1
+          fi
+
+          printf 'Running AniList dry-run for %s query/queries:\n' "$(( ${#query_args[@]} / 2 ))"
+          for ((i = 1; i < ${#query_args[@]}; i += 2)); do
+            printf -- '- %s\n' "${query_args[$i]}"
+          done
+
+          npm run update:anime -- --source anilist "${query_args[@]}" --dry-run
 
       - name: Upload dry-run artifacts
         uses: actions/upload-artifact@v4

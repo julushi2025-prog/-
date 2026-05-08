@@ -250,20 +250,32 @@ npm run update:anime -- --dry-run
 1. 打开 GitHub 仓库页面，进入 **Actions**。
 2. 在左侧工作流列表选择 **AniList Dry-run Import**。
 3. 点击 **Run workflow**。
-4. 在 `query` 输入框填写要测试的 AniList 搜索标题；默认值是 `Serial Experiments Lain`。
-5. 再次点击 **Run workflow** 启动任务。
-6. 任务会运行 `npm install`，然后执行：
+4. 在 `queries` 输入框按“每行一个动漫标题”填写要测试的 AniList 搜索标题；可以一次输入多行，空行会被忽略。默认批量测试列表是：
 
-   ```bash
-   npm run update:anime -- --source anilist --query "$QUERY" --dry-run
+   ```text
+   Serial Experiments Lain
+   Neon Genesis Evangelion
+   Puella Magi Madoka Magica
+   Made in Abyss
+   FLCL
+   Ghost in the Shell: Stand Alone Complex
+   Revolutionary Girl Utena
+   Monogatari Series
    ```
 
-7. dry-run 不会自动 commit、不会自动合并，也不会写入 `data/anime.json`。它只会生成或更新：
+5. 再次点击 **Run workflow** 启动任务。
+6. 任务会运行 `npm install`，把多行 `queries` 拆成多个 `--query` 参数，然后执行只读 dry-run，例如：
+
+   ```bash
+   npm run update:anime -- --source anilist --query "Serial Experiments Lain" --query "Neon Genesis Evangelion" --dry-run
+   ```
+
+7. dry-run 不会自动 commit、不会自动合并、不会执行 write，也不会写入 `data/anime.json`。它只会生成或更新：
    - `data/import/staging-anime.json`
    - `reports/import-report.json`
 8. 工作流结束后，在该次运行页面的 **Artifacts** 区域下载 `anilist-dry-run-results`，查看上述两个 dry-run 文件。
 
-这个流程只请求 AniList 的合法公开元数据 API；不要抓盗版资源，不要抓播放链接，不要高频请求，也不要覆盖 `personalFitScore`、`whyForMe`、`risk`、`tags` 等个人判断字段。
+这个流程只请求 AniList 的合法公开元数据 API；不要抓盗版资源，不要抓播放链接，不要高频请求，也不要覆盖 `personalFitScore`、`whyForMe`、`risk`、`tags` 等个人判断字段。`summary`、`genres`、`originalTitle` 仍按本地展示字段保护逻辑处理。
 
 兼容旧命令：
 
@@ -280,6 +292,7 @@ npm run import:anime
 - `skipped`：跳过哪些作品和原因
 - `conflicts`：哪些客观字段冲突、双方值、双方 `trustLevel` 和处理结果
 - `manualLocksPreserved`：哪些个人判断字段因为默认锁或 `manualLockedFields` 被保留
+- `needsReview`：哪些来源匹配置信度不足或需要人工确认
 - `possibleDuplicates`：哪些疑似重复需要人工检查
 
 命令行查看示例：
