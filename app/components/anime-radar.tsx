@@ -62,6 +62,21 @@ const reviewSortLabels: Record<ReviewSortKey, string> = {
   episodes: "集数",
 };
 
+const importReportCountLabels: Record<string, string> = {
+  sourceRating: "来源评分",
+  stagingRows: "暂存条目",
+  normalizedCandidates: "标准化候选",
+  added: "新增",
+  updated: "更新",
+  skipped: "跳过",
+  conflicts: "冲突",
+  manualLocksPreserved: "保留的手动锁",
+  acceptedExternalMetadata: "接受的外部元数据",
+  preservedLocalDisplayFields: "保留的本地展示字段",
+  possibleDuplicates: "疑似重复",
+  needsReview: "需要审核",
+};
+
 const storageKeys = {
   favorites: "anime-radar:favorites",
   dismissed: "anime-radar:dismissed",
@@ -292,13 +307,33 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
     return (
       <div className="rounded-3xl border border-dashed border-cyan-300/30 bg-slate-950/80 p-10 text-center shadow-xl shadow-black/30">
         <h2 className="text-2xl font-black text-white">当前没有候选数据，请先运行 AniList discovery workflow</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-400">运行后打开候选 PR 的 Vercel Preview，再切换到审核模式查看 data/import/staging-anime.json。</p>
+        <p className="mt-3 text-sm leading-6 text-slate-400">当前页面读取 data/import/staging-anime.json 和 reports/import-report.json；它显示的是当前分支里的候选数据，不一定是最新一次 discovery 运行结果。</p>
+        <p className="mt-2 text-sm leading-6 text-amber-100">如果候选数量少于预期，请确认当前打开的是 discovery PR 的 Vercel Preview，或在合并审核模式后重新运行 discovery workflow。</p>
       </div>
     );
   }
 
   return (
     <>
+      <section className="rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-4 shadow-xl shadow-black/30 md:p-5">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <h2 className="text-lg font-bold text-cyan-50">审核模式数据来源</h2>
+            <p className="mt-2 text-sm leading-6 text-cyan-100/90">
+              当前页面读取 data/import/staging-anime.json 和 reports/import-report.json。它显示的是当前分支里的候选数据，不一定是最新一次 discovery 运行结果。
+            </p>
+            <p className="mt-2 text-sm leading-6 text-amber-100">
+              如果候选数量少于预期，请确认当前打开的是 discovery PR 的 Vercel Preview，或在合并审核模式后重新运行 discovery workflow。
+            </p>
+          </div>
+          <div className="rounded-2xl border border-slate-700/70 bg-slate-950/70 px-4 py-3 text-sm leading-6 text-slate-200">
+            <p><span className="font-bold text-white">候选来源：</span>data/import/staging-anime.json</p>
+            <p><span className="font-bold text-white">报告状态：</span>{importReport ? "已读取 reports/import-report.json" : "未读取到 reports/import-report.json"}</p>
+            <p><span className="font-bold text-white">写入状态：</span>只读展示，不写入 GitHub，不修改 data/anime.json</p>
+          </div>
+        </div>
+      </section>
+
       <section className="grid gap-3 text-center md:grid-cols-4">
         <Stat label="候选总数" value={reviewAnime.length.toString()} />
         <Stat label="当前显示" value={filteredCandidates.length.toString()} />
@@ -319,27 +354,27 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
 
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
           <Select label="排序" value={filters.sortBy} onChange={(value) => updateFilter("sortBy", value as ReviewSortKey)} options={Object.keys(reviewSortLabels)} labels={reviewSortLabels} />
-          <Select label="Format" value={filters.format} onChange={(value) => updateFilter("format", value)} options={["all", ...formats]} />
-          <Select label="Genres" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} />
-          <Select label="Status" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} />
-          <Select label="Max Episodes" value={filters.maxEpisodes} onChange={(value) => updateFilter("maxEpisodes", value)} options={maxEpisodeOptions} labels={{ all: "全部", "6": "≤ 6", "12": "≤ 12", "13": "≤ 13", "24": "≤ 24", "26": "≤ 26", "52": "≤ 52" }} />
+          <Select label="格式" value={filters.format} onChange={(value) => updateFilter("format", value)} options={["all", ...formats]} />
+          <Select label="类型" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} />
+          <Select label="状态" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} />
+          <Select label="最大集数" value={filters.maxEpisodes} onChange={(value) => updateFilter("maxEpisodes", value)} options={maxEpisodeOptions} labels={{ all: "全部", "6": "≤ 6", "12": "≤ 12", "13": "≤ 13", "24": "≤ 24", "26": "≤ 26", "52": "≤ 52" }} />
         </div>
       </section>
 
       {importReport?.counts && (
         <section className="rounded-3xl border border-slate-700/70 bg-slate-950/80 p-4 shadow-xl shadow-black/30 md:p-5">
-          <h2 className="text-lg font-bold text-white">Import Report Counts</h2>
+          <h2 className="text-lg font-bold text-white">导入报告统计</h2>
           <div className="mt-3 grid gap-2 text-xs text-slate-300 sm:grid-cols-2 lg:grid-cols-4">
             {Object.entries(importReport.counts).map(([key, value]) => (
               <div key={key} className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 px-3 py-2">
-                <span className="text-slate-400">{key}</span>
+                <span className="text-slate-400">{importReportCountLabels[key] ?? key}</span>
                 <span className="font-bold text-slate-100">{String(value)}</span>
               </div>
             ))}
           </div>
           {Array.isArray(importReport.excluded) && importReport.excluded.length > 0 && (
             <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
-              <p className="text-sm font-bold text-white">Excluded</p>
+              <p className="text-sm font-bold text-white">已排除</p>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-300">
                 {importReport.excluded.map((item, index) => <li key={index}>{formatReportEntry(item)}</li>)}
               </ul>
@@ -357,7 +392,7 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
 
       {filteredCandidates.length === 0 && (
         <div className="rounded-3xl border border-dashed border-slate-600 bg-slate-950/70 p-10 text-center text-slate-300">
-          没有符合当前筛选条件的候选。请放宽 format、genres、status 或 maxEpisodes。
+          没有符合当前筛选条件的候选。请放宽格式、类型、状态或最大集数。
         </div>
       )}
     </>
@@ -376,42 +411,42 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="text-xl font-black text-white">{item.title}</h3>
-          <p className="mt-1 text-sm text-slate-400">{item.originalTitle || "无 originalTitle"}</p>
+          <p className="mt-1 text-sm text-slate-400">{item.originalTitle || "无原始标题"}</p>
           <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-300">
             <Badge>{item.year || "未知年份"}</Badge>
             <Badge>{item.episodes || "未知"} 集</Badge>
-            <Badge>{getCandidateFormat(item) || "未知 format"}</Badge>
+            <Badge>{getCandidateFormat(item) || "未知格式"}</Badge>
             <Badge>{item.status || "未知状态"}</Badge>
           </div>
         </div>
         <div className="text-right">
           <div className="rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-3 py-2">
-            <p className="text-xs text-cyan-200">Source</p>
-            <p className="text-2xl font-black text-cyan-100">{item.sourceRating ?? "N/A"}</p>
+            <p className="text-xs text-cyan-200">来源评分</p>
+            <p className="text-2xl font-black text-cyan-100">{item.sourceRating ?? "暂无"}</p>
           </div>
-          <p className="mt-2 text-xs text-slate-400">Match {item.matchConfidence ?? item.confidence ?? "N/A"}</p>
+          <p className="mt-2 text-xs text-slate-400">匹配置信度 {item.matchConfidence ?? item.confidence ?? "暂无"}</p>
         </div>
       </div>
 
       <p className="mt-4 text-sm leading-6 text-slate-300">{summary}</p>
 
       <div className="mt-4 space-y-3">
-        <PillGroup title="Genres" values={item.genres ?? []} empty="无 genres" />
-        <PillGroup title="Tags" values={item.tags ?? []} empty="无 tags" tag />
+        <PillGroup title="类型" values={item.genres ?? []} empty="无类型" />
+        <PillGroup title="标签" values={item.tags ?? []} empty="无标签" tag />
       </div>
 
       <div className="mt-4 grid gap-3 md:grid-cols-2">
-        <ReviewInfoBlock title="Needs Review" items={reviewReasons} empty="未在报告中标记需要审核" tone="amber" />
-        <ReviewInfoBlock title="Possible Duplicate" items={metadata.possibleDuplicates} empty="未在报告中标记疑似重复" tone="rose" />
+        <ReviewInfoBlock title="需要审核" items={reviewReasons} empty="未在报告中标记需要审核" tone="amber" />
+        <ReviewInfoBlock title="疑似重复" items={metadata.possibleDuplicates} empty="未在报告中标记疑似重复" tone="rose" />
       </div>
 
       <div className="mt-4 border-t border-slate-800 pt-4">
         {item.sourceUrl ? (
           <a className="text-sm font-semibold text-cyan-200 underline-offset-4 hover:underline" href={item.sourceUrl} rel="noreferrer" target="_blank">
-            {item.sourceName || "Source"} · {item.sourceUrl}
+            {item.sourceName || "来源"} · {item.sourceUrl}
           </a>
         ) : (
-          <p className="text-sm text-slate-400">无 sourceUrl</p>
+          <p className="text-sm text-slate-400">无来源链接</p>
         )}
       </div>
     </article>
@@ -556,7 +591,7 @@ function buildReviewMetadata(candidates: ReviewAnimeCandidate[], report: ImportR
   report?.possibleDuplicates?.forEach((entry) => {
     const incomingKey = reportEntryKey({ title: entry.incomingTitle, year: entry.incomingYear });
     const existingText = entry.existingTitle ? `疑似与 ${entry.existingTitle}${entry.existingYear ? ` (${entry.existingYear})` : ""} 重复` : "疑似重复";
-    const message = [existingText, entry.reason, entry.action ? `action: ${entry.action}` : ""].filter(Boolean).join("；");
+    const message = [existingText, entry.reason, entry.action ? `处理状态：${importReportCountLabels[entry.action] ?? entry.action}` : ""].filter(Boolean).join("；");
     const metadata = incomingKey ? map.get(incomingKey) : undefined;
     if (metadata) metadata.possibleDuplicates.push(message);
   });
@@ -595,8 +630,12 @@ function countReportList(value: unknown) {
 function formatReportEntry(entry: unknown) {
   if (typeof entry === "string") return entry;
   if (!entry || typeof entry !== "object") return String(entry);
-  const values = Object.entries(entry).map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join("|") : String(value)}`);
+  const values = Object.entries(entry).map(([key, value]) => `${formatReportKey(key)}: ${Array.isArray(value) ? value.join("|") : String(value)}`);
   return values.join("；");
+}
+
+function formatReportKey(key: string) {
+  return importReportCountLabels[key] ?? key;
 }
 
 function unique(values: string[]) {
