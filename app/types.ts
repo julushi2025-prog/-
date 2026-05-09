@@ -33,3 +33,45 @@ export type Anime = {
   externalSummary?: string;
   sourceGenres?: string[];
 };
+
+export type ReviewAnimeCandidate = Anime & {
+  format?: string;
+  anilistFormat?: string;
+  sourceQuery?: string;
+  sourceId?: number;
+  matchConfidence?: number;
+  needsReview?: boolean;
+  reviewReason?: string;
+};
+
+export type ImportReportEntry = {
+  title?: string;
+  year?: number;
+  sourceName?: string;
+  reason?: string;
+  [key: string]: unknown;
+};
+
+export type ImportReportDuplicate = {
+  incomingTitle?: string;
+  incomingYear?: number;
+  existingTitle?: string;
+  existingYear?: number;
+  reason?: string;
+  action?: string;
+  [key: string]: unknown;
+};
+
+export type ImportReport = {
+  generatedAt?: string;
+  mode?: "dry-run" | "write";
+  stagingPath?: string;
+  animePath?: string;
+  reportPath?: string;
+  counts?: Record<string, number>;
+  needsReview?: ImportReportEntry[];
+  possibleDuplicates?: ImportReportDuplicate[];
+  excluded?: ImportReportEntry[];
+  warnings?: string[];
+  [key: string]: unknown;
+};

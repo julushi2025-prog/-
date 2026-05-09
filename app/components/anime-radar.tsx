@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { Anime } from "../types";
+import type { Anime, ImportReport, ReviewAnimeCandidate } from "../types";
+
+type Mode = "library" | "review";
 
 type Filters = {
   year: string;
@@ -10,6 +12,21 @@ type Filters = {
   tag: string;
   episodeRange: string;
   minScore: number;
+};
+
+type ReviewFilters = {
+  format: string;
+  genre: string;
+  status: string;
+  maxEpisodes: string;
+  sortBy: ReviewSortKey;
+};
+
+type ReviewSortKey = "sourceRating" | "year" | "episodes";
+
+type ReviewMetadata = {
+  needsReviewReasons: string[];
+  possibleDuplicates: string[];
 };
 
 const defaultFilters: Filters = {
@@ -21,6 +38,14 @@ const defaultFilters: Filters = {
   minScore: 70,
 };
 
+const defaultReviewFilters: ReviewFilters = {
+  format: "all",
+  genre: "all",
+  status: "all",
+  maxEpisodes: "all",
+  sortBy: "sourceRating",
+};
+
 const episodeRanges = [
   { label: "全部", value: "all" },
   { label: "短篇 1-8", value: "1-8" },
@@ -29,12 +54,51 @@ const episodeRanges = [
   { label: "长篇 25+", value: "25-999" },
 ];
 
+const maxEpisodeOptions = ["all", "6", "12", "13", "24", "26", "52"];
+
+const reviewSortLabels: Record<ReviewSortKey, string> = {
+  sourceRating: "来源评分",
+  year: "年份",
+  episodes: "集数",
+};
+
 const storageKeys = {
   favorites: "anime-radar:favorites",
   dismissed: "anime-radar:dismissed",
 };
 
-export function AnimeRadar({ initialAnime }: { initialAnime: Anime[] }) {
+export function AnimeRadar({ initialAnime, reviewAnime, importReport }: { initialAnime: Anime[]; reviewAnime: ReviewAnimeCandidate[]; importReport: ImportReport | null }) {
+  const [mode, setMode] = useState<Mode>("library");
+
+  return (
+    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
+      <header className="overflow-hidden rounded-3xl border border-cyan-400/20 bg-slate-950/75 p-5 shadow-2xl shadow-cyan-950/30 backdrop-blur md:p-8">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="mb-3 inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200">
+              Anime Radar / Personal Fit Terminal
+            </p>
+            <h1 className="text-3xl font-black tracking-tight text-white md:text-5xl">个人动漫情报收集与推荐终端</h1>
+            <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
+              在“正式库”继续浏览 data/anime.json；切到“审核模式”可只读查看 AniList discovery 写入 data/import/staging-anime.json 的候选。
+            </p>
+          </div>
+          <div className="rounded-2xl border border-slate-700/70 bg-slate-900/70 p-2">
+            <div className="grid grid-cols-2 gap-2">
+              <ModeButton active={mode === "library"} onClick={() => setMode("library")}>正式库</ModeButton>
+              <ModeButton active={mode === "review"} onClick={() => setMode("review")}>审核模式</ModeButton>
+            </div>
+            <p className="mt-3 px-2 text-center text-xs text-slate-400">审核模式仅展示候选，不写入 GitHub、不修改数据、不自动合并。</p>
+          </div>
+        </div>
+      </header>
+
+      {mode === "library" ? <LibraryMode initialAnime={initialAnime} /> : <ReviewMode importReport={importReport} reviewAnime={reviewAnime} />}
+    </main>
+  );
+}
+
+function LibraryMode({ initialAnime }: { initialAnime: Anime[] }) {
   const [filters, setFilters] = useState<Filters>(defaultFilters);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [dismissed, setDismissed] = useState<string[]>([]);
@@ -102,31 +166,18 @@ export function AnimeRadar({ initialAnime }: { initialAnime: Anime[] }) {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
-      <header className="overflow-hidden rounded-3xl border border-cyan-400/20 bg-slate-950/75 p-5 shadow-2xl shadow-cyan-950/30 backdrop-blur md:p-8">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl">
-            <p className="mb-3 inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-200">
-              Anime Radar / Personal Fit Terminal
-            </p>
-            <h1 className="text-3xl font-black tracking-tight text-white md:text-5xl">个人动漫情报收集与推荐终端</h1>
-            <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
-              不是普通排行榜，而是用本地 mock 数据按“世界观密度、视听表达、作者性、结构与分析价值”筛出更适合你的作品档案。
-            </p>
-          </div>
-          <div className="grid grid-cols-3 gap-3 text-center sm:min-w-96">
-            <Stat label="命中档案" value={filteredAnime.length.toString()} />
-            <Stat label="平均适配" value={averageFit.toString()} />
-            <Stat label="收藏" value={favoriteCount.toString()} />
-          </div>
-        </div>
-      </header>
+    <>
+      <section className="grid grid-cols-3 gap-3 text-center">
+        <Stat label="命中档案" value={filteredAnime.length.toString()} />
+        <Stat label="平均适配" value={averageFit.toString()} />
+        <Stat label="收藏" value={favoriteCount.toString()} />
+      </section>
 
       <section className="rounded-3xl border border-slate-700/70 bg-slate-950/80 p-4 shadow-xl shadow-black/30 backdrop-blur md:p-5">
         <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-lg font-bold text-white">筛选矩阵</h2>
-            <p className="text-sm text-slate-400">第一版只读取 data/anime.json，不请求外部站点。</p>
+            <p className="text-sm text-slate-400">正式库模式只读取 data/anime.json，不请求外部站点。</p>
           </div>
           <div className="flex flex-wrap gap-2">
             <ActionButton onClick={() => exportResults("json")}>导出 JSON</ActionButton>
@@ -212,7 +263,166 @@ export function AnimeRadar({ initialAnime }: { initialAnime: Anime[] }) {
       )}
 
       {selectedAnime && <DetailModal anime={selectedAnime} onClose={() => setSelectedAnime(null)} />}
-    </main>
+    </>
+  );
+}
+
+function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCandidate[]; importReport: ImportReport | null }) {
+  const [filters, setFilters] = useState<ReviewFilters>(defaultReviewFilters);
+
+  const metadataByKey = useMemo(() => buildReviewMetadata(reviewAnime, importReport), [importReport, reviewAnime]);
+  const formats = useMemo(() => unique(reviewAnime.map((item) => getCandidateFormat(item)).filter(Boolean)).sort(), [reviewAnime]);
+  const genres = useMemo(() => unique(reviewAnime.flatMap((item) => item.genres ?? [])).sort(), [reviewAnime]);
+  const statuses = useMemo(() => unique(reviewAnime.map((item) => item.status).filter(Boolean)).sort(), [reviewAnime]);
+
+  const filteredCandidates = useMemo(() => {
+    return [...reviewAnime]
+      .filter((item) => filters.format === "all" || getCandidateFormat(item) === filters.format)
+      .filter((item) => filters.genre === "all" || (item.genres ?? []).includes(filters.genre))
+      .filter((item) => filters.status === "all" || item.status === filters.status)
+      .filter((item) => filters.maxEpisodes === "all" || item.episodes <= Number(filters.maxEpisodes))
+      .sort((a, b) => compareReviewCandidates(a, b, filters.sortBy));
+  }, [filters, reviewAnime]);
+
+  function updateFilter<K extends keyof ReviewFilters>(key: K, value: ReviewFilters[K]) {
+    setFilters((current) => ({ ...current, [key]: value }));
+  }
+
+  if (reviewAnime.length === 0) {
+    return (
+      <div className="rounded-3xl border border-dashed border-cyan-300/30 bg-slate-950/80 p-10 text-center shadow-xl shadow-black/30">
+        <h2 className="text-2xl font-black text-white">当前没有候选数据，请先运行 AniList discovery workflow</h2>
+        <p className="mt-3 text-sm leading-6 text-slate-400">运行后打开候选 PR 的 Vercel Preview，再切换到审核模式查看 data/import/staging-anime.json。</p>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <section className="grid gap-3 text-center md:grid-cols-4">
+        <Stat label="候选总数" value={reviewAnime.length.toString()} />
+        <Stat label="当前显示" value={filteredCandidates.length.toString()} />
+        <Stat label="需审核" value={(importReport?.counts?.needsReview ?? countReportList(importReport?.needsReview)).toString()} />
+        <Stat label="疑似重复" value={(importReport?.counts?.possibleDuplicates ?? countReportList(importReport?.possibleDuplicates)).toString()} />
+      </section>
+
+      <section className="rounded-3xl border border-slate-700/70 bg-slate-950/80 p-4 shadow-xl shadow-black/30 backdrop-blur md:p-5">
+        <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-lg font-bold text-white">候选审核台</h2>
+            <p className="text-sm text-slate-400">只读读取 data/import/staging-anime.json，并关联 reports/import-report.json 中的审核报告。</p>
+          </div>
+          <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-xs leading-5 text-amber-100">
+            本页面不会正式导入、不会自动合并候选，也不会写入 GitHub 或修改数据文件。
+          </div>
+        </div>
+
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+          <Select label="排序" value={filters.sortBy} onChange={(value) => updateFilter("sortBy", value as ReviewSortKey)} options={Object.keys(reviewSortLabels)} labels={reviewSortLabels} />
+          <Select label="Format" value={filters.format} onChange={(value) => updateFilter("format", value)} options={["all", ...formats]} />
+          <Select label="Genres" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} />
+          <Select label="Status" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} />
+          <Select label="Max Episodes" value={filters.maxEpisodes} onChange={(value) => updateFilter("maxEpisodes", value)} options={maxEpisodeOptions} labels={{ all: "全部", "6": "≤ 6", "12": "≤ 12", "13": "≤ 13", "24": "≤ 24", "26": "≤ 26", "52": "≤ 52" }} />
+        </div>
+      </section>
+
+      {importReport?.counts && (
+        <section className="rounded-3xl border border-slate-700/70 bg-slate-950/80 p-4 shadow-xl shadow-black/30 md:p-5">
+          <h2 className="text-lg font-bold text-white">Import Report Counts</h2>
+          <div className="mt-3 grid gap-2 text-xs text-slate-300 sm:grid-cols-2 lg:grid-cols-4">
+            {Object.entries(importReport.counts).map(([key, value]) => (
+              <div key={key} className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 px-3 py-2">
+                <span className="text-slate-400">{key}</span>
+                <span className="font-bold text-slate-100">{String(value)}</span>
+              </div>
+            ))}
+          </div>
+          {Array.isArray(importReport.excluded) && importReport.excluded.length > 0 && (
+            <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+              <p className="text-sm font-bold text-white">Excluded</p>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-300">
+                {importReport.excluded.map((item, index) => <li key={index}>{formatReportEntry(item)}</li>)}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+
+      <section className="grid gap-4 lg:grid-cols-2">
+        {filteredCandidates.map((item) => {
+          const metadata = metadataByKey.get(candidateKey(item)) ?? { needsReviewReasons: [], possibleDuplicates: [] };
+          return <ReviewCandidateCard key={`${item.id ?? item.sourceUrl}-${item.title}`} item={item} metadata={metadata} />;
+        })}
+      </section>
+
+      {filteredCandidates.length === 0 && (
+        <div className="rounded-3xl border border-dashed border-slate-600 bg-slate-950/70 p-10 text-center text-slate-300">
+          没有符合当前筛选条件的候选。请放宽 format、genres、status 或 maxEpisodes。
+        </div>
+      )}
+    </>
+  );
+}
+
+function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; metadata: ReviewMetadata }) {
+  const summary = item.summary || item.externalSummary || "暂无简介";
+  const reviewReasons = [
+    ...(item.needsReview ? [item.reviewReason || "候选标记为需要人工审核。"] : []),
+    ...metadata.needsReviewReasons,
+  ];
+
+  return (
+    <article className="rounded-3xl border border-slate-700/70 bg-slate-950/85 p-4 shadow-xl shadow-black/30 md:p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3 className="text-xl font-black text-white">{item.title}</h3>
+          <p className="mt-1 text-sm text-slate-400">{item.originalTitle || "无 originalTitle"}</p>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-300">
+            <Badge>{item.year || "未知年份"}</Badge>
+            <Badge>{item.episodes || "未知"} 集</Badge>
+            <Badge>{getCandidateFormat(item) || "未知 format"}</Badge>
+            <Badge>{item.status || "未知状态"}</Badge>
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-3 py-2">
+            <p className="text-xs text-cyan-200">Source</p>
+            <p className="text-2xl font-black text-cyan-100">{item.sourceRating ?? "N/A"}</p>
+          </div>
+          <p className="mt-2 text-xs text-slate-400">Match {item.matchConfidence ?? item.confidence ?? "N/A"}</p>
+        </div>
+      </div>
+
+      <p className="mt-4 text-sm leading-6 text-slate-300">{summary}</p>
+
+      <div className="mt-4 space-y-3">
+        <PillGroup title="Genres" values={item.genres ?? []} empty="无 genres" />
+        <PillGroup title="Tags" values={item.tags ?? []} empty="无 tags" tag />
+      </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        <ReviewInfoBlock title="Needs Review" items={reviewReasons} empty="未在报告中标记需要审核" tone="amber" />
+        <ReviewInfoBlock title="Possible Duplicate" items={metadata.possibleDuplicates} empty="未在报告中标记疑似重复" tone="rose" />
+      </div>
+
+      <div className="mt-4 border-t border-slate-800 pt-4">
+        {item.sourceUrl ? (
+          <a className="text-sm font-semibold text-cyan-200 underline-offset-4 hover:underline" href={item.sourceUrl} rel="noreferrer" target="_blank">
+            {item.sourceName || "Source"} · {item.sourceUrl}
+          </a>
+        ) : (
+          <p className="text-sm text-slate-400">无 sourceUrl</p>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function ModeButton({ active, children, onClick }: { active: boolean; children: React.ReactNode; onClick: () => void }) {
+  return (
+    <button className={`rounded-xl px-4 py-2 text-sm font-black transition ${active ? "bg-cyan-300 text-slate-950" : "border border-slate-700 text-slate-200 hover:border-cyan-300/60"}`} onClick={onClick} type="button">
+      {children}
+    </button>
   );
 }
 
@@ -247,7 +457,7 @@ function Tag({ children }: { children: React.ReactNode }) {
 }
 
 function ActionButton({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
-  return <button className="rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1.5 text-xs font-bold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20" onClick={onClick}>{children}</button>;
+  return <button className="rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1.5 text-xs font-bold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20" onClick={onClick} type="button">{children}</button>;
 }
 
 function InfoBlock({ title, text, tone }: { title: string; text: string; tone: "cyan" | "amber" }) {
@@ -256,6 +466,33 @@ function InfoBlock({ title, text, tone }: { title: string; text: string; tone: "
     <div className={`rounded-2xl border p-3 ${color}`}>
       <p className="mb-1 text-xs font-black uppercase tracking-widest opacity-80">{title}</p>
       <p className="line-clamp-3 text-sm leading-6 text-slate-300">{text}</p>
+    </div>
+  );
+}
+
+function ReviewInfoBlock({ title, items, empty, tone }: { title: string; items: string[]; empty: string; tone: "amber" | "rose" }) {
+  const color = tone === "amber" ? "border-amber-300/20 bg-amber-300/5 text-amber-100" : "border-rose-300/20 bg-rose-300/5 text-rose-100";
+  return (
+    <div className={`rounded-2xl border p-3 ${color}`}>
+      <p className="mb-2 text-xs font-black uppercase tracking-widest opacity-80">{title}</p>
+      {items.length > 0 ? (
+        <ul className="list-disc space-y-1 pl-5 text-sm leading-6 text-slate-300">
+          {unique(items).map((item) => <li key={item}>{item}</li>)}
+        </ul>
+      ) : (
+        <p className="text-sm leading-6 text-slate-400">{empty}</p>
+      )}
+    </div>
+  );
+}
+
+function PillGroup({ title, values, empty, tag = false }: { title: string; values: string[]; empty: string; tag?: boolean }) {
+  return (
+    <div>
+      <p className="mb-2 text-xs font-black uppercase tracking-widest text-slate-500">{title}</p>
+      <div className="flex flex-wrap gap-2">
+        {values.length > 0 ? values.map((value) => tag ? <Tag key={value}>{value}</Tag> : <Badge key={value}>{value}</Badge>) : <span className="text-sm text-slate-500">{empty}</span>}
+      </div>
     </div>
   );
 }
@@ -303,6 +540,63 @@ function ModalSection({ title, text }: { title: string; text: string }) {
       <p className="mt-2 leading-7 text-slate-300">{text}</p>
     </section>
   );
+}
+
+function buildReviewMetadata(candidates: ReviewAnimeCandidate[], report: ImportReport | null) {
+  const map = new Map<string, ReviewMetadata>();
+  candidates.forEach((candidate) => map.set(candidateKey(candidate), { needsReviewReasons: [], possibleDuplicates: [] }));
+
+  report?.needsReview?.forEach((entry) => {
+    const key = reportEntryKey(entry);
+    if (!key) return;
+    const metadata = map.get(key);
+    if (metadata) metadata.needsReviewReasons.push(entry.reason || formatReportEntry(entry));
+  });
+
+  report?.possibleDuplicates?.forEach((entry) => {
+    const incomingKey = reportEntryKey({ title: entry.incomingTitle, year: entry.incomingYear });
+    const existingText = entry.existingTitle ? `疑似与 ${entry.existingTitle}${entry.existingYear ? ` (${entry.existingYear})` : ""} 重复` : "疑似重复";
+    const message = [existingText, entry.reason, entry.action ? `action: ${entry.action}` : ""].filter(Boolean).join("；");
+    const metadata = incomingKey ? map.get(incomingKey) : undefined;
+    if (metadata) metadata.possibleDuplicates.push(message);
+  });
+
+  return map;
+}
+
+function candidateKey(item: Pick<Anime, "title" | "year">) {
+  return `${normalizeKey(item.title)}::${item.year ?? ""}`;
+}
+
+function reportEntryKey(entry: { title?: string; year?: number; incomingTitle?: string; incomingYear?: number }) {
+  const title = entry.title ?? entry.incomingTitle;
+  const year = entry.year ?? entry.incomingYear;
+  return title ? `${normalizeKey(title)}::${year ?? ""}` : null;
+}
+
+function normalizeKey(value: string) {
+  return value.toLocaleLowerCase().normalize("NFKD").replace(/[\p{P}\p{S}\s_]+/gu, "");
+}
+
+function getCandidateFormat(item: ReviewAnimeCandidate) {
+  return item.format || item.anilistFormat || "";
+}
+
+function compareReviewCandidates(a: ReviewAnimeCandidate, b: ReviewAnimeCandidate, sortBy: ReviewSortKey) {
+  const left = sortBy === "sourceRating" ? a.sourceRating ?? -1 : a[sortBy] ?? -1;
+  const right = sortBy === "sourceRating" ? b.sourceRating ?? -1 : b[sortBy] ?? -1;
+  return right - left || a.title.localeCompare(b.title);
+}
+
+function countReportList(value: unknown) {
+  return Array.isArray(value) ? value.length : 0;
+}
+
+function formatReportEntry(entry: unknown) {
+  if (typeof entry === "string") return entry;
+  if (!entry || typeof entry !== "object") return String(entry);
+  const values = Object.entries(entry).map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join("|") : String(value)}`);
+  return values.join("；");
 }
 
 function unique(values: string[]) {
