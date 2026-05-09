@@ -488,6 +488,8 @@ Discovery 生成的 staging 候选会包含初步客观字段：`title`、`origi
 
 审核模式支持按 `sourceRating`、`year`、`episodes` 排序，并支持按 `format`、`genres`、`status`、`maxEpisodes` 筛选。页面不会正式导入、不会自动合并候选、不会写入 GitHub，也不会修改 `data/anime.json`；正式库模式仍然只读取 `data/anime.json`。如果 staging 为空，页面会提示先运行 AniList discovery workflow。
 
+审核模式 UI 合并进 main 后，需要重新运行 discovery workflow，新的 discovery PR 才会在预览站中显示最新候选。
+
 请先在 Vercel Preview 的审核模式中人工检查候选、needsReview 原因和疑似重复信息，再决定是否通过现有 write import 流程把候选合并进主数据。
 
 ### GitHub Actions 手动 AniList write PR
