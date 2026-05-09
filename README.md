@@ -484,7 +484,11 @@ Discovery 生成的 staging 候选会包含初步客观字段：`title`、`origi
    - `data/import/staging-anime.json`
    - `reports/import-report.json`
 
-请先人工检查 staging 与 report，再决定是否通过现有 write import 流程把候选合并进主数据。
+运行 discovery workflow 后，会生成一个候选 PR。打开该 PR 的 Vercel Preview，在网站顶部把“正式库”切换到“审核模式”，即可在站内以只读卡片方式查看候选，而不必只在 GitHub 里阅读 staging JSON。审核模式继续读取 `data/import/staging-anime.json`，并在存在 `reports/import-report.json` 时显示 `needsReview`、`possibleDuplicates`、`excluded`、`counts` 等报告信息。
+
+审核模式支持按 `sourceRating`、`year`、`episodes` 排序，并支持按 `format`、`genres`、`status`、`maxEpisodes` 筛选。页面不会正式导入、不会自动合并候选、不会写入 GitHub，也不会修改 `data/anime.json`；正式库模式仍然只读取 `data/anime.json`。如果 staging 为空，页面会提示先运行 AniList discovery workflow。
+
+请先在 Vercel Preview 的审核模式中人工检查候选、needsReview 原因和疑似重复信息，再决定是否通过现有 write import 流程把候选合并进主数据。
 
 ### GitHub Actions 手动 AniList write PR
 
