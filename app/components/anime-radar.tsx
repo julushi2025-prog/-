@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { externalLabelLocalizationMap, formatLocalizationMap, getAnimeFormat, getExternalAnimeGenres, getLocalizedAnimeDisplay, statusLocalizationMap } from "../../lib/anime-localization";
 import type { Anime, ImportReport, ReviewAnimeCandidate } from "../types";
 
 type Mode = "library" | "review";
@@ -77,60 +78,6 @@ const importReportCountLabels: Record<string, string> = {
   needsReview: "需要审核",
   "needs-review": "需要审核",
   merged: "已合并",
-};
-
-const externalLabelTranslations: Record<string, string> = {
-  Action: "动作",
-  Adventure: "冒险",
-  Comedy: "喜剧",
-  Drama: "剧情",
-  Fantasy: "奇幻",
-  Mystery: "悬疑",
-  Psychological: "心理",
-  Romance: "恋爱",
-  "Sci-Fi": "科幻",
-  "Slice of Life": "日常",
-  Supernatural: "超自然",
-  Thriller: "惊悚",
-  Mecha: "机甲",
-  "Mahou Shoujo": "魔法少女",
-  Horror: "恐怖",
-  Sports: "运动",
-  Music: "音乐",
-  Philosophy: "哲学",
-  "Coming of Age": "成长",
-  Dystopian: "反乌托邦",
-  "Post-Apocalyptic": "后启示录",
-  "Super Robot": "超级机器人",
-  "Primarily Teen Cast": "青少年群像",
-  "Primarily Female Cast": "女性群像",
-  "Urban Fantasy": "都市奇幻",
-  Satire: "讽刺",
-  Parody: "戏仿",
-  "Anti-Hero": "反英雄",
-  "Time Manipulation": "时间操作",
-  "Alternate Universe": "平行世界",
-  Tragedy: "悲剧",
-  "Surreal Comedy": "超现实喜剧",
-  Denpa: "电波系",
-};
-
-const formatLabels: Record<string, string> = {
-  TV: "电视动画",
-  TV_SHORT: "电视短篇",
-  MOVIE: "剧场版",
-  OVA: "OVA",
-  ONA: "ONA",
-  SPECIAL: "特别篇",
-  MUSIC: "音乐",
-};
-
-const statusLabels: Record<string, string> = {
-  FINISHED: "完结",
-  RELEASING: "连载中",
-  NOT_YET_RELEASED: "未开播",
-  CANCELLED: "已取消",
-  HIATUS: "暂停",
 };
 
 const storageKeys = {
@@ -259,10 +206,10 @@ function LibraryMode({ initialAnime }: { initialAnime: Anime[] }) {
 
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           <Select label="年份" value={filters.year} onChange={(value) => updateFilter("year", value)} options={["all", ...years]} />
-          <Select label="类型" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} />
+          <Select label="类型" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} labels={externalLabelLocalizationMap} />
           <Select label="集数范围" value={filters.episodeRange} onChange={(value) => updateFilter("episodeRange", value)} options={episodeRanges.map((item) => item.value)} labels={Object.fromEntries(episodeRanges.map((item) => [item.value, item.label]))} />
-          <Select label="状态" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} />
-          <Select label="标签" value={filters.tag} onChange={(value) => updateFilter("tag", value)} options={["all", ...tags]} />
+          <Select label="状态" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} labels={statusLocalizationMap} />
+          <Select label="标签" value={filters.tag} onChange={(value) => updateFilter("tag", value)} options={["all", ...tags]} labels={externalLabelLocalizationMap} />
           <label className="rounded-2xl border border-slate-700/80 bg-slate-900/70 p-3">
             <span className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">最低适配度：{filters.minScore}</span>
             <input
@@ -278,19 +225,21 @@ function LibraryMode({ initialAnime }: { initialAnime: Anime[] }) {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-2">
-        {filteredAnime.map((item) => (
+        {filteredAnime.map((item) => {
+          const display = getLocalizedAnimeDisplay(item);
+          return (
           <article key={item.title} className="group rounded-3xl border border-slate-700/70 bg-slate-950/85 p-4 shadow-xl shadow-black/30 transition hover:-translate-y-0.5 hover:border-cyan-300/50 hover:shadow-cyan-950/30 md:p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <button className="text-left" onClick={() => setSelectedAnime(item)}>
-                  <h3 className="text-xl font-black text-white group-hover:text-cyan-100">{item.title}</h3>
-                  <p className="mt-1 text-sm text-slate-400">{item.originalTitle}</p>
+                  <h3 className="text-xl font-black text-white group-hover:text-cyan-100">{display.title}</h3>
+                  <p className="mt-1 text-sm text-slate-400">{display.originalTitle || "无原始标题"}{display.titleNeedsLocalization ? " · 标题待汉化" : ""}</p>
                 </button>
                 <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-300">
                   <Badge>{item.year}</Badge>
                   <Badge>{item.episodes} 集</Badge>
-                  <Badge>{item.status}</Badge>
-                  {item.genres.map((genre) => <Badge key={genre}>{genre}</Badge>)}
+                  <Badge>{display.status || "未知状态"}</Badge>
+                  {display.genres.map((genre) => <Badge key={genre}>{genre}</Badge>)}
                 </div>
               </div>
               <div className="text-right">
@@ -302,10 +251,10 @@ function LibraryMode({ initialAnime }: { initialAnime: Anime[] }) {
               </div>
             </div>
 
-            <p className="mt-4 line-clamp-2 text-sm leading-6 text-slate-300">{item.summary}</p>
+            <p className="mt-4 line-clamp-2 text-sm leading-6 text-slate-300">{display.summary}{display.summaryNotice ? `（${display.summaryNotice}）` : ""}</p>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              {item.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+              {display.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
             </div>
 
             <div className="mt-4 grid gap-3 md:grid-cols-2">
@@ -324,7 +273,8 @@ function LibraryMode({ initialAnime }: { initialAnime: Anime[] }) {
               </div>
             </div>
           </article>
-        ))}
+          );
+        })}
       </section>
 
       {filteredAnime.length === 0 && (
@@ -342,14 +292,14 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
   const [filters, setFilters] = useState<ReviewFilters>(defaultReviewFilters);
 
   const metadataByKey = useMemo(() => buildReviewMetadata(reviewAnime, importReport), [importReport, reviewAnime]);
-  const formats = useMemo(() => unique(reviewAnime.map((item) => getCandidateFormat(item)).filter(Boolean)).sort(), [reviewAnime]);
-  const genres = useMemo(() => unique(reviewAnime.flatMap((item) => getExternalGenres(item))).sort(), [reviewAnime]);
+  const formats = useMemo(() => unique(reviewAnime.map((item) => getAnimeFormat(item)).filter(Boolean)).sort(), [reviewAnime]);
+  const genres = useMemo(() => unique(reviewAnime.flatMap((item) => getExternalAnimeGenres(item))).sort(), [reviewAnime]);
   const statuses = useMemo(() => unique(reviewAnime.map((item) => item.status).filter(Boolean)).sort(), [reviewAnime]);
 
   const filteredCandidates = useMemo(() => {
     return [...reviewAnime]
-      .filter((item) => filters.format === "all" || getCandidateFormat(item) === filters.format)
-      .filter((item) => filters.genre === "all" || getExternalGenres(item).includes(filters.genre))
+      .filter((item) => filters.format === "all" || getAnimeFormat(item) === filters.format)
+      .filter((item) => filters.genre === "all" || getExternalAnimeGenres(item).includes(filters.genre))
       .filter((item) => filters.status === "all" || item.status === filters.status)
       .filter((item) => filters.maxEpisodes === "all" || item.episodes <= Number(filters.maxEpisodes))
       .sort((a, b) => compareReviewCandidates(a, b, filters.sortBy));
@@ -410,9 +360,9 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
 
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
           <Select label="排序" value={filters.sortBy} onChange={(value) => updateFilter("sortBy", value as ReviewSortKey)} options={Object.keys(reviewSortLabels)} labels={reviewSortLabels} />
-          <Select label="格式" value={filters.format} onChange={(value) => updateFilter("format", value)} options={["all", ...formats]} labels={formatLabels} />
-          <Select label="类型" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} labels={externalLabelTranslations} />
-          <Select label="状态" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} labels={statusLabels} />
+          <Select label="格式" value={filters.format} onChange={(value) => updateFilter("format", value)} options={["all", ...formats]} labels={formatLocalizationMap} />
+          <Select label="类型" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} labels={externalLabelLocalizationMap} />
+          <Select label="状态" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} labels={statusLocalizationMap} />
           <Select label="最大集数" value={filters.maxEpisodes} onChange={(value) => updateFilter("maxEpisodes", value)} options={maxEpisodeOptions} labels={{ all: "全部", "6": "≤ 6", "12": "≤ 12", "13": "≤ 13", "24": "≤ 24", "26": "≤ 26", "52": "≤ 52" }} />
         </div>
       </section>
@@ -456,26 +406,24 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
 }
 
 function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; metadata: ReviewMetadata }) {
-  const summary = item.summary || item.externalSummary || "暂无简介";
+  const display = getLocalizedAnimeDisplay(item);
   const reviewReasons = [
     ...(item.needsReview ? [item.reviewReason || "候选标记为需要人工审核。"] : []),
     ...metadata.needsReviewReasons,
   ];
-  const translatedExternalGenres = getExternalGenres(item).map(formatExternalLabel);
-  const translatedExternalTags = splitExternalLabels(item.tags ?? []);
   const personalJudgments = getPersonalJudgments(item);
 
   return (
     <article className="rounded-3xl border border-slate-700/70 bg-slate-950/85 p-4 shadow-xl shadow-black/30 md:p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-xl font-black text-white">{item.title}</h3>
-          <p className="mt-1 text-sm text-slate-400">{item.originalTitle || "无原始标题"}</p>
+          <h3 className="text-xl font-black text-white">{display.title}</h3>
+          <p className="mt-1 text-sm text-slate-400">{display.originalTitle || "无原始标题"}{display.titleNeedsLocalization ? " · 标题待汉化" : ""}</p>
           <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-300">
             <Badge>{item.year || "未知年份"}</Badge>
             <Badge>{item.episodes || "未知"} 集</Badge>
-            <Badge>{formatCandidateFormat(item) || "未知格式"}</Badge>
-            <Badge>{formatCandidateStatus(item.status) || "未知状态"}</Badge>
+            <Badge>{display.format || "未知格式"}</Badge>
+            <Badge>{display.status || "未知状态"}</Badge>
           </div>
         </div>
         <div className="text-right">
@@ -487,12 +435,12 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
         </div>
       </div>
 
-      <p className="mt-4 text-sm leading-6 text-slate-300">{summary}</p>
+      <p className="mt-4 text-sm leading-6 text-slate-300">{display.summary}{display.summaryNotice ? `（${display.summaryNotice}）` : ""}</p>
 
       <div className="mt-4 space-y-3">
-        <PillGroup title="外部类型" values={translatedExternalGenres} empty="无外部类型" />
-        <PillGroup title="外部标签" values={translatedExternalTags.translated} empty="无已翻译外部标签" tag />
-        <PillGroup title="未翻译外部标签" values={translatedExternalTags.untranslated} empty="无未翻译外部标签" tag />
+        <PillGroup title="外部类型" values={display.externalGenres} empty="无外部类型" />
+        <PillGroup title="外部标签" values={display.externalTags} empty="无已翻译外部标签" tag />
+        <PillGroup title="未翻译外部标签" values={display.untranslatedExternalLabels} empty="无未翻译外部标签" tag />
         <PillGroup title="个人判断" values={personalJudgments} empty="个人判断：待审核" />
       </div>
 
@@ -594,14 +542,16 @@ function PillGroup({ title, values, empty, tag = false }: { title: string; value
 }
 
 function DetailModal({ anime, onClose }: { anime: Anime; onClose: () => void }) {
+  const display = getLocalizedAnimeDisplay(anime);
+
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 p-3 backdrop-blur sm:items-center" role="dialog" aria-modal="true">
       <div className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-cyan-300/25 bg-slate-950 p-5 shadow-2xl shadow-cyan-950/40 md:p-7">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-200">作品档案</p>
-            <h2 className="mt-2 text-3xl font-black text-white">{anime.title}</h2>
-            <p className="mt-1 text-slate-400">{anime.originalTitle}</p>
+            <h2 className="mt-2 text-3xl font-black text-white">{display.title}</h2>
+            <p className="mt-1 text-slate-400">{display.originalTitle || "无原始标题"}{display.titleNeedsLocalization ? " · 标题待汉化" : ""}</p>
           </div>
           <button className="rounded-full border border-slate-600 px-3 py-1 text-sm text-slate-200 hover:border-cyan-300" onClick={onClose}>关闭</button>
         </div>
@@ -609,12 +559,19 @@ function DetailModal({ anime, onClose }: { anime: Anime; onClose: () => void }) 
         <div className="mt-5 grid gap-3 sm:grid-cols-4">
           <Stat label="年份" value={anime.year.toString()} />
           <Stat label="集数" value={anime.episodes.toString()} />
-          <Stat label="状态" value={anime.status} />
+          <Stat label="状态" value={display.status || "未知状态"} />
           <Stat label="适配" value={anime.personalFitScore.toString()} />
         </div>
 
         <div className="mt-6 space-y-4">
-          <ModalSection title="简介" text={anime.summary} />
+          <ModalSection title="简介" text={`${display.summary}${display.summaryNotice ? `（${display.summaryNotice}）` : ""}`} />
+          <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-4">
+            <p className="mb-2 text-xs font-black uppercase tracking-widest text-slate-400">类型与标签</p>
+            <div className="flex flex-wrap gap-2">
+              {display.genres.map((genre) => <Badge key={genre}>{genre}</Badge>)}
+              {display.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+            </div>
+          </div>
           <ModalSection title="为什么适合我" text={anime.whyForMe} />
           <ModalSection title="可能不适合我的原因" text={anime.risk} />
           <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-4">
@@ -660,36 +617,6 @@ function buildReviewMetadata(candidates: ReviewAnimeCandidate[], report: ImportR
   return map;
 }
 
-function getExternalGenres(item: ReviewAnimeCandidate) {
-  const sourceGenres = item.sourceGenres ?? [];
-  return unique(sourceGenres.length > 0 ? sourceGenres : item.genres ?? []);
-}
-
-function splitExternalLabels(values: string[]) {
-  return unique(values).reduce<{ translated: string[]; untranslated: string[] }>((groups, value) => {
-    const translated = externalLabelTranslations[value];
-    if (translated) {
-      groups.translated.push(translated);
-    } else {
-      groups.untranslated.push(value);
-    }
-    return groups;
-  }, { translated: [], untranslated: [] });
-}
-
-function formatExternalLabel(value: string) {
-  return externalLabelTranslations[value] ?? value;
-}
-
-function formatCandidateFormat(item: ReviewAnimeCandidate) {
-  const format = getCandidateFormat(item);
-  return format ? formatLabels[format] ?? format : "";
-}
-
-function formatCandidateStatus(status?: string) {
-  return status ? statusLabels[status] ?? status : "";
-}
-
 function getPersonalJudgments(item: ReviewAnimeCandidate) {
   const judgments = [
     item.personalFitScore > 0 ? `适配度：${item.personalFitScore}` : "",
@@ -713,9 +640,6 @@ function normalizeKey(value: string) {
   return value.toLocaleLowerCase().normalize("NFKD").replace(/[\p{P}\p{S}\s_]+/gu, "");
 }
 
-function getCandidateFormat(item: ReviewAnimeCandidate) {
-  return item.format || item.anilistFormat || "";
-}
 
 function compareReviewCandidates(a: ReviewAnimeCandidate, b: ReviewAnimeCandidate, sortBy: ReviewSortKey) {
   const left = sortBy === "sourceRating" ? a.sourceRating ?? -1 : a[sortBy] ?? -1;
