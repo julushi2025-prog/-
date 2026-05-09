@@ -75,6 +75,62 @@ const importReportCountLabels: Record<string, string> = {
   preservedLocalDisplayFields: "保留的本地展示字段",
   possibleDuplicates: "疑似重复",
   needsReview: "需要审核",
+  "needs-review": "需要审核",
+  merged: "已合并",
+};
+
+const externalLabelTranslations: Record<string, string> = {
+  Action: "动作",
+  Adventure: "冒险",
+  Comedy: "喜剧",
+  Drama: "剧情",
+  Fantasy: "奇幻",
+  Mystery: "悬疑",
+  Psychological: "心理",
+  Romance: "恋爱",
+  "Sci-Fi": "科幻",
+  "Slice of Life": "日常",
+  Supernatural: "超自然",
+  Thriller: "惊悚",
+  Mecha: "机甲",
+  "Mahou Shoujo": "魔法少女",
+  Horror: "恐怖",
+  Sports: "运动",
+  Music: "音乐",
+  Philosophy: "哲学",
+  "Coming of Age": "成长",
+  Dystopian: "反乌托邦",
+  "Post-Apocalyptic": "后启示录",
+  "Super Robot": "超级机器人",
+  "Primarily Teen Cast": "青少年群像",
+  "Primarily Female Cast": "女性群像",
+  "Urban Fantasy": "都市奇幻",
+  Satire: "讽刺",
+  Parody: "戏仿",
+  "Anti-Hero": "反英雄",
+  "Time Manipulation": "时间操作",
+  "Alternate Universe": "平行世界",
+  Tragedy: "悲剧",
+  "Surreal Comedy": "超现实喜剧",
+  Denpa: "电波系",
+};
+
+const formatLabels: Record<string, string> = {
+  TV: "电视动画",
+  TV_SHORT: "电视短篇",
+  MOVIE: "剧场版",
+  OVA: "OVA",
+  ONA: "ONA",
+  SPECIAL: "特别篇",
+  MUSIC: "音乐",
+};
+
+const statusLabels: Record<string, string> = {
+  FINISHED: "完结",
+  RELEASING: "连载中",
+  NOT_YET_RELEASED: "未开播",
+  CANCELLED: "已取消",
+  HIATUS: "暂停",
 };
 
 const storageKeys = {
@@ -287,13 +343,13 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
 
   const metadataByKey = useMemo(() => buildReviewMetadata(reviewAnime, importReport), [importReport, reviewAnime]);
   const formats = useMemo(() => unique(reviewAnime.map((item) => getCandidateFormat(item)).filter(Boolean)).sort(), [reviewAnime]);
-  const genres = useMemo(() => unique(reviewAnime.flatMap((item) => item.genres ?? [])).sort(), [reviewAnime]);
+  const genres = useMemo(() => unique(reviewAnime.flatMap((item) => getExternalGenres(item))).sort(), [reviewAnime]);
   const statuses = useMemo(() => unique(reviewAnime.map((item) => item.status).filter(Boolean)).sort(), [reviewAnime]);
 
   const filteredCandidates = useMemo(() => {
     return [...reviewAnime]
       .filter((item) => filters.format === "all" || getCandidateFormat(item) === filters.format)
-      .filter((item) => filters.genre === "all" || (item.genres ?? []).includes(filters.genre))
+      .filter((item) => filters.genre === "all" || getExternalGenres(item).includes(filters.genre))
       .filter((item) => filters.status === "all" || item.status === filters.status)
       .filter((item) => filters.maxEpisodes === "all" || item.episodes <= Number(filters.maxEpisodes))
       .sort((a, b) => compareReviewCandidates(a, b, filters.sortBy));
@@ -354,9 +410,9 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
 
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
           <Select label="排序" value={filters.sortBy} onChange={(value) => updateFilter("sortBy", value as ReviewSortKey)} options={Object.keys(reviewSortLabels)} labels={reviewSortLabels} />
-          <Select label="格式" value={filters.format} onChange={(value) => updateFilter("format", value)} options={["all", ...formats]} />
-          <Select label="类型" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} />
-          <Select label="状态" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} />
+          <Select label="格式" value={filters.format} onChange={(value) => updateFilter("format", value)} options={["all", ...formats]} labels={formatLabels} />
+          <Select label="类型" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} labels={externalLabelTranslations} />
+          <Select label="状态" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} labels={statusLabels} />
           <Select label="最大集数" value={filters.maxEpisodes} onChange={(value) => updateFilter("maxEpisodes", value)} options={maxEpisodeOptions} labels={{ all: "全部", "6": "≤ 6", "12": "≤ 12", "13": "≤ 13", "24": "≤ 24", "26": "≤ 26", "52": "≤ 52" }} />
         </div>
       </section>
@@ -405,6 +461,9 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
     ...(item.needsReview ? [item.reviewReason || "候选标记为需要人工审核。"] : []),
     ...metadata.needsReviewReasons,
   ];
+  const translatedExternalGenres = getExternalGenres(item).map(formatExternalLabel);
+  const translatedExternalTags = splitExternalLabels(item.tags ?? []);
+  const personalJudgments = getPersonalJudgments(item);
 
   return (
     <article className="rounded-3xl border border-slate-700/70 bg-slate-950/85 p-4 shadow-xl shadow-black/30 md:p-5">
@@ -415,8 +474,8 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
           <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-300">
             <Badge>{item.year || "未知年份"}</Badge>
             <Badge>{item.episodes || "未知"} 集</Badge>
-            <Badge>{getCandidateFormat(item) || "未知格式"}</Badge>
-            <Badge>{item.status || "未知状态"}</Badge>
+            <Badge>{formatCandidateFormat(item) || "未知格式"}</Badge>
+            <Badge>{formatCandidateStatus(item.status) || "未知状态"}</Badge>
           </div>
         </div>
         <div className="text-right">
@@ -431,8 +490,10 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
       <p className="mt-4 text-sm leading-6 text-slate-300">{summary}</p>
 
       <div className="mt-4 space-y-3">
-        <PillGroup title="类型" values={item.genres ?? []} empty="无类型" />
-        <PillGroup title="标签" values={item.tags ?? []} empty="无标签" tag />
+        <PillGroup title="外部类型" values={translatedExternalGenres} empty="无外部类型" />
+        <PillGroup title="外部标签" values={translatedExternalTags.translated} empty="无已翻译外部标签" tag />
+        <PillGroup title="未翻译外部标签" values={translatedExternalTags.untranslated} empty="无未翻译外部标签" tag />
+        <PillGroup title="个人判断" values={personalJudgments} empty="个人判断：待审核" />
       </div>
 
       <div className="mt-4 grid gap-3 md:grid-cols-2">
@@ -597,6 +658,45 @@ function buildReviewMetadata(candidates: ReviewAnimeCandidate[], report: ImportR
   });
 
   return map;
+}
+
+function getExternalGenres(item: ReviewAnimeCandidate) {
+  const sourceGenres = item.sourceGenres ?? [];
+  return unique(sourceGenres.length > 0 ? sourceGenres : item.genres ?? []);
+}
+
+function splitExternalLabels(values: string[]) {
+  return unique(values).reduce<{ translated: string[]; untranslated: string[] }>((groups, value) => {
+    const translated = externalLabelTranslations[value];
+    if (translated) {
+      groups.translated.push(translated);
+    } else {
+      groups.untranslated.push(value);
+    }
+    return groups;
+  }, { translated: [], untranslated: [] });
+}
+
+function formatExternalLabel(value: string) {
+  return externalLabelTranslations[value] ?? value;
+}
+
+function formatCandidateFormat(item: ReviewAnimeCandidate) {
+  const format = getCandidateFormat(item);
+  return format ? formatLabels[format] ?? format : "";
+}
+
+function formatCandidateStatus(status?: string) {
+  return status ? statusLabels[status] ?? status : "";
+}
+
+function getPersonalJudgments(item: ReviewAnimeCandidate) {
+  const judgments = [
+    item.personalFitScore > 0 ? `适配度：${item.personalFitScore}` : "",
+    item.whyForMe?.trim() ? `推荐理由：${item.whyForMe.trim()}` : "",
+    item.risk?.trim() ? `风险提醒：${item.risk.trim()}` : "",
+  ];
+  return judgments.filter(Boolean);
 }
 
 function candidateKey(item: Pick<Anime, "title" | "year">) {
