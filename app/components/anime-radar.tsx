@@ -28,6 +28,7 @@ type ReviewSortKey = "sourceRating" | "year" | "episodes";
 type ReviewMetadata = {
   needsReviewReasons: string[];
   possibleDuplicates: string[];
+  existingDuplicateMatches: string[];
 };
 
 const defaultFilters: Filters = {
@@ -111,7 +112,7 @@ export function AnimeRadar({ initialAnime, reviewAnime, importReport }: { initia
         </div>
       </header>
 
-      {mode === "library" ? <LibraryMode initialAnime={initialAnime} /> : <ReviewMode importReport={importReport} reviewAnime={reviewAnime} />}
+      {mode === "library" ? <LibraryMode initialAnime={initialAnime} /> : <ReviewMode existingAnime={initialAnime} importReport={importReport} reviewAnime={reviewAnime} />}
     </main>
   );
 }
@@ -288,10 +289,11 @@ function LibraryMode({ initialAnime }: { initialAnime: Anime[] }) {
   );
 }
 
-function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCandidate[]; importReport: ImportReport | null }) {
+function ReviewMode({ existingAnime, reviewAnime, importReport }: { existingAnime: Anime[]; reviewAnime: ReviewAnimeCandidate[]; importReport: ImportReport | null }) {
   const [filters, setFilters] = useState<ReviewFilters>(defaultReviewFilters);
 
-  const metadataByKey = useMemo(() => buildReviewMetadata(reviewAnime, importReport), [importReport, reviewAnime]);
+  const metadataByKey = useMemo(() => buildReviewMetadata(reviewAnime, importReport, existingAnime), [existingAnime, importReport, reviewAnime]);
+  const hasLowCandidateCount = reviewAnime.length > 0 && reviewAnime.length < 20;
   const formats = useMemo(() => unique(reviewAnime.map((item) => getAnimeFormat(item)).filter(Boolean)).sort(), [reviewAnime]);
   const genres = useMemo(() => unique(reviewAnime.flatMap((item) => getExternalAnimeGenres(item))).sort(), [reviewAnime]);
   const statuses = useMemo(() => unique(reviewAnime.map((item) => item.status).filter(Boolean)).sort(), [reviewAnime]);
@@ -313,8 +315,9 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
     return (
       <div className="rounded-3xl border border-dashed border-cyan-300/30 bg-slate-950/80 p-10 text-center shadow-xl shadow-black/30">
         <h2 className="text-2xl font-black text-white">当前没有候选数据，请先运行 AniList discovery workflow</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-400">当前页面读取 data/import/staging-anime.json 和 reports/import-report.json；它显示的是当前分支里的候选数据，不一定是最新一次 discovery 运行结果。</p>
-        <p className="mt-2 text-sm leading-6 text-amber-100">如果候选数量少于预期，请确认当前打开的是 discovery PR 的 Vercel Preview，或在合并审核模式后重新运行 discovery workflow。</p>
+        <p className="mt-3 text-sm leading-6 text-slate-400">当前候选来源：data/import/staging-anime.json；当前报告来源：reports/import-report.json。</p>
+        <p className="mt-2 text-sm leading-6 text-slate-400">当前为只读审核模式，不写入正式库，不修改 data/anime.json，不自动合并。</p>
+        <p className="mt-2 text-sm leading-6 text-amber-100">当前分支中的 staging 数据较少，请确认打开的是最新 discovery PR 的 Vercel Preview。</p>
       </div>
     );
   }
@@ -326,19 +329,25 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
           <div>
             <h2 className="text-lg font-bold text-cyan-50">审核模式数据来源</h2>
             <p className="mt-2 text-sm leading-6 text-cyan-100/90">
-              当前页面读取 data/import/staging-anime.json 和 reports/import-report.json。它显示的是当前分支里的候选数据，不一定是最新一次 discovery 运行结果。
+              当前候选来源：data/import/staging-anime.json；当前报告来源：reports/import-report.json。它显示的是当前分支里的候选数据，不一定是最新一次 discovery 运行结果。
             </p>
             <p className="mt-2 text-sm leading-6 text-amber-100">
-              如果候选数量少于预期，请确认当前打开的是 discovery PR 的 Vercel Preview，或在合并审核模式后重新运行 discovery workflow。
+              当前为只读审核模式，不写入正式库，不修改 data/anime.json，不自动合并。
             </p>
           </div>
           <div className="rounded-2xl border border-slate-700/70 bg-slate-950/70 px-4 py-3 text-sm leading-6 text-slate-200">
-            <p><span className="font-bold text-white">候选来源：</span>data/import/staging-anime.json</p>
-            <p><span className="font-bold text-white">报告状态：</span>{importReport ? "已读取 reports/import-report.json" : "未读取到 reports/import-report.json"}</p>
-            <p><span className="font-bold text-white">写入状态：</span>只读展示，不写入 GitHub，不修改 data/anime.json</p>
+            <p><span className="font-bold text-white">当前候选来源：</span>data/import/staging-anime.json</p>
+            <p><span className="font-bold text-white">当前报告来源：</span>{importReport ? "reports/import-report.json" : "未读取到 reports/import-report.json"}</p>
+            <p><span className="font-bold text-white">审核状态：</span>当前为只读审核模式，不写入正式库。</p>
           </div>
         </div>
       </section>
+
+      {hasLowCandidateCount && (
+        <section className="rounded-3xl border border-amber-300/30 bg-amber-300/10 p-4 text-sm leading-6 text-amber-100 shadow-xl shadow-black/30 md:p-5">
+          当前分支中的 staging 数据较少，请确认打开的是最新 discovery PR 的 Vercel Preview。
+        </section>
+      )}
 
       <section className="grid gap-3 text-center md:grid-cols-4">
         <Stat label="候选总数" value={reviewAnime.length.toString()} />
@@ -391,7 +400,7 @@ function ReviewMode({ reviewAnime, importReport }: { reviewAnime: ReviewAnimeCan
 
       <section className="grid gap-4 lg:grid-cols-2">
         {filteredCandidates.map((item) => {
-          const metadata = metadataByKey.get(candidateKey(item)) ?? { needsReviewReasons: [], possibleDuplicates: [] };
+          const metadata = metadataByKey.get(candidateKey(item)) ?? { needsReviewReasons: [], possibleDuplicates: [], existingDuplicateMatches: [] };
           return <ReviewCandidateCard key={`${item.id ?? item.sourceUrl}-${item.title}`} item={item} metadata={metadata} />;
         })}
       </section>
@@ -412,6 +421,9 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
     ...metadata.needsReviewReasons,
   ];
   const personalJudgments = getPersonalJudgments(item);
+  const duplicateItems = unique([...metadata.possibleDuplicates, ...metadata.existingDuplicateMatches]);
+  const needsReviewStatus = item.needsReview || metadata.needsReviewReasons.length > 0 ? "是" : "否";
+  const possibleDuplicateStatus = duplicateItems.length > 0 ? "是" : "否";
 
   return (
     <article className="rounded-3xl border border-slate-700/70 bg-slate-950/85 p-4 shadow-xl shadow-black/30 md:p-5">
@@ -424,6 +436,8 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
             <Badge>{item.episodes || "未知"} 集</Badge>
             <Badge>{display.format || "未知格式"}</Badge>
             <Badge>{display.status || "未知状态"}</Badge>
+            <Badge>needsReview：{needsReviewStatus}</Badge>
+            <Badge>possibleDuplicate：{possibleDuplicateStatus}</Badge>
           </div>
         </div>
         <div className="text-right">
@@ -446,7 +460,7 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
 
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         <ReviewInfoBlock title="需要审核" items={reviewReasons} empty="未在报告中标记需要审核" tone="amber" />
-        <ReviewInfoBlock title="疑似重复" items={metadata.possibleDuplicates} empty="未在报告中标记疑似重复" tone="rose" />
+        <ReviewInfoBlock title="疑似重复 / 已存在" items={duplicateItems} empty="未在报告或正式库比对中标记疑似重复" tone="rose" />
       </div>
 
       <div className="mt-4 border-t border-slate-800 pt-4">
@@ -595,9 +609,9 @@ function ModalSection({ title, text }: { title: string; text: string }) {
   );
 }
 
-function buildReviewMetadata(candidates: ReviewAnimeCandidate[], report: ImportReport | null) {
+function buildReviewMetadata(candidates: ReviewAnimeCandidate[], report: ImportReport | null, existingAnime: Anime[]) {
   const map = new Map<string, ReviewMetadata>();
-  candidates.forEach((candidate) => map.set(candidateKey(candidate), { needsReviewReasons: [], possibleDuplicates: [] }));
+  candidates.forEach((candidate) => map.set(candidateKey(candidate), { needsReviewReasons: [], possibleDuplicates: [], existingDuplicateMatches: [] }));
 
   report?.needsReview?.forEach((entry) => {
     const key = reportEntryKey(entry);
@@ -614,6 +628,15 @@ function buildReviewMetadata(candidates: ReviewAnimeCandidate[], report: ImportR
     if (metadata) metadata.possibleDuplicates.push(message);
   });
 
+  candidates.forEach((candidate) => {
+    const metadata = map.get(candidateKey(candidate));
+    if (!metadata) return;
+    const duplicates = findExistingDuplicates(candidate, existingAnime);
+    duplicates.forEach((existing) => {
+      metadata.existingDuplicateMatches.push(`当前 data/anime.json 已存在疑似重复：${existing.title}${existing.year ? ` (${existing.year})` : ""}`);
+    });
+  });
+
   return map;
 }
 
@@ -628,6 +651,18 @@ function getPersonalJudgments(item: ReviewAnimeCandidate) {
 
 function candidateKey(item: Pick<Anime, "title" | "year">) {
   return `${normalizeKey(item.title)}::${item.year ?? ""}`;
+}
+
+function findExistingDuplicates(candidate: ReviewAnimeCandidate, existingAnime: Anime[]) {
+  const candidateNames = normalizedNames(candidate);
+  return existingAnime.filter((existing) => {
+    if (candidate.year && existing.year && candidate.year !== existing.year) return false;
+    return normalizedNames(existing).some((name) => candidateNames.includes(name));
+  });
+}
+
+function normalizedNames(item: Pick<Anime, "title" | "originalTitle" | "aliases">) {
+  return unique([item.title, item.originalTitle, ...(item.aliases ?? [])].map(normalizeKey).filter(Boolean));
 }
 
 function reportEntryKey(entry: { title?: string; year?: number; incomingTitle?: string; incomingYear?: number }) {
