@@ -298,6 +298,7 @@ function normalizeAniListMedia(media: AniListMedia, query: string, confidence: n
   const sourceRating = media.averageScore ?? media.meanScore ?? null;
   const summary = summarizeDescription(media.description);
   const genres = uniqueStrings(media.genres ?? []);
+  const tags = getReviewableTags(media.tags);
   const sourceUrl = cleanText(media.siteUrl);
 
   return {
@@ -308,10 +309,10 @@ function normalizeAniListMedia(media: AniListMedia, query: string, confidence: n
     episodes: media.episodes ?? 0,
     status: normalizeAniListStatus(media.status),
     genres,
-    tags: [],
+    tags,
     summary,
     externalSummary: summary,
-    sourceGenres: genres,
+    sourceGenres: uniqueStrings([...genres, ...tags]),
     sourceRating,
     personalFitScore: 0,
     whyForMe: "",
@@ -319,7 +320,7 @@ function normalizeAniListMedia(media: AniListMedia, query: string, confidence: n
     sourceName: "AniList",
     sourceUrl,
     aliases: uniqueStrings([media.title?.english, media.title?.romaji, media.title?.native].map((value) => cleanText(value))),
-    sources: [{ id: "anilist", name: "AniList", trustLevel: 80, sourceUrl, description: summary, genres }],
+    sources: [{ id: "anilist", name: "AniList", trustLevel: 80, sourceUrl, description: summary, genres: uniqueStrings([...genres, ...tags]) }],
     confidence,
     manualLockedFields: ["personalFitScore", "whyForMe", "risk", "tags"],
     sourceQuery: query,
@@ -329,6 +330,17 @@ function normalizeAniListMedia(media: AniListMedia, query: string, confidence: n
     needsReview,
     reviewReason,
   };
+}
+
+function getReviewableTags(tags: AniListTag[] | null | undefined) {
+  return uniqueStrings(
+    (tags ?? [])
+      .filter((tag) => !tag.isMediaSpoiler && !tag.isGeneralSpoiler)
+      .sort((left, right) => (right.rank ?? 0) - (left.rank ?? 0))
+      .slice(0, MAX_TAGS)
+      .map((tag) => cleanText(tag.name))
+      .filter(Boolean),
+  );
 }
 
 function normalizeAniListStatus(status: unknown): AnimeStatus {

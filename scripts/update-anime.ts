@@ -2,7 +2,8 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
-import type { Anime, AnimeStatus } from "../app/types";
+import type { Anime, AnimeStatus, ReviewAnimeCandidate } from "../app/types";
+import { buildDiscoveryReviewReport, renderDiscoveryReviewMarkdown } from "../lib/anime-review";
 import { discoverAniListAnime, fetchAniListAnime, type AniListDiscoveryMode } from "./adapters/anilist";
 
 type SourceType = "manual-json" | "api-placeholder" | "anilist-api";
@@ -137,6 +138,8 @@ const DEFAULT_MANUAL_LOCKED_FIELDS: ManualField[] = ["personalFitScore", "whyFor
 const DEFAULT_STAGING_PATH = "data/import/staging-anime.json";
 const DEFAULT_QUERY_PATH = "data/import/search-queries.json";
 const REPORT_PATH = "reports/import-report.json";
+const DISCOVERY_REVIEW_JSON_PATH = "reports/discovery-review.json";
+const DISCOVERY_REVIEW_MARKDOWN_PATH = "reports/discovery-review.md";
 const PLAYBACK_URL_PATTERN = /\b(play|watch|stream|episode|video|m3u8|magnet|torrent|download)\b/i;
 
 async function main() {
@@ -169,6 +172,7 @@ async function main() {
   const nextAnime = mergeAnime(currentAnime, dedupedCandidates, sources, report);
   updateCounts(report);
   await writeReport(reportPath, report);
+  await writeDiscoveryReview(root, stagingRows as ReviewAnimeCandidate[]);
 
   console.log("Import preview:");
   console.log(`- Staging rows read: ${report.counts.stagingRows}`);
@@ -184,6 +188,8 @@ async function main() {
   console.log(`- Possible duplicates needing review: ${report.counts.possibleDuplicates}`);
   console.log(`- Source matches needing review: ${report.counts.needsReview}`);
   console.log(`- Report written: ${REPORT_PATH}`);
+  console.log(`- Discovery review JSON written: ${DISCOVERY_REVIEW_JSON_PATH}`);
+  console.log(`- Discovery review Markdown written: ${DISCOVERY_REVIEW_MARKDOWN_PATH}`);
 
   if (!args.write) {
     console.log("\nDry-run complete. No changes were written to data/anime.json.");
@@ -696,6 +702,22 @@ function updateCounts(report: ImportReport) {
 async function writeReport(reportPath: string, report: ImportReport) {
   await mkdir(path.dirname(reportPath), { recursive: true });
   await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+}
+
+async function writeDiscoveryReview(root: string, rows: ReviewAnimeCandidate[]) {
+  const jsonPath = path.join(root, DISCOVERY_REVIEW_JSON_PATH);
+  const markdownPath = path.join(root, DISCOVERY_REVIEW_MARKDOWN_PATH);
+  const generatedAt = new Date().toISOString();
+  const review = buildDiscoveryReviewReport(rows, {
+    generatedAt,
+    stagingPath: DEFAULT_STAGING_PATH,
+    reportPath: DISCOVERY_REVIEW_JSON_PATH,
+    markdownPath: DISCOVERY_REVIEW_MARKDOWN_PATH,
+  });
+
+  await mkdir(path.dirname(jsonPath), { recursive: true });
+  await writeFile(jsonPath, `${JSON.stringify(review, null, 2)}\n`);
+  await writeFile(markdownPath, renderDiscoveryReviewMarkdown(review));
 }
 
 function makeId(title: string, year: number) {

@@ -34,9 +34,18 @@ export type Anime = {
   sourceGenres?: string[];
 };
 
+export type DiscoveryRecommendation = "recommended" | "maybe" | "low-priority" | "needs-review";
+export type DiscoveryReviewPriority = "high" | "medium" | "low" | "manual";
+
 export type ReviewAnimeCandidate = Anime & {
   format?: string;
   anilistFormat?: string;
+  preliminaryFitScore?: number;
+  recommendation?: DiscoveryRecommendation;
+  reviewPriority?: DiscoveryReviewPriority;
+  matchReasons?: string[];
+  riskReasons?: string[];
+  reviewNote?: string;
   sourceQuery?: string;
   sourceId?: number;
   matchConfidence?: number;
@@ -74,4 +83,32 @@ export type ImportReport = {
   excluded?: ImportReportEntry[];
   warnings?: string[];
   [key: string]: unknown;
+};
+
+export type DiscoveryReviewItem = {
+  title: string;
+  originalTitle: string;
+  year: number;
+  episodes: number;
+  format: string;
+  status: string;
+  genres: string[];
+  tags: string[];
+  sourceRating: number | null;
+  sourceUrl: string;
+  preliminaryFitScore: number;
+  recommendation: DiscoveryRecommendation;
+  reviewPriority: DiscoveryReviewPriority;
+  matchReasons: string[];
+  riskReasons: string[];
+  reviewNote: string;
+};
+
+export type DiscoveryReviewReport = {
+  generatedAt?: string;
+  stagingPath?: string;
+  reportPath?: string;
+  markdownPath?: string;
+  counts?: Record<string, number>;
+  items?: DiscoveryReviewItem[];
 };
