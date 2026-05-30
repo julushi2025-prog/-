@@ -23,7 +23,7 @@ type ReviewFilters = {
   sortBy: ReviewSortKey;
 };
 
-type ReviewSortKey = "sourceRating" | "year" | "episodes";
+type ReviewSortKey = "preliminaryFitScore" | "sourceRating" | "year" | "episodes";
 
 type ReviewMetadata = {
   needsReviewReasons: string[];
@@ -45,7 +45,7 @@ const defaultReviewFilters: ReviewFilters = {
   genre: "all",
   status: "all",
   maxEpisodes: "all",
-  sortBy: "sourceRating",
+  sortBy: "preliminaryFitScore",
 };
 
 const episodeRanges = [
@@ -59,12 +59,14 @@ const episodeRanges = [
 const maxEpisodeOptions = ["all", "6", "12", "13", "24", "26", "52"];
 
 const reviewSortLabels: Record<ReviewSortKey, string> = {
+  preliminaryFitScore: "初步适配分",
   sourceRating: "来源评分",
   year: "年份",
   episodes: "集数",
 };
 
 const importReportCountLabels: Record<string, string> = {
+  preliminaryFitScore: "初步适配分",
   sourceRating: "来源评分",
   stagingRows: "暂存条目",
   normalizedCandidates: "标准化候选",
@@ -438,6 +440,8 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
             <Badge>{display.status || "未知状态"}</Badge>
             <Badge>needsReview：{needsReviewStatus}</Badge>
             <Badge>possibleDuplicate：{possibleDuplicateStatus}</Badge>
+            {item.recommendation && <Badge>推荐：{formatRecommendationLabel(item.recommendation)}</Badge>}
+            {item.reviewPriority && <Badge>优先级：{formatReviewPriorityLabel(item.reviewPriority)}</Badge>}
           </div>
         </div>
         <div className="text-right">
@@ -446,6 +450,7 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
             <p className="text-2xl font-black text-cyan-100">{item.sourceRating ?? "暂无"}</p>
           </div>
           <p className="mt-2 text-xs text-slate-400">匹配置信度 {item.matchConfidence ?? item.confidence ?? "暂无"}</p>
+          {item.preliminaryFitScore !== undefined && <p className="mt-1 text-xs font-bold text-emerald-200">初步适配分 {item.preliminaryFitScore}</p>}
         </div>
       </div>
 
@@ -459,6 +464,8 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
       </div>
 
       <div className="mt-4 grid gap-3 md:grid-cols-2">
+        <ReviewInfoBlock title="匹配理由" items={item.matchReasons ?? []} empty="粗审核暂无匹配理由" tone="emerald" />
+        <ReviewInfoBlock title="风险理由" items={item.riskReasons ?? []} empty="粗审核暂无风险理由" tone="rose" />
         <ReviewInfoBlock title="需要审核" items={reviewReasons} empty="未在报告中标记需要审核" tone="amber" />
         <ReviewInfoBlock title="疑似重复 / 已存在" items={duplicateItems} empty="未在报告或正式库比对中标记疑似重复" tone="rose" />
       </div>
@@ -528,8 +535,8 @@ function InfoBlock({ title, text, tone }: { title: string; text: string; tone: "
   );
 }
 
-function ReviewInfoBlock({ title, items, empty, tone }: { title: string; items: string[]; empty: string; tone: "amber" | "rose" }) {
-  const color = tone === "amber" ? "border-amber-300/20 bg-amber-300/5 text-amber-100" : "border-rose-300/20 bg-rose-300/5 text-rose-100";
+function ReviewInfoBlock({ title, items, empty, tone }: { title: string; items: string[]; empty: string; tone: "amber" | "rose" | "emerald" }) {
+  const color = tone === "amber" ? "border-amber-300/20 bg-amber-300/5 text-amber-100" : tone === "emerald" ? "border-emerald-300/20 bg-emerald-300/5 text-emerald-100" : "border-rose-300/20 bg-rose-300/5 text-rose-100";
   return (
     <div className={`rounded-2xl border p-3 ${color}`}>
       <p className="mb-2 text-xs font-black uppercase tracking-widest opacity-80">{title}</p>
@@ -675,6 +682,21 @@ function normalizeKey(value: string) {
   return value.toLocaleLowerCase().normalize("NFKD").replace(/[\p{P}\p{S}\s_]+/gu, "");
 }
 
+
+function formatRecommendationLabel(value: string) {
+  const labels: Record<string, string> = {
+    recommended: "推荐",
+    maybe: "待判断",
+    "low-priority": "低优先级",
+    "needs-review": "人工审核",
+  };
+  return labels[value] ?? value;
+}
+
+function formatReviewPriorityLabel(value: string) {
+  const labels: Record<string, string> = { high: "高", medium: "中", low: "低", manual: "人工" };
+  return labels[value] ?? value;
+}
 
 function compareReviewCandidates(a: ReviewAnimeCandidate, b: ReviewAnimeCandidate, sortBy: ReviewSortKey) {
   const left = sortBy === "sourceRating" ? a.sourceRating ?? -1 : a[sortBy] ?? -1;
