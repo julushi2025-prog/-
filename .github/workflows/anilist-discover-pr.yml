@@ -98,6 +98,8 @@ jobs:
           set -euo pipefail
           test -f data/import/staging-anime.json
           test -f reports/import-report.json
+          test -f reports/discovery-review.json
+          test -f reports/discovery-review.md
           git diff -- data/anime.json --exit-code
 
       - name: Prepare pull request body
@@ -107,15 +109,23 @@ jobs:
           node <<'NODE' > "$body_path"
           const { readFileSync } = require("node:fs");
           const report = JSON.parse(readFileSync("reports/import-report.json", "utf8"));
+          const review = JSON.parse(readFileSync("reports/discovery-review.json", "utf8"));
           const counts = report.counts ?? {};
+          const reviewCounts = review.counts ?? {};
 
           console.log("## AniList discovery summary");
           console.log("");
           console.log(`- discovered：${counts.discovered ?? 0} 条`);
           console.log(`- addedCandidates：${counts.addedCandidates ?? 0} 条`);
           console.log(`- updatedCandidates：${counts.updatedCandidates ?? 0} 条`);
-          console.log(`- skipped：${counts.skipped ?? 0} 条`);
           console.log(`- needsReview：${counts.needsReview ?? 0} 条`);
+          console.log(`- recommended：${reviewCounts.recommended ?? 0} 条`);
+          console.log(`- maybe：${reviewCounts.maybe ?? 0} 条`);
+          console.log(`- low-priority：${reviewCounts["low-priority"] ?? 0} 条`);
+          console.log(`- needs-review：${reviewCounts["needs-review"] ?? 0} 条`);
+          console.log("");
+          console.log("Additional import diagnostics:");
+          console.log(`- skipped：${counts.skipped ?? 0} 条`);
           console.log(`- possibleDuplicates：${counts.possibleDuplicates ?? 0} 条`);
           console.log(`- excludedByFormat：${counts.excludedByFormat ?? 0} 条`);
           console.log(`- excludedByEpisodeCount：${counts.excludedByEpisodeCount ?? 0} 条`);
@@ -123,6 +133,8 @@ jobs:
           console.log("Generated candidate files:");
           console.log("- `data/import/staging-anime.json`");
           console.log("- `reports/import-report.json`");
+          console.log("- `reports/discovery-review.json`");
+          console.log("- `reports/discovery-review.md`");
           console.log("");
           console.log("> This discovery PR intentionally does not modify `data/anime.json`. Review staged candidates before running a separate import/write flow.");
           NODE
@@ -140,7 +152,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data/import/staging-anime.json reports/import-report.json
+          git add data/import/staging-anime.json reports/import-report.json reports/discovery-review.json reports/discovery-review.md
           if git diff --cached --quiet; then
             echo "AniList discovery produced no candidate changes to commit; skipping PR creation."
             exit 0
