@@ -4,8 +4,8 @@
 
 :root {
   color-scheme: dark;
-  --background: #070a12;
-  --foreground: #dbeafe;
+  --background: #0b111c;
+  --foreground: #d7deea;
 }
 
 * {
@@ -20,9 +20,8 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 34rem),
-    radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 30rem),
-    linear-gradient(135deg, #050711 0%, #08111f 52%, #050711 100%);
+    radial-gradient(circle at top left, rgba(56, 86, 126, 0.18), transparent 30rem),
+    linear-gradient(180deg, #0b111c 0%, #090e18 42%, #070b12 100%);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -33,19 +32,10 @@ input {
   font: inherit;
 }
 
-.terminal-grid {
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.scanline::after {
-  pointer-events: none;
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(rgba(255, 255, 255, 0.025) 50%, rgba(0, 0, 0, 0.025) 50%);
-  background-size: 100% 4px;
-  mix-blend-mode: overlay;
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
 }
