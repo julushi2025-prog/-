@@ -1,105 +1,74 @@
 [
   {
-    "id": "anilist-147105",
-    "title": "Witch Hat Atelier",
-    "originalTitle": "とんがり帽子のアトリエ",
+    "id": "anilist-195600",
+    "title": "Daemons of the Shadow Realm",
+    "originalTitle": "黄泉のツガイ",
     "year": 2026,
-    "episodes": 13,
+    "episodes": 24,
     "status": "连载中",
     "genres": [
+      "Action",
       "Adventure",
-      "Drama",
+      "Comedy",
       "Fantasy"
     ],
-    "tags": [],
-    "summary": "In a world where everyone takes wonders like magic spells and dragons for granted, Coco is a girl with a simple dream: she wants to be a witch. But everybody knows magicians are born, not made, and Coco was not born with a gift for magic. Resigned to her un-magical life, Coco is about to give up on her dream to become a witch … until the day she meets Qif...",
-    "externalSummary": "In a world where everyone takes wonders like magic spells and dragons for granted, Coco is a girl with a simple dream: she wants to be a witch. But everybody knows magicians are born, not made, and Coco was not born with a gift for magic. Resigned to her un-magical life, Coco is about to give up on her dream to become a witch … until the day she meets Qif...",
+    "tags": [
+      "Shounen",
+      "Male Protagonist",
+      "Youkai",
+      "Archery",
+      "Rural",
+      "Twins",
+      "Urban Fantasy",
+      "Demons"
+    ],
+    "summary": "In a remote mountain village under the watchful eyes of two stone guardians, the young Yuru contentedly lives off the land while staying close to the only family he has left—Asa, his precious twin sister. Asa, meanwhile, carries out a mysterious “duty” on behalf of the village while locked in a cage. Why is Asa a prisoner? And what other secrets does Yuru...",
+    "externalSummary": "In a remote mountain village under the watchful eyes of two stone guardians, the young Yuru contentedly lives off the land while staying close to the only family he has left—Asa, his precious twin sister. Asa, meanwhile, carries out a mysterious “duty” on behalf of the village while locked in a cage. Why is Asa a prisoner? And what other secrets does Yuru...",
     "sourceGenres": [
+      "Action",
       "Adventure",
-      "Drama",
-      "Fantasy"
+      "Comedy",
+      "Fantasy",
+      "Shounen",
+      "Male Protagonist",
+      "Youkai",
+      "Archery",
+      "Rural",
+      "Twins",
+      "Urban Fantasy",
+      "Demons"
     ],
-    "sourceRating": 86,
+    "sourceRating": 78,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
     "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/147105",
+    "sourceUrl": "https://anilist.co/anime/195600",
     "aliases": [
-      "Witch Hat Atelier",
-      "Tongari Boushi no Atelier",
-      "とんがり帽子のアトリエ"
+      "Daemons of the Shadow Realm",
+      "Yomi no Tsugai",
+      "黄泉のツガイ"
     ],
     "sources": [
       {
         "id": "anilist",
         "name": "AniList",
         "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/147105",
-        "description": "In a world where everyone takes wonders like magic spells and dragons for granted, Coco is a girl with a simple dream: she wants to be a witch. But everybody knows magicians are born, not made, and Coco was not born with a gift for magic. Resigned to her un-magical life, Coco is about to give up on her dream to become a witch … until the day she meets Qif...",
-        "genres": [
-          "Adventure",
-          "Drama",
-          "Fantasy"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 147105,
-    "matchConfidence": 1,
-    "anilistFormat": "ONA",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-206914",
-    "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-    "originalTitle": "日本三國",
-    "year": 2026,
-    "episodes": 12,
-    "status": "连载中",
-    "genres": [
-      "Action",
-      "Drama",
-      "Sci-Fi"
-    ],
-    "tags": [],
-    "summary": "A revolution sparked by nuclear war, natural disaster, and misrule leads to the collapse of Japanese society. The country splits into three nations vying for hegemony, and the Sangoku era begins. Aoteru Misumi, a former agricultural officer, vows to reunify Japan. He rises through the ranks with only his knowledge and eloquence. Witness the legend of the...",
-    "externalSummary": "A revolution sparked by nuclear war, natural disaster, and misrule leads to the collapse of Japanese society. The country splits into three nations vying for hegemony, and the Sangoku era begins. Aoteru Misumi, a former agricultural officer, vows to reunify Japan. He rises through the ranks with only his knowledge and eloquence. Witness the legend of the...",
-    "sourceGenres": [
-      "Action",
-      "Drama",
-      "Sci-Fi"
-    ],
-    "sourceRating": 81,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/206914",
-    "aliases": [
-      "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "Nippon Sangoku",
-      "日本三國"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/206914",
-        "description": "A revolution sparked by nuclear war, natural disaster, and misrule leads to the collapse of Japanese society. The country splits into three nations vying for hegemony, and the Sangoku era begins. Aoteru Misumi, a former agricultural officer, vows to reunify Japan. He rises through the ranks with only his knowledge and eloquence. Witness the legend of the...",
+        "sourceUrl": "https://anilist.co/anime/195600",
+        "description": "In a remote mountain village under the watchful eyes of two stone guardians, the young Yuru contentedly lives off the land while staying close to the only family he has left—Asa, his precious twin sister. Asa, meanwhile, carries out a mysterious “duty” on behalf of the village while locked in a cage. Why is Asa a prisoner? And what other secrets does Yuru...",
         "genres": [
           "Action",
-          "Drama",
-          "Sci-Fi"
+          "Adventure",
+          "Comedy",
+          "Fantasy",
+          "Shounen",
+          "Male Protagonist",
+          "Youkai",
+          "Archery",
+          "Rural",
+          "Twins",
+          "Urban Fantasy",
+          "Demons"
         ]
       }
     ],
@@ -111,113 +80,82 @@
       "tags"
     ],
     "sourceQuery": "discover:trending",
-    "sourceId": 206914,
-    "matchConfidence": 1,
-    "anilistFormat": "ONA",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-180745",
-    "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
-    "originalTitle": "ようこそ実力至上主義の教室へ 4th Season 2年生編1学期",
-    "year": 2026,
-    "episodes": 16,
-    "status": "连载中",
-    "genres": [
-      "Drama",
-      "Psychological"
-    ],
-    "tags": [],
-    "summary": "The fourth season of Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e . As Ayanokouji and his classmates begin their second year at the Advanced Nurturing High School, they’re greeted by a fresh gauntlet of exams and a fresh batch of rather unique first-year students. They’ll have to get to know each other quickly, because the first special exam pairs the...",
-    "externalSummary": "The fourth season of Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e . As Ayanokouji and his classmates begin their second year at the Advanced Nurturing High School, they’re greeted by a fresh gauntlet of exams and a fresh batch of rather unique first-year students. They’ll have to get to know each other quickly, because the first special exam pairs the...",
-    "sourceGenres": [
-      "Drama",
-      "Psychological"
-    ],
-    "sourceRating": 79,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/180745",
-    "aliases": [
-      "Classroom of the Elite 4th Season: Second Year, First Semester",
-      "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 4th Season 2-nensei-hen Ichi Gakki",
-      "ようこそ実力至上主義の教室へ 4th Season 2年生編1学期"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/180745",
-        "description": "The fourth season of Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e . As Ayanokouji and his classmates begin their second year at the Advanced Nurturing High School, they’re greeted by a fresh gauntlet of exams and a fresh batch of rather unique first-year students. They’ll have to get to know each other quickly, because the first special exam pairs the...",
-        "genres": [
-          "Drama",
-          "Psychological"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 180745,
+    "sourceId": 195600,
     "matchConfidence": 1,
     "anilistFormat": "TV",
     "needsReview": false,
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
-    "id": "anilist-199221",
-    "title": "Dr. STONE SCIENCE FUTURE Cour 3",
-    "originalTitle": "Dr.STONE SCIENCE FUTURE 3クール",
+    "id": "anilist-182205",
+    "title": "That Time I Got Reincarnated as a Slime Season 4",
+    "originalTitle": "転生したらスライムだった件 第4期",
     "year": 2026,
-    "episodes": 13,
+    "episodes": 0,
     "status": "连载中",
     "genres": [
       "Action",
       "Adventure",
       "Comedy",
-      "Sci-Fi"
+      "Fantasy"
     ],
-    "tags": [],
-    "summary": "The third and final cour of the fourth season of Dr.STONE .",
-    "externalSummary": "The third and final cour of the fourth season of Dr.STONE .",
+    "tags": [
+      "Kingdom Management",
+      "Isekai",
+      "Magic",
+      "Ensemble Cast",
+      "Demons",
+      "Medieval",
+      "Skeleton",
+      "Spearplay"
+    ],
+    "summary": "The fourth season of Tensei Shitara Slime Datta Ken . Demon Lord Rimuru's dream of creating an alliance between humans and monsters takes a step closer to being realized. As Tempest continues to prosper, Granville Rozzo and his granddaughter, Maribel Rozzo, clash with Demon Lord Rimuru over their plan to protect mankind by ruling over them. Meanwhile, in...",
+    "externalSummary": "The fourth season of Tensei Shitara Slime Datta Ken . Demon Lord Rimuru's dream of creating an alliance between humans and monsters takes a step closer to being realized. As Tempest continues to prosper, Granville Rozzo and his granddaughter, Maribel Rozzo, clash with Demon Lord Rimuru over their plan to protect mankind by ruling over them. Meanwhile, in...",
     "sourceGenres": [
       "Action",
       "Adventure",
       "Comedy",
-      "Sci-Fi"
+      "Fantasy",
+      "Kingdom Management",
+      "Isekai",
+      "Magic",
+      "Ensemble Cast",
+      "Demons",
+      "Medieval",
+      "Skeleton",
+      "Spearplay"
     ],
     "sourceRating": 81,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
     "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/199221",
+    "sourceUrl": "https://anilist.co/anime/182205",
     "aliases": [
-      "Dr. STONE SCIENCE FUTURE Cour 3",
-      "Dr. STONE: SCIENCE FUTURE Part 3",
-      "Dr.STONE SCIENCE FUTURE 3クール"
+      "That Time I Got Reincarnated as a Slime Season 4",
+      "Tensei Shitara Slime Datta Ken 4th Season",
+      "転生したらスライムだった件 第4期"
     ],
     "sources": [
       {
         "id": "anilist",
         "name": "AniList",
         "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/199221",
-        "description": "The third and final cour of the fourth season of Dr.STONE .",
+        "sourceUrl": "https://anilist.co/anime/182205",
+        "description": "The fourth season of Tensei Shitara Slime Datta Ken . Demon Lord Rimuru's dream of creating an alliance between humans and monsters takes a step closer to being realized. As Tempest continues to prosper, Granville Rozzo and his granddaughter, Maribel Rozzo, clash with Demon Lord Rimuru over their plan to protect mankind by ruling over them. Meanwhile, in...",
         "genres": [
           "Action",
           "Adventure",
           "Comedy",
-          "Sci-Fi"
+          "Fantasy",
+          "Kingdom Management",
+          "Isekai",
+          "Magic",
+          "Ensemble Cast",
+          "Demons",
+          "Medieval",
+          "Skeleton",
+          "Spearplay"
         ]
       }
     ],
@@ -229,7 +167,84 @@
       "tags"
     ],
     "sourceQuery": "discover:trending",
-    "sourceId": 199221,
+    "sourceId": 182205,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-196935",
+    "title": "Akane-banashi",
+    "originalTitle": "あかね噺",
+    "year": 2026,
+    "episodes": 12,
+    "status": "连载中",
+    "genres": [
+      "Drama"
+    ],
+    "tags": [
+      "Rakugo",
+      "Female Protagonist",
+      "Coming of Age",
+      "Acting",
+      "Shounen",
+      "Revenge",
+      "Found Family",
+      "Work"
+    ],
+    "summary": "\"With only your voice and body—master the art.\" Akane Ousaki, captivated since childhood by the magical performances of her father, Shinta Arakawa, witnesses a shocking incident during his decisive performance for promotion to shin’uchi (master rank). Six years later, now a high school student, she sets her sights on becoming a shin’uchi herself—pushing f...",
+    "externalSummary": "\"With only your voice and body—master the art.\" Akane Ousaki, captivated since childhood by the magical performances of her father, Shinta Arakawa, witnesses a shocking incident during his decisive performance for promotion to shin’uchi (master rank). Six years later, now a high school student, she sets her sights on becoming a shin’uchi herself—pushing f...",
+    "sourceGenres": [
+      "Drama",
+      "Rakugo",
+      "Female Protagonist",
+      "Coming of Age",
+      "Acting",
+      "Shounen",
+      "Revenge",
+      "Found Family",
+      "Work"
+    ],
+    "sourceRating": 76,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/196935",
+    "aliases": [
+      "Akane-banashi",
+      "あかね噺"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/196935",
+        "description": "\"With only your voice and body—master the art.\" Akane Ousaki, captivated since childhood by the magical performances of her father, Shinta Arakawa, witnesses a shocking incident during his decisive performance for promotion to shin’uchi (master rank). Six years later, now a high school student, she sets her sights on becoming a shin’uchi herself—pushing f...",
+        "genres": [
+          "Drama",
+          "Rakugo",
+          "Female Protagonist",
+          "Coming of Age",
+          "Acting",
+          "Shounen",
+          "Revenge",
+          "Found Family",
+          "Work"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 196935,
     "matchConfidence": 1,
     "anilistFormat": "TV",
     "needsReview": false,
@@ -246,14 +261,31 @@
       "Action",
       "Comedy"
     ],
-    "tags": [],
+    "tags": [
+      "Guns",
+      "Age Regression",
+      "School",
+      "Assassins",
+      "School Club",
+      "Urban",
+      "Ensemble Cast",
+      "Surreal Comedy"
+    ],
     "summary": "Juuzou Oogami is a legendary hitman who has never failed an assignment, no matter how impossible. One day, after wiping out a powerful organization, he is stung by a mysterious wasp and collapses. When he wakes up, the fearsome 39-year-old assassin has been transformed into a 13-year-old boy! Before he can even process what happened, his boss delivers a n...",
     "externalSummary": "Juuzou Oogami is a legendary hitman who has never failed an assignment, no matter how impossible. One day, after wiping out a powerful organization, he is stung by a mysterious wasp and collapses. When he wakes up, the fearsome 39-year-old assassin has been transformed into a 13-year-old boy! Before he can even process what happened, his boss delivers a n...",
     "sourceGenres": [
       "Action",
-      "Comedy"
+      "Comedy",
+      "Guns",
+      "Age Regression",
+      "School",
+      "Assassins",
+      "School Club",
+      "Urban",
+      "Ensemble Cast",
+      "Surreal Comedy"
     ],
-    "sourceRating": 73,
+    "sourceRating": 74,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
@@ -273,7 +305,15 @@
         "description": "Juuzou Oogami is a legendary hitman who has never failed an assignment, no matter how impossible. One day, after wiping out a powerful organization, he is stung by a mysterious wasp and collapses. When he wakes up, the fearsome 39-year-old assassin has been transformed into a 13-year-old boy! Before he can even process what happened, his boss delivers a n...",
         "genres": [
           "Action",
-          "Comedy"
+          "Comedy",
+          "Guns",
+          "Age Regression",
+          "School",
+          "Assassins",
+          "School Club",
+          "Urban",
+          "Ensemble Cast",
+          "Surreal Comedy"
         ]
       }
     ],
@@ -292,56 +332,76 @@
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
-    "id": "anilist-189046",
-    "title": "Re:ZERO -Starting Life in Another World- Season 4",
-    "originalTitle": "Re:ゼロから始める異世界生活 4th season",
-    "year": 2026,
-    "episodes": 19,
+    "id": "anilist-21",
+    "title": "ONE PIECE",
+    "originalTitle": "ONE PIECE",
+    "year": 1999,
+    "episodes": 0,
     "status": "连载中",
     "genres": [
       "Action",
       "Adventure",
+      "Comedy",
       "Drama",
-      "Fantasy",
-      "Psychological",
-      "Romance"
+      "Fantasy"
     ],
-    "tags": [],
-    "summary": "The fourth season of Re:Zero kara Hajimeru Isekai Seikatsu . To save his stricken allies, Subaru faces a deadly desert to find the Sage at Pleiades Watchtower. (Source: Crunchyroll News) Note: World Premiere of Episode 1 screened at Lucca Comics & Games 2025 on November 1, 2025, before the Japanese television broadcast.",
-    "externalSummary": "The fourth season of Re:Zero kara Hajimeru Isekai Seikatsu . To save his stricken allies, Subaru faces a deadly desert to find the Sage at Pleiades Watchtower. (Source: Crunchyroll News) Note: World Premiere of Episode 1 screened at Lucca Comics & Games 2025 on November 1, 2025, before the Japanese television broadcast.",
+    "tags": [
+      "Pirates",
+      "Travel",
+      "Shounen",
+      "Ensemble Cast",
+      "Super Power",
+      "Found Family",
+      "Male Protagonist",
+      "Conspiracy"
+    ],
+    "summary": "Gold Roger was known as the Pirate King, the strongest and most infamous being to have sailed the Grand Line. The capture and death of Roger by the World Government brought a change throughout the world. His last words before his death revealed the location of the greatest treasure in the world, One Piece. It was this revelation that brought about the Gra...",
+    "externalSummary": "Gold Roger was known as the Pirate King, the strongest and most infamous being to have sailed the Grand Line. The capture and death of Roger by the World Government brought a change throughout the world. His last words before his death revealed the location of the greatest treasure in the world, One Piece. It was this revelation that brought about the Gra...",
     "sourceGenres": [
       "Action",
       "Adventure",
+      "Comedy",
       "Drama",
       "Fantasy",
-      "Psychological",
-      "Romance"
+      "Pirates",
+      "Travel",
+      "Shounen",
+      "Ensemble Cast",
+      "Super Power",
+      "Found Family",
+      "Male Protagonist",
+      "Conspiracy"
     ],
     "sourceRating": 87,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
     "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/189046",
+    "sourceUrl": "https://anilist.co/anime/21",
     "aliases": [
-      "Re:ZERO -Starting Life in Another World- Season 4",
-      "Re:Zero kara Hajimeru Isekai Seikatsu 4th Season",
-      "Re:ゼロから始める異世界生活 4th season"
+      "ONE PIECE"
     ],
     "sources": [
       {
         "id": "anilist",
         "name": "AniList",
         "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/189046",
-        "description": "The fourth season of Re:Zero kara Hajimeru Isekai Seikatsu . To save his stricken allies, Subaru faces a deadly desert to find the Sage at Pleiades Watchtower. (Source: Crunchyroll News) Note: World Premiere of Episode 1 screened at Lucca Comics & Games 2025 on November 1, 2025, before the Japanese television broadcast.",
+        "sourceUrl": "https://anilist.co/anime/21",
+        "description": "Gold Roger was known as the Pirate King, the strongest and most infamous being to have sailed the Grand Line. The capture and death of Roger by the World Government brought a change throughout the world. His last words before his death revealed the location of the greatest treasure in the world, One Piece. It was this revelation that brought about the Gra...",
         "genres": [
           "Action",
           "Adventure",
+          "Comedy",
           "Drama",
           "Fantasy",
-          "Psychological",
-          "Romance"
+          "Pirates",
+          "Travel",
+          "Shounen",
+          "Ensemble Cast",
+          "Super Power",
+          "Found Family",
+          "Male Protagonist",
+          "Conspiracy"
         ]
       }
     ],
@@ -353,237 +413,7 @@
       "tags"
     ],
     "sourceQuery": "discover:trending",
-    "sourceId": 189046,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-169580",
-    "title": "I Made Friends with the Second Prettiest Girl in My Class",
-    "originalTitle": "クラスで２番目に可愛い女の子と友だちになった",
-    "year": 2026,
-    "episodes": 12,
-    "status": "连载中",
-    "genres": [
-      "Comedy",
-      "Romance"
-    ],
-    "tags": [],
-    "summary": "Maki Maehara, the class outcast, finally makes his first friend: Umi Asanagi, the second-prettiest girl in class and the center of everyone’s attention. He’s convinced she’s out of his league, but as their unlikely friendship grows, Maki starts to wonder…could there be more than just friendship between them? (Source: Crunchyroll)",
-    "externalSummary": "Maki Maehara, the class outcast, finally makes his first friend: Umi Asanagi, the second-prettiest girl in class and the center of everyone’s attention. He’s convinced she’s out of his league, but as their unlikely friendship grows, Maki starts to wonder…could there be more than just friendship between them? (Source: Crunchyroll)",
-    "sourceGenres": [
-      "Comedy",
-      "Romance"
-    ],
-    "sourceRating": 78,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/169580",
-    "aliases": [
-      "I Made Friends with the Second Prettiest Girl in My Class",
-      "Class de 2-banme ni Kawaii Onnanoko to Tomodachi ni Natta",
-      "クラスで２番目に可愛い女の子と友だちになった"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/169580",
-        "description": "Maki Maehara, the class outcast, finally makes his first friend: Umi Asanagi, the second-prettiest girl in class and the center of everyone’s attention. He’s convinced she’s out of his league, but as their unlikely friendship grows, Maki starts to wonder…could there be more than just friendship between them? (Source: Crunchyroll)",
-        "genres": [
-          "Comedy",
-          "Romance"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 169580,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-182255",
-    "title": "Frieren: Beyond Journey’s End Season 2",
-    "originalTitle": "葬送のフリーレン 第2期",
-    "year": 2026,
-    "episodes": 10,
-    "status": "完结",
-    "genres": [
-      "Adventure",
-      "Drama",
-      "Fantasy"
-    ],
-    "tags": [],
-    "summary": "The second season of Sousou no Frieren .",
-    "externalSummary": "The second season of Sousou no Frieren .",
-    "sourceGenres": [
-      "Adventure",
-      "Drama",
-      "Fantasy"
-    ],
-    "sourceRating": 88,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/182255",
-    "aliases": [
-      "Frieren: Beyond Journey’s End Season 2",
-      "Sousou no Frieren 2nd Season",
-      "葬送のフリーレン 第2期"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/182255",
-        "description": "The second season of Sousou no Frieren .",
-        "genres": [
-          "Adventure",
-          "Drama",
-          "Fantasy"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 182255,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-170019",
-    "title": "The Angel Next Door Spoils Me Rotten2",
-    "originalTitle": "お隣の天使様にいつの間にか駄目人間にされていた件 第2期",
-    "year": 2026,
-    "episodes": 12,
-    "status": "连载中",
-    "genres": [
-      "Romance",
-      "Slice of Life"
-    ],
-    "tags": [],
-    "summary": "The second season of Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken . Now a couple, Amane and Mahiru navigate school life and overcome their pasts in this sweet love story. (Source: Crunchyroll News)",
-    "externalSummary": "The second season of Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken . Now a couple, Amane and Mahiru navigate school life and overcome their pasts in this sweet love story. (Source: Crunchyroll News)",
-    "sourceGenres": [
-      "Romance",
-      "Slice of Life"
-    ],
-    "sourceRating": 78,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/170019",
-    "aliases": [
-      "The Angel Next Door Spoils Me Rotten2",
-      "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season",
-      "お隣の天使様にいつの間にか駄目人間にされていた件 第2期"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/170019",
-        "description": "The second season of Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken . Now a couple, Amane and Mahiru navigate school life and overcome their pasts in this sweet love story. (Source: Crunchyroll News)",
-        "genres": [
-          "Romance",
-          "Slice of Life"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 170019,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-172463",
-    "title": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
-    "originalTitle": "呪術廻戦 死滅回游 前編",
-    "year": 2026,
-    "episodes": 12,
-    "status": "完结",
-    "genres": [
-      "Action",
-      "Drama",
-      "Supernatural"
-    ],
-    "tags": [],
-    "summary": "The third season of Jujutsu Kaisen . After the Shibuya Incident, a deadly jujutsu battle known as the Culling Game orchestrated by Noritoshi Kamo erupts across ten colonies in Japan. Haunted by guilt over the mass killings in Shibuya and wary of Sukuna’s interest in Fushiguro, Itadori chooses not to return to Jujutsu High. Instead, he teams up with Choso...",
-    "externalSummary": "The third season of Jujutsu Kaisen . After the Shibuya Incident, a deadly jujutsu battle known as the Culling Game orchestrated by Noritoshi Kamo erupts across ten colonies in Japan. Haunted by guilt over the mass killings in Shibuya and wary of Sukuna’s interest in Fushiguro, Itadori chooses not to return to Jujutsu High. Instead, he teams up with Choso...",
-    "sourceGenres": [
-      "Action",
-      "Drama",
-      "Supernatural"
-    ],
-    "sourceRating": 86,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/172463",
-    "aliases": [
-      "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
-      "Jujutsu Kaisen: Shimetsu Kaiyuu - Zenpen",
-      "呪術廻戦 死滅回游 前編"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/172463",
-        "description": "The third season of Jujutsu Kaisen . After the Shibuya Incident, a deadly jujutsu battle known as the Culling Game orchestrated by Noritoshi Kamo erupts across ten colonies in Japan. Haunted by guilt over the mass killings in Shibuya and wary of Sukuna’s interest in Fushiguro, Itadori chooses not to return to Jujutsu High. Instead, he teams up with Choso...",
-        "genres": [
-          "Action",
-          "Drama",
-          "Supernatural"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 172463,
+    "sourceId": 21,
     "matchConfidence": 1,
     "anilistFormat": "TV",
     "needsReview": false,
@@ -602,14 +432,31 @@
       "Fantasy",
       "Romance"
     ],
-    "tags": [],
+    "tags": [
+      "Demons",
+      "Heterosexual",
+      "Tsundere",
+      "Large Breasts",
+      "School",
+      "Male Protagonist",
+      "Female Protagonist",
+      "Slapstick"
+    ],
     "summary": "Kanan, a female demon, infiltrates a high school with the goal of devouring some delicious human souls. She sets her sights on the perfect target, a teen boy named Kyougi Youji, and goes for the kill—only to somehow end up in a relationship with him instead?! Kanan’s never been in love before, and this oddly innocent demon creates absolute chaos as the tw...",
     "externalSummary": "Kanan, a female demon, infiltrates a high school with the goal of devouring some delicious human souls. She sets her sights on the perfect target, a teen boy named Kyougi Youji, and goes for the kill—only to somehow end up in a relationship with him instead?! Kanan’s never been in love before, and this oddly innocent demon creates absolute chaos as the tw...",
     "sourceGenres": [
       "Comedy",
       "Ecchi",
       "Fantasy",
-      "Romance"
+      "Romance",
+      "Demons",
+      "Heterosexual",
+      "Tsundere",
+      "Large Breasts",
+      "School",
+      "Male Protagonist",
+      "Female Protagonist",
+      "Slapstick"
     ],
     "sourceRating": 67,
     "personalFitScore": 0,
@@ -633,7 +480,15 @@
           "Comedy",
           "Ecchi",
           "Fantasy",
-          "Romance"
+          "Romance",
+          "Demons",
+          "Heterosexual",
+          "Tsundere",
+          "Large Breasts",
+          "School",
+          "Male Protagonist",
+          "Female Protagonist",
+          "Slapstick"
         ]
       }
     ],
@@ -652,6 +507,90 @@
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
+    "id": "anilist-147105",
+    "title": "Witch Hat Atelier",
+    "originalTitle": "とんがり帽子のアトリエ",
+    "year": 2026,
+    "episodes": 13,
+    "status": "连载中",
+    "genres": [
+      "Adventure",
+      "Drama",
+      "Fantasy"
+    ],
+    "tags": [
+      "Magic",
+      "Witch",
+      "Female Protagonist",
+      "Drawing",
+      "Coming of Age",
+      "Primarily Female Cast",
+      "Found Family",
+      "Philosophy"
+    ],
+    "summary": "In a world where everyone takes wonders like magic spells and dragons for granted, Coco is a girl with a simple dream: she wants to be a witch. But everybody knows magicians are born, not made, and Coco was not born with a gift for magic. Resigned to her un-magical life, Coco is about to give up on her dream to become a witch … until the day she meets Qif...",
+    "externalSummary": "In a world where everyone takes wonders like magic spells and dragons for granted, Coco is a girl with a simple dream: she wants to be a witch. But everybody knows magicians are born, not made, and Coco was not born with a gift for magic. Resigned to her un-magical life, Coco is about to give up on her dream to become a witch … until the day she meets Qif...",
+    "sourceGenres": [
+      "Adventure",
+      "Drama",
+      "Fantasy",
+      "Magic",
+      "Witch",
+      "Female Protagonist",
+      "Drawing",
+      "Coming of Age",
+      "Primarily Female Cast",
+      "Found Family",
+      "Philosophy"
+    ],
+    "sourceRating": 86,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/147105",
+    "aliases": [
+      "Witch Hat Atelier",
+      "Tongari Boushi no Atelier",
+      "とんがり帽子のアトリエ"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/147105",
+        "description": "In a world where everyone takes wonders like magic spells and dragons for granted, Coco is a girl with a simple dream: she wants to be a witch. But everybody knows magicians are born, not made, and Coco was not born with a gift for magic. Resigned to her un-magical life, Coco is about to give up on her dream to become a witch … until the day she meets Qif...",
+        "genres": [
+          "Adventure",
+          "Drama",
+          "Fantasy",
+          "Magic",
+          "Witch",
+          "Female Protagonist",
+          "Drawing",
+          "Coming of Age",
+          "Primarily Female Cast",
+          "Found Family",
+          "Philosophy"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 147105,
+    "matchConfidence": 1,
+    "anilistFormat": "ONA",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
     "id": "anilist-190143",
     "title": "Agents of the Four Seasons: Dance of Spring",
     "originalTitle": "春夏秋冬代行者 春の舞",
@@ -663,13 +602,30 @@
       "Fantasy",
       "Romance"
     ],
-    "tags": [],
+    "tags": [
+      "Urban Fantasy",
+      "Environmental",
+      "Mythology",
+      "Ensemble Cast",
+      "Rehabilitation",
+      "Swordplay",
+      "Disability",
+      "Shoujo"
+    ],
     "summary": "When the Agent of Spring, Hinagiku Kayo, is abducted, spring itself vanishes—plunging the world into unending winter. Refusing to give up, her devoted guard, Sakura Himedaka, searches for her for years. When Hinagiku suddenly returns, the two set out to restore the lost season, face the past that tore them apart, and reclaim the warmth they refuse to lose...",
     "externalSummary": "When the Agent of Spring, Hinagiku Kayo, is abducted, spring itself vanishes—plunging the world into unending winter. Refusing to give up, her devoted guard, Sakura Himedaka, searches for her for years. When Hinagiku suddenly returns, the two set out to restore the lost season, face the past that tore them apart, and reclaim the warmth they refuse to lose...",
     "sourceGenres": [
       "Drama",
       "Fantasy",
-      "Romance"
+      "Romance",
+      "Urban Fantasy",
+      "Environmental",
+      "Mythology",
+      "Ensemble Cast",
+      "Rehabilitation",
+      "Swordplay",
+      "Disability",
+      "Shoujo"
     ],
     "sourceRating": 75,
     "personalFitScore": 0,
@@ -692,7 +648,15 @@
         "genres": [
           "Drama",
           "Fantasy",
-          "Romance"
+          "Romance",
+          "Urban Fantasy",
+          "Environmental",
+          "Mythology",
+          "Ensemble Cast",
+          "Rehabilitation",
+          "Swordplay",
+          "Disability",
+          "Shoujo"
         ]
       }
     ],
@@ -711,6 +675,606 @@
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
+    "id": "anilist-184492",
+    "title": "Welcome to Demon School! Iruma-kun Season 4",
+    "originalTitle": "魔入りました！入間くん 第4シリーズ",
+    "year": 2026,
+    "episodes": 24,
+    "status": "连载中",
+    "genres": [
+      "Comedy",
+      "Fantasy",
+      "Supernatural"
+    ],
+    "tags": [
+      "School",
+      "Demons",
+      "Primarily Teen Cast",
+      "Magic",
+      "Shounen",
+      "Isekai",
+      "Monster Boy",
+      "Monster Girl"
+    ],
+    "summary": "The fourth season of Mairimashita! Iruma-kun. Suzuki Iruma and all thirteen students of the Misfit Class must perform to reach Rank 4 at the Music Festival. (Source: Crunchyroll News)",
+    "externalSummary": "The fourth season of Mairimashita! Iruma-kun. Suzuki Iruma and all thirteen students of the Misfit Class must perform to reach Rank 4 at the Music Festival. (Source: Crunchyroll News)",
+    "sourceGenres": [
+      "Comedy",
+      "Fantasy",
+      "Supernatural",
+      "School",
+      "Demons",
+      "Primarily Teen Cast",
+      "Magic",
+      "Shounen",
+      "Isekai",
+      "Monster Boy",
+      "Monster Girl"
+    ],
+    "sourceRating": 80,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/184492",
+    "aliases": [
+      "Welcome to Demon School! Iruma-kun Season 4",
+      "Mairimashita! Iruma-kun 4",
+      "魔入りました！入間くん 第4シリーズ"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/184492",
+        "description": "The fourth season of Mairimashita! Iruma-kun. Suzuki Iruma and all thirteen students of the Misfit Class must perform to reach Rank 4 at the Music Festival. (Source: Crunchyroll News)",
+        "genres": [
+          "Comedy",
+          "Fantasy",
+          "Supernatural",
+          "School",
+          "Demons",
+          "Primarily Teen Cast",
+          "Magic",
+          "Shounen",
+          "Isekai",
+          "Monster Boy",
+          "Monster Girl"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 184492,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-200769",
+    "title": "The strongest job is apparently not a hero or a sage, but an appraiser (provisional)!",
+    "originalTitle": "最強の職業は勇者でも賢者でもなく鑑定士（仮）らしいですよ？",
+    "year": 2026,
+    "episodes": 12,
+    "status": "连载中",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Comedy",
+      "Fantasy"
+    ],
+    "tags": [
+      "Slapstick",
+      "Isekai",
+      "Magic",
+      "Animals",
+      "Surreal Comedy",
+      "Elf",
+      "Archery",
+      "Male Protagonist"
+    ],
+    "summary": "Hibiki, a high school student who was suddenly transferred to another world, wanders alone in a vast grassland of a fantasy world where monsters inhabit. All he has are non-combat skills such as \"Appraisal\"! From a hopeless situation, he is saved by encounters, and his all-powerful abilities blossom! An another world adventure tale of miraculous reversal...",
+    "externalSummary": "Hibiki, a high school student who was suddenly transferred to another world, wanders alone in a vast grassland of a fantasy world where monsters inhabit. All he has are non-combat skills such as \"Appraisal\"! From a hopeless situation, he is saved by encounters, and his all-powerful abilities blossom! An another world adventure tale of miraculous reversal...",
+    "sourceGenres": [
+      "Action",
+      "Adventure",
+      "Comedy",
+      "Fantasy",
+      "Slapstick",
+      "Isekai",
+      "Magic",
+      "Animals",
+      "Surreal Comedy",
+      "Elf",
+      "Archery",
+      "Male Protagonist"
+    ],
+    "sourceRating": 58,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/200769",
+    "aliases": [
+      "The strongest job is apparently not a hero or a sage, but an appraiser (provisional)!",
+      "Saikyou no Shokugyou wa Yuusha demo Kenja demo Naku Kanteishi (Kari) Rashii desu yo?",
+      "最強の職業は勇者でも賢者でもなく鑑定士（仮）らしいですよ？"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/200769",
+        "description": "Hibiki, a high school student who was suddenly transferred to another world, wanders alone in a vast grassland of a fantasy world where monsters inhabit. All he has are non-combat skills such as \"Appraisal\"! From a hopeless situation, he is saved by encounters, and his all-powerful abilities blossom! An another world adventure tale of miraculous reversal...",
+        "genres": [
+          "Action",
+          "Adventure",
+          "Comedy",
+          "Fantasy",
+          "Slapstick",
+          "Isekai",
+          "Magic",
+          "Animals",
+          "Surreal Comedy",
+          "Elf",
+          "Archery",
+          "Male Protagonist"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 200769,
+    "matchConfidence": 1,
+    "anilistFormat": "ONA",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-171110",
+    "title": "Ascendance of a Bookworm: Adopted Daughter of an Archduke",
+    "originalTitle": "本好きの下剋上 領主の養女",
+    "year": 2026,
+    "episodes": 0,
+    "status": "连载中",
+    "genres": [
+      "Drama",
+      "Fantasy",
+      "Slice of Life"
+    ],
+    "tags": [
+      "Coming of Age",
+      "Writing",
+      "Magic",
+      "Female Protagonist",
+      "Isekai",
+      "Politics",
+      "Religion",
+      "Gods"
+    ],
+    "summary": "Anime adaptation of Part 3 of Honzuki no Gekokujou . Following a disastrous encounter with a noble, Myne finally resolves to say goodbye to her family and friends in the lower city, changing her name to “Rozemyne” and beginning her new life as the adopted daughter of Ehrenfest’s archduke. However, her days as an archnoble in noble society are brutal, as s...",
+    "externalSummary": "Anime adaptation of Part 3 of Honzuki no Gekokujou . Following a disastrous encounter with a noble, Myne finally resolves to say goodbye to her family and friends in the lower city, changing her name to “Rozemyne” and beginning her new life as the adopted daughter of Ehrenfest’s archduke. However, her days as an archnoble in noble society are brutal, as s...",
+    "sourceGenres": [
+      "Drama",
+      "Fantasy",
+      "Slice of Life",
+      "Coming of Age",
+      "Writing",
+      "Magic",
+      "Female Protagonist",
+      "Isekai",
+      "Politics",
+      "Religion",
+      "Gods"
+    ],
+    "sourceRating": 77,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/171110",
+    "aliases": [
+      "Ascendance of a Bookworm: Adopted Daughter of an Archduke",
+      "Honzuki no Gekokujou: Ryoushu no Youjo",
+      "本好きの下剋上 領主の養女"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/171110",
+        "description": "Anime adaptation of Part 3 of Honzuki no Gekokujou . Following a disastrous encounter with a noble, Myne finally resolves to say goodbye to her family and friends in the lower city, changing her name to “Rozemyne” and beginning her new life as the adopted daughter of Ehrenfest’s archduke. However, her days as an archnoble in noble society are brutal, as s...",
+        "genres": [
+          "Drama",
+          "Fantasy",
+          "Slice of Life",
+          "Coming of Age",
+          "Writing",
+          "Magic",
+          "Female Protagonist",
+          "Isekai",
+          "Politics",
+          "Religion",
+          "Gods"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 171110,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-196029",
+    "title": "Kusunoki's Garden of Gods",
+    "originalTitle": "神の庭付き楠木邸",
+    "year": 2026,
+    "episodes": 12,
+    "status": "连载中",
+    "genres": [
+      "Comedy",
+      "Fantasy",
+      "Slice of Life"
+    ],
+    "tags": [
+      "Iyashikei",
+      "Gods",
+      "Youkai",
+      "Exorcism",
+      "Rural",
+      "Male Protagonist",
+      "Food",
+      "Animals"
+    ],
+    "summary": "Minato Kusunoki is assigned to manage his family’s haunted, abandoned countryside estate. However, thanks to his overwhelming spiritual power, Minato accidentally purifies the entire place, turning the once-cursed property into a peaceful haven for wandering gods and deities! As Minato settles in, he finds himself surrounded by quirky divine neighbors and...",
+    "externalSummary": "Minato Kusunoki is assigned to manage his family’s haunted, abandoned countryside estate. However, thanks to his overwhelming spiritual power, Minato accidentally purifies the entire place, turning the once-cursed property into a peaceful haven for wandering gods and deities! As Minato settles in, he finds himself surrounded by quirky divine neighbors and...",
+    "sourceGenres": [
+      "Comedy",
+      "Fantasy",
+      "Slice of Life",
+      "Iyashikei",
+      "Gods",
+      "Youkai",
+      "Exorcism",
+      "Rural",
+      "Male Protagonist",
+      "Food",
+      "Animals"
+    ],
+    "sourceRating": 70,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/196029",
+    "aliases": [
+      "Kusunoki's Garden of Gods",
+      "Kami no Niwatsuki Kusunoki-tei",
+      "神の庭付き楠木邸"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/196029",
+        "description": "Minato Kusunoki is assigned to manage his family’s haunted, abandoned countryside estate. However, thanks to his overwhelming spiritual power, Minato accidentally purifies the entire place, turning the once-cursed property into a peaceful haven for wandering gods and deities! As Minato settles in, he finds himself surrounded by quirky divine neighbors and...",
+        "genres": [
+          "Comedy",
+          "Fantasy",
+          "Slice of Life",
+          "Iyashikei",
+          "Gods",
+          "Youkai",
+          "Exorcism",
+          "Rural",
+          "Male Protagonist",
+          "Food",
+          "Animals"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 196029,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-199221",
+    "title": "Dr. STONE SCIENCE FUTURE Cour 3",
+    "originalTitle": "Dr.STONE SCIENCE FUTURE 3クール",
+    "year": 2026,
+    "episodes": 13,
+    "status": "连载中",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Comedy",
+      "Sci-Fi"
+    ],
+    "tags": [
+      "Post-Apocalyptic",
+      "Male Protagonist",
+      "Shounen",
+      "Space",
+      "Ensemble Cast",
+      "Foreign",
+      "Travel",
+      "Lost Civilization"
+    ],
+    "summary": "The third and final cour of the fourth season of Dr.STONE .",
+    "externalSummary": "The third and final cour of the fourth season of Dr.STONE .",
+    "sourceGenres": [
+      "Action",
+      "Adventure",
+      "Comedy",
+      "Sci-Fi",
+      "Post-Apocalyptic",
+      "Male Protagonist",
+      "Shounen",
+      "Space",
+      "Ensemble Cast",
+      "Foreign",
+      "Travel",
+      "Lost Civilization"
+    ],
+    "sourceRating": 82,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/199221",
+    "aliases": [
+      "Dr. STONE SCIENCE FUTURE Cour 3",
+      "Dr. STONE: SCIENCE FUTURE Part 3",
+      "Dr.STONE SCIENCE FUTURE 3クール"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/199221",
+        "description": "The third and final cour of the fourth season of Dr.STONE .",
+        "genres": [
+          "Action",
+          "Adventure",
+          "Comedy",
+          "Sci-Fi",
+          "Post-Apocalyptic",
+          "Male Protagonist",
+          "Shounen",
+          "Space",
+          "Ensemble Cast",
+          "Foreign",
+          "Travel",
+          "Lost Civilization"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 199221,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-189046",
+    "title": "Re:ZERO -Starting Life in Another World- Season 4",
+    "originalTitle": "Re:ゼロから始める異世界生活 4th season",
+    "year": 2026,
+    "episodes": 19,
+    "status": "连载中",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama",
+      "Fantasy",
+      "Psychological",
+      "Romance"
+    ],
+    "tags": [
+      "Isekai",
+      "Male Protagonist",
+      "Time Loop",
+      "Magic",
+      "Witch",
+      "Female Protagonist",
+      "Travel",
+      "Spearplay"
+    ],
+    "summary": "The fourth season of Re:Zero kara Hajimeru Isekai Seikatsu . To save his stricken allies, Subaru faces a deadly desert to find the Sage at Pleiades Watchtower. (Source: Crunchyroll News) Note: Episode 1 pre-screened at Lucca Comics & Games on November 1, 2025, before the Japanese television broadcast.",
+    "externalSummary": "The fourth season of Re:Zero kara Hajimeru Isekai Seikatsu . To save his stricken allies, Subaru faces a deadly desert to find the Sage at Pleiades Watchtower. (Source: Crunchyroll News) Note: Episode 1 pre-screened at Lucca Comics & Games on November 1, 2025, before the Japanese television broadcast.",
+    "sourceGenres": [
+      "Action",
+      "Adventure",
+      "Drama",
+      "Fantasy",
+      "Psychological",
+      "Romance",
+      "Isekai",
+      "Male Protagonist",
+      "Time Loop",
+      "Magic",
+      "Witch",
+      "Female Protagonist",
+      "Travel",
+      "Spearplay"
+    ],
+    "sourceRating": 87,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/189046",
+    "aliases": [
+      "Re:ZERO -Starting Life in Another World- Season 4",
+      "Re:Zero kara Hajimeru Isekai Seikatsu 4th Season",
+      "Re:ゼロから始める異世界生活 4th season"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/189046",
+        "description": "The fourth season of Re:Zero kara Hajimeru Isekai Seikatsu . To save his stricken allies, Subaru faces a deadly desert to find the Sage at Pleiades Watchtower. (Source: Crunchyroll News) Note: Episode 1 pre-screened at Lucca Comics & Games on November 1, 2025, before the Japanese television broadcast.",
+        "genres": [
+          "Action",
+          "Adventure",
+          "Drama",
+          "Fantasy",
+          "Psychological",
+          "Romance",
+          "Isekai",
+          "Male Protagonist",
+          "Time Loop",
+          "Magic",
+          "Witch",
+          "Female Protagonist",
+          "Travel",
+          "Spearplay"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 189046,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-180745",
+    "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
+    "originalTitle": "ようこそ実力至上主義の教室へ 4th Season 2年生編1学期",
+    "year": 2026,
+    "episodes": 16,
+    "status": "连载中",
+    "genres": [
+      "Drama",
+      "Psychological"
+    ],
+    "tags": [
+      "Boarding School",
+      "Survival",
+      "Fugitive",
+      "Battle Royale",
+      "Male Protagonist",
+      "School",
+      "Anti-Hero",
+      "Coming of Age"
+    ],
+    "summary": "The fourth season of Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e . As Ayanokouji and his classmates begin their second year at the Advanced Nurturing High School, they’re greeted by a fresh gauntlet of exams and a fresh batch of rather unique first-year students. They’ll have to get to know each other quickly, because the first special exam pairs the...",
+    "externalSummary": "The fourth season of Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e . As Ayanokouji and his classmates begin their second year at the Advanced Nurturing High School, they’re greeted by a fresh gauntlet of exams and a fresh batch of rather unique first-year students. They’ll have to get to know each other quickly, because the first special exam pairs the...",
+    "sourceGenres": [
+      "Drama",
+      "Psychological",
+      "Boarding School",
+      "Survival",
+      "Fugitive",
+      "Battle Royale",
+      "Male Protagonist",
+      "School",
+      "Anti-Hero",
+      "Coming of Age"
+    ],
+    "sourceRating": 79,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/180745",
+    "aliases": [
+      "Classroom of the Elite 4th Season: Second Year, First Semester",
+      "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 4th Season 2-nensei-hen Ichi Gakki",
+      "ようこそ実力至上主義の教室へ 4th Season 2年生編1学期"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/180745",
+        "description": "The fourth season of Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e . As Ayanokouji and his classmates begin their second year at the Advanced Nurturing High School, they’re greeted by a fresh gauntlet of exams and a fresh batch of rather unique first-year students. They’ll have to get to know each other quickly, because the first special exam pairs the...",
+        "genres": [
+          "Drama",
+          "Psychological",
+          "Boarding School",
+          "Survival",
+          "Fugitive",
+          "Battle Royale",
+          "Male Protagonist",
+          "School",
+          "Anti-Hero",
+          "Coming of Age"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 180745,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
     "id": "anilist-202102",
     "title": "NEEDY GIRL OVERDOSE",
     "originalTitle": "NEEDY GIRL OVERDOSE",
@@ -723,14 +1287,31 @@
       "Psychological",
       "Slice of Life"
     ],
-    "tags": [],
+    "tags": [
+      "Female Protagonist",
+      "Philosophy",
+      "Otaku Culture",
+      "Idol",
+      "VTuber",
+      "Yuri",
+      "Urban",
+      "CGI"
+    ],
     "summary": "OMGkawaiiAngel, affectionately known as \"KAngel\", is the top streamer girl with 10 million subscribers, and not a day goes by without seeing her in action. Whether online, on TV, or at a live show, she is always surrounded by her cheering fans. Striving to catch up with KAngel's popularity is a three-girl streaming unit called Karamazov. And far removed f...",
     "externalSummary": "OMGkawaiiAngel, affectionately known as \"KAngel\", is the top streamer girl with 10 million subscribers, and not a day goes by without seeing her in action. Whether online, on TV, or at a live show, she is always surrounded by her cheering fans. Striving to catch up with KAngel's popularity is a three-girl streaming unit called Karamazov. And far removed f...",
     "sourceGenres": [
       "Adventure",
       "Drama",
       "Psychological",
-      "Slice of Life"
+      "Slice of Life",
+      "Female Protagonist",
+      "Philosophy",
+      "Otaku Culture",
+      "Idol",
+      "VTuber",
+      "Yuri",
+      "Urban",
+      "CGI"
     ],
     "sourceRating": 68,
     "personalFitScore": 0,
@@ -752,7 +1333,15 @@
           "Adventure",
           "Drama",
           "Psychological",
-          "Slice of Life"
+          "Slice of Life",
+          "Female Protagonist",
+          "Philosophy",
+          "Otaku Culture",
+          "Idol",
+          "VTuber",
+          "Yuri",
+          "Urban",
+          "CGI"
         ]
       }
     ],
@@ -771,346 +1360,71 @@
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
-    "id": "anilist-212105",
-    "title": "Umi ga Hashiru End Roll",
-    "originalTitle": "海が走るエンドロール",
-    "year": 2027,
-    "episodes": 1,
-    "status": "未开播",
-    "genres": [
-      "Comedy",
-      "Drama",
-      "Slice of Life"
-    ],
-    "tags": [],
-    "summary": "Umiko, a grandma, realizes that she has the same desire to make movies as university student Kai—and soon she enrolls in Kai's film school! \"It's not the movies you like…you like watching the people watching the movies.\" Just what are you going to do with the rest of your life? It's the question you'll always have to answer, no matter your age. Umiko Chin...",
-    "externalSummary": "Umiko, a grandma, realizes that she has the same desire to make movies as university student Kai—and soon she enrolls in Kai's film school! \"It's not the movies you like…you like watching the people watching the movies.\" Just what are you going to do with the rest of your life? It's the question you'll always have to answer, no matter your age. Umiko Chin...",
-    "sourceGenres": [
-      "Comedy",
-      "Drama",
-      "Slice of Life"
-    ],
-    "sourceRating": null,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/212105",
-    "aliases": [
-      "Umi ga Hashiru End Roll",
-      "海が走るエンドロール"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/212105",
-        "description": "Umiko, a grandma, realizes that she has the same desire to make movies as university student Kai—and soon she enrolls in Kai's film school! \"It's not the movies you like…you like watching the people watching the movies.\" Just what are you going to do with the rest of your life? It's the question you'll always have to answer, no matter your age. Umiko Chin...",
-        "genres": [
-          "Comedy",
-          "Drama",
-          "Slice of Life"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 212105,
-    "matchConfidence": 1,
-    "anilistFormat": "MOVIE",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-127230",
-    "title": "Chainsaw Man",
-    "originalTitle": "チェンソーマン",
-    "year": 2022,
-    "episodes": 12,
-    "status": "完结",
-    "genres": [
-      "Action",
-      "Drama",
-      "Horror",
-      "Supernatural"
-    ],
-    "tags": [],
-    "summary": "Denji is a teenage boy living with a Chainsaw Devil named Pochita. Due to the debt his father left behind, he has been living a rock-bottom life while repaying his debt by harvesting devil corpses with Pochita. One day, Denji is betrayed and killed. As his consciousness fades, he makes a contract with Pochita and gets revived as \"Chainsaw Man\" — a man wit...",
-    "externalSummary": "Denji is a teenage boy living with a Chainsaw Devil named Pochita. Due to the debt his father left behind, he has been living a rock-bottom life while repaying his debt by harvesting devil corpses with Pochita. One day, Denji is betrayed and killed. As his consciousness fades, he makes a contract with Pochita and gets revived as \"Chainsaw Man\" — a man wit...",
-    "sourceGenres": [
-      "Action",
-      "Drama",
-      "Horror",
-      "Supernatural"
-    ],
-    "sourceRating": 83,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/127230",
-    "aliases": [
-      "Chainsaw Man",
-      "チェンソーマン"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/127230",
-        "description": "Denji is a teenage boy living with a Chainsaw Devil named Pochita. Due to the debt his father left behind, he has been living a rock-bottom life while repaying his debt by harvesting devil corpses with Pochita. One day, Denji is betrayed and killed. As his consciousness fades, he makes a contract with Pochita and gets revived as \"Chainsaw Man\" — a man wit...",
-        "genres": [
-          "Action",
-          "Drama",
-          "Horror",
-          "Supernatural"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 127230,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-206166",
-    "title": "Ingoku Danchi:Deviant's Apartment Complex",
-    "originalTitle": "インゴクダンチ",
-    "year": 2026,
-    "episodes": 12,
-    "status": "连载中",
-    "genres": [
-      "Ecchi"
-    ],
-    "tags": [],
-    "summary": "It's a place where greedy wives live... A married woman's erotic suspense! This is the extreme suspense of a married woman by the author of Libido Hunter Takeru ! In this story, a group of perverted married women wearing the mysterious \"libido cross\" costume that amplifies human desires come under attack! Protect the apartment complex from the threat of p...",
-    "externalSummary": "It's a place where greedy wives live... A married woman's erotic suspense! This is the extreme suspense of a married woman by the author of Libido Hunter Takeru ! In this story, a group of perverted married women wearing the mysterious \"libido cross\" costume that amplifies human desires come under attack! Protect the apartment complex from the threat of p...",
-    "sourceGenres": [
-      "Ecchi"
-    ],
-    "sourceRating": 50,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/206166",
-    "aliases": [
-      "Ingoku Danchi:Deviant's Apartment Complex",
-      "Ingoku Danchi",
-      "インゴクダンチ"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/206166",
-        "description": "It's a place where greedy wives live... A married woman's erotic suspense! This is the extreme suspense of a married woman by the author of Libido Hunter Takeru ! In this story, a group of perverted married women wearing the mysterious \"libido cross\" costume that amplifies human desires come under attack! Protect the apartment complex from the threat of p...",
-        "genres": [
-          "Ecchi"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 206166,
-    "matchConfidence": 1,
-    "anilistFormat": "TV_SHORT",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-174576",
-    "title": "Wistoria: Wand and Sword",
-    "originalTitle": "杖と剣のウィストリア",
-    "year": 2024,
-    "episodes": 12,
-    "status": "完结",
-    "genres": [
-      "Action",
-      "Comedy",
-      "Drama",
-      "Fantasy"
-    ],
-    "tags": [],
-    "summary": "A hard-working boy named Will enters a magic academy in hopes of becoming a great sorcerer. Unfortunately, there's a fatal flaw in his plan: he lacks the ability to use magic. Amid the cold stares of his classmates and instructors, Will feels discouraged at times, but he presses forward with unwavering determination. He can't use a wand, but he can wield...",
-    "externalSummary": "A hard-working boy named Will enters a magic academy in hopes of becoming a great sorcerer. Unfortunately, there's a fatal flaw in his plan: he lacks the ability to use magic. Amid the cold stares of his classmates and instructors, Will feels discouraged at times, but he presses forward with unwavering determination. He can't use a wand, but he can wield...",
-    "sourceGenres": [
-      "Action",
-      "Comedy",
-      "Drama",
-      "Fantasy"
-    ],
-    "sourceRating": 78,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/174576",
-    "aliases": [
-      "Wistoria: Wand and Sword",
-      "Tsue to Tsurugi no Wistoria",
-      "杖と剣のウィストリア"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/174576",
-        "description": "A hard-working boy named Will enters a magic academy in hopes of becoming a great sorcerer. Unfortunately, there's a fatal flaw in his plan: he lacks the ability to use magic. Amid the cold stares of his classmates and instructors, Will feels discouraged at times, but he presses forward with unwavering determination. He can't use a wand, but he can wield...",
-        "genres": [
-          "Action",
-          "Comedy",
-          "Drama",
-          "Fantasy"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 174576,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-132405",
-    "title": "My Dress-Up Darling",
-    "originalTitle": "その着せ替え人形は恋をする",
-    "year": 2022,
-    "episodes": 12,
-    "status": "完结",
-    "genres": [
-      "Comedy",
-      "Ecchi",
-      "Romance",
-      "Slice of Life"
-    ],
-    "tags": [],
-    "summary": "High schooler Wakana Gojou cares about one thing: making Hina dolls. With nobody to share his obsession, he has trouble finding friends—or even holding conversation. But after the school’s most popular girl, Marin Kitagawa, reveals a secret of her own, he discovers a new purpose for his sewing skills. Together, they’ll make her cosplay dreams come true! (...",
-    "externalSummary": "High schooler Wakana Gojou cares about one thing: making Hina dolls. With nobody to share his obsession, he has trouble finding friends—or even holding conversation. But after the school’s most popular girl, Marin Kitagawa, reveals a secret of her own, he discovers a new purpose for his sewing skills. Together, they’ll make her cosplay dreams come true! (...",
-    "sourceGenres": [
-      "Comedy",
-      "Ecchi",
-      "Romance",
-      "Slice of Life"
-    ],
-    "sourceRating": 80,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/132405",
-    "aliases": [
-      "My Dress-Up Darling",
-      "Sono Bisque Doll wa Koi wo Suru",
-      "その着せ替え人形は恋をする"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/132405",
-        "description": "High schooler Wakana Gojou cares about one thing: making Hina dolls. With nobody to share his obsession, he has trouble finding friends—or even holding conversation. But after the school’s most popular girl, Marin Kitagawa, reveals a secret of her own, he discovers a new purpose for his sewing skills. Together, they’ll make her cosplay dreams come true! (...",
-        "genres": [
-          "Comedy",
-          "Ecchi",
-          "Romance",
-          "Slice of Life"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 132405,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-166613",
-    "title": "Hell’s Paradise Season 2",
-    "originalTitle": "地獄楽 第二期",
-    "year": 2026,
-    "episodes": 12,
+    "id": "anilist-269",
+    "title": "Bleach",
+    "originalTitle": "BLEACH",
+    "year": 2004,
+    "episodes": 366,
     "status": "完结",
     "genres": [
       "Action",
       "Adventure",
-      "Mystery",
       "Supernatural"
     ],
-    "tags": [],
-    "summary": "The second season of Jigokuraku .",
-    "externalSummary": "The second season of Jigokuraku .",
+    "tags": [
+      "Swordplay",
+      "Shounen",
+      "Super Power",
+      "Ghost",
+      "Male Protagonist",
+      "Exorcism",
+      "Demons",
+      "Urban Fantasy"
+    ],
+    "summary": "Ichigo Kurosaki is a rather normal high school student apart from the fact he has the ability to see ghosts. This ability never impacted his life in a major way until the day he encounters the Shinigami Kuchiki Rukia, who saves him and his family's lives from a Hollow, a corrupt spirit that devours human souls. Wounded during the fight against the Hollow,...",
+    "externalSummary": "Ichigo Kurosaki is a rather normal high school student apart from the fact he has the ability to see ghosts. This ability never impacted his life in a major way until the day he encounters the Shinigami Kuchiki Rukia, who saves him and his family's lives from a Hollow, a corrupt spirit that devours human souls. Wounded during the fight against the Hollow,...",
     "sourceGenres": [
       "Action",
       "Adventure",
-      "Mystery",
-      "Supernatural"
+      "Supernatural",
+      "Swordplay",
+      "Shounen",
+      "Super Power",
+      "Ghost",
+      "Male Protagonist",
+      "Exorcism",
+      "Demons",
+      "Urban Fantasy"
     ],
-    "sourceRating": 82,
+    "sourceRating": 79,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
     "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/166613",
+    "sourceUrl": "https://anilist.co/anime/269",
     "aliases": [
-      "Hell’s Paradise Season 2",
-      "Jigokuraku 2nd Season",
-      "地獄楽 第二期"
+      "Bleach",
+      "BLEACH"
     ],
     "sources": [
       {
         "id": "anilist",
         "name": "AniList",
         "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/166613",
-        "description": "The second season of Jigokuraku .",
+        "sourceUrl": "https://anilist.co/anime/269",
+        "description": "Ichigo Kurosaki is a rather normal high school student apart from the fact he has the ability to see ghosts. This ability never impacted his life in a major way until the day he encounters the Shinigami Kuchiki Rukia, who saves him and his family's lives from a Hollow, a corrupt spirit that devours human souls. Wounded during the fight against the Hollow,...",
         "genres": [
           "Action",
           "Adventure",
-          "Mystery",
-          "Supernatural"
+          "Supernatural",
+          "Swordplay",
+          "Shounen",
+          "Super Power",
+          "Ghost",
+          "Male Protagonist",
+          "Exorcism",
+          "Demons",
+          "Urban Fantasy"
         ]
       }
     ],
@@ -1122,172 +1436,76 @@
       "tags"
     ],
     "sourceQuery": "discover:trending",
-    "sourceId": 166613,
+    "sourceId": 269,
     "matchConfidence": 1,
     "anilistFormat": "TV",
     "needsReview": false,
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
-    "id": "anilist-167152",
-    "title": "Sentenced to Be a Hero",
-    "originalTitle": "勇者刑に処す 懲罰勇者9004隊刑務記録",
-    "year": 2026,
-    "episodes": 12,
-    "status": "完结",
-    "genres": [
-      "Action",
-      "Drama",
-      "Fantasy"
-    ],
-    "tags": [],
-    "summary": "In a world where heroism is a punishment, Xylo Forbartz, a condemned goddess killer, battles endless hordes of monstrous abominations as part of Penal Hero Unit 9004. Death is no escape, only a cycle of resurrection and relentless combat. But when Xylo encounters a mysterious new goddess, their unlikely alliance sparks a rebellion that could shatter the c...",
-    "externalSummary": "In a world where heroism is a punishment, Xylo Forbartz, a condemned goddess killer, battles endless hordes of monstrous abominations as part of Penal Hero Unit 9004. Death is no escape, only a cycle of resurrection and relentless combat. But when Xylo encounters a mysterious new goddess, their unlikely alliance sparks a rebellion that could shatter the c...",
-    "sourceGenres": [
-      "Action",
-      "Drama",
-      "Fantasy"
-    ],
-    "sourceRating": 81,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/167152",
-    "aliases": [
-      "Sentenced to Be a Hero",
-      "Yuusha Kei ni Shosu: Choubatsu Yuusha 9004-tai Keimu Kiroku",
-      "勇者刑に処す 懲罰勇者9004隊刑務記録"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/167152",
-        "description": "In a world where heroism is a punishment, Xylo Forbartz, a condemned goddess killer, battles endless hordes of monstrous abominations as part of Penal Hero Unit 9004. Death is no escape, only a cycle of resurrection and relentless combat. But when Xylo encounters a mysterious new goddess, their unlikely alliance sparks a rebellion that could shatter the c...",
-        "genres": [
-          "Action",
-          "Drama",
-          "Fantasy"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 167152,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-182483",
-    "title": "The Warrior Princess and the Barbaric King",
-    "originalTitle": "姫騎士は蛮族の嫁",
+    "id": "anilist-170019",
+    "title": "The Angel Next Door Spoils Me Rotten2",
+    "originalTitle": "お隣の天使様にいつの間にか駄目人間にされていた件 第2期",
     "year": 2026,
     "episodes": 12,
     "status": "连载中",
     "genres": [
-      "Comedy",
-      "Fantasy",
-      "Romance"
-    ],
-    "tags": [],
-    "summary": "Serafina, the West’s fiercest knight, expected torture when captured by barbarians. Instead, she got a marriage proposal! Marrying her sworn enemy is a hard no! But after seeing her wedding captor’s culture and very pretty face, she may be tempted to swap her sword for a wedding veil. Get ready for the ultimate enemies-to-maybe-lovers arc. (Source: Crunch...",
-    "externalSummary": "Serafina, the West’s fiercest knight, expected torture when captured by barbarians. Instead, she got a marriage proposal! Marrying her sworn enemy is a hard no! But after seeing her wedding captor’s culture and very pretty face, she may be tempted to swap her sword for a wedding veil. Get ready for the ultimate enemies-to-maybe-lovers arc. (Source: Crunch...",
-    "sourceGenres": [
-      "Comedy",
-      "Fantasy",
-      "Romance"
-    ],
-    "sourceRating": 67,
-    "personalFitScore": 0,
-    "whyForMe": "",
-    "risk": "",
-    "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/182483",
-    "aliases": [
-      "The Warrior Princess and the Barbaric King",
-      "Hime Kishi wa Barbaroi no Yome",
-      "姫騎士は蛮族の嫁"
-    ],
-    "sources": [
-      {
-        "id": "anilist",
-        "name": "AniList",
-        "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/182483",
-        "description": "Serafina, the West’s fiercest knight, expected torture when captured by barbarians. Instead, she got a marriage proposal! Marrying her sworn enemy is a hard no! But after seeing her wedding captor’s culture and very pretty face, she may be tempted to swap her sword for a wedding veil. Get ready for the ultimate enemies-to-maybe-lovers arc. (Source: Crunch...",
-        "genres": [
-          "Comedy",
-          "Fantasy",
-          "Romance"
-        ]
-      }
-    ],
-    "confidence": 1,
-    "manualLockedFields": [
-      "personalFitScore",
-      "whyForMe",
-      "risk",
-      "tags"
-    ],
-    "sourceQuery": "discover:trending",
-    "sourceId": 182483,
-    "matchConfidence": 1,
-    "anilistFormat": "TV",
-    "needsReview": false,
-    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
-  },
-  {
-    "id": "anilist-187869",
-    "title": "Botan Kamiina Fully Blossoms When Drunk",
-    "originalTitle": "上伊那ぼたん、酔へる姿は百合の花",
-    "year": 2026,
-    "episodes": 12,
-    "status": "连载中",
-    "genres": [
-      "Comedy",
       "Romance",
       "Slice of Life"
     ],
-    "tags": [],
-    "summary": "New university life, new dormmates…and a whole new world of drinks! Botan Kamiina takes her first sip of alcohol after spotting the quiet dorm leader, Ibuki Tonami, enjoying a highball alone. From shochu to whisky, Botan shares the joy of drinking with friends, while Ibuki slowly learns that some pleasures are better when shared. (Source: Crunchyroll)",
-    "externalSummary": "New university life, new dormmates…and a whole new world of drinks! Botan Kamiina takes her first sip of alcohol after spotting the quiet dorm leader, Ibuki Tonami, enjoying a highball alone. From shochu to whisky, Botan shares the joy of drinking with friends, while Ibuki slowly learns that some pleasures are better when shared. (Source: Crunchyroll)",
+    "tags": [
+      "Heterosexual",
+      "Male Protagonist",
+      "Iyashikei",
+      "Female Protagonist",
+      "Primarily Teen Cast",
+      "Kuudere",
+      "School",
+      "Chibi"
+    ],
+    "summary": "The second season of Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken . Now a couple, Amane and Mahiru navigate school life and overcome their pasts in this sweet love story. (Source: Crunchyroll News) Note: Crunchyroll has labeled the English title under the name \"The Angel Next Door Spoils Me Rotten2\", so while it seems erroneous for...",
+    "externalSummary": "The second season of Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken . Now a couple, Amane and Mahiru navigate school life and overcome their pasts in this sweet love story. (Source: Crunchyroll News) Note: Crunchyroll has labeled the English title under the name \"The Angel Next Door Spoils Me Rotten2\", so while it seems erroneous for...",
     "sourceGenres": [
-      "Comedy",
       "Romance",
-      "Slice of Life"
+      "Slice of Life",
+      "Heterosexual",
+      "Male Protagonist",
+      "Iyashikei",
+      "Female Protagonist",
+      "Primarily Teen Cast",
+      "Kuudere",
+      "School",
+      "Chibi"
     ],
     "sourceRating": 77,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
     "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/187869",
+    "sourceUrl": "https://anilist.co/anime/170019",
     "aliases": [
-      "Botan Kamiina Fully Blossoms When Drunk",
-      "Kamiina Botan, Yoeru Sugata wa Yuri no Hana",
-      "上伊那ぼたん、酔へる姿は百合の花"
+      "The Angel Next Door Spoils Me Rotten2",
+      "Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season",
+      "お隣の天使様にいつの間にか駄目人間にされていた件 第2期"
     ],
     "sources": [
       {
         "id": "anilist",
         "name": "AniList",
         "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/187869",
-        "description": "New university life, new dormmates…and a whole new world of drinks! Botan Kamiina takes her first sip of alcohol after spotting the quiet dorm leader, Ibuki Tonami, enjoying a highball alone. From shochu to whisky, Botan shares the joy of drinking with friends, while Ibuki slowly learns that some pleasures are better when shared. (Source: Crunchyroll)",
+        "sourceUrl": "https://anilist.co/anime/170019",
+        "description": "The second season of Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken . Now a couple, Amane and Mahiru navigate school life and overcome their pasts in this sweet love story. (Source: Crunchyroll News) Note: Crunchyroll has labeled the English title under the name \"The Angel Next Door Spoils Me Rotten2\", so while it seems erroneous for...",
         "genres": [
-          "Comedy",
           "Romance",
-          "Slice of Life"
+          "Slice of Life",
+          "Heterosexual",
+          "Male Protagonist",
+          "Iyashikei",
+          "Female Protagonist",
+          "Primarily Teen Cast",
+          "Kuudere",
+          "School",
+          "Chibi"
         ]
       }
     ],
@@ -1299,54 +1517,79 @@
       "tags"
     ],
     "sourceQuery": "discover:trending",
-    "sourceId": 187869,
+    "sourceId": 170019,
     "matchConfidence": 1,
     "anilistFormat": "TV",
     "needsReview": false,
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
-    "id": "anilist-181444",
-    "title": "The Fragrant Flower Blooms With Dignity",
-    "originalTitle": "薫る花は凛と咲く",
-    "year": 2025,
-    "episodes": 13,
-    "status": "完结",
+    "id": "anilist-186497",
+    "title": "The Ramparts of Ice",
+    "originalTitle": "氷の城壁",
+    "year": 2026,
+    "episodes": 0,
+    "status": "连载中",
     "genres": [
       "Comedy",
-      "Drama",
-      "Romance"
+      "Romance",
+      "Slice of Life"
     ],
-    "tags": [],
-    "summary": "Chidori High is a boys’ school that takes in the dregs of society with the lowest grades. Next door stands Kikyo Girls’ High, where the wealthy, high-class families send their precious daughters. Chidori second-year Rintarou, who has a fierce face but a gentle heart, is helping at his family’s patisserie when he meets a girl named Kaoruko. The two hit it...",
-    "externalSummary": "Chidori High is a boys’ school that takes in the dregs of society with the lowest grades. Next door stands Kikyo Girls’ High, where the wealthy, high-class families send their precious daughters. Chidori second-year Rintarou, who has a fierce face but a gentle heart, is helping at his family’s patisserie when he meets a girl named Kaoruko. The two hit it...",
+    "tags": [
+      "Heterosexual",
+      "Female Protagonist",
+      "Ensemble Cast",
+      "Primarily Teen Cast",
+      "Kuudere",
+      "School",
+      "Shoujo",
+      "Coming of Age"
+    ],
+    "summary": "Socially inept, Higawa Koyuki maintains a wall between herself and other people. She spends her time in high school alone, until she meets Amamiya Minato, a boy who keeps trying to close the distance between them for some reason?! The loner Koyuki, the popular Miki, the boundary-less Minato, and the kind basketball player Youta. This is the story about fo...",
+    "externalSummary": "Socially inept, Higawa Koyuki maintains a wall between herself and other people. She spends her time in high school alone, until she meets Amamiya Minato, a boy who keeps trying to close the distance between them for some reason?! The loner Koyuki, the popular Miki, the boundary-less Minato, and the kind basketball player Youta. This is the story about fo...",
     "sourceGenres": [
       "Comedy",
-      "Drama",
-      "Romance"
+      "Romance",
+      "Slice of Life",
+      "Heterosexual",
+      "Female Protagonist",
+      "Ensemble Cast",
+      "Primarily Teen Cast",
+      "Kuudere",
+      "School",
+      "Shoujo",
+      "Coming of Age"
     ],
-    "sourceRating": 85,
+    "sourceRating": 78,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
     "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/181444",
+    "sourceUrl": "https://anilist.co/anime/186497",
     "aliases": [
-      "The Fragrant Flower Blooms With Dignity",
-      "Kaoru Hana wa Rin to Saku",
-      "薫る花は凛と咲く"
+      "The Ramparts of Ice",
+      "Koori no Jouheki",
+      "氷の城壁"
     ],
     "sources": [
       {
         "id": "anilist",
         "name": "AniList",
         "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/181444",
-        "description": "Chidori High is a boys’ school that takes in the dregs of society with the lowest grades. Next door stands Kikyo Girls’ High, where the wealthy, high-class families send their precious daughters. Chidori second-year Rintarou, who has a fierce face but a gentle heart, is helping at his family’s patisserie when he meets a girl named Kaoruko. The two hit it...",
+        "sourceUrl": "https://anilist.co/anime/186497",
+        "description": "Socially inept, Higawa Koyuki maintains a wall between herself and other people. She spends her time in high school alone, until she meets Amamiya Minato, a boy who keeps trying to close the distance between them for some reason?! The loner Koyuki, the popular Miki, the boundary-less Minato, and the kind basketball player Youta. This is the story about fo...",
         "genres": [
           "Comedy",
-          "Drama",
-          "Romance"
+          "Romance",
+          "Slice of Life",
+          "Heterosexual",
+          "Female Protagonist",
+          "Ensemble Cast",
+          "Primarily Teen Cast",
+          "Kuudere",
+          "School",
+          "Shoujo",
+          "Coming of Age"
         ]
       }
     ],
@@ -1358,57 +1601,82 @@
       "tags"
     ],
     "sourceQuery": "discover:trending",
-    "sourceId": 181444,
+    "sourceId": 186497,
     "matchConfidence": 1,
     "anilistFormat": "TV",
     "needsReview": false,
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
-    "id": "anilist-184951",
-    "title": "You and I Are Polar Opposites",
-    "originalTitle": "正反対な君と僕",
+    "id": "anilist-182300",
+    "title": "Wistoria: Wand and Sword Season 2",
+    "originalTitle": "杖と剣のウィストリア Season2",
     "year": 2026,
     "episodes": 12,
-    "status": "完结",
+    "status": "连载中",
     "genres": [
-      "Comedy",
+      "Action",
+      "Adventure",
       "Drama",
-      "Romance",
-      "Slice of Life"
+      "Fantasy"
     ],
-    "tags": [],
-    "summary": "Suzuki’s a high school girl in love, but the guy she’s fallen for is nothing like her! While she’s cheerful, outgoing, and always trying to fit in, her classmate Yusuke Tani is stoic, quiet, and doesn’t seem to care what people think of him. Will Suzuki be able to overcome her anxieties and ask him out, or will she discover that opposites really don’t att...",
-    "externalSummary": "Suzuki’s a high school girl in love, but the guy she’s fallen for is nothing like her! While she’s cheerful, outgoing, and always trying to fit in, her classmate Yusuke Tani is stoic, quiet, and doesn’t seem to care what people think of him. Will Suzuki be able to overcome her anxieties and ask him out, or will she discover that opposites really don’t att...",
+    "tags": [
+      "Magic",
+      "Swordplay",
+      "Male Protagonist",
+      "Shounen",
+      "Elf",
+      "Primarily Teen Cast",
+      "Medieval",
+      "Female Harem"
+    ],
+    "summary": "The second season of Tsue to Tsurugi no Wistoria . Will, a washout student at a magical academy who is unable to use magic, is aiming to join the top tier of mages, the Magia Vander, to fulfill a promise to his childhood friend, Elfaria. Wielding a sword instead of a wand, his abilities are slowly recognized within the academy. During the all-student prax...",
+    "externalSummary": "The second season of Tsue to Tsurugi no Wistoria . Will, a washout student at a magical academy who is unable to use magic, is aiming to join the top tier of mages, the Magia Vander, to fulfill a promise to his childhood friend, Elfaria. Wielding a sword instead of a wand, his abilities are slowly recognized within the academy. During the all-student prax...",
     "sourceGenres": [
-      "Comedy",
+      "Action",
+      "Adventure",
       "Drama",
-      "Romance",
-      "Slice of Life"
+      "Fantasy",
+      "Magic",
+      "Swordplay",
+      "Male Protagonist",
+      "Shounen",
+      "Elf",
+      "Primarily Teen Cast",
+      "Medieval",
+      "Female Harem"
     ],
-    "sourceRating": 83,
+    "sourceRating": 82,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
     "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/184951",
+    "sourceUrl": "https://anilist.co/anime/182300",
     "aliases": [
-      "You and I Are Polar Opposites",
-      "Seihantai na Kimi to Boku",
-      "正反対な君と僕"
+      "Wistoria: Wand and Sword Season 2",
+      "Tsue to Tsurugi no Wistoria Season 2",
+      "杖と剣のウィストリア Season2"
     ],
     "sources": [
       {
         "id": "anilist",
         "name": "AniList",
         "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/184951",
-        "description": "Suzuki’s a high school girl in love, but the guy she’s fallen for is nothing like her! While she’s cheerful, outgoing, and always trying to fit in, her classmate Yusuke Tani is stoic, quiet, and doesn’t seem to care what people think of him. Will Suzuki be able to overcome her anxieties and ask him out, or will she discover that opposites really don’t att...",
+        "sourceUrl": "https://anilist.co/anime/182300",
+        "description": "The second season of Tsue to Tsurugi no Wistoria . Will, a washout student at a magical academy who is unable to use magic, is aiming to join the top tier of mages, the Magia Vander, to fulfill a promise to his childhood friend, Elfaria. Wielding a sword instead of a wand, his abilities are slowly recognized within the academy. During the all-student prax...",
         "genres": [
-          "Comedy",
+          "Action",
+          "Adventure",
           "Drama",
-          "Romance",
-          "Slice of Life"
+          "Fantasy",
+          "Magic",
+          "Swordplay",
+          "Male Protagonist",
+          "Shounen",
+          "Elf",
+          "Primarily Teen Cast",
+          "Medieval",
+          "Female Harem"
         ]
       }
     ],
@@ -1420,57 +1688,76 @@
       "tags"
     ],
     "sourceQuery": "discover:trending",
-    "sourceId": 184951,
+    "sourceId": 182300,
     "matchConfidence": 1,
     "anilistFormat": "TV",
     "needsReview": false,
     "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
   },
   {
-    "id": "anilist-20958",
-    "title": "Attack on Titan Season 2",
-    "originalTitle": "進撃の巨人 Season２",
-    "year": 2017,
+    "id": "anilist-199588",
+    "title": "Gals Can't Be Kind to Otaku!?",
+    "originalTitle": "オタクに優しいギャルはいない!?",
+    "year": 2026,
     "episodes": 12,
-    "status": "完结",
+    "status": "连载中",
     "genres": [
-      "Action",
-      "Drama",
-      "Fantasy",
-      "Mystery"
+      "Comedy",
+      "Romance"
     ],
-    "tags": [],
-    "summary": "Eren Jaeger swore to wipe out every last Titan, but in a battle for his life he wound up becoming the thing he hates most. With his new powers, he fights for humanity's freedom facing the monsters that threaten his home. After a bittersweet victory against the Female Titan, Eren finds no time to rest—a horde of Titans is approaching Wall Rose and the batt...",
-    "externalSummary": "Eren Jaeger swore to wipe out every last Titan, but in a battle for his life he wound up becoming the thing he hates most. With his new powers, he fights for humanity's freedom facing the monsters that threaten his home. After a bittersweet victory against the Female Titan, Eren finds no time to rest—a horde of Titans is approaching Wall Rose and the batt...",
+    "tags": [
+      "Gyaru",
+      "Otaku Culture",
+      "Primarily Teen Cast",
+      "Heterosexual",
+      "Male Protagonist",
+      "School",
+      "Seinen",
+      "Female Protagonist"
+    ],
+    "summary": "Meet Takuya Seo, an otaku who sits behind the popular gals in class, Ijichi and Amane. Since they're people from different \"castes,\" you wouldn't expect them to have much in common. But when their worlds collide over a borrowed eraser, Takuya slips up about his favorite anime, and Amane...is rather quick to correct him. She says she's not a fan, but her f...",
+    "externalSummary": "Meet Takuya Seo, an otaku who sits behind the popular gals in class, Ijichi and Amane. Since they're people from different \"castes,\" you wouldn't expect them to have much in common. But when their worlds collide over a borrowed eraser, Takuya slips up about his favorite anime, and Amane...is rather quick to correct him. She says she's not a fan, but her f...",
     "sourceGenres": [
-      "Action",
-      "Drama",
-      "Fantasy",
-      "Mystery"
+      "Comedy",
+      "Romance",
+      "Gyaru",
+      "Otaku Culture",
+      "Primarily Teen Cast",
+      "Heterosexual",
+      "Male Protagonist",
+      "School",
+      "Seinen",
+      "Female Protagonist"
     ],
-    "sourceRating": 85,
+    "sourceRating": 75,
     "personalFitScore": 0,
     "whyForMe": "",
     "risk": "",
     "sourceName": "AniList",
-    "sourceUrl": "https://anilist.co/anime/20958",
+    "sourceUrl": "https://anilist.co/anime/199588",
     "aliases": [
-      "Attack on Titan Season 2",
-      "Shingeki no Kyojin Season 2",
-      "進撃の巨人 Season２"
+      "Gals Can't Be Kind to Otaku!?",
+      "Otaku ni Yasashii Gal wa Inai!?",
+      "オタクに優しいギャルはいない!?"
     ],
     "sources": [
       {
         "id": "anilist",
         "name": "AniList",
         "trustLevel": 80,
-        "sourceUrl": "https://anilist.co/anime/20958",
-        "description": "Eren Jaeger swore to wipe out every last Titan, but in a battle for his life he wound up becoming the thing he hates most. With his new powers, he fights for humanity's freedom facing the monsters that threaten his home. After a bittersweet victory against the Female Titan, Eren finds no time to rest—a horde of Titans is approaching Wall Rose and the batt...",
+        "sourceUrl": "https://anilist.co/anime/199588",
+        "description": "Meet Takuya Seo, an otaku who sits behind the popular gals in class, Ijichi and Amane. Since they're people from different \"castes,\" you wouldn't expect them to have much in common. But when their worlds collide over a borrowed eraser, Takuya slips up about his favorite anime, and Amane...is rather quick to correct him. She says she's not a fan, but her f...",
         "genres": [
-          "Action",
-          "Drama",
-          "Fantasy",
-          "Mystery"
+          "Comedy",
+          "Romance",
+          "Gyaru",
+          "Otaku Culture",
+          "Primarily Teen Cast",
+          "Heterosexual",
+          "Male Protagonist",
+          "School",
+          "Seinen",
+          "Female Protagonist"
         ]
       }
     ],
@@ -1482,7 +1769,348 @@
       "tags"
     ],
     "sourceQuery": "discover:trending",
-    "sourceId": 20958,
+    "sourceId": 199588,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-185211",
+    "title": "Yowayowa Sensei",
+    "originalTitle": "よわよわ先生",
+    "year": 2026,
+    "episodes": 12,
+    "status": "连载中",
+    "genres": [
+      "Comedy",
+      "Ecchi",
+      "Romance"
+    ],
+    "tags": [
+      "Teacher",
+      "Nudity",
+      "Heterosexual",
+      "Female Harem",
+      "Shounen",
+      "Large Breasts",
+      "School",
+      "Male Protagonist"
+    ],
+    "summary": "High school homeroom teacher Hiyori Hiwamura is known as the “Scary Teacher,” and if you offend her, she’ll put a curse on you! Or at least that’s what everyone believes. She’s secretly a total softy who’s deeply misunderstood, and once you see her sweet side, she’ll put a different kind of spell on you... Unfortunately, one of her students, Akihito Abiku...",
+    "externalSummary": "High school homeroom teacher Hiyori Hiwamura is known as the “Scary Teacher,” and if you offend her, she’ll put a curse on you! Or at least that’s what everyone believes. She’s secretly a total softy who’s deeply misunderstood, and once you see her sweet side, she’ll put a different kind of spell on you... Unfortunately, one of her students, Akihito Abiku...",
+    "sourceGenres": [
+      "Comedy",
+      "Ecchi",
+      "Romance",
+      "Teacher",
+      "Nudity",
+      "Heterosexual",
+      "Female Harem",
+      "Shounen",
+      "Large Breasts",
+      "School",
+      "Male Protagonist"
+    ],
+    "sourceRating": 62,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/185211",
+    "aliases": [
+      "Yowayowa Sensei",
+      "Yowa Yowa Sensei",
+      "よわよわ先生"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/185211",
+        "description": "High school homeroom teacher Hiyori Hiwamura is known as the “Scary Teacher,” and if you offend her, she’ll put a curse on you! Or at least that’s what everyone believes. She’s secretly a total softy who’s deeply misunderstood, and once you see her sweet side, she’ll put a different kind of spell on you... Unfortunately, one of her students, Akihito Abiku...",
+        "genres": [
+          "Comedy",
+          "Ecchi",
+          "Romance",
+          "Teacher",
+          "Nudity",
+          "Heterosexual",
+          "Female Harem",
+          "Shounen",
+          "Large Breasts",
+          "School",
+          "Male Protagonist"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 185211,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-169580",
+    "title": "I Made Friends with the Second Prettiest Girl in My Class",
+    "originalTitle": "クラスで２番目に可愛い女の子と友だちになった",
+    "year": 2026,
+    "episodes": 12,
+    "status": "连载中",
+    "genres": [
+      "Comedy",
+      "Romance"
+    ],
+    "tags": [
+      "Seinen",
+      "Male Protagonist",
+      "School",
+      "Primarily Teen Cast",
+      "Heterosexual",
+      "Otaku Culture",
+      "Female Protagonist",
+      "Chibi"
+    ],
+    "summary": "Maki Maehara, the class outcast, finally makes his first friend: Umi Asanagi, the second-prettiest girl in class and the center of everyone’s attention. He’s convinced she’s out of his league, but as their unlikely friendship grows, Maki starts to wonder…could there be more than just friendship between them? (Source: Crunchyroll)",
+    "externalSummary": "Maki Maehara, the class outcast, finally makes his first friend: Umi Asanagi, the second-prettiest girl in class and the center of everyone’s attention. He’s convinced she’s out of his league, but as their unlikely friendship grows, Maki starts to wonder…could there be more than just friendship between them? (Source: Crunchyroll)",
+    "sourceGenres": [
+      "Comedy",
+      "Romance",
+      "Seinen",
+      "Male Protagonist",
+      "School",
+      "Primarily Teen Cast",
+      "Heterosexual",
+      "Otaku Culture",
+      "Female Protagonist",
+      "Chibi"
+    ],
+    "sourceRating": 79,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/169580",
+    "aliases": [
+      "I Made Friends with the Second Prettiest Girl in My Class",
+      "Class de 2-banme ni Kawaii Onnanoko to Tomodachi ni Natta",
+      "クラスで２番目に可愛い女の子と友だちになった"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/169580",
+        "description": "Maki Maehara, the class outcast, finally makes his first friend: Umi Asanagi, the second-prettiest girl in class and the center of everyone’s attention. He’s convinced she’s out of his league, but as their unlikely friendship grows, Maki starts to wonder…could there be more than just friendship between them? (Source: Crunchyroll)",
+        "genres": [
+          "Comedy",
+          "Romance",
+          "Seinen",
+          "Male Protagonist",
+          "School",
+          "Primarily Teen Cast",
+          "Heterosexual",
+          "Otaku Culture",
+          "Female Protagonist",
+          "Chibi"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 169580,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-199547",
+    "title": "MARRIAGETOXIN",
+    "originalTitle": "マリッジトキシン",
+    "year": 2026,
+    "episodes": 13,
+    "status": "连载中",
+    "genres": [
+      "Action",
+      "Comedy",
+      "Drama",
+      "Romance"
+    ],
+    "tags": [
+      "Assassins",
+      "Marriage",
+      "Urban",
+      "Crime",
+      "Surreal Comedy",
+      "Primarily Adult Cast",
+      "Male Protagonist",
+      "Bisexual"
+    ],
+    "summary": "For centuries, the deadly arts have been perfected by those known as the Masters. Among them, the Poison Masters of the Five Great Families hold the most fearsome power and influence. Hikaru Gero, heir to the Poison Masters’ Gero Family, has lived his entire life in the underworld, far removed from love or marriage. But when the Gero Family head decrees t...",
+    "externalSummary": "For centuries, the deadly arts have been perfected by those known as the Masters. Among them, the Poison Masters of the Five Great Families hold the most fearsome power and influence. Hikaru Gero, heir to the Poison Masters’ Gero Family, has lived his entire life in the underworld, far removed from love or marriage. But when the Gero Family head decrees t...",
+    "sourceGenres": [
+      "Action",
+      "Comedy",
+      "Drama",
+      "Romance",
+      "Assassins",
+      "Marriage",
+      "Urban",
+      "Crime",
+      "Surreal Comedy",
+      "Primarily Adult Cast",
+      "Male Protagonist",
+      "Bisexual"
+    ],
+    "sourceRating": 75,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/199547",
+    "aliases": [
+      "MARRIAGETOXIN",
+      "マリッジトキシン"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/199547",
+        "description": "For centuries, the deadly arts have been perfected by those known as the Masters. Among them, the Poison Masters of the Five Great Families hold the most fearsome power and influence. Hikaru Gero, heir to the Poison Masters’ Gero Family, has lived his entire life in the underworld, far removed from love or marriage. But when the Gero Family head decrees t...",
+        "genres": [
+          "Action",
+          "Comedy",
+          "Drama",
+          "Romance",
+          "Assassins",
+          "Marriage",
+          "Urban",
+          "Crime",
+          "Surreal Comedy",
+          "Primarily Adult Cast",
+          "Male Protagonist",
+          "Bisexual"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 199547,
+    "matchConfidence": 1,
+    "anilistFormat": "TV",
+    "needsReview": false,
+    "reviewReason": "Discovered from AniList batch discovery; review personal recommendation fields before merging."
+  },
+  {
+    "id": "anilist-187989",
+    "title": "Scum of the Brave",
+    "originalTitle": "勇者のクズ",
+    "year": 2026,
+    "episodes": 24,
+    "status": "连载中",
+    "genres": [
+      "Action",
+      "Comedy",
+      "Drama",
+      "Fantasy",
+      "Sci-Fi"
+    ],
+    "tags": [
+      "Male Protagonist",
+      "Drugs",
+      "Urban Fantasy",
+      "Crime",
+      "Urban",
+      "Mafia",
+      "Gore",
+      "Anti-Hero"
+    ],
+    "summary": "In the mid-21st century, Tokyo's mafia can turn into ether-enhanced Demon Lords, and Braves hunt them down. Yashiro, the Grim Reaper, reluctantly takes a new apprentice named Aki Jogamine, a high school girl training to become a Brave. He soon finds himself dragged into one troublesome case after another. The supernatural story of a scumbag master and his...",
+    "externalSummary": "In the mid-21st century, Tokyo's mafia can turn into ether-enhanced Demon Lords, and Braves hunt them down. Yashiro, the Grim Reaper, reluctantly takes a new apprentice named Aki Jogamine, a high school girl training to become a Brave. He soon finds himself dragged into one troublesome case after another. The supernatural story of a scumbag master and his...",
+    "sourceGenres": [
+      "Action",
+      "Comedy",
+      "Drama",
+      "Fantasy",
+      "Sci-Fi",
+      "Male Protagonist",
+      "Drugs",
+      "Urban Fantasy",
+      "Crime",
+      "Urban",
+      "Mafia",
+      "Gore",
+      "Anti-Hero"
+    ],
+    "sourceRating": 62,
+    "personalFitScore": 0,
+    "whyForMe": "",
+    "risk": "",
+    "sourceName": "AniList",
+    "sourceUrl": "https://anilist.co/anime/187989",
+    "aliases": [
+      "Scum of the Brave",
+      "Yuusha no Kuzu",
+      "勇者のクズ"
+    ],
+    "sources": [
+      {
+        "id": "anilist",
+        "name": "AniList",
+        "trustLevel": 80,
+        "sourceUrl": "https://anilist.co/anime/187989",
+        "description": "In the mid-21st century, Tokyo's mafia can turn into ether-enhanced Demon Lords, and Braves hunt them down. Yashiro, the Grim Reaper, reluctantly takes a new apprentice named Aki Jogamine, a high school girl training to become a Brave. He soon finds himself dragged into one troublesome case after another. The supernatural story of a scumbag master and his...",
+        "genres": [
+          "Action",
+          "Comedy",
+          "Drama",
+          "Fantasy",
+          "Sci-Fi",
+          "Male Protagonist",
+          "Drugs",
+          "Urban Fantasy",
+          "Crime",
+          "Urban",
+          "Mafia",
+          "Gore",
+          "Anti-Hero"
+        ]
+      }
+    ],
+    "confidence": 1,
+    "manualLockedFields": [
+      "personalFitScore",
+      "whyForMe",
+      "risk",
+      "tags"
+    ],
+    "sourceQuery": "discover:trending",
+    "sourceId": 187989,
     "matchConfidence": 1,
     "anilistFormat": "TV",
     "needsReview": false,

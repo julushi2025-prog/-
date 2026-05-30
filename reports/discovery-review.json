@@ -1,44 +1,55 @@
 {
-  "generatedAt": "2026-05-30T19:18:43.808Z",
+  "generatedAt": "2026-05-30T20:04:38.706Z",
   "stagingPath": "data/import/staging-anime.json",
   "reportPath": "reports/discovery-review.json",
   "markdownPath": "reports/discovery-review.md",
   "counts": {
     "total": 25,
-    "recommended": 0,
+    "recommended": 6,
     "maybe": 8,
-    "low-priority": 7,
-    "needs-review": 10
+    "low-priority": 3,
+    "needs-review": 8
   },
   "items": [
     {
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "originalTitle": "日本三國",
+      "title": "Witch Hat Atelier",
+      "originalTitle": "とんがり帽子のアトリエ",
       "year": 2026,
-      "episodes": 12,
+      "episodes": 13,
       "format": "ONA",
       "status": "连载中",
       "genres": [
-        "Action",
+        "Adventure",
         "Drama",
-        "Sci-Fi"
+        "Fantasy"
       ],
-      "tags": [],
-      "sourceRating": 81,
-      "sourceUrl": "https://anilist.co/anime/206914",
-      "preliminaryFitScore": 73,
+      "tags": [
+        "Magic",
+        "Witch",
+        "Female Protagonist",
+        "Drawing",
+        "Coming of Age",
+        "Primarily Female Cast",
+        "Found Family",
+        "Philosophy"
+      ],
+      "sourceRating": 86,
+      "sourceUrl": "https://anilist.co/anime/147105",
+      "preliminaryFitScore": 93,
       "recommendation": "needs-review",
       "reviewPriority": "manual",
       "matchReasons": [
-        "Sci-Fi: matches a positive rough-review signal.",
         "Drama: matches a positive rough-review signal.",
-        "War: matches a positive rough-review signal.",
-        "Solid source rating from AniList."
+        "Philosophy: matches a positive rough-review signal.",
+        "Coming of Age: matches a positive rough-review signal.",
+        "Found Family: matches a positive rough-review signal.",
+        "Primarily Female Cast: matches a positive rough-review signal.",
+        "High Rating: AniList source rating is very strong."
       ],
       "riskReasons": [
         "Series/sequel/special/version is uncertain and needs manual review."
       ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 73; keep candidate in staging report."
+      "reviewNote": "Manual review required before any later import decision. Preliminary score 93; keep candidate in staging report."
     },
     {
       "title": "Re:ZERO -Starting Life in Another World- Season 4",
@@ -55,161 +66,31 @@
         "Psychological",
         "Romance"
       ],
-      "tags": [],
+      "tags": [
+        "Isekai",
+        "Male Protagonist",
+        "Time Loop",
+        "Magic",
+        "Witch",
+        "Female Protagonist",
+        "Travel",
+        "Spearplay"
+      ],
       "sourceRating": 87,
       "sourceUrl": "https://anilist.co/anime/189046",
-      "preliminaryFitScore": 72,
+      "preliminaryFitScore": 80,
       "recommendation": "needs-review",
       "reviewPriority": "manual",
       "matchReasons": [
         "Psychological: matches a positive rough-review signal.",
         "Drama: matches a positive rough-review signal.",
+        "Time Manipulation: matches a positive rough-review signal.",
         "High Rating: AniList source rating is very strong."
       ],
       "riskReasons": [
         "Series/sequel/special/version is uncertain and needs manual review."
       ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 72; keep candidate in staging report."
-    },
-    {
-      "title": "Attack on Titan Season 2",
-      "originalTitle": "進撃の巨人 Season２",
-      "year": 2017,
-      "episodes": 12,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
-        "Action",
-        "Drama",
-        "Fantasy",
-        "Mystery"
-      ],
-      "tags": [],
-      "sourceRating": 85,
-      "sourceUrl": "https://anilist.co/anime/20958",
-      "preliminaryFitScore": 70,
-      "recommendation": "needs-review",
-      "reviewPriority": "manual",
-      "matchReasons": [
-        "Mystery: matches a positive rough-review signal.",
-        "Drama: matches a positive rough-review signal.",
-        "High Rating: AniList source rating is very strong."
-      ],
-      "riskReasons": [
-        "Series/sequel/special/version is uncertain and needs manual review."
-      ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 70; keep candidate in staging report."
-    },
-    {
-      "title": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
-      "originalTitle": "呪術廻戦 死滅回游 前編",
-      "year": 2026,
-      "episodes": 12,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
-        "Action",
-        "Drama",
-        "Supernatural"
-      ],
-      "tags": [],
-      "sourceRating": 86,
-      "sourceUrl": "https://anilist.co/anime/172463",
-      "preliminaryFitScore": 65,
-      "recommendation": "needs-review",
-      "reviewPriority": "manual",
-      "matchReasons": [
-        "Drama: matches a positive rough-review signal.",
-        "Supernatural: matches a positive rough-review signal.",
-        "High Rating: AniList source rating is very strong."
-      ],
-      "riskReasons": [
-        "Series/sequel/special/version is uncertain and needs manual review."
-      ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 65; keep candidate in staging report."
-    },
-    {
-      "title": "Hell’s Paradise Season 2",
-      "originalTitle": "地獄楽 第二期",
-      "year": 2026,
-      "episodes": 12,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
-        "Action",
-        "Adventure",
-        "Mystery",
-        "Supernatural"
-      ],
-      "tags": [],
-      "sourceRating": 82,
-      "sourceUrl": "https://anilist.co/anime/166613",
-      "preliminaryFitScore": 63,
-      "recommendation": "needs-review",
-      "reviewPriority": "manual",
-      "matchReasons": [
-        "Mystery: matches a positive rough-review signal.",
-        "Supernatural: matches a positive rough-review signal.",
-        "Solid source rating from AniList."
-      ],
-      "riskReasons": [
-        "Series/sequel/special/version is uncertain and needs manual review."
-      ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 63; keep candidate in staging report."
-    },
-    {
-      "title": "Frieren: Beyond Journey’s End Season 2",
-      "originalTitle": "葬送のフリーレン 第2期",
-      "year": 2026,
-      "episodes": 10,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
-        "Adventure",
-        "Drama",
-        "Fantasy"
-      ],
-      "tags": [],
-      "sourceRating": 88,
-      "sourceUrl": "https://anilist.co/anime/182255",
-      "preliminaryFitScore": 58,
-      "recommendation": "needs-review",
-      "reviewPriority": "manual",
-      "matchReasons": [
-        "Drama: matches a positive rough-review signal.",
-        "High Rating: AniList source rating is very strong."
-      ],
-      "riskReasons": [
-        "Series/sequel/special/version is uncertain and needs manual review."
-      ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 58; keep candidate in staging report."
-    },
-    {
-      "title": "Witch Hat Atelier",
-      "originalTitle": "とんがり帽子のアトリエ",
-      "year": 2026,
-      "episodes": 13,
-      "format": "ONA",
-      "status": "连载中",
-      "genres": [
-        "Adventure",
-        "Drama",
-        "Fantasy"
-      ],
-      "tags": [],
-      "sourceRating": 86,
-      "sourceUrl": "https://anilist.co/anime/147105",
-      "preliminaryFitScore": 58,
-      "recommendation": "needs-review",
-      "reviewPriority": "manual",
-      "matchReasons": [
-        "Drama: matches a positive rough-review signal.",
-        "High Rating: AniList source rating is very strong."
-      ],
-      "riskReasons": [
-        "Series/sequel/special/version is uncertain and needs manual review."
-      ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 58; keep candidate in staging report."
+      "reviewNote": "Manual review required before any later import decision. Preliminary score 80; keep candidate in staging report."
     },
     {
       "title": "Dr. STONE SCIENCE FUTURE Cour 3",
@@ -224,20 +105,30 @@
         "Comedy",
         "Sci-Fi"
       ],
-      "tags": [],
-      "sourceRating": 81,
+      "tags": [
+        "Post-Apocalyptic",
+        "Male Protagonist",
+        "Shounen",
+        "Space",
+        "Ensemble Cast",
+        "Foreign",
+        "Travel",
+        "Lost Civilization"
+      ],
+      "sourceRating": 82,
       "sourceUrl": "https://anilist.co/anime/199221",
-      "preliminaryFitScore": 56,
+      "preliminaryFitScore": 70,
       "recommendation": "needs-review",
       "reviewPriority": "manual",
       "matchReasons": [
         "Sci-Fi: matches a positive rough-review signal.",
+        "Post-Apocalyptic: matches a positive rough-review signal.",
         "Solid source rating from AniList."
       ],
       "riskReasons": [
         "Series/sequel/special/version is uncertain and needs manual review."
       ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 56; keep candidate in staging report."
+      "reviewNote": "Manual review required before any later import decision. Preliminary score 70; keep candidate in staging report."
     },
     {
       "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
@@ -250,48 +141,257 @@
         "Drama",
         "Psychological"
       ],
-      "tags": [],
+      "tags": [
+        "Boarding School",
+        "Survival",
+        "Fugitive",
+        "Battle Royale",
+        "Male Protagonist",
+        "School",
+        "Anti-Hero",
+        "Coming of Age"
+      ],
       "sourceRating": 79,
       "sourceUrl": "https://anilist.co/anime/180745",
-      "preliminaryFitScore": 52,
+      "preliminaryFitScore": 62,
       "recommendation": "needs-review",
       "reviewPriority": "manual",
       "matchReasons": [
         "Psychological: matches a positive rough-review signal.",
         "Drama: matches a positive rough-review signal.",
+        "Coming of Age: matches a positive rough-review signal.",
         "Solid source rating from AniList."
       ],
       "riskReasons": [
         "SPECIAL: matches a down-weight rough-review signal.",
         "Series/sequel/special/version is uncertain and needs manual review."
       ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 52; keep candidate in staging report."
+      "reviewNote": "Manual review required before any later import decision. Preliminary score 62; keep candidate in staging report."
     },
     {
-      "title": "Umi ga Hashiru End Roll",
-      "originalTitle": "海が走るエンドロール",
-      "year": 2027,
-      "episodes": 1,
-      "format": "MOVIE",
-      "status": "未开播",
+      "title": "The strongest job is apparently not a hero or a sage, but an appraiser (provisional)!",
+      "originalTitle": "最強の職業は勇者でも賢者でもなく鑑定士（仮）らしいですよ？",
+      "year": 2026,
+      "episodes": 12,
+      "format": "ONA",
+      "status": "连载中",
       "genres": [
+        "Action",
+        "Adventure",
         "Comedy",
-        "Drama",
-        "Slice of Life"
+        "Fantasy"
       ],
-      "tags": [],
-      "sourceRating": null,
-      "sourceUrl": "https://anilist.co/anime/212105",
-      "preliminaryFitScore": 50,
+      "tags": [
+        "Slapstick",
+        "Isekai",
+        "Magic",
+        "Animals",
+        "Surreal Comedy",
+        "Elf",
+        "Archery",
+        "Male Protagonist"
+      ],
+      "sourceRating": 58,
+      "sourceUrl": "https://anilist.co/anime/200769",
+      "preliminaryFitScore": 47,
       "recommendation": "needs-review",
       "reviewPriority": "manual",
       "matchReasons": [
-        "Drama: matches a positive rough-review signal."
+        "Surreal Comedy: matches a positive rough-review signal."
+      ],
+      "riskReasons": [
+        "Low source rating from AniList.",
+        "Series/sequel/special/version is uncertain and needs manual review."
+      ],
+      "reviewNote": "Manual review required before any later import decision. Preliminary score 47; keep candidate in staging report."
+    },
+    {
+      "title": "That Time I Got Reincarnated as a Slime Season 4",
+      "originalTitle": "転生したらスライムだった件 第4期",
+      "year": 2026,
+      "episodes": 0,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Fantasy"
+      ],
+      "tags": [
+        "Kingdom Management",
+        "Isekai",
+        "Magic",
+        "Ensemble Cast",
+        "Demons",
+        "Medieval",
+        "Skeleton",
+        "Spearplay"
+      ],
+      "sourceRating": 81,
+      "sourceUrl": "https://anilist.co/anime/182205",
+      "preliminaryFitScore": 44,
+      "recommendation": "needs-review",
+      "reviewPriority": "manual",
+      "matchReasons": [
+        "Solid source rating from AniList."
       ],
       "riskReasons": [
         "Series/sequel/special/version is uncertain and needs manual review."
       ],
-      "reviewNote": "Manual review required before any later import decision. Preliminary score 50; keep candidate in staging report."
+      "reviewNote": "Manual review required before any later import decision. Preliminary score 44; keep candidate in staging report."
+    },
+    {
+      "title": "Wistoria: Wand and Sword Season 2",
+      "originalTitle": "杖と剣のウィストリア Season2",
+      "year": 2026,
+      "episodes": 12,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Drama",
+        "Fantasy"
+      ],
+      "tags": [
+        "Magic",
+        "Swordplay",
+        "Male Protagonist",
+        "Shounen",
+        "Elf",
+        "Primarily Teen Cast",
+        "Medieval",
+        "Female Harem"
+      ],
+      "sourceRating": 82,
+      "sourceUrl": "https://anilist.co/anime/182300",
+      "preliminaryFitScore": 43,
+      "recommendation": "needs-review",
+      "reviewPriority": "manual",
+      "matchReasons": [
+        "Drama: matches a positive rough-review signal.",
+        "Primarily Teen Cast: matches a positive rough-review signal.",
+        "Solid source rating from AniList."
+      ],
+      "riskReasons": [
+        "Harem: matches a down-weight rough-review signal.",
+        "Series/sequel/special/version is uncertain and needs manual review."
+      ],
+      "reviewNote": "Manual review required before any later import decision. Preliminary score 43; keep candidate in staging report."
+    },
+    {
+      "title": "Welcome to Demon School! Iruma-kun Season 4",
+      "originalTitle": "魔入りました！入間くん 第4シリーズ",
+      "year": 2026,
+      "episodes": 24,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Comedy",
+        "Fantasy",
+        "Supernatural"
+      ],
+      "tags": [
+        "School",
+        "Demons",
+        "Primarily Teen Cast",
+        "Magic",
+        "Shounen",
+        "Isekai",
+        "Monster Boy",
+        "Monster Girl"
+      ],
+      "sourceRating": 80,
+      "sourceUrl": "https://anilist.co/anime/184492",
+      "preliminaryFitScore": 36,
+      "recommendation": "needs-review",
+      "reviewPriority": "manual",
+      "matchReasons": [
+        "Supernatural: matches a positive rough-review signal.",
+        "Primarily Teen Cast: matches a positive rough-review signal.",
+        "Solid source rating from AniList."
+      ],
+      "riskReasons": [
+        "MUSIC: matches a down-weight rough-review signal.",
+        "Series/sequel/special/version is uncertain and needs manual review."
+      ],
+      "reviewNote": "Manual review required before any later import decision. Preliminary score 36; keep candidate in staging report."
+    },
+    {
+      "title": "Ascendance of a Bookworm: Adopted Daughter of an Archduke",
+      "originalTitle": "本好きの下剋上 領主の養女",
+      "year": 2026,
+      "episodes": 0,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Drama",
+        "Fantasy",
+        "Slice of Life"
+      ],
+      "tags": [
+        "Coming of Age",
+        "Writing",
+        "Magic",
+        "Female Protagonist",
+        "Isekai",
+        "Politics",
+        "Religion",
+        "Gods"
+      ],
+      "sourceRating": 77,
+      "sourceUrl": "https://anilist.co/anime/171110",
+      "preliminaryFitScore": 88,
+      "recommendation": "recommended",
+      "reviewPriority": "high",
+      "matchReasons": [
+        "Drama: matches a positive rough-review signal.",
+        "Coming of Age: matches a positive rough-review signal.",
+        "Politics: matches a positive rough-review signal.",
+        "Religion: matches a positive rough-review signal.",
+        "Solid source rating from AniList."
+      ],
+      "riskReasons": [],
+      "reviewNote": "Strong rough fit; review early but do not auto-import. Preliminary score 88."
+    },
+    {
+      "title": "Scum of the Brave",
+      "originalTitle": "勇者のクズ",
+      "year": 2026,
+      "episodes": 24,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Action",
+        "Comedy",
+        "Drama",
+        "Fantasy",
+        "Sci-Fi"
+      ],
+      "tags": [
+        "Male Protagonist",
+        "Drugs",
+        "Urban Fantasy",
+        "Crime",
+        "Urban",
+        "Mafia",
+        "Gore",
+        "Anti-Hero"
+      ],
+      "sourceRating": 62,
+      "sourceUrl": "https://anilist.co/anime/187989",
+      "preliminaryFitScore": 79,
+      "recommendation": "recommended",
+      "reviewPriority": "high",
+      "matchReasons": [
+        "Sci-Fi: matches a positive rough-review signal.",
+        "Drama: matches a positive rough-review signal.",
+        "Urban Fantasy: matches a positive rough-review signal.",
+        "Supernatural: matches a positive rough-review signal."
+      ],
+      "riskReasons": [],
+      "reviewNote": "Strong rough fit; review early but do not auto-import. Preliminary score 79."
     },
     {
       "title": "NEEDY GIRL OVERDOSE",
@@ -306,70 +406,66 @@
         "Psychological",
         "Slice of Life"
       ],
-      "tags": [],
+      "tags": [
+        "Female Protagonist",
+        "Philosophy",
+        "Otaku Culture",
+        "Idol",
+        "VTuber",
+        "Yuri",
+        "Urban",
+        "CGI"
+      ],
       "sourceRating": 68,
       "sourceUrl": "https://anilist.co/anime/202102",
-      "preliminaryFitScore": 64,
-      "recommendation": "maybe",
-      "reviewPriority": "medium",
+      "preliminaryFitScore": 78,
+      "recommendation": "recommended",
+      "reviewPriority": "high",
       "matchReasons": [
         "Psychological: matches a positive rough-review signal.",
-        "Drama: matches a positive rough-review signal."
+        "Drama: matches a positive rough-review signal.",
+        "Philosophy: matches a positive rough-review signal."
       ],
       "riskReasons": [],
-      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 64."
+      "reviewNote": "Strong rough fit; review early but do not auto-import. Preliminary score 78."
     },
     {
-      "title": "Chainsaw Man",
-      "originalTitle": "チェンソーマン",
-      "year": 2022,
-      "episodes": 12,
+      "title": "ONE PIECE",
+      "originalTitle": "ONE PIECE",
+      "year": 1999,
+      "episodes": 0,
       "format": "TV",
-      "status": "完结",
+      "status": "连载中",
       "genres": [
         "Action",
-        "Drama",
-        "Horror",
-        "Supernatural"
-      ],
-      "tags": [],
-      "sourceRating": 83,
-      "sourceUrl": "https://anilist.co/anime/127230",
-      "preliminaryFitScore": 61,
-      "recommendation": "maybe",
-      "reviewPriority": "medium",
-      "matchReasons": [
-        "Drama: matches a positive rough-review signal.",
-        "Supernatural: matches a positive rough-review signal.",
-        "Solid source rating from AniList."
-      ],
-      "riskReasons": [],
-      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 61."
-    },
-    {
-      "title": "The Fragrant Flower Blooms With Dignity",
-      "originalTitle": "薫る花は凛と咲く",
-      "year": 2025,
-      "episodes": 13,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
+        "Adventure",
         "Comedy",
         "Drama",
-        "Romance"
+        "Fantasy"
       ],
-      "tags": [],
-      "sourceRating": 85,
-      "sourceUrl": "https://anilist.co/anime/181444",
-      "preliminaryFitScore": 58,
-      "recommendation": "maybe",
-      "reviewPriority": "medium",
+      "tags": [
+        "Pirates",
+        "Travel",
+        "Shounen",
+        "Ensemble Cast",
+        "Super Power",
+        "Found Family",
+        "Male Protagonist",
+        "Conspiracy"
+      ],
+      "sourceRating": 87,
+      "sourceUrl": "https://anilist.co/anime/21",
+      "preliminaryFitScore": 76,
+      "recommendation": "recommended",
+      "reviewPriority": "high",
       "matchReasons": [
         "Drama: matches a positive rough-review signal.",
+        "Conspiracy: matches a positive rough-review signal.",
+        "Found Family: matches a positive rough-review signal.",
         "High Rating: AniList source rating is very strong."
       ],
       "riskReasons": [],
-      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 58."
+      "reviewNote": "Strong rough fit; review early but do not auto-import. Preliminary score 76."
     },
     {
       "title": "Agents of the Four Seasons: Dance of Spring",
@@ -383,165 +479,169 @@
         "Fantasy",
         "Romance"
       ],
-      "tags": [],
+      "tags": [
+        "Urban Fantasy",
+        "Environmental",
+        "Mythology",
+        "Ensemble Cast",
+        "Rehabilitation",
+        "Swordplay",
+        "Disability",
+        "Shoujo"
+      ],
       "sourceRating": 75,
       "sourceUrl": "https://anilist.co/anime/190143",
-      "preliminaryFitScore": 54,
-      "recommendation": "maybe",
-      "reviewPriority": "medium",
+      "preliminaryFitScore": 71,
+      "recommendation": "recommended",
+      "reviewPriority": "high",
       "matchReasons": [
         "Drama: matches a positive rough-review signal.",
+        "Urban Fantasy: matches a positive rough-review signal.",
+        "Mythology: matches a positive rough-review signal.",
         "Solid source rating from AniList."
       ],
       "riskReasons": [],
-      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 54."
+      "reviewNote": "Strong rough fit; review early but do not auto-import. Preliminary score 71."
     },
     {
-      "title": "Sentenced to Be a Hero",
-      "originalTitle": "勇者刑に処す 懲罰勇者9004隊刑務記録",
-      "year": 2026,
-      "episodes": 12,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
-        "Action",
-        "Drama",
-        "Fantasy"
-      ],
-      "tags": [],
-      "sourceRating": 81,
-      "sourceUrl": "https://anilist.co/anime/167152",
-      "preliminaryFitScore": 54,
-      "recommendation": "maybe",
-      "reviewPriority": "medium",
-      "matchReasons": [
-        "Drama: matches a positive rough-review signal.",
-        "Solid source rating from AniList."
-      ],
-      "riskReasons": [],
-      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 54."
-    },
-    {
-      "title": "Wistoria: Wand and Sword",
-      "originalTitle": "杖と剣のウィストリア",
-      "year": 2024,
-      "episodes": 12,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
-        "Action",
-        "Comedy",
-        "Drama",
-        "Fantasy"
-      ],
-      "tags": [],
-      "sourceRating": 78,
-      "sourceUrl": "https://anilist.co/anime/174576",
-      "preliminaryFitScore": 54,
-      "recommendation": "maybe",
-      "reviewPriority": "medium",
-      "matchReasons": [
-        "Drama: matches a positive rough-review signal.",
-        "Solid source rating from AniList."
-      ],
-      "riskReasons": [],
-      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 54."
-    },
-    {
-      "title": "You and I Are Polar Opposites",
-      "originalTitle": "正反対な君と僕",
-      "year": 2026,
-      "episodes": 12,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
-        "Comedy",
-        "Drama",
-        "Romance",
-        "Slice of Life"
-      ],
-      "tags": [],
-      "sourceRating": 83,
-      "sourceUrl": "https://anilist.co/anime/184951",
-      "preliminaryFitScore": 54,
-      "recommendation": "maybe",
-      "reviewPriority": "medium",
-      "matchReasons": [
-        "Drama: matches a positive rough-review signal.",
-        "Solid source rating from AniList."
-      ],
-      "riskReasons": [],
-      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 54."
-    },
-    {
-      "title": "Botan Kamiina Fully Blossoms When Drunk",
-      "originalTitle": "上伊那ぼたん、酔へる姿は百合の花",
+      "title": "Akane-banashi",
+      "originalTitle": "あかね噺",
       "year": 2026,
       "episodes": 12,
       "format": "TV",
       "status": "连载中",
       "genres": [
-        "Comedy",
-        "Romance",
-        "Slice of Life"
+        "Drama"
       ],
-      "tags": [],
-      "sourceRating": 77,
-      "sourceUrl": "https://anilist.co/anime/187869",
-      "preliminaryFitScore": 44,
-      "recommendation": "low-priority",
-      "reviewPriority": "low",
+      "tags": [
+        "Rakugo",
+        "Female Protagonist",
+        "Coming of Age",
+        "Acting",
+        "Shounen",
+        "Revenge",
+        "Found Family",
+        "Work"
+      ],
+      "sourceRating": 76,
+      "sourceUrl": "https://anilist.co/anime/196935",
+      "preliminaryFitScore": 70,
+      "recommendation": "recommended",
+      "reviewPriority": "high",
       "matchReasons": [
+        "Drama: matches a positive rough-review signal.",
+        "Coming of Age: matches a positive rough-review signal.",
+        "Found Family: matches a positive rough-review signal.",
         "Solid source rating from AniList."
       ],
       "riskReasons": [],
-      "reviewNote": "Low priority only; candidate is retained for audit and should not be deleted automatically. Preliminary score 44."
+      "reviewNote": "Strong rough fit; review early but do not auto-import. Preliminary score 70."
     },
     {
-      "title": "I Made Friends with the Second Prettiest Girl in My Class",
-      "originalTitle": "クラスで２番目に可愛い女の子と友だちになった",
+      "title": "MARRIAGETOXIN",
+      "originalTitle": "マリッジトキシン",
       "year": 2026,
-      "episodes": 12,
+      "episodes": 13,
       "format": "TV",
       "status": "连载中",
       "genres": [
+        "Action",
         "Comedy",
+        "Drama",
         "Romance"
       ],
-      "tags": [],
-      "sourceRating": 78,
-      "sourceUrl": "https://anilist.co/anime/169580",
-      "preliminaryFitScore": 44,
-      "recommendation": "low-priority",
-      "reviewPriority": "low",
+      "tags": [
+        "Assassins",
+        "Marriage",
+        "Urban",
+        "Crime",
+        "Surreal Comedy",
+        "Primarily Adult Cast",
+        "Male Protagonist",
+        "Bisexual"
+      ],
+      "sourceRating": 75,
+      "sourceUrl": "https://anilist.co/anime/199547",
+      "preliminaryFitScore": 66,
+      "recommendation": "maybe",
+      "reviewPriority": "medium",
       "matchReasons": [
+        "Drama: matches a positive rough-review signal.",
+        "Surreal Comedy: matches a positive rough-review signal.",
         "Solid source rating from AniList."
       ],
       "riskReasons": [],
-      "reviewNote": "Low priority only; candidate is retained for audit and should not be deleted automatically. Preliminary score 44."
+      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 66."
     },
     {
-      "title": "The Angel Next Door Spoils Me Rotten2",
-      "originalTitle": "お隣の天使様にいつの間にか駄目人間にされていた件 第2期",
+      "title": "The Ramparts of Ice",
+      "originalTitle": "氷の城壁",
       "year": 2026,
-      "episodes": 12,
+      "episodes": 0,
       "format": "TV",
       "status": "连载中",
       "genres": [
+        "Comedy",
         "Romance",
         "Slice of Life"
       ],
-      "tags": [],
+      "tags": [
+        "Heterosexual",
+        "Female Protagonist",
+        "Ensemble Cast",
+        "Primarily Teen Cast",
+        "Kuudere",
+        "School",
+        "Shoujo",
+        "Coming of Age"
+      ],
       "sourceRating": 78,
-      "sourceUrl": "https://anilist.co/anime/170019",
-      "preliminaryFitScore": 44,
-      "recommendation": "low-priority",
-      "reviewPriority": "low",
+      "sourceUrl": "https://anilist.co/anime/186497",
+      "preliminaryFitScore": 59,
+      "recommendation": "maybe",
+      "reviewPriority": "medium",
       "matchReasons": [
+        "Coming of Age: matches a positive rough-review signal.",
+        "Primarily Teen Cast: matches a positive rough-review signal.",
         "Solid source rating from AniList."
       ],
       "riskReasons": [],
-      "reviewNote": "Low priority only; candidate is retained for audit and should not be deleted automatically. Preliminary score 44."
+      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 59."
+    },
+    {
+      "title": "Daemons of the Shadow Realm",
+      "originalTitle": "黄泉のツガイ",
+      "year": 2026,
+      "episodes": 24,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Fantasy"
+      ],
+      "tags": [
+        "Shounen",
+        "Male Protagonist",
+        "Youkai",
+        "Archery",
+        "Rural",
+        "Twins",
+        "Urban Fantasy",
+        "Demons"
+      ],
+      "sourceRating": 78,
+      "sourceUrl": "https://anilist.co/anime/195600",
+      "preliminaryFitScore": 54,
+      "recommendation": "maybe",
+      "reviewPriority": "medium",
+      "matchReasons": [
+        "Urban Fantasy: matches a positive rough-review signal.",
+        "Solid source rating from AniList."
+      ],
+      "riskReasons": [],
+      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 54."
     },
     {
       "title": "KILL BLUE",
@@ -554,9 +654,187 @@
         "Action",
         "Comedy"
       ],
-      "tags": [],
-      "sourceRating": 73,
+      "tags": [
+        "Guns",
+        "Age Regression",
+        "School",
+        "Assassins",
+        "School Club",
+        "Urban",
+        "Ensemble Cast",
+        "Surreal Comedy"
+      ],
+      "sourceRating": 74,
       "sourceUrl": "https://anilist.co/anime/198113",
+      "preliminaryFitScore": 52,
+      "recommendation": "maybe",
+      "reviewPriority": "medium",
+      "matchReasons": [
+        "Surreal Comedy: matches a positive rough-review signal."
+      ],
+      "riskReasons": [],
+      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 52."
+    },
+    {
+      "title": "Bleach",
+      "originalTitle": "BLEACH",
+      "year": 2004,
+      "episodes": 366,
+      "format": "TV",
+      "status": "完结",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Supernatural"
+      ],
+      "tags": [
+        "Swordplay",
+        "Shounen",
+        "Super Power",
+        "Ghost",
+        "Male Protagonist",
+        "Exorcism",
+        "Demons",
+        "Urban Fantasy"
+      ],
+      "sourceRating": 79,
+      "sourceUrl": "https://anilist.co/anime/269",
+      "preliminaryFitScore": 49,
+      "recommendation": "maybe",
+      "reviewPriority": "medium",
+      "matchReasons": [
+        "Urban Fantasy: matches a positive rough-review signal.",
+        "Supernatural: matches a positive rough-review signal.",
+        "Solid source rating from AniList."
+      ],
+      "riskReasons": [
+        "Very long episode count: may be costly to review/watch."
+      ],
+      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 49."
+    },
+    {
+      "title": "Gals Can't Be Kind to Otaku!?",
+      "originalTitle": "オタクに優しいギャルはいない!?",
+      "year": 2026,
+      "episodes": 12,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "tags": [
+        "Gyaru",
+        "Otaku Culture",
+        "Primarily Teen Cast",
+        "Heterosexual",
+        "Male Protagonist",
+        "School",
+        "Seinen",
+        "Female Protagonist"
+      ],
+      "sourceRating": 75,
+      "sourceUrl": "https://anilist.co/anime/199588",
+      "preliminaryFitScore": 49,
+      "recommendation": "maybe",
+      "reviewPriority": "medium",
+      "matchReasons": [
+        "Primarily Teen Cast: matches a positive rough-review signal.",
+        "Solid source rating from AniList."
+      ],
+      "riskReasons": [],
+      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 49."
+    },
+    {
+      "title": "I Made Friends with the Second Prettiest Girl in My Class",
+      "originalTitle": "クラスで２番目に可愛い女の子と友だちになった",
+      "year": 2026,
+      "episodes": 12,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "tags": [
+        "Seinen",
+        "Male Protagonist",
+        "School",
+        "Primarily Teen Cast",
+        "Heterosexual",
+        "Otaku Culture",
+        "Female Protagonist",
+        "Chibi"
+      ],
+      "sourceRating": 79,
+      "sourceUrl": "https://anilist.co/anime/169580",
+      "preliminaryFitScore": 49,
+      "recommendation": "maybe",
+      "reviewPriority": "medium",
+      "matchReasons": [
+        "Primarily Teen Cast: matches a positive rough-review signal.",
+        "Solid source rating from AniList."
+      ],
+      "riskReasons": [],
+      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 49."
+    },
+    {
+      "title": "The Angel Next Door Spoils Me Rotten2",
+      "originalTitle": "お隣の天使様にいつの間にか駄目人間にされていた件 第2期",
+      "year": 2026,
+      "episodes": 12,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Romance",
+        "Slice of Life"
+      ],
+      "tags": [
+        "Heterosexual",
+        "Male Protagonist",
+        "Iyashikei",
+        "Female Protagonist",
+        "Primarily Teen Cast",
+        "Kuudere",
+        "School",
+        "Chibi"
+      ],
+      "sourceRating": 77,
+      "sourceUrl": "https://anilist.co/anime/170019",
+      "preliminaryFitScore": 49,
+      "recommendation": "maybe",
+      "reviewPriority": "medium",
+      "matchReasons": [
+        "Primarily Teen Cast: matches a positive rough-review signal.",
+        "Solid source rating from AniList."
+      ],
+      "riskReasons": [],
+      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 49."
+    },
+    {
+      "title": "Kusunoki's Garden of Gods",
+      "originalTitle": "神の庭付き楠木邸",
+      "year": 2026,
+      "episodes": 12,
+      "format": "TV",
+      "status": "连载中",
+      "genres": [
+        "Comedy",
+        "Fantasy",
+        "Slice of Life"
+      ],
+      "tags": [
+        "Iyashikei",
+        "Gods",
+        "Youkai",
+        "Exorcism",
+        "Rural",
+        "Male Protagonist",
+        "Food",
+        "Animals"
+      ],
+      "sourceRating": 70,
+      "sourceUrl": "https://anilist.co/anime/196029",
       "preliminaryFitScore": 40,
       "recommendation": "low-priority",
       "reviewPriority": "low",
@@ -565,57 +843,6 @@
       ],
       "riskReasons": [],
       "reviewNote": "Low priority only; candidate is retained for audit and should not be deleted automatically. Preliminary score 40."
-    },
-    {
-      "title": "The Warrior Princess and the Barbaric King",
-      "originalTitle": "姫騎士は蛮族の嫁",
-      "year": 2026,
-      "episodes": 12,
-      "format": "TV",
-      "status": "连载中",
-      "genres": [
-        "Comedy",
-        "Fantasy",
-        "Romance"
-      ],
-      "tags": [],
-      "sourceRating": 67,
-      "sourceUrl": "https://anilist.co/anime/182483",
-      "preliminaryFitScore": 40,
-      "recommendation": "maybe",
-      "reviewPriority": "medium",
-      "matchReasons": [
-        "No strong preference signal found in the current AniList metadata."
-      ],
-      "riskReasons": [],
-      "reviewNote": "Possible fit; use web review/manual judgment before promotion. Preliminary score 40."
-    },
-    {
-      "title": "My Dress-Up Darling",
-      "originalTitle": "その着せ替え人形は恋をする",
-      "year": 2022,
-      "episodes": 12,
-      "format": "TV",
-      "status": "完结",
-      "genres": [
-        "Comedy",
-        "Ecchi",
-        "Romance",
-        "Slice of Life"
-      ],
-      "tags": [],
-      "sourceRating": 80,
-      "sourceUrl": "https://anilist.co/anime/132405",
-      "preliminaryFitScore": 26,
-      "recommendation": "low-priority",
-      "reviewPriority": "low",
-      "matchReasons": [
-        "Solid source rating from AniList."
-      ],
-      "riskReasons": [
-        "Ecchi: matches a down-weight rough-review signal."
-      ],
-      "reviewNote": "Low priority only; candidate is retained for audit and should not be deleted automatically. Preliminary score 26; risks: Ecchi: matches a down-weight rough-review signal.."
     },
     {
       "title": "Mistress Kanan is Devilishly Easy",
@@ -630,7 +857,16 @@
         "Fantasy",
         "Romance"
       ],
-      "tags": [],
+      "tags": [
+        "Demons",
+        "Heterosexual",
+        "Tsundere",
+        "Large Breasts",
+        "School",
+        "Male Protagonist",
+        "Female Protagonist",
+        "Slapstick"
+      ],
       "sourceRating": 67,
       "sourceUrl": "https://anilist.co/anime/190704",
       "preliminaryFitScore": 22,
@@ -645,29 +881,40 @@
       "reviewNote": "Low priority only; candidate is retained for audit and should not be deleted automatically. Preliminary score 22; risks: Ecchi: matches a down-weight rough-review signal.."
     },
     {
-      "title": "Ingoku Danchi:Deviant's Apartment Complex",
-      "originalTitle": "インゴクダンチ",
+      "title": "Yowayowa Sensei",
+      "originalTitle": "よわよわ先生",
       "year": 2026,
       "episodes": 12,
-      "format": "TV_SHORT",
+      "format": "TV",
       "status": "连载中",
       "genres": [
-        "Ecchi"
+        "Comedy",
+        "Ecchi",
+        "Romance"
       ],
-      "tags": [],
-      "sourceRating": 50,
-      "sourceUrl": "https://anilist.co/anime/206166",
-      "preliminaryFitScore": 17,
+      "tags": [
+        "Teacher",
+        "Nudity",
+        "Heterosexual",
+        "Female Harem",
+        "Shounen",
+        "Large Breasts",
+        "School",
+        "Male Protagonist"
+      ],
+      "sourceRating": 62,
+      "sourceUrl": "https://anilist.co/anime/185211",
+      "preliminaryFitScore": 6,
       "recommendation": "low-priority",
       "reviewPriority": "low",
       "matchReasons": [
         "No strong preference signal found in the current AniList metadata."
       ],
       "riskReasons": [
-        "Ecchi: matches a down-weight rough-review signal.",
-        "Low source rating from AniList."
+        "Harem: matches a down-weight rough-review signal.",
+        "Ecchi: matches a down-weight rough-review signal."
       ],
-      "reviewNote": "Low priority only; candidate is retained for audit and should not be deleted automatically. Preliminary score 17; risks: Ecchi: matches a down-weight rough-review signal.; Low source rating from AniList.."
+      "reviewNote": "Low priority only; candidate is retained for audit and should not be deleted automatically. Preliminary score 6; risks: Harem: matches a down-weight rough-review signal.; Ecchi: matches a down-weight rough-review signal.."
     }
   ]
 }
