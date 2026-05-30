@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-11T10:07:36.809Z",
+  "generatedAt": "2026-05-30T19:57:07.790Z",
   "mode": "dry-run",
   "stagingPath": "data/import/staging-anime.json",
   "animePath": "data/anime.json",
@@ -24,73 +24,108 @@
   },
   "added": [
     {
-      "title": "Witch Hat Atelier",
-      "year": 2026,
+      "title": "Attack on Titan",
+      "year": 2013,
       "sourceName": "AniList"
     },
     {
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "year": 2026,
+      "title": "Demon Slayer: Kimetsu no Yaiba",
+      "year": 2019,
       "sourceName": "AniList"
     },
     {
-      "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
-      "year": 2026,
+      "title": "JUJUTSU KAISEN",
+      "year": 2020,
       "sourceName": "AniList"
     },
     {
-      "title": "Dr. STONE SCIENCE FUTURE Cour 3",
-      "year": 2026,
+      "title": "Death Note",
+      "year": 2006,
       "sourceName": "AniList"
     },
     {
-      "title": "KILL BLUE",
-      "year": 2026,
+      "title": "My Hero Academia",
+      "year": 2016,
       "sourceName": "AniList"
     },
     {
-      "title": "Re:ZERO -Starting Life in Another World- Season 4",
-      "year": 2026,
+      "title": "Hunter x Hunter (2011)",
+      "year": 2011,
       "sourceName": "AniList"
     },
     {
-      "title": "I Made Friends with the Second Prettiest Girl in My Class",
-      "year": 2026,
+      "title": "One-Punch Man",
+      "year": 2015,
       "sourceName": "AniList"
     },
     {
-      "title": "Frieren: Beyond Journey’s End Season 2",
-      "year": 2026,
+      "title": "Tokyo Ghoul",
+      "year": 2014,
       "sourceName": "AniList"
     },
     {
-      "title": "The Angel Next Door Spoils Me Rotten2",
-      "year": 2026,
+      "title": "ONE PIECE",
+      "year": 1999,
       "sourceName": "AniList"
     },
     {
-      "title": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
-      "year": 2026,
+      "title": "Attack on Titan Season 2",
+      "year": 2017,
       "sourceName": "AniList"
     },
     {
-      "title": "Mistress Kanan is Devilishly Easy",
-      "year": 2026,
+      "title": "Fullmetal Alchemist: Brotherhood",
+      "year": 2009,
       "sourceName": "AniList"
     },
     {
-      "title": "Agents of the Four Seasons: Dance of Spring",
-      "year": 2026,
+      "title": "Naruto",
+      "year": 2002,
       "sourceName": "AniList"
     },
     {
-      "title": "NEEDY GIRL OVERDOSE",
-      "year": 2026,
+      "title": "Sword Art Online",
+      "year": 2012,
       "sourceName": "AniList"
     },
     {
-      "title": "Umi ga Hashiru End Roll",
-      "year": 2027,
+      "title": "Your Name.",
+      "year": 2016,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "A Silent Voice",
+      "year": 2016,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Attack on Titan Season 3",
+      "year": 2018,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "My Hero Academia Season 2",
+      "year": 2017,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Attack on Titan Final Season",
+      "year": 2020,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "The Promised Neverland",
+      "year": 2019,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Assassination Classroom",
+      "year": 2015,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Mob Psycho 100",
+      "year": 2016,
       "sourceName": "AniList"
     },
     {
@@ -99,53 +134,18 @@
       "sourceName": "AniList"
     },
     {
-      "title": "Ingoku Danchi:Deviant's Apartment Complex",
-      "year": 2026,
+      "title": "Your lie in April",
+      "year": 2014,
       "sourceName": "AniList"
     },
     {
-      "title": "Wistoria: Wand and Sword",
-      "year": 2024,
+      "title": "Re:ZERO -Starting Life in Another World-",
+      "year": 2016,
       "sourceName": "AniList"
     },
     {
-      "title": "My Dress-Up Darling",
-      "year": 2022,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "Hell’s Paradise Season 2",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "Sentenced to Be a Hero",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "The Warrior Princess and the Barbaric King",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "Botan Kamiina Fully Blossoms When Drunk",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "The Fragrant Flower Blooms With Dignity",
-      "year": 2025,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "You and I Are Polar Opposites",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "Attack on Titan Season 2",
-      "year": 2017,
+      "title": "Attack on Titan Season 3 Part 2",
+      "year": 2019,
       "sourceName": "AniList"
     }
   ],
@@ -158,86 +158,128 @@
   "possibleDuplicates": [],
   "needsReview": [
     {
-      "title": "Witch Hat Atelier",
-      "year": 2026,
+      "title": "Attack on Titan",
+      "year": 2013,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "year": 2026,
+      "title": "Demon Slayer: Kimetsu no Yaiba",
+      "year": 2019,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
-      "year": 2026,
+      "title": "JUJUTSU KAISEN",
+      "year": 2020,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Dr. STONE SCIENCE FUTURE Cour 3",
-      "year": 2026,
+      "title": "Death Note",
+      "year": 2006,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "KILL BLUE",
-      "year": 2026,
+      "title": "My Hero Academia",
+      "year": 2016,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Re:ZERO -Starting Life in Another World- Season 4",
-      "year": 2026,
+      "title": "Hunter x Hunter (2011)",
+      "year": 2011,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "I Made Friends with the Second Prettiest Girl in My Class",
-      "year": 2026,
+      "title": "One-Punch Man",
+      "year": 2015,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Frieren: Beyond Journey’s End Season 2",
-      "year": 2026,
+      "title": "Tokyo Ghoul",
+      "year": 2014,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "The Angel Next Door Spoils Me Rotten2",
-      "year": 2026,
+      "title": "ONE PIECE",
+      "year": 1999,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
-      "year": 2026,
+      "title": "Attack on Titan Season 2",
+      "year": 2017,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Mistress Kanan is Devilishly Easy",
-      "year": 2026,
+      "title": "Fullmetal Alchemist: Brotherhood",
+      "year": 2009,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Agents of the Four Seasons: Dance of Spring",
-      "year": 2026,
+      "title": "Naruto",
+      "year": 2002,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "NEEDY GIRL OVERDOSE",
-      "year": 2026,
+      "title": "Sword Art Online",
+      "year": 2012,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Umi ga Hashiru End Roll",
-      "year": 2027,
+      "title": "Your Name.",
+      "year": 2016,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "A Silent Voice",
+      "year": 2016,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Attack on Titan Season 3",
+      "year": 2018,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "My Hero Academia Season 2",
+      "year": 2017,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Attack on Titan Final Season",
+      "year": 2020,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "The Promised Neverland",
+      "year": 2019,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Assassination Classroom",
+      "year": 2015,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Mob Psycho 100",
+      "year": 2016,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
@@ -248,62 +290,20 @@
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Ingoku Danchi:Deviant's Apartment Complex",
-      "year": 2026,
+      "title": "Your lie in April",
+      "year": 2014,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Wistoria: Wand and Sword",
-      "year": 2024,
+      "title": "Re:ZERO -Starting Life in Another World-",
+      "year": 2016,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "My Dress-Up Darling",
-      "year": 2022,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "Hell’s Paradise Season 2",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "Sentenced to Be a Hero",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "The Warrior Princess and the Barbaric King",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "Botan Kamiina Fully Blossoms When Drunk",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "The Fragrant Flower Blooms With Dignity",
-      "year": 2025,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "You and I Are Polar Opposites",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "Attack on Titan Season 2",
-      "year": 2017,
+      "title": "Attack on Titan Season 3 Part 2",
+      "year": 2019,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     }
