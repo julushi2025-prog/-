@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-11T10:07:36.809Z",
+  "generatedAt": "2026-05-30T20:04:38.224Z",
   "mode": "dry-run",
   "stagingPath": "data/import/staging-anime.json",
   "animePath": "data/anime.json",
@@ -24,22 +24,17 @@
   },
   "added": [
     {
-      "title": "Witch Hat Atelier",
+      "title": "Daemons of the Shadow Realm",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "title": "That Time I Got Reincarnated as a Slime Season 4",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "Dr. STONE SCIENCE FUTURE Cour 3",
+      "title": "Akane-banashi",
       "year": 2026,
       "sourceName": "AniList"
     },
@@ -49,32 +44,17 @@
       "sourceName": "AniList"
     },
     {
-      "title": "Re:ZERO -Starting Life in Another World- Season 4",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "I Made Friends with the Second Prettiest Girl in My Class",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "Frieren: Beyond Journey’s End Season 2",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "The Angel Next Door Spoils Me Rotten2",
-      "year": 2026,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
-      "year": 2026,
+      "title": "ONE PIECE",
+      "year": 1999,
       "sourceName": "AniList"
     },
     {
       "title": "Mistress Kanan is Devilishly Easy",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Witch Hat Atelier",
       "year": 2026,
       "sourceName": "AniList"
     },
@@ -84,68 +64,88 @@
       "sourceName": "AniList"
     },
     {
+      "title": "Welcome to Demon School! Iruma-kun Season 4",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "The strongest job is apparently not a hero or a sage, but an appraiser (provisional)!",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Ascendance of a Bookworm: Adopted Daughter of an Archduke",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Kusunoki's Garden of Gods",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Dr. STONE SCIENCE FUTURE Cour 3",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Re:ZERO -Starting Life in Another World- Season 4",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
       "title": "NEEDY GIRL OVERDOSE",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "Umi ga Hashiru End Roll",
-      "year": 2027,
+      "title": "Bleach",
+      "year": 2004,
       "sourceName": "AniList"
     },
     {
-      "title": "Chainsaw Man",
-      "year": 2022,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "Ingoku Danchi:Deviant's Apartment Complex",
+      "title": "The Angel Next Door Spoils Me Rotten2",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "Wistoria: Wand and Sword",
-      "year": 2024,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "My Dress-Up Darling",
-      "year": 2022,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "Hell’s Paradise Season 2",
+      "title": "The Ramparts of Ice",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "Sentenced to Be a Hero",
+      "title": "Wistoria: Wand and Sword Season 2",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "The Warrior Princess and the Barbaric King",
+      "title": "Gals Can't Be Kind to Otaku!?",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "Botan Kamiina Fully Blossoms When Drunk",
+      "title": "Yowayowa Sensei",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "The Fragrant Flower Blooms With Dignity",
-      "year": 2025,
-      "sourceName": "AniList"
-    },
-    {
-      "title": "You and I Are Polar Opposites",
+      "title": "I Made Friends with the Second Prettiest Girl in My Class",
       "year": 2026,
       "sourceName": "AniList"
     },
     {
-      "title": "Attack on Titan Season 2",
-      "year": 2017,
+      "title": "MARRIAGETOXIN",
+      "year": 2026,
+      "sourceName": "AniList"
+    },
+    {
+      "title": "Scum of the Brave",
+      "year": 2026,
       "sourceName": "AniList"
     }
   ],
@@ -158,25 +158,19 @@
   "possibleDuplicates": [],
   "needsReview": [
     {
-      "title": "Witch Hat Atelier",
+      "title": "Daemons of the Shadow Realm",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "title": "That Time I Got Reincarnated as a Slime Season 4",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "Dr. STONE SCIENCE FUTURE Cour 3",
+      "title": "Akane-banashi",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
@@ -188,37 +182,19 @@
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Re:ZERO -Starting Life in Another World- Season 4",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "I Made Friends with the Second Prettiest Girl in My Class",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "Frieren: Beyond Journey’s End Season 2",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "The Angel Next Door Spoils Me Rotten2",
-      "year": 2026,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "JUJUTSU KAISEN Season 3: The Culling Game Part 1",
-      "year": 2026,
+      "title": "ONE PIECE",
+      "year": 1999,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
       "title": "Mistress Kanan is Devilishly Easy",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Witch Hat Atelier",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
@@ -230,80 +206,104 @@
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
+      "title": "Welcome to Demon School! Iruma-kun Season 4",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "The strongest job is apparently not a hero or a sage, but an appraiser (provisional)!",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Ascendance of a Bookworm: Adopted Daughter of an Archduke",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Kusunoki's Garden of Gods",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Dr. STONE SCIENCE FUTURE Cour 3",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Re:ZERO -Starting Life in Another World- Season 4",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Classroom of the Elite 4th Season: Second Year, First Semester",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
       "title": "NEEDY GIRL OVERDOSE",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Umi ga Hashiru End Roll",
-      "year": 2027,
+      "title": "Bleach",
+      "year": 2004,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Chainsaw Man",
-      "year": 2022,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "Ingoku Danchi:Deviant's Apartment Complex",
+      "title": "The Angel Next Door Spoils Me Rotten2",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Wistoria: Wand and Sword",
-      "year": 2024,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "My Dress-Up Darling",
-      "year": 2022,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "Hell’s Paradise Season 2",
+      "title": "The Ramparts of Ice",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Sentenced to Be a Hero",
+      "title": "Wistoria: Wand and Sword Season 2",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "The Warrior Princess and the Barbaric King",
+      "title": "Gals Can't Be Kind to Otaku!?",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Botan Kamiina Fully Blossoms When Drunk",
+      "title": "Yowayowa Sensei",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "The Fragrant Flower Blooms With Dignity",
-      "year": 2025,
-      "sourceName": "AniList",
-      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
-    },
-    {
-      "title": "You and I Are Polar Opposites",
+      "title": "I Made Friends with the Second Prettiest Girl in My Class",
       "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     },
     {
-      "title": "Attack on Titan Season 2",
-      "year": 2017,
+      "title": "MARRIAGETOXIN",
+      "year": 2026,
+      "sourceName": "AniList",
+      "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
+    },
+    {
+      "title": "Scum of the Brave",
+      "year": 2026,
       "sourceName": "AniList",
       "reason": "AniList discovery supplies external metadata only; review personalFitScore, whyForMe, risk, and tags manually before merging."
     }
