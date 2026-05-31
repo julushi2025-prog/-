@@ -117,7 +117,10 @@ const storageKeys = {
   favorites: "anime-radar:favorites",
   dismissed: "anime-radar:dismissed",
   reviewState: "anime-radar-review-state-v1",
+  reviewUndoStack: "anime-radar-review-undo-stack-v1",
 };
+
+const maxManualReviewUndoStackSize = 10;
 
 const manualReviewStatusLabels: Record<ManualReviewFilter, string> = {
   all: "全部",
@@ -344,6 +347,7 @@ function ReviewMode({ existingAnime, reviewAnime, importReport, reviewDataSource
 
   useEffect(() => {
     setManualReviewState(readManualReviewState());
+    setUndoStack(readManualReviewUndoStack());
   }, []);
 
   const metadataByKey = useMemo(() => buildReviewMetadata(reviewAnime, importReport, existingAnime), [existingAnime, importReport, reviewAnime]);
@@ -378,10 +382,14 @@ function ReviewMode({ existingAnime, reviewAnime, importReport, reviewDataSource
         [candidateKeyValue]: { status: nextStatus, updatedAt },
       };
       writeManualReviewState(next);
-      setUndoStack((currentUndoStack) => [
-        { candidateKey: candidateKeyValue, previousStatus, nextStatus, timestamp: updatedAt },
-        ...currentUndoStack,
-      ].slice(0, 10));
+      setUndoStack((currentUndoStack) => {
+        const nextUndoStack = [
+          { candidateKey: candidateKeyValue, previousStatus, nextStatus, timestamp: updatedAt },
+          ...currentUndoStack,
+        ].slice(0, maxManualReviewUndoStackSize);
+        writeManualReviewUndoStack(nextUndoStack);
+        return nextUndoStack;
+      });
       return next;
     });
   }
@@ -404,6 +412,7 @@ function ReviewMode({ existingAnime, reviewAnime, importReport, reviewDataSource
         writeManualReviewState(next);
         return next;
       });
+      writeManualReviewUndoStack(remainingActions);
 
       return remainingActions;
     });
@@ -1025,6 +1034,37 @@ function readManualReviewState(): ManualReviewState {
 
 function writeManualReviewState(value: ManualReviewState) {
   window.localStorage.setItem(storageKeys.reviewState, JSON.stringify(value));
+}
+
+function readManualReviewUndoStack(): ManualReviewUndoAction[] {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(storageKeys.reviewUndoStack) ?? "[]");
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed.filter(isManualReviewUndoAction).slice(0, maxManualReviewUndoStackSize);
+  } catch {
+    return [];
+  }
+}
+
+function writeManualReviewUndoStack(value: ManualReviewUndoAction[]) {
+  window.localStorage.setItem(storageKeys.reviewUndoStack, JSON.stringify(value.slice(0, maxManualReviewUndoStackSize)));
+}
+
+function isManualReviewUndoAction(value: unknown): value is ManualReviewUndoAction {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+
+  const candidate = value as Partial<ManualReviewUndoAction>;
+  return Boolean(
+    typeof candidate.candidateKey === "string"
+    && (candidate.previousStatus === null || isManualReviewStatus(candidate.previousStatus))
+    && isManualReviewStatus(candidate.nextStatus)
+    && typeof candidate.timestamp === "string",
+  );
+}
+
+function isManualReviewStatus(value: unknown): value is ManualReviewStatus {
+  return value === "accepted" || value === "maybe" || value === "rejected";
 }
 
 function readStorage(key: string) {
