@@ -102,7 +102,14 @@ export type DiscoveryReviewItem = {
   matchReasons: string[];
   riskReasons: string[];
   reviewNote: string;
+  summary?: string;
+  externalSummary?: string;
+  sourceGenres?: string[];
+  sourceName?: string;
+  aliases?: string[];
 };
+
+export type ReviewDataSource = "discovery-review.json" | "staging-anime.json fallback";
 
 export type DiscoveryReviewReport = {
   generatedAt?: string;
