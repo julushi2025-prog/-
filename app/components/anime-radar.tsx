@@ -20,6 +20,25 @@ type ReviewFilters = {
   genre: string;
   status: string;
   maxEpisodes: string;
+  manualStatus: ManualReviewFilter;
+};
+
+type ManualReviewStatus = "accepted" | "maybe" | "rejected";
+
+type ManualReviewFilter = "all" | "unreviewed" | ManualReviewStatus;
+
+type ManualReviewStateEntry = {
+  status: ManualReviewStatus;
+  updatedAt: string;
+};
+
+type ManualReviewState = Record<string, ManualReviewStateEntry>;
+
+type ManualReviewUndoAction = {
+  candidateKey: string;
+  previousStatus: ManualReviewStatus | null;
+  nextStatus: ManualReviewStatus;
+  timestamp: string;
 };
 
 type ReviewRecommendationGroup = {
@@ -49,6 +68,7 @@ const defaultReviewFilters: ReviewFilters = {
   genre: "all",
   status: "all",
   maxEpisodes: "all",
+  manualStatus: "unreviewed",
 };
 
 const episodeRanges = [
@@ -96,7 +116,22 @@ const reviewSourceLabels: Record<ReviewDataSource, string> = {
 const storageKeys = {
   favorites: "anime-radar:favorites",
   dismissed: "anime-radar:dismissed",
+  reviewState: "anime-radar-review-state-v1",
 };
+
+const manualReviewStatusLabels: Record<ManualReviewFilter, string> = {
+  all: "全部",
+  unreviewed: "未审核",
+  accepted: "已接受",
+  maybe: "暂存",
+  rejected: "已拒绝",
+};
+
+const manualReviewDropZones: { status: ManualReviewStatus; title: string; description: string; color: string }[] = [
+  { status: "accepted", title: "接受", description: "确定值得后续处理", color: "emerald" },
+  { status: "maybe", title: "暂存", description: "需要之后再判断", color: "amber" },
+  { status: "rejected", title: "拒绝", description: "暂时不纳入候选", color: "rose" },
+];
 
 export function AnimeRadar({ initialAnime, reviewAnime, importReport, reviewDataSource }: { initialAnime: Anime[]; reviewAnime: ReviewAnimeCandidate[]; importReport: ImportReport | null; reviewDataSource: ReviewDataSource }) {
   const [mode, setMode] = useState<Mode>("library");
@@ -303,6 +338,13 @@ function LibraryMode({ initialAnime }: { initialAnime: Anime[] }) {
 
 function ReviewMode({ existingAnime, reviewAnime, importReport, reviewDataSource }: { existingAnime: Anime[]; reviewAnime: ReviewAnimeCandidate[]; importReport: ImportReport | null; reviewDataSource: ReviewDataSource }) {
   const [filters, setFilters] = useState<ReviewFilters>(defaultReviewFilters);
+  const [manualReviewState, setManualReviewState] = useState<ManualReviewState>({});
+  const [undoStack, setUndoStack] = useState<ManualReviewUndoAction[]>([]);
+  const [activeDropStatus, setActiveDropStatus] = useState<ManualReviewStatus | null>(null);
+
+  useEffect(() => {
+    setManualReviewState(readManualReviewState());
+  }, []);
 
   const metadataByKey = useMemo(() => buildReviewMetadata(reviewAnime, importReport, existingAnime), [existingAnime, importReport, reviewAnime]);
   const hasLowCandidateCount = reviewAnime.length > 0 && reviewAnime.length < 20;
@@ -310,18 +352,69 @@ function ReviewMode({ existingAnime, reviewAnime, importReport, reviewDataSource
   const genres = useMemo(() => unique(reviewAnime.flatMap((item) => getExternalAnimeGenres(item))).sort(), [reviewAnime]);
   const statuses = useMemo(() => unique(reviewAnime.map((item) => item.status).filter(Boolean)).sort(), [reviewAnime]);
 
-  const recommendationCounts = useMemo(() => countRecommendations(reviewAnime), [reviewAnime]);
+  const manualCounts = useMemo(() => countManualReviewStatuses(reviewAnime, manualReviewState), [manualReviewState, reviewAnime]);
   const filteredCandidates = useMemo(() => {
     return [...reviewAnime]
       .filter((item) => filters.format === "all" || getAnimeFormat(item) === filters.format)
       .filter((item) => filters.genre === "all" || getExternalAnimeGenres(item).includes(filters.genre))
       .filter((item) => filters.status === "all" || item.status === filters.status)
-      .filter((item) => filters.maxEpisodes === "all" || item.episodes <= Number(filters.maxEpisodes));
-  }, [filters, reviewAnime]);
+      .filter((item) => filters.maxEpisodes === "all" || item.episodes <= Number(filters.maxEpisodes))
+      .filter((item) => matchesManualReviewFilter(manualReviewState[getManualReviewKey(item)]?.status ?? null, filters.manualStatus));
+  }, [filters, manualReviewState, reviewAnime]);
   const groupedCandidates = useMemo(() => groupReviewCandidates(filteredCandidates), [filteredCandidates]);
 
   function updateFilter<K extends keyof ReviewFilters>(key: K, value: ReviewFilters[K]) {
     setFilters((current) => ({ ...current, [key]: value }));
+  }
+
+  function updateManualReviewStatus(candidateKeyValue: string, nextStatus: ManualReviewStatus) {
+    setManualReviewState((current) => {
+      const previousStatus = current[candidateKeyValue]?.status ?? null;
+      if (previousStatus === nextStatus) return current;
+
+      const updatedAt = new Date().toISOString();
+      const next = {
+        ...current,
+        [candidateKeyValue]: { status: nextStatus, updatedAt },
+      };
+      writeManualReviewState(next);
+      setUndoStack((currentUndoStack) => [
+        { candidateKey: candidateKeyValue, previousStatus, nextStatus, timestamp: updatedAt },
+        ...currentUndoStack,
+      ].slice(0, 10));
+      return next;
+    });
+  }
+
+  function undoLastManualReview() {
+    setUndoStack((currentUndoStack) => {
+      const [lastAction, ...remainingActions] = currentUndoStack;
+      if (!lastAction) return currentUndoStack;
+
+      setManualReviewState((current) => {
+        const next = { ...current };
+        if (lastAction.previousStatus === null) {
+          delete next[lastAction.candidateKey];
+        } else {
+          next[lastAction.candidateKey] = {
+            status: lastAction.previousStatus,
+            updatedAt: new Date().toISOString(),
+          };
+        }
+        writeManualReviewState(next);
+        return next;
+      });
+
+      return remainingActions;
+    });
+  }
+
+  function handleDrop(event: React.DragEvent<HTMLElement>, status: ManualReviewStatus) {
+    event.preventDefault();
+    const draggedCandidateKey = event.dataTransfer.getData("text/plain");
+    setActiveDropStatus(null);
+    if (!draggedCandidateKey) return;
+    updateManualReviewStatus(draggedCandidateKey, status);
   }
 
   if (reviewAnime.length === 0) {
@@ -337,7 +430,7 @@ function ReviewMode({ existingAnime, reviewAnime, importReport, reviewDataSource
 
   return (
     <>
-      <section className="rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-4 shadow-xl shadow-black/30 md:p-5">
+      <section className="rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-4 shadow-xl shadow-black/30 md:p-5 xl:mr-72">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <h2 className="text-lg font-bold text-cyan-50">审核模式数据来源</h2>
@@ -345,52 +438,58 @@ function ReviewMode({ existingAnime, reviewAnime, importReport, reviewDataSource
               当前数据来源：{reviewSourceLabels[reviewDataSource]}。审核模式会优先读取 reports/discovery-review.json；如果该文件不存在，才回退读取 data/import/staging-anime.json。
             </p>
             <p className="mt-2 text-sm leading-6 text-amber-100">
-              当前为只读审核模式，不写入正式库，不修改 data/anime.json，不自动合并。
+              当前为只读审核模式；人工状态只保存在浏览器 localStorage（{storageKeys.reviewState}），不写入正式库、不修改 data/anime.json、不自动合并。
             </p>
           </div>
           <div className="rounded-2xl border border-slate-700/70 bg-slate-950/70 px-4 py-3 text-sm leading-6 text-slate-200">
             <p><span className="font-bold text-white">当前数据来源：</span>{reviewSourceLabels[reviewDataSource]}</p>
             <p><span className="font-bold text-white">回退规则：</span>{reviewDataSource === "discovery-review.json" ? "已命中 discovery-review.json" : "未读取到 discovery-review.json，使用 staging fallback"}</p>
-            <p><span className="font-bold text-white">审核状态：</span>当前为只读审核模式，不写入正式库。</p>
+            <p><span className="font-bold text-white">人工审核：</span>拖拽卡片到右侧/底部投放区即可暂存本机判断。</p>
           </div>
         </div>
       </section>
 
       {hasLowCandidateCount && (
-        <section className="rounded-3xl border border-amber-300/30 bg-amber-300/10 p-4 text-sm leading-6 text-amber-100 shadow-xl shadow-black/30 md:p-5">
+        <section className="rounded-3xl border border-amber-300/30 bg-amber-300/10 p-4 text-sm leading-6 text-amber-100 shadow-xl shadow-black/30 md:p-5 xl:mr-72">
           当前候选数量较少，请确认打开的是最新 discovery PR 的 Vercel Preview。
         </section>
       )}
 
-      <section className="grid gap-3 text-center md:grid-cols-5">
-        <Stat label="候选总数" value={reviewAnime.length.toString()} />
-        <Stat label="recommended" value={recommendationCounts.recommended.toString()} />
-        <Stat label="maybe" value={recommendationCounts.maybe.toString()} />
-        <Stat label="low-priority" value={recommendationCounts["low-priority"].toString()} />
-        <Stat label="needs-review" value={recommendationCounts["needs-review"].toString()} />
+      <section className="grid gap-3 text-center md:grid-cols-5 xl:mr-72">
+        <Stat label="候选总数" value={manualCounts.total.toString()} />
+        <Stat label="未审核" value={manualCounts.unreviewed.toString()} />
+        <Stat label="已接受" value={manualCounts.accepted.toString()} />
+        <Stat label="暂存" value={manualCounts.maybe.toString()} />
+        <Stat label="已拒绝" value={manualCounts.rejected.toString()} />
       </section>
 
-      <section className="rounded-3xl border border-slate-700/70 bg-slate-950/80 p-4 shadow-xl shadow-black/30 backdrop-blur md:p-5">
+      <section className="rounded-3xl border border-slate-700/70 bg-slate-950/80 p-4 shadow-xl shadow-black/30 backdrop-blur md:p-5 xl:mr-72">
         <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-lg font-bold text-white">候选审核台</h2>
-            <p className="text-sm text-slate-400">只读展示粗审核结果；按 recommendation 分组，每组按 preliminaryFitScore 从高到低排序。</p>
+            <p className="text-sm text-slate-400">默认显示未审核候选；人工状态来自 localStorage，不会与机器粗审核 recommendation 混淆。</p>
           </div>
-          <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-xs leading-5 text-amber-100">
-            本页面不会正式导入、不会自动合并候选，也不会写入 GitHub 或修改数据文件。
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <button className="rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1.5 text-xs font-bold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20 disabled:cursor-not-allowed disabled:border-slate-700 disabled:bg-slate-800/60 disabled:text-slate-500" disabled={undoStack.length === 0} onClick={undoLastManualReview} type="button">
+              撤回上一步
+            </button>
+            <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-xs leading-5 text-amber-100">
+              本页面不会正式导入、不会自动合并候选，也不会写入 GitHub 或修改数据文件。
+            </div>
           </div>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
           <Select label="格式" value={filters.format} onChange={(value) => updateFilter("format", value)} options={["all", ...formats]} labels={formatLocalizationMap} />
           <Select label="类型" value={filters.genre} onChange={(value) => updateFilter("genre", value)} options={["all", ...genres]} labels={externalLabelLocalizationMap} />
           <Select label="状态" value={filters.status} onChange={(value) => updateFilter("status", value)} options={["all", ...statuses]} labels={statusLocalizationMap} />
           <Select label="最大集数" value={filters.maxEpisodes} onChange={(value) => updateFilter("maxEpisodes", value)} options={maxEpisodeOptions} labels={{ all: "全部", "6": "≤ 6", "12": "≤ 12", "13": "≤ 13", "24": "≤ 24", "26": "≤ 26", "52": "≤ 52" }} />
+          <Select label="人工状态" value={filters.manualStatus} onChange={(value) => updateFilter("manualStatus", value as ManualReviewFilter)} options={["all", "unreviewed", "accepted", "maybe", "rejected"]} labels={manualReviewStatusLabels} />
         </div>
       </section>
 
       {importReport?.counts && (
-        <section className="rounded-3xl border border-slate-700/70 bg-slate-950/80 p-4 shadow-xl shadow-black/30 md:p-5">
+        <section className="rounded-3xl border border-slate-700/70 bg-slate-950/80 p-4 shadow-xl shadow-black/30 md:p-5 xl:mr-72">
           <h2 className="text-lg font-bold text-white">导入报告统计</h2>
           <div className="mt-3 grid gap-2 text-xs text-slate-300 sm:grid-cols-2 lg:grid-cols-4">
             {Object.entries(importReport.counts).map(([key, value]) => (
@@ -411,22 +510,34 @@ function ReviewMode({ existingAnime, reviewAnime, importReport, reviewDataSource
         </section>
       )}
 
-      <section className="space-y-6">
+      <section className="space-y-6 xl:mr-72">
         {groupedCandidates.map((group) => (
-          <ReviewCandidateGroup key={group.key} group={group} metadataByKey={metadataByKey} />
+          <ReviewCandidateGroup key={group.key} group={group} manualReviewState={manualReviewState} metadataByKey={metadataByKey} />
         ))}
       </section>
 
       {filteredCandidates.length === 0 && (
-        <div className="rounded-3xl border border-dashed border-slate-600 bg-slate-950/70 p-10 text-center text-slate-300">
-          没有符合当前筛选条件的候选。请放宽格式、类型、状态或最大集数。
+        <div className="rounded-3xl border border-dashed border-slate-600 bg-slate-950/70 p-10 text-center text-slate-300 xl:mr-72">
+          没有符合当前筛选条件的候选。请放宽格式、类型、状态、最大集数或人工状态。
         </div>
       )}
+
+      <ManualReviewDropPanel
+        activeStatus={activeDropStatus}
+        counts={manualCounts}
+        onDragLeave={() => setActiveDropStatus(null)}
+        onDragOver={(event, status) => {
+          event.preventDefault();
+          event.dataTransfer.dropEffect = "move";
+          setActiveDropStatus(status);
+        }}
+        onDrop={handleDrop}
+      />
     </>
   );
 }
 
-function ReviewCandidateGroup({ group, metadataByKey }: { group: ReviewRecommendationGroup; metadataByKey: Map<string, ReviewMetadata> }) {
+function ReviewCandidateGroup({ group, manualReviewState, metadataByKey }: { group: ReviewRecommendationGroup; manualReviewState: ManualReviewState; metadataByKey: Map<string, ReviewMetadata> }) {
   return (
     <section className="rounded-3xl border border-slate-700/70 bg-slate-950/55 p-4 shadow-xl shadow-black/30 md:p-5">
       <div className="mb-4 flex flex-col gap-2 border-b border-slate-800 pb-4 md:flex-row md:items-end md:justify-between">
@@ -444,7 +555,8 @@ function ReviewCandidateGroup({ group, metadataByKey }: { group: ReviewRecommend
         <div className="grid gap-4 lg:grid-cols-2">
           {group.items.map((item) => {
             const metadata = metadataByKey.get(candidateKey(item)) ?? { needsReviewReasons: [], possibleDuplicates: [], existingDuplicateMatches: [] };
-            return <ReviewCandidateCard key={`${item.id ?? item.sourceUrl}-${item.title}`} item={item} metadata={metadata} />;
+            const manualKey = getManualReviewKey(item);
+            return <ReviewCandidateCard key={`${item.id ?? item.sourceUrl}-${item.title}`} item={item} manualKey={manualKey} manualStatus={manualReviewState[manualKey]?.status ?? null} metadata={metadata} />;
           })}
         </div>
       ) : (
@@ -454,7 +566,7 @@ function ReviewCandidateGroup({ group, metadataByKey }: { group: ReviewRecommend
   );
 }
 
-function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; metadata: ReviewMetadata }) {
+function ReviewCandidateCard({ item, manualKey, manualStatus, metadata }: { item: ReviewAnimeCandidate; manualKey: string; manualStatus: ManualReviewStatus | null; metadata: ReviewMetadata }) {
   const display = getLocalizedAnimeDisplay(item);
   const reviewReasons = [
     ...(item.needsReview ? [item.reviewReason || "候选标记为需要人工审核。"] : []),
@@ -466,7 +578,14 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
   const possibleDuplicateStatus = duplicateItems.length > 0 ? "是" : "否";
 
   return (
-    <article className="rounded-3xl border border-slate-700/70 bg-slate-950/85 p-4 shadow-xl shadow-black/30 md:p-5">
+    <article
+      className="cursor-grab rounded-3xl border border-slate-700/70 bg-slate-950/85 p-4 shadow-xl shadow-black/30 transition hover:-translate-y-0.5 hover:border-cyan-300/50 active:cursor-grabbing md:p-5"
+      draggable
+      onDragStart={(event) => {
+        event.dataTransfer.effectAllowed = "move";
+        event.dataTransfer.setData("text/plain", manualKey);
+      }}
+    >
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="text-xl font-black text-white">{display.title}</h3>
@@ -480,6 +599,7 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
             <Badge>possibleDuplicate：{possibleDuplicateStatus}</Badge>
             {item.recommendation && <Badge>推荐：{formatRecommendationLabel(item.recommendation)}</Badge>}
             {item.reviewPriority && <Badge>优先级：{formatReviewPriorityLabel(item.reviewPriority)}</Badge>}
+            <Badge>人工状态：{formatManualReviewStatus(manualStatus)}</Badge>
           </div>
         </div>
         <div className="text-right">
@@ -503,6 +623,7 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
         <ReviewField label="preliminaryFitScore" value={item.preliminaryFitScore ?? "暂无"} />
         <ReviewField label="recommendation" value={item.recommendation ?? "needs-review"} />
         <ReviewField label="reviewPriority" value={item.reviewPriority ?? "暂无"} />
+        <ReviewField label="人工状态" value={formatManualReviewStatus(manualStatus)} />
         <ReviewField className="sm:col-span-2 lg:col-span-3" label="sourceUrl" value={item.sourceUrl || "无来源链接"} />
       </div>
 
@@ -536,6 +657,50 @@ function ReviewCandidateCard({ item, metadata }: { item: ReviewAnimeCandidate; m
         )}
       </div>
     </article>
+  );
+}
+
+function ManualReviewDropPanel({ activeStatus, counts, onDragLeave, onDragOver, onDrop }: { activeStatus: ManualReviewStatus | null; counts: ReturnType<typeof countManualReviewStatuses>; onDragLeave: () => void; onDragOver: (event: React.DragEvent<HTMLElement>, status: ManualReviewStatus) => void; onDrop: (event: React.DragEvent<HTMLElement>, status: ManualReviewStatus) => void }) {
+  return (
+    <aside className="fixed inset-x-3 bottom-3 z-40 rounded-3xl border border-cyan-300/20 bg-slate-950/95 p-3 shadow-2xl shadow-cyan-950/50 backdrop-blur xl:inset-x-auto xl:bottom-6 xl:right-6 xl:top-6 xl:w-64 xl:overflow-y-auto">
+      <div className="mb-3 hidden xl:block">
+        <p className="text-xs font-black uppercase tracking-[0.3em] text-cyan-200">manual review</p>
+        <h2 className="mt-1 text-xl font-black text-white">拖拽投放区</h2>
+        <p className="mt-2 text-xs leading-5 text-slate-400">把整张候选卡片拖到接受、暂存或拒绝。状态会保存在本机浏览器。</p>
+      </div>
+      <div className="grid grid-cols-3 gap-2 xl:grid-cols-1">
+        {manualReviewDropZones.map((zone) => (
+          <ManualReviewDropZone
+            key={zone.status}
+            active={activeStatus === zone.status}
+            count={counts[zone.status]}
+            description={zone.description}
+            status={zone.status}
+            title={zone.title}
+            onDragLeave={onDragLeave}
+            onDragOver={onDragOver}
+            onDrop={onDrop}
+          />
+        ))}
+      </div>
+    </aside>
+  );
+}
+
+function ManualReviewDropZone({ active, count, description, status, title, onDragLeave, onDragOver, onDrop }: { active: boolean; count: number; description: string; status: ManualReviewStatus; title: string; onDragLeave: () => void; onDragOver: (event: React.DragEvent<HTMLElement>, status: ManualReviewStatus) => void; onDrop: (event: React.DragEvent<HTMLElement>, status: ManualReviewStatus) => void }) {
+  const activeClass = active ? "scale-[1.02] border-cyan-200 bg-cyan-300/20 shadow-lg shadow-cyan-950/40" : "border-slate-700 bg-slate-900/80";
+
+  return (
+    <section
+      className={`rounded-2xl border p-3 text-center transition ${activeClass}`}
+      onDragLeave={onDragLeave}
+      onDragOver={(event) => onDragOver(event, status)}
+      onDrop={(event) => onDrop(event, status)}
+    >
+      <p className="text-base font-black text-white xl:text-lg">{title}</p>
+      <p className="mt-1 text-2xl font-black text-cyan-100">{count}</p>
+      <p className="mt-1 hidden text-xs leading-5 text-slate-400 xl:block">{description}</p>
+    </section>
   );
 }
 
@@ -757,6 +922,38 @@ function formatRecommendationLabel(value: string) {
   return labels[value] ?? value;
 }
 
+function formatManualReviewStatus(status: ManualReviewStatus | null) {
+  return status ? manualReviewStatusLabels[status] : "未审核";
+}
+
+function matchesManualReviewFilter(status: ManualReviewStatus | null, filter: ManualReviewFilter) {
+  if (filter === "all") return true;
+  if (filter === "unreviewed") return status === null;
+  return status === filter;
+}
+
+function countManualReviewStatuses(candidates: ReviewAnimeCandidate[], manualReviewState: ManualReviewState) {
+  return candidates.reduce(
+    (counts, item) => {
+      const status = manualReviewState[getManualReviewKey(item)]?.status ?? null;
+      counts.total += 1;
+      if (status === null) {
+        counts.unreviewed += 1;
+      } else {
+        counts[status] += 1;
+      }
+      return counts;
+    },
+    { total: 0, unreviewed: 0, accepted: 0, maybe: 0, rejected: 0 },
+  );
+}
+
+function getManualReviewKey(item: Pick<Anime, "id" | "sourceUrl" | "title" | "year">) {
+  if (item.id) return `id:${item.id}`;
+  if (item.sourceUrl) return `source:${item.sourceUrl}`;
+  return `title-year:${normalizeKey(item.title)}::${item.year ?? ""}`;
+}
+
 function formatReviewPriorityLabel(value: string) {
   const labels: Record<string, string> = { high: "高", medium: "中", low: "低", manual: "人工" };
   return labels[value] ?? value;
@@ -801,6 +998,33 @@ function matchesEpisodeRange(episodes: number, range: string) {
   if (range === "all") return true;
   const [min, max] = range.split("-").map(Number);
   return episodes >= min && episodes <= max;
+}
+
+function readManualReviewState(): ManualReviewState {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(storageKeys.reviewState) ?? "{}");
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+
+    return Object.fromEntries(
+      Object.entries(parsed).filter((entry): entry is [string, ManualReviewStateEntry] => {
+        const [, value] = entry;
+        return Boolean(
+          value
+          && typeof value === "object"
+          && "status" in value
+          && ["accepted", "maybe", "rejected"].includes(String(value.status))
+          && "updatedAt" in value
+          && typeof value.updatedAt === "string",
+        );
+      }),
+    );
+  } catch {
+    return {};
+  }
+}
+
+function writeManualReviewState(value: ManualReviewState) {
+  window.localStorage.setItem(storageKeys.reviewState, JSON.stringify(value));
 }
 
 function readStorage(key: string) {
